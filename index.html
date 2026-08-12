@@ -311,7 +311,15 @@
 
     .chrome-omnibox:focus-within {
       background: var(--chrome-omnibox-focus-bg);
-      box-shadow: 0 1px 6px rgba(32, 33, 36, 0.12);
+    }
+
+    html.compact,
+    html.compact body,
+    html.compact .memo,
+    html.compact .chrome-shell,
+    html.compact .chrome-toolbar,
+    html.compact .chrome-omnibox {
+      box-shadow: none !important;
     }
 
     .chrome-lock {
