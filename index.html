@@ -98,7 +98,10 @@
       outline: none;
     }
 
-    .mode-toggle {
+    .title-btn.active {
+      color: var(--memo-text);
+      font-weight: 700;
+    }
 
     .reader {
       height: calc(var(--memo-height) - var(--title-height) - var(--status-height));
@@ -143,10 +146,9 @@
       right: 0;
       bottom: 0;
       left: 0;
-      display: grid;
-      grid-template-columns: 1fr auto auto;
+      display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: space-between;
       height: var(--status-height);
       padding: 0 9px;
       border-top: 1px solid rgba(100, 84, 23, 0.11);
@@ -158,27 +160,6 @@
 
     .import-zone {
       cursor: default;
-    }
-
-    .help-btn {
-      padding: 0 4px;
-      border: 0;
-      background: transparent;
-      color: var(--muted-text);
-      font-size: 10px;
-      cursor: pointer;
-    }
-
-    .help-btn:hover,
-    .help-btn:focus-visible {
-      color: var(--memo-text);
-      outline: none;
-      text-decoration: underline;
-    }
-
-    .help-btn.active {
-      color: var(--memo-text);
-      font-weight: 600;
     }
 
     .progress-wrap {
@@ -220,7 +201,7 @@
       top: 0;
       right: 0;
       z-index: 2;
-      width: 62px;
+      width: 93px;
       height: var(--compact-height);
       padding: 0;
       border: 0;
@@ -233,7 +214,7 @@
     }
 
     .memo.compact .reader {
-      width: calc(100% - 62px);
+      width: calc(100% - 93px);
       height: var(--compact-height);
       padding: 4px 9px;
       overflow: hidden;
@@ -265,8 +246,9 @@
     <header class="title-bar">
       <span class="title-text">Notes - Task List</span>
       <div class="title-actions">
+        <button class="title-btn" id="helpBtn" type="button" aria-label="使用說明" title="使用說明">?</button>
         <button class="title-btn" id="resizeBtn" type="button" aria-label="縮放視窗至便利貼大小" title="縮放視窗至便利貼大小">⤢</button>
-        <button class="title-btn mode-toggle" id="modeToggle" type="button" aria-label="切換單行模式" title="切換單行模式">−</button>
+        <button class="title-btn" id="modeToggle" type="button" aria-label="切換單行模式" title="切換單行模式">−</button>
       </div>
     </header>
 
@@ -274,7 +256,6 @@
 
     <footer class="status-bar" id="statusBar" title="雙擊以匯入 TXT 或 EPUB 文件">
       <span class="import-zone">Task notes</span>
-      <button class="help-btn" id="helpBtn" type="button" title="使用說明">說明</button>
       <div class="progress-wrap">
         <span class="progress" id="progress" title="點擊以跳轉">0/0 (0%)</span>
         <input
@@ -316,12 +297,13 @@
         "單行模式：點標題列 − 按鈕縮小。",
         "再按 + 可展開回便利貼模式。",
         "縮放視窗：點標題列 ⤢ 按鈕。",
-        "Memo 模式縮至 350×250，單行 350×30。",
+        "若無法縮放，會自動以彈出視窗開啟。",
+        "Memo 模式 350×250，單行模式 350×30。",
         "跳轉：點擊右下角進度數字。",
         "輸入行號後按 Enter 即可跳轉。",
         "閱讀進度會自動儲存在瀏覽器。",
         "重新整理後會從上次位置繼續閱讀。",
-        "關閉說明：再點底部「說明」按鈕即可。"
+        "關閉說明：再點頂部 ? 按鈕即可。"
       ];
 
       const state = {
@@ -344,30 +326,83 @@
       const resizeBtn = document.getElementById("resizeBtn");
       const helpBtn = document.getElementById("helpBtn");
 
-      // ===== 視窗尺寸：一鍵將瀏覽器視窗縮放至便利貼大小 =====
+      // ===== 視窗尺寸：一鍵縮放至便利貼大小；若瀏覽器封鎖則改以彈出視窗開啟 =====
+      function getMemoWindowSize() {
+        return {
+          width: 350,
+          height: state.compact ? 30 : 250
+        };
+      }
+
+      function isLikelyPopupWindow() {
+        return window.opener !== null || window.name === "StealthMemoReader";
+      }
+
+      function openMemoPopup(options = {}) {
+        const { showBlockedAlert = false } = options;
+        const { width, height } = getMemoWindowSize();
+        const features = [
+          `width=${width}`,
+          `height=${height}`,
+          "menubar=no",
+          "toolbar=no",
+          "location=no",
+          "status=no",
+          "resizable=yes",
+          "scrollbars=no"
+        ].join(",");
+
+        const popup = window.open(location.href, "StealthMemoReader", features);
+        if (!popup && showBlockedAlert) {
+          alert("無法自動縮放視窗。請允許彈出視窗，或右鍵連結選擇「在新視窗中開啟」後手動調整大小。");
+        }
+        return Boolean(popup);
+      }
+
       function fitWindowToMemo(options = {}) {
         const { showBlockedAlert = false } = options;
-        const memoWidth = 350;
-        const memoHeight = state.compact ? 30 : 250;
+        const { width: memoWidth, height: memoHeight } = getMemoWindowSize();
         const chromeWidth = window.outerWidth - window.innerWidth;
         const chromeHeight = window.outerHeight - window.innerHeight;
+        const targetWidth = memoWidth + chromeWidth;
+        const targetHeight = memoHeight + chromeHeight;
 
         document.documentElement.classList.toggle("compact", state.compact);
         document.body.classList.toggle("compact", state.compact);
 
+        const beforeWidth = window.outerWidth;
+        const beforeHeight = window.outerHeight;
+
         try {
-          window.resizeTo(memoWidth + chromeWidth, memoHeight + chromeHeight);
+          window.resizeTo(targetWidth, targetHeight);
           window.moveTo(
-            Math.max(0, Math.round((screen.availWidth - memoWidth - chromeWidth) / 2)),
-            Math.max(0, Math.round((screen.availHeight - memoHeight - chromeHeight) / 2))
+            Math.max(0, Math.round((screen.availWidth - targetWidth) / 2)),
+            Math.max(0, Math.round((screen.availHeight - targetHeight) / 2))
           );
-          return true;
         } catch (error) {
-          if (showBlockedAlert) {
-            alert("瀏覽器不允許自動調整視窗大小。請改用彈出視窗開啟此頁，或手動縮放視窗。");
-          }
-          return false;
+          return openMemoPopup(options);
         }
+
+        // 現代瀏覽器在一般分頁會靜默忽略 resizeTo，需檢查是否真的有縮放成功。
+        window.setTimeout(() => {
+          const nearTarget = Math.abs(window.outerWidth - targetWidth) < 24
+            && Math.abs(window.outerHeight - targetHeight) < 24;
+
+          if (nearTarget) return;
+
+          if (isLikelyPopupWindow()) {
+            try {
+              window.resizeTo(targetWidth, targetHeight);
+            } catch (error) {
+              // 已在彈出視窗但仍無法縮放時不再重複開窗。
+            }
+            return;
+          }
+
+          openMemoPopup({ showBlockedAlert });
+        }, 120);
+
+        return true;
       }
 
       // ===== 文字解析器：依中英文標點與換行切句，長句再以 30 字分段 =====
@@ -487,7 +522,8 @@
         modeToggle.textContent = state.compact ? "+" : "−";
         modeToggle.setAttribute("aria-label", state.compact ? "展開 Memo 模式" : "切換單行模式");
         helpBtn.classList.toggle("active", state.manualMode);
-        helpBtn.textContent = state.manualMode ? "返回" : "說明";
+        helpBtn.setAttribute("aria-label", state.manualMode ? "關閉說明" : "使用說明");
+        helpBtn.title = state.manualMode ? "關閉說明" : "使用說明";
         document.documentElement.classList.toggle("compact", state.compact);
         document.body.classList.toggle("compact", state.compact);
 
@@ -825,7 +861,7 @@
 
       // ===== 事件監聽：雙擊匯入、說明書、視窗縮放、進度跳轉、模式切換與鍵盤快捷鍵 =====
       statusBar.addEventListener("dblclick", (event) => {
-        if (event.target === jumpInput || event.target === helpBtn) return;
+        if (event.target === jumpInput || event.target.closest(".progress-wrap")) return;
         fileInput.click();
       });
 
