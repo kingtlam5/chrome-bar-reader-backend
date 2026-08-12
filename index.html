@@ -13,8 +13,8 @@
       --active-bg: rgba(255, 255, 255, 0.34);
       --memo-width: 350px;
       --memo-height: 250px;
-      --compact-height: 48px;
-      --chrome-toolbar-height: 48px;
+      --compact-height: 52px;
+      --chrome-toolbar-height: 52px;
       --title-height: 25px;
       --status-height: 24px;
       --font-size: 15px;
@@ -274,8 +274,8 @@
       flex-shrink: 0;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       padding: 0;
       border: 0;
       border-radius: 50%;
@@ -301,7 +301,7 @@
       flex: 1;
       align-items: center;
       min-width: 0;
-      height: 38px;
+      height: 44px;
       margin: 0 8px 0 0;
       padding: 0 14px;
       border-radius: 24px;
@@ -339,15 +339,48 @@
       fill: currentColor;
     }
 
-    .chrome-url {
+    .chrome-url-scroll {
       flex: 1;
       min-width: 0;
+      height: 44px;
       overflow: hidden;
+    }
+
+    .chrome-url-scroll.can-scroll {
+      overflow-x: auto;
+      scrollbar-width: none;
+      cursor: ew-resize;
+    }
+
+    .chrome-url-scroll.can-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chrome-url {
+      display: inline-block;
       color: var(--chrome-address-text);
       font-size: 13px;
-      line-height: 38px;
+      line-height: 44px;
       white-space: nowrap;
-      text-overflow: ellipsis;
+    }
+
+    .chrome-url.marquee {
+      animation: chrome-url-marquee var(--marquee-duration, 16s) linear infinite;
+      padding-right: 40px;
+    }
+
+    .chrome-url-scroll:hover .chrome-url.marquee {
+      animation-play-state: paused;
+    }
+
+    @keyframes chrome-url-marquee {
+      0%, 14% {
+        transform: translateX(0);
+      }
+
+      86%, 100% {
+        transform: translateX(var(--marquee-offset, -100px));
+      }
     }
 
     .chrome-progress {
@@ -357,7 +390,7 @@
       border-left: 1px solid var(--chrome-separator);
       color: var(--chrome-icon);
       font-size: 12px;
-      line-height: 38px;
+      line-height: 44px;
       white-space: nowrap;
       cursor: pointer;
     }
@@ -483,7 +516,9 @@
           <span class="chrome-lock" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
           </span>
-          <span class="chrome-url" id="chromeUrl"></span>
+          <div class="chrome-url-scroll" id="chromeUrlScroll">
+            <span class="chrome-url" id="chromeUrl"></span>
+          </div>
           <span class="chrome-progress" id="chromeProgress" title="點擊跳轉句子">0/0</span>
           <input
             class="chrome-jump hidden"
@@ -549,7 +584,7 @@
 
       const STORAGE_KEY = "stealthMemoReader.v1";
       const VISIBLE_SENTENCE_COUNT = 4;
-      const COMPACT_TOOLBAR_HEIGHT = 48;
+      const COMPACT_TOOLBAR_HEIGHT = 52;
       const BOSS_CHROME_URL = "https://chrome.google.com/webstore/detail/developer-tools";
       const FAKE_TASKS = [
         "1. Review API logs",
@@ -576,7 +611,8 @@
         "★ 按鈕：匯入 TXT 或 EPUB 書本。",
         "網址列右側數字：顯示進度，點擊可跳轉。",
         "Chrome 模式會自動調整為全螢幕寬度。",
-        "Chrome 模式高度 48px，預設以彈出視窗全寬貼頂開啟。",
+        "Chrome 模式高度 52px，預設以彈出視窗全寬貼頂開啟。",
+        "長句會自動左右滾動；滑鼠懸停可暫停並手動捲動。",
         "縮放視窗：點標題列 ⤢ 按鈕。",
         "若無法縮放，會自動以彈出視窗開啟。",
         "Memo 模式 350×250。",
@@ -603,6 +639,7 @@
       const chromeToolbar = document.getElementById("chromeToolbar");
       const chromeShell = document.getElementById("chromeShell");
       const chromeUrl = document.getElementById("chromeUrl");
+      const chromeUrlScroll = document.getElementById("chromeUrlScroll");
       const chromeAddressWrap = document.getElementById("chromeAddressWrap");
       const chromeJumpInput = document.getElementById("chromeJumpInput");
       const chromeBack = document.getElementById("chromeBack");
@@ -647,14 +684,36 @@
         return `${current}/${total} (${percent}%)`;
       }
 
+      function updateChromeUrlDisplay(text) {
+        chromeUrl.textContent = text;
+        chromeUrl.title = text;
+        chromeUrl.classList.remove("marquee");
+        chromeUrlScroll.classList.remove("can-scroll");
+        chromeUrlScroll.scrollLeft = 0;
+        chromeUrl.style.removeProperty("--marquee-offset");
+        chromeUrl.style.removeProperty("--marquee-duration");
+
+        if (!text || !state.compact) return;
+
+        requestAnimationFrame(() => {
+          const overflow = chromeUrl.scrollWidth - chromeUrlScroll.clientWidth;
+          if (overflow <= 4) return;
+
+          chromeUrlScroll.classList.add("can-scroll");
+          chromeUrl.classList.add("marquee");
+          chromeUrl.style.setProperty("--marquee-offset", `-${overflow}px`);
+          chromeUrl.style.setProperty("--marquee-duration", `${Math.max(10, overflow / 28)}s`);
+        });
+      }
+
       function updateChromeToolbar() {
         if (!state.compact) return;
 
         if (state.bossMode) {
-          chromeUrl.textContent = BOSS_CHROME_URL;
+          updateChromeUrlDisplay(BOSS_CHROME_URL);
           chromeProgress.classList.add("hidden");
         } else {
-          chromeUrl.textContent = getCurrentSentenceText();
+          updateChromeUrlDisplay(getCurrentSentenceText());
           chromeProgress.textContent = getProgressLabel();
           chromeProgress.classList.remove("hidden");
         }
@@ -681,9 +740,14 @@
 
       function getCompactOuterSize() {
         const chrome = getWindowChromeSize();
+        const contentHeight = Math.max(
+          COMPACT_TOOLBAR_HEIGHT,
+          document.documentElement.scrollHeight || 0,
+          document.body.scrollHeight || 0
+        );
         return {
           width: window.screen.availWidth,
-          height: COMPACT_TOOLBAR_HEIGHT + chrome.height
+          height: contentHeight + chrome.height
         };
       }
 
@@ -54672,6 +54736,13 @@
         openChromeJumpInput();
       });
 
+      chromeUrlScroll.addEventListener("wheel", (event) => {
+        if (!chromeUrlScroll.classList.contains("can-scroll")) return;
+        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+        event.preventDefault();
+        chromeUrlScroll.scrollLeft += event.deltaY;
+      }, { passive: false });
+
       chromeTranslate.addEventListener("click", (event) => {
         event.stopPropagation();
         toggleTranslate();
@@ -54752,6 +54823,11 @@
       window.addEventListener("resize", () => {
         if (state.compact && isCompactPopupContext()) {
           applyCompactWindowFrame();
+          if (state.bossMode) {
+            updateChromeUrlDisplay(BOSS_CHROME_URL);
+          } else {
+            updateChromeUrlDisplay(getCurrentSentenceText());
+          }
         }
       });
     })();
