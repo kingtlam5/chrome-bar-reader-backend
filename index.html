@@ -13,35 +13,42 @@
       --active-bg: rgba(255, 255, 255, 0.34);
       --memo-width: 350px;
       --memo-height: 250px;
-      --compact-height: 42px;
+      --compact-height: 74px;
+      --chrome-tab-height: 34px;
+      --chrome-toolbar-height: 40px;
       --title-height: 25px;
       --status-height: 24px;
       --font-size: 15px;
       --line-height: 1.72;
       --radius: 6px;
       --transition-speed: 180ms;
-      --chrome-bg: #f1f3f4;
-      --chrome-toolbar-bg: #f1f3f4;
+      --chrome-bg: #dee1e6;
+      --chrome-toolbar-bg: #ffffff;
+      --chrome-tab-active-bg: #ffffff;
+      --chrome-tab-inactive-bg: transparent;
       --chrome-icon: #5f6368;
-      --chrome-icon-hover-bg: rgba(95, 99, 104, 0.08);
-      --chrome-address-bg: #ffffff;
+      --chrome-icon-disabled: #bdc1c6;
+      --chrome-icon-hover-bg: rgba(60, 64, 67, 0.08);
+      --chrome-omnibox-bg: #e8eaed;
+      --chrome-omnibox-focus-bg: #ffffff;
       --chrome-address-text: #202124;
-      --chrome-border: rgba(0, 0, 0, 0.06);
-      --chrome-translate-bg: #ffffff;
-      --chrome-translate-border: #dadce0;
+      --chrome-tab-text: #3c4043;
+      --chrome-separator: #dadce0;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
         --chrome-bg: #202124;
         --chrome-toolbar-bg: #202124;
+        --chrome-tab-active-bg: #202124;
         --chrome-icon: #9aa0a6;
+        --chrome-icon-disabled: #5f6368;
         --chrome-icon-hover-bg: rgba(255, 255, 255, 0.08);
-        --chrome-address-bg: #303134;
+        --chrome-omnibox-bg: #303134;
+        --chrome-omnibox-focus-bg: #303134;
         --chrome-address-text: #e8eaed;
-        --chrome-border: rgba(255, 255, 255, 0.08);
-        --chrome-translate-bg: #292a2d;
-        --chrome-translate-border: #3c4043;
+        --chrome-tab-text: #e8eaed;
+        --chrome-separator: #3c4043;
       }
     }
 
@@ -61,9 +68,13 @@
 
     html.compact,
     body.compact {
-      width: 100%;
-      min-width: var(--memo-width);
+      width: 100vw !important;
+      max-width: 100vw;
+      min-width: 100vw;
       height: var(--compact-height);
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
       background: var(--chrome-bg);
     }
 
@@ -219,8 +230,10 @@
     }
 
     .memo.compact {
+      width: 100vw;
+      max-width: 100vw;
       height: var(--compact-height);
-      background: var(--chrome-toolbar-bg);
+      background: var(--chrome-bg);
     }
 
     .memo.compact .title-bar,
@@ -229,21 +242,115 @@
       display: none;
     }
 
-    .chrome-toolbar {
+    .chrome-shell {
       display: none;
-      align-items: center;
-      gap: 4px;
-      width: 100%;
+      flex-direction: column;
+      width: 100vw;
+      max-width: 100vw;
       height: var(--compact-height);
-      padding: 0 8px;
-      background: var(--chrome-toolbar-bg);
-      color: var(--chrome-icon);
-      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
       user-select: none;
     }
 
-    .memo.compact .chrome-toolbar {
+    .memo.compact .chrome-shell {
       display: flex;
+    }
+
+    /* Tab bar */
+    .chrome-tabs {
+      display: flex;
+      align-items: flex-end;
+      height: var(--chrome-tab-height);
+      padding: 8px 8px 0;
+      background: var(--chrome-bg);
+      gap: 0;
+    }
+
+    .chrome-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 240px;
+      height: 26px;
+      padding: 0 10px 0 12px;
+      border-radius: 8px 8px 0 0;
+      background: var(--chrome-tab-inactive-bg);
+      color: var(--chrome-tab-text);
+      font-size: 12px;
+      line-height: 26px;
+      white-space: nowrap;
+    }
+
+    .chrome-tab.active {
+      background: var(--chrome-tab-active-bg);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .chrome-tab-favicon {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 2px;
+      background: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc05 75%, #ea4335 100%);
+    }
+
+    .chrome-tab-title {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chrome-tab-close {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--chrome-icon);
+      font-size: 14px;
+      line-height: 16px;
+      cursor: default;
+      opacity: 0.7;
+    }
+
+    .chrome-new-tab {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      margin-left: 4px;
+      margin-bottom: 2px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--chrome-icon);
+      font-size: 18px;
+      line-height: 28px;
+      cursor: default;
+    }
+
+    /* Main toolbar */
+    .chrome-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      height: var(--chrome-toolbar-height);
+      padding: 0 4px 0 6px;
+      background: var(--chrome-toolbar-bg);
+      color: var(--chrome-icon);
+    }
+
+    .chrome-nav-group {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      gap: 2px;
+      margin-right: 6px;
     }
 
     .chrome-nav {
@@ -251,16 +358,20 @@
       flex-shrink: 0;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       padding: 0;
       border: 0;
       border-radius: 50%;
       background: transparent;
       color: var(--chrome-icon);
-      font-size: 16px;
-      line-height: 1;
       cursor: pointer;
+    }
+
+    .chrome-nav svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
 
     .chrome-nav:hover,
@@ -269,26 +380,39 @@
       outline: none;
     }
 
-    .chrome-address {
+    .chrome-omnibox {
       display: flex;
       flex: 1;
       align-items: center;
       min-width: 0;
-      height: 28px;
-      padding: 0 10px;
-      border: 1px solid var(--chrome-border);
-      border-radius: 20px;
-      background: var(--chrome-address-bg);
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-      cursor: text;
+      height: 34px;
+      margin: 0 8px 0 0;
+      padding: 0 12px;
+      border-radius: 24px;
+      background: var(--chrome-omnibox-bg);
+      transition: background 120ms ease;
+    }
+
+    .chrome-omnibox:focus-within {
+      background: var(--chrome-omnibox-focus-bg);
+      box-shadow: 0 1px 6px rgba(32, 33, 36, 0.12);
     }
 
     .chrome-lock {
       flex-shrink: 0;
-      margin-right: 6px;
-      opacity: 0.72;
-      font-size: 11px;
-      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      color: var(--chrome-icon);
+    }
+
+    .chrome-lock svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
     }
 
     .chrome-url {
@@ -296,20 +420,20 @@
       min-width: 0;
       overflow: hidden;
       color: var(--chrome-address-text);
-      font-size: 12px;
-      line-height: 28px;
+      font-size: 13px;
+      line-height: 34px;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
 
     .chrome-progress {
       flex-shrink: 0;
-      margin-left: 8px;
+      margin-left: 10px;
       padding-left: 10px;
-      border-left: 1px solid var(--chrome-border);
+      border-left: 1px solid var(--chrome-separator);
       color: var(--chrome-icon);
-      font-size: 11px;
-      line-height: 28px;
+      font-size: 12px;
+      line-height: 34px;
       white-space: nowrap;
       cursor: pointer;
     }
@@ -319,67 +443,167 @@
     }
 
     .chrome-jump {
-      flex: 1;
-      min-width: 0;
-      max-width: 72px;
-      height: 22px;
+      flex-shrink: 0;
+      width: 72px;
+      height: 26px;
       margin-left: 8px;
-      padding: 0 4px;
-      border: 0;
-      border-left: 1px solid var(--chrome-border);
+      padding: 0 6px;
+      border: 1px solid var(--chrome-separator);
+      border-radius: 4px;
       outline: none;
-      background: transparent;
+      background: var(--chrome-toolbar-bg);
       color: var(--chrome-address-text);
-      font-size: 11px;
+      font-size: 12px;
       text-align: right;
     }
 
-    .chrome-action {
+    .chrome-omnibox-actions {
+      display: flex;
       flex-shrink: 0;
-      height: 24px;
-      padding: 0 8px;
-      border: 1px solid var(--chrome-translate-border);
-      border-radius: 4px;
-      background: var(--chrome-translate-bg);
-      color: var(--chrome-address-text);
-      font-size: 13px;
+      align-items: center;
+      gap: 2px;
+      margin-left: 6px;
+    }
+
+    .chrome-omnibox-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--chrome-icon);
+      font-size: 12px;
       font-weight: 500;
-      line-height: 22px;
+      line-height: 1;
       cursor: pointer;
     }
 
-    .chrome-action:hover,
-    .chrome-action.active {
+    .chrome-omnibox-btn:hover,
+    .chrome-omnibox-btn.active {
       background: var(--chrome-icon-hover-bg);
     }
 
-    .chrome-upload {
-      font-size: 15px;
+    .chrome-omnibox-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .chrome-toolbar-actions {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      gap: 2px;
+      margin-left: 4px;
+    }
+
+    .chrome-toolbar-sep {
+      width: 1px;
+      height: 20px;
+      margin: 0 4px;
+      background: var(--chrome-separator);
+    }
+
+    .chrome-profile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #8e24aa;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 28px;
+      text-align: center;
+    }
+
+    .chrome-menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--chrome-icon);
+      cursor: pointer;
+    }
+
+    .chrome-menu-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .chrome-menu-btn:hover {
+      background: var(--chrome-icon-hover-bg);
     }
   </style>
 </head>
 <body>
   <main class="memo" id="memo" aria-label="隱蔽文字閱讀器">
-    <header class="chrome-toolbar" id="chromeToolbar" aria-label="Chrome 工具列（偽裝）">
-      <button class="chrome-nav" id="chromeBack" type="button" aria-label="上一句" title="上一句">←</button>
-      <button class="chrome-nav" id="chromeForward" type="button" aria-label="下一句" title="下一句">→</button>
-      <button class="chrome-nav" id="chromeRefresh" type="button" aria-label="展開 Memo 視窗" title="展開 Memo 視窗">↻</button>
-      <div class="chrome-address" id="chromeAddressWrap">
-        <span class="chrome-lock" aria-hidden="true">🔒</span>
-        <span class="chrome-url" id="chromeUrl"></span>
-        <span class="chrome-progress" id="chromeProgress" title="點擊跳轉句子">0/0</span>
-        <input
-          class="chrome-jump hidden"
-          id="chromeJumpInput"
-          type="number"
-          min="1"
-          inputmode="numeric"
-          aria-label="跳轉至指定句"
-        >
+    <div class="chrome-shell" id="chromeShell">
+      <div class="chrome-tabs">
+        <div class="chrome-tab active">
+          <span class="chrome-tab-favicon" aria-hidden="true"></span>
+          <span class="chrome-tab-title" id="chromeTabTitle">Google</span>
+          <span class="chrome-tab-close" aria-hidden="true">×</span>
+        </div>
+        <span class="chrome-new-tab" aria-hidden="true">+</span>
       </div>
-      <button class="chrome-action" id="chromeTranslate" type="button" aria-label="簡轉繁" title="簡轉繁">⇄</button>
-      <button class="chrome-nav chrome-upload" id="chromeUpload" type="button" aria-label="匯入書本" title="匯入 TXT 或 EPUB">★</button>
-    </header>
+      <header class="chrome-toolbar" id="chromeToolbar" aria-label="Chrome 工具列（偽裝）">
+        <div class="chrome-nav-group">
+          <button class="chrome-nav" id="chromeBack" type="button" aria-label="上一句" title="上一句">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6v12z"/></svg>
+          </button>
+          <button class="chrome-nav" id="chromeForward" type="button" aria-label="下一句" title="下一句">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6v12z"/></svg>
+          </button>
+          <button class="chrome-nav" id="chromeRefresh" type="button" aria-label="展開 Memo 視窗" title="展開 Memo 視窗">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08a5.99 5.99 0 01-5.65 4c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+          </button>
+        </div>
+        <div class="chrome-omnibox" id="chromeAddressWrap">
+          <span class="chrome-lock" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          </span>
+          <span class="chrome-url" id="chromeUrl"></span>
+          <span class="chrome-progress" id="chromeProgress" title="點擊跳轉句子">0/0</span>
+          <input
+            class="chrome-jump hidden"
+            id="chromeJumpInput"
+            type="number"
+            min="1"
+            inputmode="numeric"
+            aria-label="跳轉至指定句"
+          >
+          <div class="chrome-omnibox-actions">
+            <button class="chrome-omnibox-btn" id="chromeTranslate" type="button" aria-label="簡轉繁" title="簡轉繁">⇄</button>
+            <button class="chrome-omnibox-btn" id="chromeUpload" type="button" aria-label="匯入書本" title="匯入 TXT 或 EPUB">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="chrome-toolbar-actions">
+          <button class="chrome-nav" type="button" aria-hidden="true" tabindex="-1">
+            <svg viewBox="0 0 24 24"><path d="M11.99 18.54l-7.37-5.73C3 11.39 2 10.18 2 8.75 2 6.09 4.09 4 6.75 4h10.5c2.66 0 4.75 2.09 4.75 4.75 0 1.43-1 2.64-2.62 3.06l-7.37 5.73zM12 16.25l6.74-5.24c.85-.66 1.26-1.19 1.26-1.86 0-1.38-1.12-2.5-2.5-2.5H6.75c-1.38 0-2.5 1.12-2.5 2.5 0 .67.41 1.2 1.26 1.86L12 16.25z"/></svg>
+          </button>
+          <span class="chrome-toolbar-sep" aria-hidden="true"></span>
+          <span class="chrome-profile" aria-hidden="true">B</span>
+          <button class="chrome-menu-btn" id="chromeMenuBtn" type="button" aria-label="展開 Memo 模式" title="展開 Memo 模式">
+            <svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          </button>
+        </div>
+      </header>
+    </div>
 
     <header class="title-bar" id="titleBar">
       <span class="title-text">Notes - Task List</span>
@@ -443,9 +667,7 @@
         "★ 按鈕：匯入 TXT 或 EPUB 書本。",
         "網址列右側數字：顯示進度，點擊可跳轉。",
         "Chrome 模式會自動調整為全螢幕寬度。",
-        "縮放視窗：點標題列 ⤢ 按鈕。",
-        "若無法縮放，會自動以彈出視窗開啟。",
-        "Memo 模式 350×250，Chrome 模式高度 42px。",
+        "Chrome 模式高度 74px（分頁列 + 工具列）。",
         "跳轉：點擊右下角進度數字。",
         "輸入行號後按 Enter 即可跳轉。",
         "閱讀進度會自動儲存在瀏覽器。",
@@ -467,6 +689,8 @@
       const memo = document.getElementById("memo");
       const titleBar = document.getElementById("titleBar");
       const chromeToolbar = document.getElementById("chromeToolbar");
+      const chromeShell = document.getElementById("chromeShell");
+      const chromeTabTitle = document.getElementById("chromeTabTitle");
       const chromeUrl = document.getElementById("chromeUrl");
       const chromeAddressWrap = document.getElementById("chromeAddressWrap");
       const chromeJumpInput = document.getElementById("chromeJumpInput");
@@ -476,6 +700,7 @@
       const chromeTranslate = document.getElementById("chromeTranslate");
       const chromeProgress = document.getElementById("chromeProgress");
       const chromeUpload = document.getElementById("chromeUpload");
+      const chromeMenuBtn = document.getElementById("chromeMenuBtn");
       const reader = document.getElementById("reader");
       const statusBar = document.getElementById("statusBar");
       const progress = document.getElementById("progress");
@@ -517,9 +742,11 @@
 
         if (state.bossMode) {
           chromeUrl.textContent = BOSS_CHROME_URL;
+          chromeTabTitle.textContent = "Chrome Web Store";
           chromeProgress.classList.add("hidden");
         } else {
           chromeUrl.textContent = getCurrentSentenceText();
+          chromeTabTitle.textContent = state.fileName || document.title;
           chromeProgress.textContent = getProgressLabel();
           chromeProgress.classList.remove("hidden");
         }
@@ -530,6 +757,22 @@
           "aria-label",
           state.translateTraditional ? "關閉簡轉繁" : "簡轉繁"
         );
+      }
+
+      function ensureCompactFullWidth() {
+        if (!state.compact) return;
+
+        const chromeWidth = window.outerWidth - window.innerWidth;
+        const chromeHeight = window.outerHeight - window.innerHeight;
+        const targetWidth = window.screen.availWidth + chromeWidth;
+        const targetHeight = 74 + chromeHeight;
+
+        try {
+          window.moveTo(window.screen.availLeft, window.screen.availTop);
+          window.resizeTo(targetWidth, targetHeight);
+        } catch (error) {
+          // 一般分頁可能封鎖 resizeTo。
+        }
       }
 
       function prevSentence() {
@@ -569,8 +812,8 @@
       function getMemoWindowSize() {
         if (state.compact) {
           return {
-            width: screen.availWidth,
-            height: 42
+            width: window.screen.availWidth,
+            height: 74
           };
         }
 
@@ -622,8 +865,8 @@
         try {
           window.resizeTo(targetWidth, targetHeight);
           window.moveTo(
-            state.compact ? screen.availLeft : Math.max(0, Math.round((screen.availWidth - targetWidth) / 2)),
-            state.compact ? screen.availTop : Math.max(0, Math.round((screen.availHeight - targetHeight) / 2))
+            state.compact ? window.screen.availLeft : Math.max(0, Math.round((window.screen.availWidth - targetWidth) / 2)),
+            state.compact ? window.screen.availTop : Math.max(0, Math.round((window.screen.availHeight - targetHeight) / 2))
           );
         } catch (error) {
           return openMemoPopup(options);
@@ -647,6 +890,10 @@
 
           openMemoPopup({ showBlockedAlert });
         }, 120);
+
+        if (state.compact) {
+          window.setTimeout(ensureCompactFullWidth, 240);
+        }
 
         return true;
       }
@@ -54415,6 +54662,9 @@
         saveState();
         render();
         fitWindowToMemo({ showBlockedAlert: true });
+        if (state.compact) {
+          window.setTimeout(ensureCompactFullWidth, 300);
+        }
       });
 
       chromeBack.addEventListener("click", (event) => {
@@ -54445,6 +54695,11 @@
       chromeUpload.addEventListener("click", (event) => {
         event.stopPropagation();
         fileInput.click();
+      });
+
+      chromeMenuBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        expandToMemoMode();
       });
 
       chromeJumpInput.addEventListener("keydown", (event) => {
@@ -54513,7 +54768,21 @@
 
       loadState();
       render();
-      window.addEventListener("load", () => fitWindowToMemo());
+      if (state.compact) {
+        ensureCompactFullWidth();
+      }
+      window.addEventListener("load", () => {
+        fitWindowToMemo();
+        if (state.compact) {
+          ensureCompactFullWidth();
+        }
+      });
+      window.addEventListener("resize", () => {
+        if (state.compact) {
+          document.documentElement.style.width = "100vw";
+          document.body.style.width = "100vw";
+        }
+      });
     })();
   </script>
 </body>
