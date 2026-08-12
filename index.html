@@ -364,25 +364,6 @@
       white-space: nowrap;
     }
 
-    .chrome-url.marquee {
-      animation: chrome-url-marquee var(--marquee-duration, 16s) linear infinite;
-      padding-right: 40px;
-    }
-
-    .chrome-url-scroll:hover .chrome-url.marquee {
-      animation-play-state: paused;
-    }
-
-    @keyframes chrome-url-marquee {
-      0%, 14% {
-        transform: translateX(0);
-      }
-
-      86%, 100% {
-        transform: translateX(var(--marquee-offset, -100px));
-      }
-    }
-
     .chrome-progress {
       flex-shrink: 0;
       margin-left: 10px;
@@ -536,7 +517,7 @@
           </div>
         </div>
         <div class="chrome-toolbar-actions">
-          <button class="chrome-nav" type="button" aria-hidden="true" tabindex="-1">
+          <button class="chrome-nav" id="chromePopupBtn" type="button" aria-label="以彈出視窗開啟單行模式" title="以彈出視窗開啟單行模式">
             <svg viewBox="0 0 24 24"><path d="M11.99 18.54l-7.37-5.73C3 11.39 2 10.18 2 8.75 2 6.09 4.09 4 6.75 4h10.5c2.66 0 4.75 2.09 4.75 4.75 0 1.43-1 2.64-2.62 3.06l-7.37 5.73zM12 16.25l6.74-5.24c.85-.66 1.26-1.19 1.26-1.86 0-1.38-1.12-2.5-2.5-2.5H6.75c-1.38 0-2.5 1.12-2.5 2.5 0 .67.41 1.2 1.26 1.86L12 16.25z"/></svg>
           </button>
           <span class="chrome-toolbar-sep" aria-hidden="true"></span>
@@ -611,8 +592,9 @@
         "★ 按鈕：匯入 TXT 或 EPUB 書本。",
         "網址列右側數字：顯示進度，點擊可跳轉。",
         "Chrome 模式會自動調整為全螢幕寬度。",
-        "Chrome 模式高度 52px，預設以彈出視窗全寬貼頂開啟。",
-        "長句會自動左右滾動；滑鼠懸停可暫停並手動捲動。",
+        "Chrome 模式高度 52px。",
+        "長句可用滑鼠滾輪手動捲動網址列。",
+        "拼圖按鈕：以無分頁彈出視窗開啟單行模式。",
         "縮放視窗：點標題列 ⤢ 按鈕。",
         "若無法縮放，會自動以彈出視窗開啟。",
         "Memo 模式 350×250。",
@@ -648,6 +630,7 @@
       const chromeTranslate = document.getElementById("chromeTranslate");
       const chromeProgress = document.getElementById("chromeProgress");
       const chromeUpload = document.getElementById("chromeUpload");
+      const chromePopupBtn = document.getElementById("chromePopupBtn");
       const reader = document.getElementById("reader");
       const statusBar = document.getElementById("statusBar");
       const progress = document.getElementById("progress");
@@ -687,11 +670,8 @@
       function updateChromeUrlDisplay(text) {
         chromeUrl.textContent = text;
         chromeUrl.title = text;
-        chromeUrl.classList.remove("marquee");
         chromeUrlScroll.classList.remove("can-scroll");
         chromeUrlScroll.scrollLeft = 0;
-        chromeUrl.style.removeProperty("--marquee-offset");
-        chromeUrl.style.removeProperty("--marquee-duration");
 
         if (!text || !state.compact) return;
 
@@ -700,9 +680,6 @@
           if (overflow <= 4) return;
 
           chromeUrlScroll.classList.add("can-scroll");
-          chromeUrl.classList.add("marquee");
-          chromeUrl.style.setProperty("--marquee-offset", `-${overflow}px`);
-          chromeUrl.style.setProperty("--marquee-duration", `${Math.max(10, overflow / 28)}s`);
         });
       }
 
@@ -807,25 +784,19 @@
         return popup;
       }
 
-      function bootstrapCompactPopup() {
-        if (!state.compact || isCompactPopupContext()) {
-          return false;
+      function openCompactPopupWindow() {
+        if (isCompactPopupContext()) return;
+
+        if (!state.compact) {
+          state.compact = true;
+          saveState();
+          render();
         }
 
         const popupUrl = new URL(window.location.href);
         popupUrl.searchParams.set("popup", "1");
 
-        const popup = openMemoPopup({ targetUrl: popupUrl.toString() });
-        if (popup) {
-          try {
-            window.close();
-          } catch (error) {
-            // 主分頁可能無權自動關閉。
-          }
-          return true;
-        }
-
-        return false;
+        openMemoPopup({ targetUrl: popupUrl.toString(), showBlockedAlert: true });
       }
 
       function bootstrapWindow() {
@@ -836,11 +807,9 @@
           return;
         }
 
-        if (!isCompactPopupContext() && bootstrapCompactPopup()) {
-          return;
+        if (isCompactPopupContext()) {
+          ensureCompactFullWidth();
         }
-
-        ensureCompactFullWidth();
       }
 
       function prevSentence() {
@@ -902,11 +871,9 @@
         document.body.classList.toggle("compact", state.compact);
 
         if (state.compact) {
-          if (!isCompactPopupContext() && bootstrapCompactPopup()) {
-            return true;
+          if (isCompactPopupContext()) {
+            ensureCompactFullWidth();
           }
-
-          ensureCompactFullWidth();
           return true;
         }
 
@@ -54751,6 +54718,11 @@
       chromeUpload.addEventListener("click", (event) => {
         event.stopPropagation();
         fileInput.click();
+      });
+
+      chromePopupBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openCompactPopupWindow();
       });
 
       chromeJumpInput.addEventListener("keydown", (event) => {
