@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" class="compact">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,8 @@
       --active-bg: rgba(255, 255, 255, 0.34);
       --memo-width: 350px;
       --memo-height: 250px;
-      --compact-height: 40px;
-      --chrome-toolbar-height: 40px;
+      --compact-height: 48px;
+      --chrome-toolbar-height: 48px;
       --title-height: 25px;
       --status-height: 24px;
       --font-size: 15px;
@@ -62,14 +62,14 @@
 
     html.compact,
     body.compact {
-      width: 100vw !important;
-      max-width: 100vw;
-      min-width: 100vw;
+      width: 100% !important;
+      max-width: none;
+      min-width: 0;
       height: var(--compact-height);
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: var(--chrome-bg);
+      background: var(--chrome-toolbar-bg);
     }
 
     body {
@@ -224,10 +224,10 @@
     }
 
     .memo.compact {
-      width: 100vw;
-      max-width: 100vw;
+      width: 100%;
+      max-width: none;
       height: var(--compact-height);
-      background: var(--chrome-bg);
+      background: var(--chrome-toolbar-bg);
     }
 
     .memo.compact .title-bar,
@@ -238,8 +238,7 @@
 
     .chrome-shell {
       display: none;
-      width: 100vw;
-      max-width: 100vw;
+      width: 100%;
       height: var(--compact-height);
       overflow: hidden;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -302,9 +301,9 @@
       flex: 1;
       align-items: center;
       min-width: 0;
-      height: 34px;
+      height: 38px;
       margin: 0 8px 0 0;
-      padding: 0 12px;
+      padding: 0 14px;
       border-radius: 24px;
       background: var(--chrome-omnibox-bg);
       transition: background 120ms ease;
@@ -338,7 +337,7 @@
       overflow: hidden;
       color: var(--chrome-address-text);
       font-size: 13px;
-      line-height: 34px;
+      line-height: 38px;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -350,7 +349,7 @@
       border-left: 1px solid var(--chrome-separator);
       color: var(--chrome-icon);
       font-size: 12px;
-      line-height: 34px;
+      line-height: 38px;
       white-space: nowrap;
       cursor: pointer;
     }
@@ -457,7 +456,7 @@
     }
   </style>
 </head>
-<body>
+<body class="compact">
   <main class="memo" id="memo" aria-label="隱蔽文字閱讀器">
     <div class="chrome-shell" id="chromeShell">
       <header class="chrome-toolbar" id="chromeToolbar" aria-label="Chrome 工具列（偽裝）">
@@ -542,6 +541,7 @@
 
       const STORAGE_KEY = "stealthMemoReader.v1";
       const VISIBLE_SENTENCE_COUNT = 4;
+      const COMPACT_TOOLBAR_HEIGHT = 48;
       const BOSS_CHROME_URL = "https://chrome.google.com/webstore/detail/developer-tools";
       const FAKE_TASKS = [
         "1. Review API logs",
@@ -568,7 +568,7 @@
         "★ 按鈕：匯入 TXT 或 EPUB 書本。",
         "網址列右側數字：顯示進度，點擊可跳轉。",
         "Chrome 模式會自動調整為全螢幕寬度。",
-        "Chrome 模式高度 40px（工具列）。",
+        "Chrome 模式高度 48px，預設以彈出視窗全寬貼頂開啟。",
         "縮放視窗：點標題列 ⤢ 按鈕。",
         "若無法縮放，會自動以彈出視窗開啟。",
         "Memo 模式 350×250。",
@@ -583,7 +583,7 @@
         sentences: [],
         index: 0,
         fileName: "",
-        compact: false,
+        compact: true,
         bossMode: false,
         manualMode: false,
         manualIndex: 0,
@@ -659,20 +659,116 @@
         );
       }
 
-      function ensureCompactFullWidth() {
+      function isCompactPopupContext() {
+        return window.name === "StealthMemoReader"
+          || new URLSearchParams(window.location.search).get("popup") === "1";
+      }
+
+      function getWindowChromeSize() {
+        return {
+          width: Math.max(0, window.outerWidth - window.innerWidth),
+          height: Math.max(0, window.outerHeight - window.innerHeight)
+        };
+      }
+
+      function getCompactOuterSize() {
+        const chrome = getWindowChromeSize();
+        return {
+          width: window.screen.availWidth,
+          height: COMPACT_TOOLBAR_HEIGHT + chrome.height
+        };
+      }
+
+      function buildPopupFeatures(outerWidth, outerHeight) {
+        return [
+          `left=${window.screen.availLeft}`,
+          `top=${window.screen.availTop}`,
+          `width=${outerWidth}`,
+          `height=${outerHeight}`,
+          "menubar=no",
+          "toolbar=no",
+          "location=no",
+          "status=no",
+          "resizable=yes",
+          "scrollbars=no"
+        ].join(",");
+      }
+
+      function applyCompactWindowFrame() {
         if (!state.compact) return;
 
-        const chromeWidth = window.outerWidth - window.innerWidth;
-        const chromeHeight = window.outerHeight - window.innerHeight;
-        const targetWidth = window.screen.availWidth + chromeWidth;
-        const targetHeight = 40 + chromeHeight;
+        document.documentElement.classList.add("compact");
+        document.body.classList.add("compact");
+
+        const { width, height } = getCompactOuterSize();
 
         try {
           window.moveTo(window.screen.availLeft, window.screen.availTop);
-          window.resizeTo(targetWidth, targetHeight);
+          window.resizeTo(width, height);
         } catch (error) {
-          // 一般分頁可能封鎖 resizeTo。
+          // 部分環境會封鎖 moveTo / resizeTo。
         }
+      }
+
+      function ensureCompactFullWidth() {
+        applyCompactWindowFrame();
+        window.setTimeout(applyCompactWindowFrame, 120);
+        window.setTimeout(applyCompactWindowFrame, 320);
+      }
+
+      function openMemoPopup(options = {}) {
+        const { showBlockedAlert = false, targetUrl = window.location.href } = options;
+        const { width, height } = state.compact
+          ? getCompactOuterSize()
+          : { width: 350 + getWindowChromeSize().width, height: 250 + getWindowChromeSize().height };
+
+        const popup = window.open(
+          targetUrl,
+          "StealthMemoReader",
+          buildPopupFeatures(width, height)
+        );
+
+        if (!popup && showBlockedAlert) {
+          alert("無法開啟彈出視窗。請允許此網站的彈出視窗，或手動以新視窗開啟。");
+        }
+
+        return popup;
+      }
+
+      function bootstrapCompactPopup() {
+        if (!state.compact || isCompactPopupContext()) {
+          return false;
+        }
+
+        const popupUrl = new URL(window.location.href);
+        popupUrl.searchParams.set("popup", "1");
+
+        const popup = openMemoPopup({ targetUrl: popupUrl.toString() });
+        if (popup) {
+          try {
+            window.close();
+          } catch (error) {
+            // 主分頁可能無權自動關閉。
+          }
+          return true;
+        }
+
+        return false;
+      }
+
+      function bootstrapWindow() {
+        render();
+
+        if (!state.compact) {
+          fitWindowToMemo({ showBlockedAlert: false });
+          return;
+        }
+
+        if (!isCompactPopupContext() && bootstrapCompactPopup()) {
+          return;
+        }
+
+        ensureCompactFullWidth();
       }
 
       function prevSentence() {
@@ -713,7 +809,7 @@
         if (state.compact) {
           return {
             width: window.screen.availWidth,
-            height: 40
+            height: COMPACT_TOOLBAR_HEIGHT
           };
         }
 
@@ -724,62 +820,45 @@
       }
 
       function isLikelyPopupWindow() {
-        return window.opener !== null || window.name === "StealthMemoReader";
-      }
-
-      function openMemoPopup(options = {}) {
-        const { showBlockedAlert = false } = options;
-        const { width, height } = getMemoWindowSize();
-        const features = [
-          `width=${width}`,
-          `height=${height}`,
-          "menubar=no",
-          "toolbar=no",
-          "location=no",
-          "status=no",
-          "resizable=yes",
-          "scrollbars=no"
-        ].join(",");
-
-        const popup = window.open(location.href, "StealthMemoReader", features);
-        if (!popup && showBlockedAlert) {
-          alert("無法自動縮放視窗。請允許彈出視窗，或右鍵連結選擇「在新視窗中開啟」後手動調整大小。");
-        }
-        return Boolean(popup);
+        return isCompactPopupContext();
       }
 
       function fitWindowToMemo(options = {}) {
         const { showBlockedAlert = false } = options;
-        const { width: memoWidth, height: memoHeight } = getMemoWindowSize();
-        const chromeWidth = window.outerWidth - window.innerWidth;
-        const chromeHeight = window.outerHeight - window.innerHeight;
-        const targetWidth = memoWidth + chromeWidth;
-        const targetHeight = memoHeight + chromeHeight;
 
         document.documentElement.classList.toggle("compact", state.compact);
         document.body.classList.toggle("compact", state.compact);
 
-        const beforeWidth = window.outerWidth;
-        const beforeHeight = window.outerHeight;
+        if (state.compact) {
+          if (!isCompactPopupContext() && bootstrapCompactPopup()) {
+            return true;
+          }
+
+          ensureCompactFullWidth();
+          return true;
+        }
+
+        const chrome = getWindowChromeSize();
+        const targetWidth = 350 + chrome.width;
+        const targetHeight = 250 + chrome.height;
 
         try {
           window.resizeTo(targetWidth, targetHeight);
           window.moveTo(
-            state.compact ? window.screen.availLeft : Math.max(0, Math.round((window.screen.availWidth - targetWidth) / 2)),
-            state.compact ? window.screen.availTop : Math.max(0, Math.round((window.screen.availHeight - targetHeight) / 2))
+            Math.max(0, Math.round((window.screen.availWidth - targetWidth) / 2)),
+            Math.max(0, Math.round((window.screen.availHeight - targetHeight) / 2))
           );
         } catch (error) {
-          return openMemoPopup(options);
+          return openMemoPopup({ showBlockedAlert });
         }
 
-        // 現代瀏覽器在一般分頁會靜默忽略 resizeTo，需檢查是否真的有縮放成功。
         window.setTimeout(() => {
           const nearTarget = Math.abs(window.outerWidth - targetWidth) < 24
             && Math.abs(window.outerHeight - targetHeight) < 24;
 
           if (nearTarget) return;
 
-          if (isLikelyPopupWindow()) {
+          if (isCompactPopupContext()) {
             try {
               window.resizeTo(targetWidth, targetHeight);
             } catch (error) {
@@ -790,10 +869,6 @@
 
           openMemoPopup({ showBlockedAlert });
         }, 120);
-
-        if (state.compact) {
-          window.setTimeout(ensureCompactFullWidth, 240);
-        }
 
         return true;
       }
@@ -54176,7 +54251,9 @@
           state.sentences = saved.s.filter((item) => typeof item === "string");
           state.index = clampIndex(Number(saved.i) || 0);
           state.fileName = typeof saved.n === "string" ? saved.n : "";
-          state.compact = Boolean(saved.c);
+          if (saved.c !== undefined) {
+            state.compact = Boolean(saved.c);
+          }
           state.translateTraditional = Boolean(saved.tr);
         } catch (error) {
           localStorage.removeItem(STORAGE_KEY);
@@ -54663,19 +54740,10 @@
 
       loadState();
       render();
-      if (state.compact) {
-        ensureCompactFullWidth();
-      }
-      window.addEventListener("load", () => {
-        fitWindowToMemo();
-        if (state.compact) {
-          ensureCompactFullWidth();
-        }
-      });
+      window.addEventListener("load", bootstrapWindow);
       window.addEventListener("resize", () => {
-        if (state.compact) {
-          document.documentElement.style.width = "100vw";
-          document.body.style.width = "100vw";
+        if (state.compact && isCompactPopupContext()) {
+          applyCompactWindowFrame();
         }
       });
     })();
