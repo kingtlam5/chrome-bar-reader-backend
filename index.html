@@ -13,13 +13,36 @@
       --active-bg: rgba(255, 255, 255, 0.34);
       --memo-width: 350px;
       --memo-height: 250px;
-      --compact-height: 30px;
+      --compact-height: 42px;
       --title-height: 25px;
       --status-height: 24px;
       --font-size: 15px;
       --line-height: 1.72;
       --radius: 6px;
       --transition-speed: 180ms;
+      --chrome-bg: #f1f3f4;
+      --chrome-toolbar-bg: #f1f3f4;
+      --chrome-icon: #5f6368;
+      --chrome-icon-hover-bg: rgba(95, 99, 104, 0.08);
+      --chrome-address-bg: #ffffff;
+      --chrome-address-text: #202124;
+      --chrome-border: rgba(0, 0, 0, 0.06);
+      --chrome-translate-bg: #ffffff;
+      --chrome-translate-border: #dadce0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --chrome-bg: #202124;
+        --chrome-toolbar-bg: #202124;
+        --chrome-icon: #9aa0a6;
+        --chrome-icon-hover-bg: rgba(255, 255, 255, 0.08);
+        --chrome-address-bg: #303134;
+        --chrome-address-text: #e8eaed;
+        --chrome-border: rgba(255, 255, 255, 0.08);
+        --chrome-translate-bg: #292a2d;
+        --chrome-translate-border: #3c4043;
+      }
     }
 
     * {
@@ -38,7 +61,10 @@
 
     html.compact,
     body.compact {
+      width: 100%;
+      min-width: var(--memo-width);
       height: var(--compact-height);
+      background: var(--chrome-bg);
     }
 
     body {
@@ -194,56 +220,203 @@
 
     .memo.compact {
       height: var(--compact-height);
+      background: var(--chrome-toolbar-bg);
     }
 
-    .memo.compact .title-bar {
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 2;
-      width: 124px;
-      height: var(--compact-height);
-      padding: 0;
-      border: 0;
-      background: var(--memo-bg-deep);
-    }
-
-    .memo.compact .title-text,
+    .memo.compact .title-bar,
+    .memo.compact .reader,
     .memo.compact .status-bar {
       display: none;
     }
 
-    .memo.compact .reader {
-      width: calc(100% - 124px);
+    .chrome-toolbar {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      width: 100%;
       height: var(--compact-height);
-      padding: 4px 9px;
-      overflow: hidden;
-      font-size: 13px;
-      line-height: 22px;
-      white-space: nowrap;
+      padding: 0 8px;
+      background: var(--chrome-toolbar-bg);
+      color: var(--chrome-icon);
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      user-select: none;
     }
 
-    .memo.compact .sentence {
-      margin: 0;
+    .memo.compact .chrome-toolbar {
+      display: flex;
+    }
+
+    .chrome-nav {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
       padding: 0;
-      overflow: hidden;
+      border: 0;
+      border-radius: 50%;
       background: transparent;
+      color: var(--chrome-icon);
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .chrome-nav:hover,
+    .chrome-nav:focus-visible {
+      background: var(--chrome-icon-hover-bg);
+      outline: none;
+    }
+
+    .chrome-address {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      min-width: 0;
+      height: 28px;
+      padding: 0 10px;
+      border: 1px solid var(--chrome-border);
+      border-radius: 20px;
+      background: var(--chrome-address-bg);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+      cursor: text;
+    }
+
+    .chrome-lock {
+      flex-shrink: 0;
+      margin-right: 6px;
+      opacity: 0.72;
+      font-size: 11px;
+      line-height: 1;
+    }
+
+    .chrome-url {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      color: var(--chrome-address-text);
+      font-size: 12px;
+      line-height: 28px;
+      white-space: nowrap;
       text-overflow: ellipsis;
     }
 
-    .memo.compact .sentence:not(.current) {
-      display: none;
+    .chrome-jump {
+      flex: 1;
+      min-width: 0;
+      height: 22px;
+      padding: 0 4px;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: var(--chrome-address-text);
+      font-size: 12px;
     }
 
-    .memo.compact .placeholder {
-      margin: 0;
-      text-align: left;
+    .chrome-translate {
+      flex-shrink: 0;
+      height: 24px;
+      padding: 0 8px;
+      border: 1px solid var(--chrome-translate-border);
+      border-radius: 4px;
+      background: var(--chrome-translate-bg);
+      color: var(--chrome-address-text);
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 22px;
+      cursor: pointer;
+    }
+
+    .chrome-translate:hover,
+    .chrome-translate.active {
+      background: var(--chrome-icon-hover-bg);
+    }
+
+    .chrome-star {
+      flex-shrink: 0;
+      width: 28px;
+      color: var(--chrome-icon);
+      font-size: 15px;
+      line-height: 28px;
+      text-align: center;
+      opacity: 0.75;
+    }
+
+    .chrome-translate-popup {
+      position: fixed;
+      top: calc(var(--compact-height) + 4px);
+      right: 36px;
+      z-index: 20;
+      width: min(320px, calc(100vw - 16px));
+      padding: 12px 14px;
+      border: 1px solid var(--chrome-translate-border);
+      border-radius: 8px;
+      background: var(--chrome-translate-bg);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+      color: var(--chrome-address-text);
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .chrome-translate-popup h4 {
+      margin: 0 0 8px;
+      color: var(--chrome-icon);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .chrome-translate-popup .translate-source,
+    .chrome-translate-popup .translate-target {
+      margin: 0 0 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: var(--chrome-icon-hover-bg);
+      overflow-wrap: anywhere;
+    }
+
+    .chrome-translate-popup .translate-target {
+      margin-bottom: 0;
+      color: #1a73e8;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .chrome-translate-popup .translate-target {
+        color: #8ab4f8;
+      }
     }
   </style>
 </head>
 <body>
   <main class="memo" id="memo" aria-label="隱蔽文字閱讀器">
-    <header class="title-bar">
+    <header class="chrome-toolbar" id="chromeToolbar" aria-label="Chrome 工具列（偽裝）">
+      <button class="chrome-nav" id="chromeBack" type="button" aria-label="上一句" title="上一句">←</button>
+      <button class="chrome-nav" id="chromeForward" type="button" aria-label="下一句" title="下一句">→</button>
+      <button class="chrome-nav" id="chromeRefresh" type="button" aria-label="展開 Memo 視窗" title="展開 Memo 視窗">↻</button>
+      <div class="chrome-address" id="chromeAddressWrap" title="點擊跳轉句子">
+        <span class="chrome-lock" aria-hidden="true">🔒</span>
+        <span class="chrome-url" id="chromeUrl"></span>
+        <input
+          class="chrome-jump hidden"
+          id="chromeJumpInput"
+          type="number"
+          min="1"
+          inputmode="numeric"
+          aria-label="跳轉至指定句"
+        >
+      </div>
+      <button class="chrome-translate" id="chromeTranslate" type="button" aria-label="翻譯" title="翻譯">文/A</button>
+      <span class="chrome-star" aria-hidden="true">★</span>
+    </header>
+
+    <div class="chrome-translate-popup hidden" id="chromeTranslatePopup" role="dialog" aria-label="翻譯">
+      <h4>Google Translate</h4>
+      <p class="translate-source" id="translateSource"></p>
+      <p class="translate-target" id="translateTarget"></p>
+    </div>
+
+    <header class="title-bar" id="titleBar">
       <span class="title-text">Notes - Task List</span>
       <div class="title-actions">
         <button class="title-btn" id="translateBtn" type="button" aria-label="簡轉繁" title="簡轉繁">⇄</button>
@@ -279,6 +452,21 @@
 
       const STORAGE_KEY = "stealthMemoReader.v1";
       const VISIBLE_SENTENCE_COUNT = 4;
+      const BOSS_CHROME_URL = "https://chrome.google.com/webstore/detail/developer-tools";
+      const FAKE_LOG_URL_BASE = "https://docs.company-internal.com/v2/log?text=";
+      const FAKE_ENGLISH_URL_BASE = "https://internal.company.com/release-notes?entry=";
+      const ENGLISH_TRANSLATION_SAMPLES = [
+        "The deployment pipeline completed successfully with no blocking issues.",
+        "Please review the attached specification before the next sprint planning.",
+        "All integration tests passed on the staging environment this morning.",
+        "The API contract change requires approval from the platform team.",
+        "Memory usage stayed within the expected threshold during peak traffic.",
+        "The rollback procedure was verified and documented in the runbook.",
+        "Security scan results show no critical vulnerabilities in this release.",
+        "The feature flag will remain disabled until QA signs off.",
+        "Database migration finished in under two minutes with zero downtime.",
+        "The incident postmortem is scheduled for Thursday at 10:00 AM."
+      ];
       const FAKE_TASKS = [
         "1. Review API logs",
         "2. Update Jira ticket",
@@ -296,11 +484,15 @@
         "上一句：按 Q 鍵。",
         "老闆鍵：按空白鍵，切換假待辦清單。",
         "再按一次空白鍵可恢復閱讀內容。",
-        "單行模式：點標題列 − 按鈕縮小。",
-        "再按 + 可展開回便利貼模式。",
+        "單行模式：點標題列 − 切換 Chrome 工具列偽裝。",
+        "Chrome 模式：←/→ 或 ↑/↓ 切換句子。",
+        "空白鍵：網址列變成 chrome.google.com 工作網址。",
+        "↻ 按鈕：展開回 350×250 Memo 視窗。",
+        "文/A：顯示英文翻譯提示（可切換英文 URL 模式）。",
+        "Memo 模式：Q/R 或方向鍵皆可翻頁。",
         "縮放視窗：點標題列 ⤢ 按鈕。",
         "若無法縮放，會自動以彈出視窗開啟。",
-        "Memo 模式 350×250，單行模式 350×30。",
+        "Memo 模式 350×250，Chrome 模式高度 42px。",
         "跳轉：點擊右下角進度數字。",
         "輸入行號後按 Enter 即可跳轉。",
         "閱讀進度會自動儲存在瀏覽器。",
@@ -316,10 +508,24 @@
         bossMode: false,
         manualMode: false,
         manualIndex: 0,
-        translateTraditional: false
+        translateTraditional: false,
+        englishMode: false,
+        translatePopupOpen: false
       };
 
       const memo = document.getElementById("memo");
+      const titleBar = document.getElementById("titleBar");
+      const chromeToolbar = document.getElementById("chromeToolbar");
+      const chromeUrl = document.getElementById("chromeUrl");
+      const chromeAddressWrap = document.getElementById("chromeAddressWrap");
+      const chromeJumpInput = document.getElementById("chromeJumpInput");
+      const chromeBack = document.getElementById("chromeBack");
+      const chromeForward = document.getElementById("chromeForward");
+      const chromeRefresh = document.getElementById("chromeRefresh");
+      const chromeTranslate = document.getElementById("chromeTranslate");
+      const chromeTranslatePopup = document.getElementById("chromeTranslatePopup");
+      const translateSource = document.getElementById("translateSource");
+      const translateTarget = document.getElementById("translateTarget");
       const reader = document.getElementById("reader");
       const statusBar = document.getElementById("statusBar");
       const progress = document.getElementById("progress");
@@ -330,11 +536,97 @@
       const translateBtn = document.getElementById("translateBtn");
       const helpBtn = document.getElementById("helpBtn");
 
+      function getCurrentSentenceText() {
+        if (state.manualMode) {
+          return USER_MANUAL[state.manualIndex] || "Stealth Memo Reader user manual";
+        }
+        if (!state.sentences.length) {
+          return "Ready to import document";
+        }
+        return toTraditional(state.sentences[state.index]);
+      }
+
+      function buildFakeChromeUrl(sentence) {
+        const encoded = encodeURIComponent(sentence);
+        if (state.englishMode) {
+          return `${FAKE_ENGLISH_URL_BASE}${encoded}&lang=en`;
+        }
+        return `${FAKE_LOG_URL_BASE}${encoded}`;
+      }
+
+      function getEnglishTranslation(text) {
+        let hash = 0;
+        Array.from(text).forEach((char, index) => {
+          hash = (hash + char.charCodeAt(0) * (index + 1)) % ENGLISH_TRANSLATION_SAMPLES.length;
+        });
+        return ENGLISH_TRANSLATION_SAMPLES[hash];
+      }
+
+      function updateChromeToolbar() {
+        if (!state.compact) return;
+
+        if (state.bossMode) {
+          chromeUrl.textContent = BOSS_CHROME_URL;
+        } else {
+          chromeUrl.textContent = buildFakeChromeUrl(getCurrentSentenceText());
+        }
+
+        const sentence = state.bossMode ? "" : getCurrentSentenceText();
+        translateSource.textContent = sentence || "—";
+        translateTarget.textContent = state.bossMode
+          ? "Translation unavailable in boss mode."
+          : getEnglishTranslation(sentence);
+
+        chromeTranslate.classList.toggle("active", state.englishMode || state.translatePopupOpen);
+        chromeTranslatePopup.classList.toggle("hidden", !state.translatePopupOpen || state.bossMode);
+      }
+
+      function prevSentence() {
+        moveBy(-1);
+      }
+
+      function nextSentence() {
+        moveBy(1);
+      }
+
+      function toggleEnglishTranslate() {
+        if (state.bossMode) return;
+        state.translatePopupOpen = !state.translatePopupOpen;
+        state.englishMode = state.translatePopupOpen;
+        updateChromeToolbar();
+      }
+
+      function expandToMemoMode() {
+        state.compact = false;
+        state.translatePopupOpen = false;
+        saveState();
+        render();
+        fitWindowToMemo({ showBlockedAlert: true });
+      }
+
+      function openChromeJumpInput() {
+        if (state.bossMode) return;
+        const sentences = getActiveSentences();
+        if (!sentences.length) return;
+
+        chromeUrl.classList.add("hidden");
+        chromeJumpInput.classList.remove("hidden");
+        chromeJumpInput.max = String(sentences.length);
+        chromeJumpInput.value = String(getActiveIndex() + 1);
+        chromeJumpInput.focus();
+        chromeJumpInput.select();
+      }
+
+      function closeChromeJumpInput() {
+        chromeJumpInput.classList.add("hidden");
+        chromeUrl.classList.remove("hidden");
+      }
+
       // ===== 視窗尺寸：一鍵縮放至便利貼大小；若瀏覽器封鎖則改以彈出視窗開啟 =====
       function getMemoWindowSize() {
         return {
-          width: 350,
-          height: state.compact ? 30 : 250
+          width: state.compact ? Math.max(window.outerWidth, 720) : 350,
+          height: state.compact ? 42 : 250
         };
       }
 
@@ -53803,6 +54095,11 @@
         document.body.classList.toggle("compact", state.compact);
         updateTranslateButton();
 
+        if (state.compact) {
+          updateChromeToolbar();
+          return;
+        }
+
         if (state.bossMode) {
           renderSentences(FAKE_TASKS, 0, false);
           progress.textContent = "3 tasks pending";
@@ -54162,10 +54459,51 @@
 
       modeToggle.addEventListener("click", () => {
         state.compact = !state.compact;
+        if (!state.compact) {
+          state.translatePopupOpen = false;
+        }
         saveState();
         render();
         fitWindowToMemo({ showBlockedAlert: true });
       });
+
+      chromeBack.addEventListener("click", (event) => {
+        event.stopPropagation();
+        prevSentence();
+      });
+
+      chromeForward.addEventListener("click", (event) => {
+        event.stopPropagation();
+        nextSentence();
+      });
+
+      chromeRefresh.addEventListener("click", (event) => {
+        event.stopPropagation();
+        expandToMemoMode();
+      });
+
+      chromeAddressWrap.addEventListener("click", (event) => {
+        if (event.target === chromeJumpInput) return;
+        openChromeJumpInput();
+      });
+
+      chromeTranslate.addEventListener("click", (event) => {
+        event.stopPropagation();
+        toggleEnglishTranslate();
+      });
+
+      chromeJumpInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          jumpTo(chromeJumpInput.value);
+          closeChromeJumpInput();
+        } else if (event.key === "Escape") {
+          event.preventDefault();
+          closeChromeJumpInput();
+        }
+      });
+
+      chromeJumpInput.addEventListener("blur", closeChromeJumpInput);
 
       progress.addEventListener("click", () => {
         if (state.bossMode) return;
@@ -54192,18 +54530,26 @@
       jumpInput.addEventListener("blur", closeJumpInput);
 
       document.addEventListener("keydown", (event) => {
-        if (document.activeElement === jumpInput) return;
+        if (document.activeElement === jumpInput || document.activeElement === chromeJumpInput) return;
 
-        if (["q", "Q", "r", "R", " "].includes(event.key)) {
+        const navKeys = ["q", "Q", "r", "R", " ", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+        if (navKeys.includes(event.key)) {
           event.preventDefault();
         }
 
-        if (event.key === "r" || event.key === "R") {
-          moveBy(1);
+        if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+          prevSentence();
+        } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+          nextSentence();
+        } else if (event.key === "r" || event.key === "R") {
+          nextSentence();
         } else if (event.key === "q" || event.key === "Q") {
-          moveBy(-1);
+          prevSentence();
         } else if (event.key === " ") {
           state.bossMode = !state.bossMode;
+          if (state.bossMode) {
+            state.translatePopupOpen = false;
+          }
           render();
         }
       });
