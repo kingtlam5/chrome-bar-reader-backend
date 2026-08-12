@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes - Task List</title>
+  <style>
+    :root {
+      --page-bg: #303236;
+      --memo-bg: #fff3a8;
+      --memo-bg-deep: #f4df7c;
+      --memo-text: #3e3b2f;
+      --muted-text: #77715b;
+      --active-bg: rgba(255, 255, 255, 0.34);
+      --shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+      --memo-width: 350px;
+      --memo-height: 250px;
+      --compact-height: 30px;
+      --title-height: 25px;
+      --status-height: 24px;
+      --font-size: 15px;
+      --line-height: 1.72;
+      --radius: 6px;
+      --transition-speed: 180ms;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: var(--page-bg);
+      color: var(--memo-text);
+      font-family: Arial, "Microsoft JhengHei", "PingFang TC", sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .memo {
+      position: relative;
+      width: var(--memo-width);
+      height: var(--memo-height);
+      overflow: hidden;
+      border: 1px solid rgba(107, 91, 30, 0.15);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, var(--memo-bg), #ffef96);
+      box-shadow: var(--shadow);
+      transition:
+        height var(--transition-speed) ease,
+        border-radius var(--transition-speed) ease;
+    }
+
+    .title-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--title-height);
+      padding-left: 9px;
+      border-bottom: 1px solid rgba(100, 84, 23, 0.13);
+      background: var(--memo-bg-deep);
+      color: #625c46;
+      font-size: 11px;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .mode-toggle {
+      width: 31px;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      border-left: 1px solid rgba(100, 84, 23, 0.12);
+      background: transparent;
+      color: #766d4d;
+      cursor: pointer;
+    }
+
+    .mode-toggle:hover,
+    .mode-toggle:focus-visible {
+      background: rgba(255, 255, 255, 0.3);
+      outline: none;
+    }
+
+    .reader {
+      height: calc(var(--memo-height) - var(--title-height) - var(--status-height));
+      padding: 13px 16px 10px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      font-size: var(--font-size);
+      line-height: var(--line-height);
+      scrollbar-color: rgba(103, 94, 59, 0.35) transparent;
+      scrollbar-width: thin;
+    }
+
+    .reader::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .reader::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background: rgba(103, 94, 59, 0.3);
+    }
+
+    .sentence {
+      margin: 0 0 5px;
+      padding: 0 3px;
+      overflow-wrap: anywhere;
+    }
+
+    .sentence.current {
+      border-radius: 3px;
+      background: var(--active-bg);
+    }
+
+    .placeholder {
+      margin: 48px 0 0;
+      color: var(--muted-text);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .status-bar {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--status-height);
+      padding: 0 9px;
+      border-top: 1px solid rgba(100, 84, 23, 0.11);
+      background: rgba(244, 223, 124, 0.56);
+      color: var(--muted-text);
+      font-size: 10px;
+      user-select: none;
+    }
+
+    .import-zone {
+      cursor: default;
+    }
+
+    .progress-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-width: 104px;
+      height: 100%;
+    }
+
+    .progress {
+      cursor: pointer;
+    }
+
+    .jump-input {
+      width: 68px;
+      height: 18px;
+      padding: 1px 4px;
+      border: 1px solid rgba(100, 84, 23, 0.25);
+      border-radius: 2px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.55);
+      color: var(--memo-text);
+      font-size: 10px;
+      text-align: right;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .memo.compact {
+      height: var(--compact-height);
+      border-radius: 3px;
+    }
+
+    .memo.compact .title-bar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      width: 31px;
+      height: var(--compact-height);
+      padding: 0;
+      border: 0;
+      background: var(--memo-bg-deep);
+    }
+
+    .memo.compact .title-text,
+    .memo.compact .status-bar {
+      display: none;
+    }
+
+    .memo.compact .mode-toggle {
+      width: 31px;
+      border-left: 1px solid rgba(100, 84, 23, 0.12);
+    }
+
+    .memo.compact .reader {
+      width: calc(100% - 31px);
+      height: var(--compact-height);
+      padding: 4px 9px;
+      overflow: hidden;
+      font-size: 13px;
+      line-height: 22px;
+      white-space: nowrap;
+    }
+
+    .memo.compact .sentence {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: transparent;
+      text-overflow: ellipsis;
+    }
+
+    .memo.compact .sentence:not(.current) {
+      display: none;
+    }
+
+    .memo.compact .placeholder {
+      margin: 0;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <main class="memo" id="memo" aria-label="隱蔽文字閱讀器">
+    <header class="title-bar">
+      <span class="title-text">Notes - Task List</span>
+      <button class="mode-toggle" id="modeToggle" type="button" aria-label="切換單行模式" title="切換單行模式">−</button>
+    </header>
+
+    <section class="reader" id="reader" aria-live="polite"></section>
+
+    <footer class="status-bar" id="statusBar" title="雙擊以匯入 TXT 文件">
+      <span class="import-zone">Task notes</span>
+      <div class="progress-wrap">
+        <span class="progress" id="progress" title="點擊以跳轉">0/0 (0%)</span>
+        <input
+          class="jump-input hidden"
+          id="jumpInput"
+          type="number"
+          min="1"
+          inputmode="numeric"
+          aria-label="跳轉至指定句"
+        >
+      </div>
+    </footer>
+
+    <input class="hidden" id="fileInput" type="file" accept=".txt,text/plain">
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const STORAGE_KEY = "stealthMemoReader.v1";
+      const MAX_SENTENCE_LENGTH = 30;
+      const VISIBLE_SENTENCE_COUNT = 4;
+      const FAKE_TASKS = [
+        "1. Review API logs",
+        "2. Update Jira ticket",
+        "3. Reply emails"
+      ];
+
+      const state = {
+        sentences: [],
+        index: 0,
+        fileName: "",
+        compact: false,
+        bossMode: false
+      };
+
+      const memo = document.getElementById("memo");
+      const reader = document.getElementById("reader");
+      const statusBar = document.getElementById("statusBar");
+      const progress = document.getElementById("progress");
+      const jumpInput = document.getElementById("jumpInput");
+      const fileInput = document.getElementById("fileInput");
+      const modeToggle = document.getElementById("modeToggle");
+
+      // ===== 文字解析器：依中英文標點與換行切句，長句再以 30 字分段 =====
+      function parseText(text) {
+        const normalized = text
+          .replace(/^\uFEFF/, "")
+          .replace(/\r\n?/g, "\n")
+          .replace(/\u0000/g, "")
+          .trim();
+
+        if (!normalized) return [];
+
+        const rawSentences = normalized.match(/[^。！？!?\n]+[。！？!?]?|[。！？!?]+/g) || [];
+        const parsed = [];
+
+        rawSentences.forEach((rawSentence) => {
+          const sentence = rawSentence.replace(/\s+/g, " ").trim();
+          if (!sentence) return;
+
+          const characters = Array.from(sentence);
+          for (let start = 0; start < characters.length; start += MAX_SENTENCE_LENGTH) {
+            parsed.push(characters.slice(start, start + MAX_SENTENCE_LENGTH).join(""));
+          }
+        });
+
+        return parsed;
+      }
+
+      // ===== 中文編碼處理：優先 UTF-8，偵測異常後嘗試 Big5 與 GB18030 =====
+      function decodeText(arrayBuffer) {
+        const candidates = [];
+        const encodings = ["utf-8", "big5", "gb18030"];
+
+        encodings.forEach((encoding) => {
+          try {
+            const decoded = new TextDecoder(encoding, { fatal: encoding === "utf-8" })
+              .decode(arrayBuffer);
+            candidates.push({
+              encoding,
+              text: decoded,
+              score: getDecodedTextScore(decoded)
+            });
+          } catch (error) {
+            // 瀏覽器不支援該編碼或內容不是合法 UTF-8 時，略過此候選。
+          }
+        });
+
+        if (!candidates.length) {
+          return {
+            text: new TextDecoder("utf-8").decode(arrayBuffer),
+            encoding: "utf-8",
+            uncertain: true
+          };
+        }
+
+        candidates.sort((a, b) => b.score - a.score);
+        const best = candidates[0];
+        const utf8 = candidates.find((candidate) => candidate.encoding === "utf-8");
+        const selected = utf8 && utf8.score >= best.score - 2 ? utf8 : best;
+
+        return {
+          text: selected.text,
+          encoding: selected.encoding,
+          uncertain: selected.score < 0
+        };
+      }
+
+      function getDecodedTextScore(text) {
+        const replacementCount = (text.match(/\uFFFD/g) || []).length;
+        const controlCount = (text.match(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g) || []).length;
+        const readableCount = (text.match(/[\u3400-\u9FFF\uF900-\uFAFFa-zA-Z0-9，。！？；：「」『』、\s]/g) || []).length;
+        const mojibakeCount = (text.match(/[ÃÂæçåäð]/g) || []).length;
+        return readableCount / Math.max(text.length, 1) * 100
+          - replacementCount * 30
+          - controlCount * 10
+          - mojibakeCount * 3;
+      }
+
+      // ===== LocalStorage 操作：以單一 JSON 儲存句子、索引與顯示設定，並捕捉容量超限 =====
+      function saveState(options = {}) {
+        const { showQuotaAlert = false } = options;
+        const payload = {
+          s: state.sentences,
+          i: state.index,
+          n: state.fileName,
+          c: state.compact
+        };
+
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+          return true;
+        } catch (error) {
+          if (showQuotaAlert) {
+            alert("文件過大，無法存入瀏覽器本地記憶。仍可在本次開啟期間閱讀，重新整理後內容將消失。");
+          }
+          return false;
+        }
+      }
+
+      function loadState() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+          if (!saved || !Array.isArray(saved.s)) return;
+
+          state.sentences = saved.s.filter((item) => typeof item === "string");
+          state.index = clampIndex(Number(saved.i) || 0);
+          state.fileName = typeof saved.n === "string" ? saved.n : "";
+          state.compact = Boolean(saved.c);
+        } catch (error) {
+          localStorage.removeItem(STORAGE_KEY);
+        }
+      }
+
+      // ===== 閱讀器畫面：依目前模式呈現四句內容或單行目前句 =====
+      function render() {
+        memo.classList.toggle("compact", state.compact);
+        modeToggle.textContent = state.compact ? "+" : "−";
+        modeToggle.setAttribute("aria-label", state.compact ? "展開 Memo 模式" : "切換單行模式");
+
+        if (state.bossMode) {
+          renderSentences(FAKE_TASKS, 0, false);
+          progress.textContent = "3 tasks pending";
+          return;
+        }
+
+        const total = state.sentences.length;
+        if (!total) {
+          reader.innerHTML = '<p class="placeholder">雙擊底部匯入文件</p>';
+          progress.textContent = "0/0 (0%)";
+          return;
+        }
+
+        state.index = clampIndex(state.index);
+        const visible = state.compact
+          ? [state.sentences[state.index]]
+          : state.sentences.slice(state.index, state.index + VISIBLE_SENTENCE_COUNT);
+
+        renderSentences(visible, state.index, true);
+
+        const current = state.index + 1;
+        const percent = Math.round(current / total * 100);
+        progress.textContent = `${current}/${total} (${percent}%)`;
+        jumpInput.max = String(total);
+        reader.scrollTop = 0;
+      }
+
+      function renderSentences(sentences, baseIndex, markCurrent) {
+        reader.replaceChildren();
+
+        sentences.forEach((sentence, offset) => {
+          const paragraph = document.createElement("p");
+          paragraph.className = "sentence";
+          if (markCurrent && offset === 0) paragraph.classList.add("current");
+          paragraph.dataset.index = String(baseIndex + offset);
+          paragraph.textContent = sentence;
+          reader.appendChild(paragraph);
+        });
+      }
+
+      function clampIndex(index) {
+        if (!state.sentences.length) return 0;
+        return Math.min(Math.max(Math.trunc(index), 0), state.sentences.length - 1);
+      }
+
+      function moveBy(offset) {
+        if (!state.sentences.length) {
+          render();
+          return;
+        }
+
+        state.index = clampIndex(state.index + offset);
+        state.bossMode = false;
+        saveState();
+        render();
+      }
+
+      function jumpTo(inputValue) {
+        if (!state.sentences.length) return;
+        const requestedLine = Number.parseInt(inputValue, 10);
+        const target = Number.isFinite(requestedLine) ? requestedLine - 1 : state.index;
+        state.index = clampIndex(target);
+        saveState();
+        render();
+      }
+
+      // ===== 檔案讀取：使用 FileReader 取得 ArrayBuffer，再進行中文編碼判斷與解析 =====
+      function importFile(file) {
+        if (!file) return;
+        if (!file.name.toLowerCase().endsWith(".txt")) {
+          alert("請選擇 .txt 文字文件。");
+          return;
+        }
+
+        const fileReader = new FileReader();
+
+        fileReader.onload = () => {
+          try {
+            const decoded = decodeText(fileReader.result);
+            const sentences = parseText(decoded.text);
+
+            if (!sentences.length) {
+              alert("文件中沒有可閱讀的文字。");
+              return;
+            }
+
+            state.sentences = sentences;
+            state.index = 0;
+            state.fileName = file.name;
+            state.bossMode = false;
+            saveState({ showQuotaAlert: true });
+            render();
+
+            if (decoded.uncertain) {
+              alert("文件編碼無法完全確認。已嘗試 UTF-8、Big5 與 GB18030；若仍有亂碼，請先將文件另存為 UTF-8 後再匯入。");
+            }
+          } catch (error) {
+            alert("讀取文件失敗，請確認文件未損壞，或先將它轉存為 UTF-8。");
+          } finally {
+            fileInput.value = "";
+          }
+        };
+
+        fileReader.onerror = () => {
+          alert("瀏覽器無法讀取這個文件，請重新選擇。");
+          fileInput.value = "";
+        };
+
+        fileReader.readAsArrayBuffer(file);
+      }
+
+      // ===== 事件監聽：雙擊匯入、進度跳轉、模式切換與鍵盤快捷鍵 =====
+      statusBar.addEventListener("dblclick", (event) => {
+        if (event.target === jumpInput) return;
+        fileInput.click();
+      });
+
+      fileInput.addEventListener("change", () => {
+        importFile(fileInput.files[0]);
+      });
+
+      modeToggle.addEventListener("click", () => {
+        state.compact = !state.compact;
+        saveState();
+        render();
+      });
+
+      progress.addEventListener("click", () => {
+        if (!state.sentences.length || state.bossMode) return;
+        progress.classList.add("hidden");
+        jumpInput.classList.remove("hidden");
+        jumpInput.value = String(state.index + 1);
+        jumpInput.focus();
+        jumpInput.select();
+      });
+
+      jumpInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          jumpTo(jumpInput.value);
+          closeJumpInput();
+        } else if (event.key === "Escape") {
+          event.preventDefault();
+          closeJumpInput();
+        }
+      });
+
+      jumpInput.addEventListener("blur", closeJumpInput);
+
+      document.addEventListener("keydown", (event) => {
+        if (document.activeElement === jumpInput) return;
+
+        if (["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft", " "].includes(event.key)) {
+          event.preventDefault();
+        }
+
+        if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+          moveBy(1);
+        } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+          moveBy(-1);
+        } else if (event.key === " ") {
+          state.bossMode = !state.bossMode;
+          render();
+        }
+      });
+
+      function closeJumpInput() {
+        jumpInput.classList.add("hidden");
+        progress.classList.remove("hidden");
+      }
+
+      loadState();
+      render();
+    })();
+  </script>
+</body>
+</html>
