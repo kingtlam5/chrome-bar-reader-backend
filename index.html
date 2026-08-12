@@ -76,7 +76,12 @@
       user-select: none;
     }
 
-    .mode-toggle {
+    .title-actions {
+      display: flex;
+      height: 100%;
+    }
+
+    .title-btn {
       width: 31px;
       height: 100%;
       padding: 0;
@@ -87,11 +92,13 @@
       cursor: pointer;
     }
 
-    .mode-toggle:hover,
-    .mode-toggle:focus-visible {
+    .title-btn:hover,
+    .title-btn:focus-visible {
       background: rgba(255, 255, 255, 0.3);
       outline: none;
     }
+
+    .mode-toggle {
 
     .reader {
       height: calc(var(--memo-height) - var(--title-height) - var(--status-height));
@@ -213,7 +220,7 @@
       top: 0;
       right: 0;
       z-index: 2;
-      width: 31px;
+      width: 62px;
       height: var(--compact-height);
       padding: 0;
       border: 0;
@@ -225,13 +232,8 @@
       display: none;
     }
 
-    .memo.compact .mode-toggle {
-      width: 31px;
-      border-left: 1px solid rgba(100, 84, 23, 0.12);
-    }
-
     .memo.compact .reader {
-      width: calc(100% - 31px);
+      width: calc(100% - 62px);
       height: var(--compact-height);
       padding: 4px 9px;
       overflow: hidden;
@@ -262,12 +264,15 @@
   <main class="memo" id="memo" aria-label="隱蔽文字閱讀器">
     <header class="title-bar">
       <span class="title-text">Notes - Task List</span>
-      <button class="mode-toggle" id="modeToggle" type="button" aria-label="切換單行模式" title="切換單行模式">−</button>
+      <div class="title-actions">
+        <button class="title-btn" id="resizeBtn" type="button" aria-label="縮放視窗至便利貼大小" title="縮放視窗至便利貼大小">⤢</button>
+        <button class="title-btn mode-toggle" id="modeToggle" type="button" aria-label="切換單行模式" title="切換單行模式">−</button>
+      </div>
     </header>
 
     <section class="reader" id="reader" aria-live="polite"></section>
 
-    <footer class="status-bar" id="statusBar" title="雙擊以匯入 TXT 文件">
+    <footer class="status-bar" id="statusBar" title="雙擊以匯入 TXT 或 EPUB 文件">
       <span class="import-zone">Task notes</span>
       <button class="help-btn" id="helpBtn" type="button" title="使用說明">說明</button>
       <div class="progress-wrap">
@@ -283,7 +288,7 @@
       </div>
     </footer>
 
-    <input class="hidden" id="fileInput" type="file" accept=".txt,text/plain">
+    <input class="hidden" id="fileInput" type="file" accept=".txt,.epub,text/plain,application/epub+zip">
   </main>
 
   <script>
@@ -301,20 +306,21 @@
       const USER_MANUAL = [
         "【Stealth Memo Reader 使用說明】",
         "這是一個偽裝成便利貼的隱蔽閱讀器。",
-        "匯入文件：雙擊底部狀態列，選擇 .txt 文件。",
-        "支援 UTF-8、Big5、GB18030 中文編碼。",
+        "匯入文件：雙擊底部狀態列。",
+        "支援 .txt 與 .epub 電子書格式。",
+        "TXT 支援 UTF-8、Big5、GB18030 編碼。",
         "下一句：按 ↓ 或 → 方向鍵。",
         "上一句：按 ↑ 或 ← 方向鍵。",
         "老闆鍵：按空白鍵，切換假待辦清單。",
         "再按一次空白鍵可恢復閱讀內容。",
-        "單行模式：點標題列右側 − 按鈕縮小。",
+        "單行模式：點標題列 − 按鈕縮小。",
         "再按 + 可展開回便利貼模式。",
+        "縮放視窗：點標題列 ⤢ 按鈕。",
+        "Memo 模式縮至 350×250，單行 350×30。",
         "跳轉：點擊右下角進度數字。",
         "輸入行號後按 Enter 即可跳轉。",
         "閱讀進度會自動儲存在瀏覽器。",
         "重新整理後會從上次位置繼續閱讀。",
-        "極簡視窗：建議用彈出視窗開啟此頁。",
-        "可將網址存為書籤，設為獨立小視窗使用。",
         "關閉說明：再點底部「說明」按鈕即可。"
       ];
 
@@ -335,10 +341,12 @@
       const jumpInput = document.getElementById("jumpInput");
       const fileInput = document.getElementById("fileInput");
       const modeToggle = document.getElementById("modeToggle");
+      const resizeBtn = document.getElementById("resizeBtn");
       const helpBtn = document.getElementById("helpBtn");
 
-      // ===== 視窗尺寸：讓整個瀏覽器視窗貼合便利貼大小，盡量去除網頁感 =====
-      function fitWindowToMemo() {
+      // ===== 視窗尺寸：一鍵將瀏覽器視窗縮放至便利貼大小 =====
+      function fitWindowToMemo(options = {}) {
+        const { showBlockedAlert = false } = options;
         const memoWidth = 350;
         const memoHeight = state.compact ? 30 : 250;
         const chromeWidth = window.outerWidth - window.innerWidth;
@@ -353,8 +361,12 @@
             Math.max(0, Math.round((screen.availWidth - memoWidth - chromeWidth) / 2)),
             Math.max(0, Math.round((screen.availHeight - memoHeight - chromeHeight) / 2))
           );
+          return true;
         } catch (error) {
-          // 部分瀏覽器限制腳本調整視窗大小，使用者可改用手動縮放或彈出視窗。
+          if (showBlockedAlert) {
+            alert("瀏覽器不允許自動調整視窗大小。請改用彈出視窗開啟此頁，或手動縮放視窗。");
+          }
+          return false;
         }
       }
 
@@ -476,7 +488,8 @@
         modeToggle.setAttribute("aria-label", state.compact ? "展開 Memo 模式" : "切換單行模式");
         helpBtn.classList.toggle("active", state.manualMode);
         helpBtn.textContent = state.manualMode ? "返回" : "說明";
-        fitWindowToMemo();
+        document.documentElement.classList.toggle("compact", state.compact);
+        document.body.classList.toggle("compact", state.compact);
 
         if (state.bossMode) {
           renderSentences(FAKE_TASKS, 0, false);
@@ -606,53 +619,211 @@
         render();
       }
 
-      // ===== 檔案讀取：使用 FileReader 取得 ArrayBuffer，再進行中文編碼判斷與解析 =====
-      function importFile(file) {
+      // ===== EPUB 解析器：解壓 ZIP、讀取 spine 順序並抽取純文字 =====
+      async function inflateZipEntry(data) {
+        if (typeof DecompressionStream === "undefined") {
+          throw new Error("UNSUPPORTED_DECOMPRESSION");
+        }
+
+        const stream = new Blob([data]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+        const buffer = await new Response(stream).arrayBuffer();
+        return new Uint8Array(buffer);
+      }
+
+      async function parseZipEntries(arrayBuffer) {
+        const view = new DataView(arrayBuffer);
+        const files = new Map();
+        let offset = 0;
+
+        while (offset + 30 <= arrayBuffer.byteLength) {
+          const signature = view.getUint32(offset, true);
+          if (signature !== 0x04034b50) break;
+
+          const compression = view.getUint16(offset + 8, true);
+          const compressedSize = view.getUint32(offset + 18, true);
+          const nameLength = view.getUint16(offset + 26, true);
+          const extraLength = view.getUint16(offset + 28, true);
+          const dataStart = offset + 30 + nameLength + extraLength;
+
+          if (dataStart + compressedSize > arrayBuffer.byteLength) break;
+
+          const name = new TextDecoder().decode(
+            new Uint8Array(arrayBuffer, offset + 30, nameLength)
+          );
+          const compressedData = new Uint8Array(arrayBuffer, dataStart, compressedSize);
+
+          let content;
+          if (compression === 0) {
+            content = compressedData;
+          } else if (compression === 8) {
+            content = await inflateZipEntry(compressedData);
+          } else {
+            throw new Error(`UNSUPPORTED_ZIP_METHOD_${compression}`);
+          }
+
+          files.set(name.replace(/\\/g, "/"), content);
+          offset = dataStart + compressedSize;
+        }
+
+        if (!files.size) {
+          throw new Error("EMPTY_ZIP");
+        }
+
+        return files;
+      }
+
+      function readZipText(files, path) {
+        const normalized = path.replace(/\\/g, "/").replace(/^\/+/, "");
+        const content = files.get(normalized);
+        if (!content) {
+          throw new Error(`MISSING_ZIP_ENTRY_${normalized}`);
+        }
+        return new TextDecoder("utf-8").decode(content);
+      }
+
+      function resolveZipPath(basePath, relativePath) {
+        const baseParts = basePath.split("/").slice(0, -1);
+        relativePath.split("/").forEach((part) => {
+          if (!part || part === ".") return;
+          if (part === "..") baseParts.pop();
+          else baseParts.push(part);
+        });
+        return baseParts.join("/");
+      }
+
+      function getXmlAttr(tag, attrName) {
+        const match = tag.match(new RegExp(`${attrName}\\s*=\\s*["']([^"']+)["']`, "i"));
+        return match ? match[1] : "";
+      }
+
+      function htmlToPlainText(html) {
+        const doc = new DOMParser().parseFromString(html, "text/html");
+        doc.querySelectorAll("script, style, nav, svg").forEach((node) => node.remove());
+        return (doc.body?.textContent || "")
+          .replace(/\u00a0/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      async function extractEpubText(arrayBuffer) {
+        const files = await parseZipEntries(arrayBuffer);
+        const containerXml = readZipText(files, "META-INF/container.xml");
+        const rootFileMatch = containerXml.match(/<rootfile\b[^>]*>/i);
+        if (!rootFileMatch) {
+          throw new Error("MISSING_EPUB_ROOTFILE");
+        }
+
+        const opfPath = getXmlAttr(rootFileMatch[0], "full-path");
+        if (!opfPath) {
+          throw new Error("MISSING_EPUB_OPF");
+        }
+
+        const opfXml = readZipText(files, opfPath);
+        const manifest = new Map();
+        const manifestRegex = /<item\b[^>]*>/gi;
+        let manifestMatch;
+
+        while ((manifestMatch = manifestRegex.exec(opfXml)) !== null) {
+          const tag = manifestMatch[0];
+          const id = getXmlAttr(tag, "id");
+          const href = getXmlAttr(tag, "href");
+          const mediaType = getXmlAttr(tag, "media-type");
+          if (id && href) {
+            manifest.set(id, { href, mediaType });
+          }
+        }
+
+        const spineIds = [];
+        const spineRegex = /<itemref\b[^>]*>/gi;
+        let spineMatch;
+
+        while ((spineMatch = spineRegex.exec(opfXml)) !== null) {
+          const idref = getXmlAttr(spineMatch[0], "idref");
+          if (idref && manifest.has(idref)) {
+            spineIds.push(idref);
+          }
+        }
+
+        if (!spineIds.length) {
+          throw new Error("EMPTY_EPUB_SPINE");
+        }
+
+        const textParts = [];
+        spineIds.forEach((id) => {
+          const item = manifest.get(id);
+          const chapterPath = resolveZipPath(opfPath, item.href);
+          const chapterHtml = readZipText(files, chapterPath);
+          const plainText = htmlToPlainText(chapterHtml);
+          if (plainText) textParts.push(plainText);
+        });
+
+        return textParts.join("\n\n");
+      }
+
+      function applyImportedSentences(sentences, fileName) {
+        state.sentences = sentences;
+        state.index = 0;
+        state.fileName = fileName;
+        state.bossMode = false;
+        state.manualMode = false;
+        saveState({ showQuotaAlert: true });
+        render();
+      }
+
+      // ===== 檔案讀取：支援 TXT 與 EPUB，再進行編碼判斷與文字解析 =====
+      async function importFile(file) {
         if (!file) return;
-        if (!file.name.toLowerCase().endsWith(".txt")) {
-          alert("請選擇 .txt 文字文件。");
+
+        const lowerName = file.name.toLowerCase();
+        const isTxt = lowerName.endsWith(".txt");
+        const isEpub = lowerName.endsWith(".epub");
+
+        if (!isTxt && !isEpub) {
+          alert("請選擇 .txt 或 .epub 文件。");
           return;
         }
 
-        const fileReader = new FileReader();
+        try {
+          const arrayBuffer = await file.arrayBuffer();
 
-        fileReader.onload = () => {
-          try {
-            const decoded = decodeText(fileReader.result);
-            const sentences = parseText(decoded.text);
+          if (isEpub) {
+            const epubText = await extractEpubText(arrayBuffer);
+            const sentences = parseText(epubText);
 
             if (!sentences.length) {
-              alert("文件中沒有可閱讀的文字。");
+              alert("EPUB 中沒有可閱讀的文字。");
               return;
             }
 
-            state.sentences = sentences;
-            state.index = 0;
-            state.fileName = file.name;
-            state.bossMode = false;
-            state.manualMode = false;
-            saveState({ showQuotaAlert: true });
-            render();
-
-            if (decoded.uncertain) {
-              alert("文件編碼無法完全確認。已嘗試 UTF-8、Big5 與 GB18030；若仍有亂碼，請先將文件另存為 UTF-8 後再匯入。");
-            }
-          } catch (error) {
-            alert("讀取文件失敗，請確認文件未損壞，或先將它轉存為 UTF-8。");
-          } finally {
-            fileInput.value = "";
+            applyImportedSentences(sentences, file.name);
+            return;
           }
-        };
 
-        fileReader.onerror = () => {
-          alert("瀏覽器無法讀取這個文件，請重新選擇。");
+          const decoded = decodeText(arrayBuffer);
+          const sentences = parseText(decoded.text);
+
+          if (!sentences.length) {
+            alert("文件中沒有可閱讀的文字。");
+            return;
+          }
+
+          applyImportedSentences(sentences, file.name);
+
+          if (decoded.uncertain) {
+            alert("文件編碼無法完全確認。已嘗試 UTF-8、Big5 與 GB18030；若仍有亂碼，請先將文件另存為 UTF-8 後再匯入。");
+          }
+        } catch (error) {
+          if (error.message === "UNSUPPORTED_DECOMPRESSION") {
+            alert("此瀏覽器不支援 EPUB 解壓，請改用 Chrome 或 Edge。");
+          } else {
+            alert("讀取文件失敗，請確認文件未損壞。");
+          }
+        } finally {
           fileInput.value = "";
-        };
-
-        fileReader.readAsArrayBuffer(file);
+        }
       }
 
-      // ===== 事件監聽：雙擊匯入、說明書、進度跳轉、模式切換與鍵盤快捷鍵 =====
+      // ===== 事件監聽：雙擊匯入、說明書、視窗縮放、進度跳轉、模式切換與鍵盤快捷鍵 =====
       statusBar.addEventListener("dblclick", (event) => {
         if (event.target === jumpInput || event.target === helpBtn) return;
         fileInput.click();
@@ -663,6 +834,11 @@
         toggleManual();
       });
 
+      resizeBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        fitWindowToMemo({ showBlockedAlert: true });
+      });
+
       fileInput.addEventListener("change", () => {
         importFile(fileInput.files[0]);
       });
@@ -671,6 +847,7 @@
         state.compact = !state.compact;
         saveState();
         render();
+        fitWindowToMemo({ showBlockedAlert: true });
       });
 
       progress.addEventListener("click", () => {
@@ -721,7 +898,7 @@
 
       loadState();
       render();
-      window.addEventListener("load", fitWindowToMemo);
+      window.addEventListener("load", () => fitWindowToMemo());
     })();
   </script>
 </body>
