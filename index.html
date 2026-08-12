@@ -290,8 +290,8 @@
         "匯入文件：雙擊底部狀態列。",
         "支援 .txt 與 .epub 電子書格式。",
         "TXT 支援 UTF-8、Big5、GB18030 編碼。",
-        "下一句：按 ↓ 或 → 方向鍵。",
-        "上一句：按 ↑ 或 ← 方向鍵。",
+        "下一句：按 R 鍵。",
+        "上一句：按 Q 鍵。",
         "老闆鍵：按空白鍵，切換假待辦清單。",
         "再按一次空白鍵可恢復閱讀內容。",
         "單行模式：點標題列 − 按鈕縮小。",
@@ -913,13 +913,13 @@
       document.addEventListener("keydown", (event) => {
         if (document.activeElement === jumpInput) return;
 
-        if (["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft", " "].includes(event.key)) {
+        if (["q", "Q", "r", "R", " "].includes(event.key)) {
           event.preventDefault();
         }
 
-        if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+        if (event.key === "r" || event.key === "R") {
           moveBy(1);
-        } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+        } else if (event.key === "q" || event.key === "Q") {
           moveBy(-1);
         } else if (event.key === " ") {
           state.bossMode = !state.bossMode;
