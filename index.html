@@ -84,17 +84,10 @@
       flex: 1;
       min-height: 0;
       overflow: hidden;
-      background: #ececec;
-    }
-
-    .stealth-bg img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      pointer-events: none;
-      user-select: none;
+      background-color: #ececec;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: 100% auto;
     }
 
     /* Main toolbar */
@@ -386,9 +379,7 @@
       </header>
     </div>
 
-    <div class="stealth-bg" id="stealthBg" aria-hidden="true">
-      <img id="stealthBgImage" alt="">
-    </div>
+    <div class="stealth-bg" id="stealthBg" aria-hidden="true"></div>
 
     <input class="hidden" id="fileInput" type="file" accept=".txt,.epub,text/plain,application/epub+zip">
     <input class="hidden" id="bgInput" type="file" accept="image/png,image/jpeg,image/webp,image/*" multiple>
@@ -455,7 +446,7 @@
       const chromeProgress = document.getElementById("chromeProgress");
       const chromeUpload = document.getElementById("chromeUpload");
       const chromePopupBtn = document.getElementById("chromePopupBtn");
-      const stealthBgImage = document.getElementById("stealthBgImage");
+      const stealthBg = document.getElementById("stealthBg");
       const fileInput = document.getElementById("fileInput");
       const bgInput = document.getElementById("bgInput");
       const chromeProfileBtn = document.getElementById("chromeProfileBtn");
@@ -672,10 +663,12 @@
 
       function updateStealthBackground() {
         const index = state.stealthBgIndex;
-        const bg = STEALTH_BACKGROUNDS[index] || STEALTH_BACKGROUNDS[0];
-        stealthBgImage.src = getBackgroundSource(index);
-        stealthBgImage.alt = getBackgroundLabel(index);
+        const src = getBackgroundSource(index);
         const label = getBackgroundLabel(index);
+        stealthBg.style.backgroundImage = src ? `url("${src}")` : "none";
+        stealthBg.style.backgroundPosition = "top center";
+        stealthBg.style.backgroundRepeat = "no-repeat";
+        stealthBg.style.backgroundSize = "100% auto";
         chromeRefresh.title = `切換偽裝背景（${label}）`;
         chromeRefresh.setAttribute("aria-label", `切換偽裝背景（${label}）`);
       }
