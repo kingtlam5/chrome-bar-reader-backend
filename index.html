@@ -6,21 +6,8 @@
   <title>Notes - Task List</title>
   <style>
     :root {
-      --memo-bg: #fff3a8;
-      --memo-bg-deep: #f4df7c;
-      --memo-text: #3e3b2f;
-      --muted-text: #77715b;
-      --active-bg: rgba(255, 255, 255, 0.34);
-      --memo-width: 350px;
-      --memo-height: 250px;
       --compact-height: 52px;
       --chrome-toolbar-height: 52px;
-      --title-height: 25px;
-      --status-height: 24px;
-      --font-size: 15px;
-      --line-height: 1.72;
-      --radius: 6px;
-      --transition-speed: 180ms;
       --chrome-bg: #dee1e6;
       --chrome-toolbar-bg: #ffffff;
       --chrome-icon: #5f6368;
@@ -52,20 +39,9 @@
 
     html,
     body {
-      width: var(--memo-width);
-      height: var(--memo-height);
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: var(--memo-bg);
-    }
-
-    html.compact,
-    body.compact {
-      width: 100% !important;
-      max-width: none;
-      min-width: 0;
-      height: var(--compact-height);
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
       margin: 0;
       padding: 0;
       overflow: hidden;
@@ -73,8 +49,8 @@
     }
 
     body {
-      color: var(--memo-text);
-      font-family: Arial, "Microsoft JhengHei", "PingFang TC", sans-serif;
+      color: #202124;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     }
 
     button,
@@ -82,171 +58,43 @@
       font: inherit;
     }
 
-    .memo {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      border: 0;
-      border-radius: 0;
-      background: linear-gradient(145deg, var(--memo-bg), #ffef96);
-      transition: height var(--transition-speed) ease;
-    }
-
-    .title-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: var(--title-height);
-      padding-left: 9px;
-      border-bottom: 1px solid rgba(100, 84, 23, 0.13);
-      background: var(--memo-bg-deep);
-      color: #625c46;
-      font-size: 11px;
-      line-height: 1;
-      user-select: none;
-    }
-
-    .title-actions {
-      display: flex;
-      height: 100%;
-    }
-
-    .title-btn {
-      width: 31px;
-      height: 100%;
-      padding: 0;
-      border: 0;
-      border-left: 1px solid rgba(100, 84, 23, 0.12);
-      background: transparent;
-      color: #766d4d;
-      cursor: pointer;
-    }
-
-    .title-btn:hover,
-    .title-btn:focus-visible {
-      background: rgba(255, 255, 255, 0.3);
-      outline: none;
-    }
-
-    .title-btn.active {
-      color: var(--memo-text);
-      font-weight: 700;
-    }
-
-    .reader {
-      height: calc(var(--memo-height) - var(--title-height) - var(--status-height));
-      padding: 13px 16px 10px;
-      overflow-y: auto;
-      overscroll-behavior: contain;
-      font-size: var(--font-size);
-      line-height: var(--line-height);
-      scrollbar-color: rgba(103, 94, 59, 0.35) transparent;
-      scrollbar-width: thin;
-    }
-
-    .reader::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .reader::-webkit-scrollbar-thumb {
-      border-radius: 5px;
-      background: rgba(103, 94, 59, 0.3);
-    }
-
-    .sentence {
-      margin: 0 0 5px;
-      padding: 0 3px;
-      overflow-wrap: anywhere;
-    }
-
-    .sentence.current {
-      border-radius: 3px;
-      background: var(--active-bg);
-    }
-
-    .placeholder {
-      margin: 48px 0 0;
-      color: var(--muted-text);
-      text-align: center;
-      font-size: 13px;
-    }
-
-    .status-bar {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: var(--status-height);
-      padding: 0 9px;
-      border-top: 1px solid rgba(100, 84, 23, 0.11);
-      background: rgba(244, 223, 124, 0.56);
-      color: var(--muted-text);
-      font-size: 10px;
-      user-select: none;
-    }
-
-    .import-zone {
-      cursor: default;
-    }
-
-    .progress-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      min-width: 104px;
-      height: 100%;
-    }
-
-    .progress {
-      cursor: pointer;
-    }
-
-    .jump-input {
-      width: 68px;
-      height: 18px;
-      padding: 1px 4px;
-      border: 1px solid rgba(100, 84, 23, 0.25);
-      border-radius: 2px;
-      outline: none;
-      background: rgba(255, 255, 255, 0.55);
-      color: var(--memo-text);
-      font-size: 10px;
-      text-align: right;
-    }
-
     .hidden {
       display: none !important;
     }
 
-    .memo.compact {
+    .memo {
+      display: flex;
+      flex-direction: column;
       width: 100%;
-      max-width: none;
-      height: var(--compact-height);
+      height: 100%;
+      min-height: 100vh;
+      overflow: hidden;
       background: var(--chrome-toolbar-bg);
     }
 
-    .memo.compact .title-bar,
-    .memo.compact .reader,
-    .memo.compact .status-bar {
-      display: none;
-    }
-
     .chrome-shell {
-      display: none;
+      flex-shrink: 0;
       width: 100%;
       height: var(--compact-height);
       overflow: hidden;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
       user-select: none;
     }
 
-    .memo.compact .chrome-shell {
+    .stealth-bg {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      background: #ececec;
+    }
+
+    .stealth-bg img {
       display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      pointer-events: none;
+      user-select: none;
     }
 
     /* Main toolbar */
@@ -489,7 +337,7 @@
           <button class="chrome-nav" id="chromeForward" type="button" aria-label="下一句" title="下一句">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6v12z"/></svg>
           </button>
-          <button class="chrome-nav" id="chromeRefresh" type="button" aria-label="展開 Memo 視窗" title="展開 Memo 視窗">
+          <button class="chrome-nav" id="chromeRefresh" type="button" aria-label="切換偽裝背景" title="切換偽裝背景">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08a5.99 5.99 0 01-5.65 4c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
           </button>
         </div>
@@ -529,32 +377,9 @@
       </header>
     </div>
 
-    <header class="title-bar" id="titleBar">
-      <span class="title-text">Notes - Task List</span>
-      <div class="title-actions">
-        <button class="title-btn" id="translateBtn" type="button" aria-label="簡轉繁" title="簡轉繁">⇄</button>
-        <button class="title-btn" id="helpBtn" type="button" aria-label="使用說明" title="使用說明">?</button>
-        <button class="title-btn" id="resizeBtn" type="button" aria-label="縮放視窗至便利貼大小" title="縮放視窗至便利貼大小">⤢</button>
-        <button class="title-btn" id="modeToggle" type="button" aria-label="切換單行模式" title="切換單行模式">−</button>
-      </div>
-    </header>
-
-    <section class="reader" id="reader" aria-live="polite"></section>
-
-    <footer class="status-bar" id="statusBar" title="雙擊以匯入 TXT 或 EPUB 文件">
-      <span class="import-zone">Task notes</span>
-      <div class="progress-wrap">
-        <span class="progress" id="progress" title="點擊以跳轉">0/0 (0%)</span>
-        <input
-          class="jump-input hidden"
-          id="jumpInput"
-          type="number"
-          min="1"
-          inputmode="numeric"
-          aria-label="跳轉至指定句"
-        >
-      </div>
-    </footer>
+    <div class="stealth-bg" id="stealthBg" aria-hidden="true">
+      <img id="stealthBgImage" alt="">
+    </div>
 
     <input class="hidden" id="fileInput" type="file" accept=".txt,.epub,text/plain,application/epub+zip">
   </main>
@@ -564,61 +389,47 @@
       "use strict";
 
       const STORAGE_KEY = "stealthMemoReader.v1";
-      const VISIBLE_SENTENCE_COUNT = 4;
       const COMPACT_TOOLBAR_HEIGHT = 52;
       const BOSS_CHROME_URL = "https://chrome.google.com/webstore/detail/developer-tools";
-      const FAKE_TASKS = [
-        "1. Review API logs",
-        "2. Update Jira ticket",
-        "3. Reply emails"
+      const STEALTH_BACKGROUNDS = [
+        { src: "assets/stealth-outlook.png", label: "Outlook" },
+        { src: "assets/stealth-trello.png", label: "Trello" },
+        { src: "assets/stealth-excel.png", label: "Excel" },
+        { src: "assets/stealth-pim.png", label: "PIM" },
+        { src: "assets/stealth-shopify.png", label: "Shopify" },
+        { src: "assets/stealth-colourliving.png", label: "Colourliving" }
       ];
       const USER_MANUAL = [
         "【Stealth Memo Reader 使用說明】",
-        "這是一個偽裝成便利貼的隱蔽閱讀器。",
-        "匯入文件：雙擊底部狀態列。",
+        "這是一個偽裝成 Chrome 工具列的隱蔽閱讀器。",
+        "匯入文件：點 ★ 按鈕。",
         "支援 .txt 與 .epub 電子書格式。",
         "TXT 支援 UTF-8、Big5、GB18030 編碼。",
         "中文以句號（。）、英文以句點（.）分段。",
-        "下一句：按 R 鍵。",
-        "簡轉繁：點頂部 ⇄ 開啟後全書生效。",
-        "上一句：按 Q 鍵。",
-        "老闆鍵：按空白鍵，切換假待辦清單。",
-        "再按一次空白鍵可恢復閱讀內容。",
-        "單行模式：點標題列 − 切換 Chrome 工具列偽裝。",
-        "Chrome 模式：←/→ 或 ↑/↓ 切換句子。",
-        "空白鍵：網址列變成 chrome.google.com 工作網址。",
-        "↻ 按鈕：展開回 350×250 Memo 視窗。",
-        "⇄ 按鈕：簡體轉繁體（Chrome 模式）。",
+        "下一句：按 R 鍵或 →。",
+        "上一句：按 Q 鍵或 ←。",
+        "簡轉繁：點 ⇄ 按鈕。",
+        "老闆鍵：按空白鍵，切換假工作網址。",
+        "↻ 按鈕：切換下方偽裝網頁背景。",
+        "⇄ 按鈕：簡體轉繁體。",
         "★ 按鈕：匯入 TXT 或 EPUB 書本。",
         "網址列右側數字：顯示進度，點擊可跳轉。",
-        "Chrome 模式會自動調整為全螢幕寬度。",
-        "Chrome 模式高度 52px。",
+        "拼圖按鈕：以無分頁彈出視窗全螢幕開啟。",
         "長句可用滑鼠滾輪手動捲動網址列。",
-        "拼圖按鈕：以無分頁彈出視窗開啟單行模式。",
-        "縮放視窗：點標題列 ⤢ 按鈕。",
-        "若無法縮放，會自動以彈出視窗開啟。",
-        "Memo 模式 350×250。",
-        "跳轉：點擊右下角進度數字。",
-        "輸入行號後按 Enter 即可跳轉。",
-        "閱讀進度會自動儲存在瀏覽器。",
-        "重新整理後會從上次位置繼續閱讀。",
-        "關閉說明：再點頂部 ? 按鈕即可。"
+        "閱讀進度會自動儲存在瀏覽器。"
       ];
 
       const state = {
         sentences: [],
         index: 0,
         fileName: "",
-        compact: true,
         bossMode: false,
         manualMode: false,
         manualIndex: 0,
-        translateTraditional: false
+        translateTraditional: false,
+        stealthBgIndex: 0
       };
 
-      const memo = document.getElementById("memo");
-      const titleBar = document.getElementById("titleBar");
-      const chromeToolbar = document.getElementById("chromeToolbar");
       const chromeShell = document.getElementById("chromeShell");
       const chromeUrl = document.getElementById("chromeUrl");
       const chromeUrlScroll = document.getElementById("chromeUrlScroll");
@@ -631,15 +442,8 @@
       const chromeProgress = document.getElementById("chromeProgress");
       const chromeUpload = document.getElementById("chromeUpload");
       const chromePopupBtn = document.getElementById("chromePopupBtn");
-      const reader = document.getElementById("reader");
-      const statusBar = document.getElementById("statusBar");
-      const progress = document.getElementById("progress");
-      const jumpInput = document.getElementById("jumpInput");
+      const stealthBgImage = document.getElementById("stealthBgImage");
       const fileInput = document.getElementById("fileInput");
-      const modeToggle = document.getElementById("modeToggle");
-      const resizeBtn = document.getElementById("resizeBtn");
-      const translateBtn = document.getElementById("translateBtn");
-      const helpBtn = document.getElementById("helpBtn");
 
       function getCurrentSentenceText() {
         if (state.manualMode) {
@@ -673,7 +477,7 @@
         chromeUrlScroll.classList.remove("can-scroll");
         chromeUrlScroll.scrollLeft = 0;
 
-        if (!text || !state.compact) return;
+        if (!text) return;
 
         requestAnimationFrame(() => {
           const overflow = chromeUrl.scrollWidth - chromeUrlScroll.clientWidth;
@@ -684,8 +488,6 @@
       }
 
       function updateChromeToolbar() {
-        if (!state.compact) return;
-
         if (state.bossMode) {
           updateChromeUrlDisplay(BOSS_CHROME_URL);
           chromeProgress.classList.add("hidden");
@@ -708,23 +510,9 @@
           || new URLSearchParams(window.location.search).get("popup") === "1";
       }
 
-      function getWindowChromeSize() {
-        return {
-          width: Math.max(0, window.outerWidth - window.innerWidth),
-          height: Math.max(0, window.outerHeight - window.innerHeight)
-        };
-      }
-
-      function getCompactOuterSize() {
-        const chrome = getWindowChromeSize();
-        const contentHeight = Math.max(
-          COMPACT_TOOLBAR_HEIGHT,
-          document.documentElement.scrollHeight || 0,
-          document.body.scrollHeight || 0
-        );
         return {
           width: window.screen.availWidth,
-          height: contentHeight + chrome.height
+          height: window.screen.availHeight
         };
       }
 
@@ -744,11 +532,6 @@
       }
 
       function applyCompactWindowFrame() {
-        if (!state.compact) return;
-
-        document.documentElement.classList.add("compact");
-        document.body.classList.add("compact");
-
         const { width, height } = getCompactOuterSize();
 
         try {
@@ -767,9 +550,7 @@
 
       function openMemoPopup(options = {}) {
         const { showBlockedAlert = false, targetUrl = window.location.href } = options;
-        const { width, height } = state.compact
-          ? getCompactOuterSize()
-          : { width: 350 + getWindowChromeSize().width, height: 250 + getWindowChromeSize().height };
+        const { width, height } = getCompactOuterSize();
 
         const popup = window.open(
           targetUrl,
@@ -787,25 +568,29 @@
       function openCompactPopupWindow() {
         if (isCompactPopupContext()) return;
 
-        if (!state.compact) {
-          state.compact = true;
-          saveState();
-          render();
-        }
-
         const popupUrl = new URL(window.location.href);
         popupUrl.searchParams.set("popup", "1");
 
         openMemoPopup({ targetUrl: popupUrl.toString(), showBlockedAlert: true });
       }
 
+      function updateStealthBackground() {
+        const bg = STEALTH_BACKGROUNDS[state.stealthBgIndex] || STEALTH_BACKGROUNDS[0];
+        stealthBgImage.src = bg.src;
+        stealthBgImage.alt = bg.label;
+        chromeRefresh.title = `切換偽裝背景（${bg.label}）`;
+        chromeRefresh.setAttribute("aria-label", `切換偽裝背景（${bg.label}）`);
+      }
+
+      function cycleStealthBackground() {
+        state.stealthBgIndex = (state.stealthBgIndex + 1) % STEALTH_BACKGROUNDS.length;
+        saveState();
+        updateStealthBackground();
+      }
+
       function bootstrapWindow() {
         render();
-
-        if (!state.compact) {
-          fitWindowToMemo({ showBlockedAlert: false });
-          return;
-        }
+        updateStealthBackground();
 
         if (isCompactPopupContext()) {
           ensureCompactFullWidth();
@@ -818,13 +603,6 @@
 
       function nextSentence() {
         moveBy(1);
-      }
-
-      function expandToMemoMode() {
-        state.compact = false;
-        saveState();
-        render();
-        fitWindowToMemo({ showBlockedAlert: true });
       }
 
       function openChromeJumpInput() {
@@ -845,77 +623,20 @@
         chromeProgress.classList.remove("hidden");
       }
 
-      // ===== 視窗尺寸：一鍵縮放至便利貼大小；若瀏覽器封鎖則改以彈出視窗開啟 =====
-      function getMemoWindowSize() {
-        if (state.compact) {
-          return {
-            width: window.screen.availWidth,
-            height: COMPACT_TOOLBAR_HEIGHT
-          };
-        }
-
-        return {
-          width: 350,
-          height: 250
-        };
-      }
-
-      function isLikelyPopupWindow() {
-        return isCompactPopupContext();
-      }
-
-      function fitWindowToMemo(options = {}) {
-        const { showBlockedAlert = false } = options;
-
-        document.documentElement.classList.toggle("compact", state.compact);
-        document.body.classList.toggle("compact", state.compact);
-
-        if (state.compact) {
-          if (isCompactPopupContext()) {
-            ensureCompactFullWidth();
-          }
-          return true;
-        }
-
-        const chrome = getWindowChromeSize();
-        const targetWidth = 350 + chrome.width;
-        const targetHeight = 250 + chrome.height;
-
-        try {
-          window.resizeTo(targetWidth, targetHeight);
-          window.moveTo(
-            Math.max(0, Math.round((window.screen.availWidth - targetWidth) / 2)),
-            Math.max(0, Math.round((window.screen.availHeight - targetHeight) / 2))
-          );
-        } catch (error) {
-          return openMemoPopup({ showBlockedAlert });
-        }
-
-        window.setTimeout(() => {
-          const nearTarget = Math.abs(window.outerWidth - targetWidth) < 24
-            && Math.abs(window.outerHeight - targetHeight) < 24;
-
-          if (nearTarget) return;
-
-          if (isCompactPopupContext()) {
-            try {
-              window.resizeTo(targetWidth, targetHeight);
-            } catch (error) {
-              // 已在彈出視窗但仍無法縮放時不再重複開窗。
-            }
-            return;
-          }
-
-          openMemoPopup({ showBlockedAlert });
-        }, 120);
-
-        return true;
-      }
-
       // ===== 簡繁轉換：OpenCC 字庫（STCharacters + STPhrases）=====
       let s2tCharMap = null;
       let s2tPhraseMap = null;
       const S2T_MAX_PHRASE_LEN = 12;
+      const S2T_PHRASE_OVERRIDES = new Map([
+        ["下面", "下面"],
+        ["在上面", "在上面"],
+        ["往下面", "往下面"],
+        ["最下面", "最下面"],
+        ["在下面", "在下面"]
+      ]);
+      const S2T_CHAR_OVERRIDES = new Map([
+        ["吃", "吃"]
+      ]);
 
       const S2T_CHAR_DATA = `㐷	傌
 㐹	㑶
@@ -54122,7 +53843,20 @@
         }
         s2tCharMap = parseS2TData(S2T_CHAR_DATA);
         s2tPhraseMap = parseS2TData(S2T_PHRASE_DATA);
+        S2T_CHAR_OVERRIDES.forEach((value, key) => {
+          s2tCharMap.set(key, value);
+        });
         return { charMap: s2tCharMap, phraseMap: s2tPhraseMap };
+      }
+
+      function resolveS2TTarget(converted) {
+        if (!converted) return converted;
+        const space = converted.indexOf(" ");
+        return space === -1 ? converted : converted.slice(0, space);
+      }
+
+      function applyS2TPostFixes(text) {
+        return text.replace(/喫/g, "吃");
       }
 
       function toTraditional(text) {
@@ -54135,9 +53869,16 @@
           const maxLen = Math.min(S2T_MAX_PHRASE_LEN, chars.length - i);
           for (let len = maxLen; len >= 2; len -= 1) {
             const phrase = chars.slice(i, i + len).join("");
+            const override = S2T_PHRASE_OVERRIDES.get(phrase);
+            if (override) {
+              result += override;
+              i += len;
+              matched = true;
+              break;
+            }
             const converted = phraseMap.get(phrase);
             if (converted) {
-              result += converted;
+              result += resolveS2TTarget(converted);
               i += len;
               matched = true;
               break;
@@ -54148,7 +53889,7 @@
           result += charMap.get(ch) || ch;
           i += 1;
         }
-        return result;
+        return applyS2TPostFixes(result);
       }
 
       function toggleTranslate() {
@@ -54158,15 +53899,13 @@
       }
 
       function updateTranslateButton() {
-        translateBtn.classList.toggle("active", state.translateTraditional);
-        translateBtn.title = state.translateTraditional ? "關閉簡轉繁" : "簡轉繁";
-        translateBtn.setAttribute(
+        chromeTranslate.classList.toggle("active", state.translateTraditional);
+        chromeTranslate.title = state.translateTraditional ? "關閉簡轉繁" : "簡轉繁";
+        chromeTranslate.setAttribute(
           "aria-label",
           state.translateTraditional ? "關閉簡轉繁" : "簡轉繁"
         );
-        if (state.compact) {
-          updateChromeToolbar();
-        }
+        updateChromeToolbar();
       }
 
       function isMostlyChinese(text) {
@@ -54267,8 +54006,8 @@
           s: state.sentences,
           i: state.index,
           n: state.fileName,
-          c: state.compact,
-          tr: state.translateTraditional
+          tr: state.translateTraditional,
+          bg: state.stealthBgIndex
         };
 
         try {
@@ -54290,10 +54029,11 @@
           state.sentences = saved.s.filter((item) => typeof item === "string");
           state.index = clampIndex(Number(saved.i) || 0);
           state.fileName = typeof saved.n === "string" ? saved.n : "";
-          if (saved.c !== undefined) {
-            state.compact = Boolean(saved.c);
-          }
           state.translateTraditional = Boolean(saved.tr);
+          if (Number.isFinite(saved.bg)) {
+            state.stealthBgIndex = ((saved.bg % STEALTH_BACKGROUNDS.length) + STEALTH_BACKGROUNDS.length)
+              % STEALTH_BACKGROUNDS.length;
+          }
         } catch (error) {
           localStorage.removeItem(STORAGE_KEY);
         }
@@ -54301,76 +54041,8 @@
 
       // ===== 閱讀器畫面：依目前模式呈現內容、說明書或假待辦 =====
       function render() {
-        memo.classList.toggle("compact", state.compact);
-        modeToggle.textContent = state.compact ? "+" : "−";
-        modeToggle.setAttribute("aria-label", state.compact ? "展開 Memo 模式" : "切換單行模式");
-        helpBtn.classList.toggle("active", state.manualMode);
-        helpBtn.setAttribute("aria-label", state.manualMode ? "關閉說明" : "使用說明");
-        helpBtn.title = state.manualMode ? "關閉說明" : "使用說明";
-        document.documentElement.classList.toggle("compact", state.compact);
-        document.body.classList.toggle("compact", state.compact);
         updateTranslateButton();
-
-        if (state.compact) {
-          updateChromeToolbar();
-          return;
-        }
-
-        if (state.bossMode) {
-          renderSentences(FAKE_TASKS, 0, false);
-          progress.textContent = "3 tasks pending";
-          return;
-        }
-
-        if (state.manualMode) {
-          state.manualIndex = clampManualIndex(state.manualIndex);
-          const visible = state.compact
-            ? [USER_MANUAL[state.manualIndex]]
-            : USER_MANUAL.slice(state.manualIndex, state.manualIndex + VISIBLE_SENTENCE_COUNT);
-
-          renderSentences(visible, state.manualIndex, true);
-
-          const current = state.manualIndex + 1;
-          const total = USER_MANUAL.length;
-          const percent = Math.round(current / total * 100);
-          progress.textContent = `說明 ${current}/${total} (${percent}%)`;
-          jumpInput.max = String(total);
-          reader.scrollTop = 0;
-          return;
-        }
-
-        const total = state.sentences.length;
-        if (!total) {
-          reader.innerHTML = '<p class="placeholder">雙擊底部匯入文件</p>';
-          progress.textContent = "0/0 (0%)";
-          return;
-        }
-
-        state.index = clampIndex(state.index);
-        const visible = state.compact
-          ? [state.sentences[state.index]]
-          : state.sentences.slice(state.index, state.index + VISIBLE_SENTENCE_COUNT);
-
-        renderSentences(visible, state.index, true);
-
-        const current = state.index + 1;
-        const percent = Math.round(current / total * 100);
-        progress.textContent = `${current}/${total} (${percent}%)`;
-        jumpInput.max = String(total);
-        reader.scrollTop = 0;
-      }
-
-      function renderSentences(sentences, baseIndex, markCurrent) {
-        reader.replaceChildren();
-
-        sentences.forEach((sentence, offset) => {
-          const paragraph = document.createElement("p");
-          paragraph.className = "sentence";
-          if (markCurrent && offset === 0) paragraph.classList.add("current");
-          paragraph.dataset.index = String(baseIndex + offset);
-          paragraph.textContent = toTraditional(sentence);
-          reader.appendChild(paragraph);
-        });
+        updateChromeToolbar();
       }
 
       function clampIndex(index) {
@@ -54440,7 +54112,7 @@
         state.manualMode = !state.manualMode;
         state.bossMode = false;
         state.manualIndex = 0;
-        closeJumpInput();
+        closeChromeJumpInput();
         render();
       }
 
@@ -54648,39 +54320,9 @@
         }
       }
 
-      // ===== 事件監聽：雙擊匯入、說明書、視窗縮放、進度跳轉、模式切換與鍵盤快捷鍵 =====
-      statusBar.addEventListener("dblclick", (event) => {
-        if (event.target === jumpInput || event.target.closest(".progress-wrap")) return;
-        fileInput.click();
-      });
-
-      translateBtn.addEventListener("click", (event) => {
-        event.stopPropagation();
-        toggleTranslate();
-      });
-
-      helpBtn.addEventListener("click", (event) => {
-        event.stopPropagation();
-        toggleManual();
-      });
-
-      resizeBtn.addEventListener("click", (event) => {
-        event.stopPropagation();
-        fitWindowToMemo({ showBlockedAlert: true });
-      });
-
+      // ===== 事件監聽：匯入、背景切換、進度跳轉與鍵盤快捷鍵 =====
       fileInput.addEventListener("change", () => {
         importFile(fileInput.files[0]);
-      });
-
-      modeToggle.addEventListener("click", () => {
-        state.compact = !state.compact;
-        saveState();
-        render();
-        fitWindowToMemo({ showBlockedAlert: true });
-        if (state.compact) {
-          window.setTimeout(ensureCompactFullWidth, 300);
-        }
       });
 
       chromeBack.addEventListener("click", (event) => {
@@ -54695,7 +54337,7 @@
 
       chromeRefresh.addEventListener("click", (event) => {
         event.stopPropagation();
-        expandToMemoMode();
+        cycleStealthBackground();
       });
 
       chromeProgress.addEventListener("click", (event) => {
@@ -54738,36 +54380,17 @@
 
       chromeJumpInput.addEventListener("blur", closeChromeJumpInput);
 
-      progress.addEventListener("click", () => {
-        if (state.bossMode) return;
-        if (!state.manualMode && !state.sentences.length) return;
-
-        progress.classList.add("hidden");
-        jumpInput.classList.remove("hidden");
-        jumpInput.value = String(getActiveIndex() + 1);
-        jumpInput.focus();
-        jumpInput.select();
-      });
-
-      jumpInput.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          jumpTo(jumpInput.value);
-          closeJumpInput();
-        } else if (event.key === "Escape") {
-          event.preventDefault();
-          closeJumpInput();
-        }
-      });
-
-      jumpInput.addEventListener("blur", closeJumpInput);
-
       document.addEventListener("keydown", (event) => {
-        if (document.activeElement === jumpInput || document.activeElement === chromeJumpInput) return;
+        if (document.activeElement === chromeJumpInput) return;
 
         const navKeys = ["q", "Q", "r", "R", " ", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
         if (navKeys.includes(event.key)) {
           event.preventDefault();
+        }
+
+        if (event.key === "?") {
+          toggleManual();
+          return;
         }
 
         if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
@@ -54784,16 +54407,12 @@
         }
       });
 
-      function closeJumpInput() {
-        jumpInput.classList.add("hidden");
-        progress.classList.remove("hidden");
-      }
-
       loadState();
       render();
+      updateStealthBackground();
       window.addEventListener("load", bootstrapWindow);
       window.addEventListener("resize", () => {
-        if (state.compact && isCompactPopupContext()) {
+        if (isCompactPopupContext()) {
           applyCompactWindowFrame();
           if (state.bossMode) {
             updateChromeUrlDisplay(BOSS_CHROME_URL);
