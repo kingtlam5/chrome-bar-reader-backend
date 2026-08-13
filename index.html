@@ -300,6 +300,8 @@
       justify-content: center;
       width: 28px;
       height: 28px;
+      padding: 0;
+      border: 0;
       border-radius: 50%;
       background: #8e24aa;
       color: #ffffff;
@@ -307,6 +309,13 @@
       font-weight: 500;
       line-height: 28px;
       text-align: center;
+      cursor: pointer;
+    }
+
+    .chrome-profile:hover,
+    .chrome-profile:focus-visible {
+      filter: brightness(1.08);
+      outline: none;
     }
 
     .chrome-menu-btn {
@@ -369,7 +378,7 @@
             <svg viewBox="0 0 24 24"><path d="M11.99 18.54l-7.37-5.73C3 11.39 2 10.18 2 8.75 2 6.09 4.09 4 6.75 4h10.5c2.66 0 4.75 2.09 4.75 4.75 0 1.43-1 2.64-2.62 3.06l-7.37 5.73zM12 16.25l6.74-5.24c.85-.66 1.26-1.19 1.26-1.86 0-1.38-1.12-2.5-2.5-2.5H6.75c-1.38 0-2.5 1.12-2.5 2.5 0 .67.41 1.2 1.26 1.86L12 16.25z"/></svg>
           </button>
           <span class="chrome-toolbar-sep" aria-hidden="true"></span>
-          <span class="chrome-profile" aria-hidden="true">B</span>
+          <button class="chrome-profile" id="chromeProfileBtn" type="button" title="上傳自訂偽裝背景（最多 6 張）" aria-label="上傳自訂偽裝背景">B</button>
           <span class="chrome-menu-btn" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
           </span>
@@ -382,6 +391,7 @@
     </div>
 
     <input class="hidden" id="fileInput" type="file" accept=".txt,.epub,text/plain,application/epub+zip">
+    <input class="hidden" id="bgInput" type="file" accept="image/png,image/jpeg,image/webp,image/*" multiple>
   </main>
 
   <script>
@@ -389,6 +399,8 @@
       "use strict";
 
       const STORAGE_KEY = "stealthMemoReader.v1";
+      const BG_DB_NAME = "stealthMemoReader.bg.v1";
+      const BG_DB_STORE = "backgrounds";
       const COMPACT_TOOLBAR_HEIGHT = 52;
       const BOSS_CHROME_URL = "https://chrome.google.com/webstore/detail/developer-tools";
       const STEALTH_BACKGROUNDS = [
@@ -411,6 +423,7 @@
         "簡轉繁：點 ⇄ 按鈕。",
         "老闆鍵：按空白鍵，切換假工作網址。",
         "↻ 按鈕：切換下方偽裝網頁背景。",
+        "B 按鈕：上傳自訂偽裝背景（一次選 6 張）。",
         "⇄ 按鈕：簡體轉繁體。",
         "★ 按鈕：匯入 TXT 或 EPUB 書本。",
         "網址列右側數字：顯示進度，點擊可跳轉。",
@@ -444,6 +457,11 @@
       const chromePopupBtn = document.getElementById("chromePopupBtn");
       const stealthBgImage = document.getElementById("stealthBgImage");
       const fileInput = document.getElementById("fileInput");
+      const bgInput = document.getElementById("bgInput");
+      const chromeProfileBtn = document.getElementById("chromeProfileBtn");
+
+      let customBackgroundUrls = [];
+      let bgDbPromise = null;
 
       function getCurrentSentenceText() {
         if (state.manualMode) {
@@ -575,12 +593,91 @@
         openMemoPopup({ targetUrl: popupUrl.toString(), showBlockedAlert: true });
       }
 
+      function openBgDb() {
+        if (!bgDbPromise) {
+          bgDbPromise = new Promise((resolve, reject) => {
+            const request = indexedDB.open(BG_DB_NAME, 1);
+            request.onupgradeneeded = () => {
+              request.result.createObjectStore(BG_DB_STORE);
+            };
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+          });
+        }
+        return bgDbPromise;
+      }
+
+      function revokeCustomBackgroundUrls() {
+        customBackgroundUrls.forEach((url) => {
+          if (url) URL.revokeObjectURL(url);
+        });
+        customBackgroundUrls = [];
+      }
+
+      async function loadCustomBackgrounds() {
+        if (!window.indexedDB) return false;
+
+        try {
+          const db = await openBgDb();
+          const blobs = await Promise.all(
+            STEALTH_BACKGROUNDS.map((_, index) => new Promise((resolve) => {
+              const tx = db.transaction(BG_DB_STORE, "readonly");
+              const request = tx.objectStore(BG_DB_STORE).get(String(index));
+              request.onsuccess = () => resolve(request.result || null);
+              request.onerror = () => resolve(null);
+            }))
+          );
+
+          revokeCustomBackgroundUrls();
+          customBackgroundUrls = blobs.map((blob) => (
+            blob instanceof Blob ? URL.createObjectURL(blob) : null
+          ));
+          return customBackgroundUrls.some(Boolean);
+        } catch (error) {
+          return false;
+        }
+      }
+
+      async function saveCustomBackgrounds(files) {
+        const db = await openBgDb();
+        const tx = db.transaction(BG_DB_STORE, "readwrite");
+        const store = tx.objectStore(BG_DB_STORE);
+
+        files.forEach((file, index) => {
+          if (index < STEALTH_BACKGROUNDS.length) {
+            store.put(file, String(index));
+          }
+        });
+
+        await new Promise((resolve, reject) => {
+          tx.oncomplete = resolve;
+          tx.onerror = () => reject(tx.error);
+        });
+
+        await loadCustomBackgrounds();
+        state.stealthBgIndex = 0;
+        saveState();
+        updateStealthBackground();
+      }
+
+      function getBackgroundSource(index) {
+        return customBackgroundUrls[index] || STEALTH_BACKGROUNDS[index].src;
+      }
+
+      function getBackgroundLabel(index) {
+        return customBackgroundUrls[index]
+          ? `自訂 ${index + 1}`
+          : STEALTH_BACKGROUNDS[index].label;
+      }
+
       function updateStealthBackground() {
-        const bg = STEALTH_BACKGROUNDS[state.stealthBgIndex] || STEALTH_BACKGROUNDS[0];
-        stealthBgImage.src = bg.src;
-        stealthBgImage.alt = bg.label;
-        chromeRefresh.title = `切換偽裝背景（${bg.label}）`;
-        chromeRefresh.setAttribute("aria-label", `切換偽裝背景（${bg.label}）`);
+        const index = state.stealthBgIndex;
+        const bg = STEALTH_BACKGROUNDS[index] || STEALTH_BACKGROUNDS[0];
+        stealthBgImage.src = getBackgroundSource(index);
+        stealthBgImage.alt = getBackgroundLabel(index);
+        const label = getBackgroundLabel(index);
+        chromeRefresh.title = `切換偽裝背景（${label}）`;
+        chromeRefresh.setAttribute("aria-label", `切換偽裝背景（${label}）`);
       }
 
       function cycleStealthBackground() {
@@ -589,7 +686,8 @@
         updateStealthBackground();
       }
 
-      function bootstrapWindow() {
+      async function bootstrapWindow() {
+        await loadCustomBackgrounds();
         render();
         updateStealthBackground();
 
@@ -54338,7 +54436,40 @@
 
       chromeRefresh.addEventListener("click", (event) => {
         event.stopPropagation();
+        if (event.shiftKey) {
+          bgInput.click();
+          return;
+        }
         cycleStealthBackground();
+      });
+
+      chromeProfileBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        bgInput.click();
+      });
+
+      bgInput.addEventListener("change", async () => {
+        const files = Array.from(bgInput.files || []).filter((file) => file.type.startsWith("image/"));
+        bgInput.value = "";
+
+        if (!files.length) {
+          alert("請選擇 PNG、JPG 或 WEBP 圖片。");
+          return;
+        }
+
+        if (files.length < STEALTH_BACKGROUNDS.length) {
+          const proceed = confirm(
+            `你選了 ${files.length} 張圖。建議一次選 6 張（Outlook → Trello → Excel → PIM → Shopify → Colourliving 順序）。仍要繼續？`
+          );
+          if (!proceed) return;
+        }
+
+        try {
+          await saveCustomBackgrounds(files.slice(0, STEALTH_BACKGROUNDS.length));
+          alert(`已儲存 ${Math.min(files.length, STEALTH_BACKGROUNDS.length)} 張自訂偽裝背景。`);
+        } catch (error) {
+          alert("儲存背景失敗，圖片可能太大或瀏覽器不支援 IndexedDB。");
+        }
       });
 
       chromeProgress.addEventListener("click", (event) => {
@@ -54409,9 +54540,9 @@
       });
 
       loadState();
-      render();
-      updateStealthBackground();
-      window.addEventListener("load", bootstrapWindow);
+      window.addEventListener("load", () => {
+        bootstrapWindow();
+      });
       window.addEventListener("resize", () => {
         if (isCompactPopupContext()) {
           applyCompactWindowFrame();
