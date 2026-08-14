@@ -27,11 +27,12 @@ python3 -m http.server 8765
 
 ## 上傳自訂偽裝背景（唔使改 assets 資料夾）
 
-1. 準備好 6 張截圖（Outlook、Trello、Excel、PIM、Shopify、Colourliving）
+1. 準備好最多 **20 張**全螢幕截圖
 2. 開啟 reader 後，撳右上角紫色 **B** 掣
-3. 一次過選 6 張圖（順序同上）
-4. 圖片會儲存在瀏覽器 IndexedDB，重新整理後仍然有效
-5. 用 **↻** 掣切換背景
+3. 一次過選取圖片（按選取順序填入第 1 至第 N 格）
+4. 前 6 格若未上傳，會使用內建 Outlook / Trello / Excel / PIM / Shopify / Colourliving
+5. 第 7 至第 20 格需自行上傳
+6. 用 **↻** 掣切換背景（只會切換已有圖片嘅格位）
 
 快捷方式：按住 **Shift** 再撳 **↻** 亦可上傳背景。
 

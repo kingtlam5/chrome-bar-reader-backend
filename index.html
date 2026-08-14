@@ -371,7 +371,7 @@
             <svg viewBox="0 0 24 24"><path d="M11.99 18.54l-7.37-5.73C3 11.39 2 10.18 2 8.75 2 6.09 4.09 4 6.75 4h10.5c2.66 0 4.75 2.09 4.75 4.75 0 1.43-1 2.64-2.62 3.06l-7.37 5.73zM12 16.25l6.74-5.24c.85-.66 1.26-1.19 1.26-1.86 0-1.38-1.12-2.5-2.5-2.5H6.75c-1.38 0-2.5 1.12-2.5 2.5 0 .67.41 1.2 1.26 1.86L12 16.25z"/></svg>
           </button>
           <span class="chrome-toolbar-sep" aria-hidden="true"></span>
-          <button class="chrome-profile" id="chromeProfileBtn" type="button" title="上傳自訂偽裝背景（最多 6 張）" aria-label="上傳自訂偽裝背景">B</button>
+          <button class="chrome-profile" id="chromeProfileBtn" type="button" title="上傳自訂偽裝背景（最多 20 張）" aria-label="上傳自訂偽裝背景">B</button>
           <span class="chrome-menu-btn" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
           </span>
@@ -394,7 +394,8 @@
       const BG_DB_STORE = "backgrounds";
       const COMPACT_TOOLBAR_HEIGHT = 52;
       const BOSS_CHROME_URL = "https://chrome.google.com/webstore/detail/developer-tools";
-      const STEALTH_BACKGROUNDS = [
+      const STEALTH_BG_COUNT = 20;
+      const DEFAULT_STEALTH_BACKGROUNDS = [
         { src: "assets/stealth-outlook.png", label: "Outlook" },
         { src: "assets/stealth-trello.png", label: "Trello" },
         { src: "assets/stealth-excel.png", label: "Excel" },
@@ -414,7 +415,7 @@
         "簡轉繁：點 ⇄ 按鈕。",
         "老闆鍵：按空白鍵，切換假工作網址。",
         "↻ 按鈕：切換下方偽裝網頁背景。",
-        "B 按鈕：上傳自訂偽裝背景（一次選 6 張）。",
+        "B 按鈕：上傳自訂偽裝背景（最多 20 張，按選取順序填入）。",
         "⇄ 按鈕：簡體轉繁體。",
         "★ 按鈕：匯入 TXT 或 EPUB 書本。",
         "網址列右側數字：顯示進度，點擊可跳轉。",
@@ -605,13 +606,34 @@
         customBackgroundUrls = [];
       }
 
+      function getDefaultStealthBackground(index) {
+        return DEFAULT_STEALTH_BACKGROUNDS[index] || null;
+      }
+
+      function hasStealthBackground(index) {
+        return Boolean(customBackgroundUrls[index] || getDefaultStealthBackground(index)?.src);
+      }
+
+      function normalizeStealthBgIndex(index) {
+        return ((index % STEALTH_BG_COUNT) + STEALTH_BG_COUNT) % STEALTH_BG_COUNT;
+      }
+
+      function resolveStealthBgIndex(preferredIndex = state.stealthBgIndex) {
+        const start = normalizeStealthBgIndex(preferredIndex);
+        for (let offset = 0; offset < STEALTH_BG_COUNT; offset += 1) {
+          const index = (start + offset) % STEALTH_BG_COUNT;
+          if (hasStealthBackground(index)) return index;
+        }
+        return 0;
+      }
+
       async function loadCustomBackgrounds() {
         if (!window.indexedDB) return false;
 
         try {
           const db = await openBgDb();
           const blobs = await Promise.all(
-            STEALTH_BACKGROUNDS.map((_, index) => new Promise((resolve) => {
+            Array.from({ length: STEALTH_BG_COUNT }, (_, index) => new Promise((resolve) => {
               const tx = db.transaction(BG_DB_STORE, "readonly");
               const request = tx.objectStore(BG_DB_STORE).get(String(index));
               request.onsuccess = () => resolve(request.result || null);
@@ -635,7 +657,7 @@
         const store = tx.objectStore(BG_DB_STORE);
 
         files.forEach((file, index) => {
-          if (index < STEALTH_BACKGROUNDS.length) {
+          if (index < STEALTH_BG_COUNT) {
             store.put(file, String(index));
           }
         });
@@ -646,22 +668,24 @@
         });
 
         await loadCustomBackgrounds();
-        state.stealthBgIndex = 0;
+        state.stealthBgIndex = resolveStealthBgIndex(0);
         saveState();
         updateStealthBackground();
       }
 
       function getBackgroundSource(index) {
-        return customBackgroundUrls[index] || STEALTH_BACKGROUNDS[index].src;
+        if (customBackgroundUrls[index]) return customBackgroundUrls[index];
+        return getDefaultStealthBackground(index)?.src || null;
       }
 
       function getBackgroundLabel(index) {
-        return customBackgroundUrls[index]
-          ? `自訂 ${index + 1}`
-          : STEALTH_BACKGROUNDS[index].label;
+        if (customBackgroundUrls[index]) return `自訂 ${index + 1}`;
+        const fallback = getDefaultStealthBackground(index);
+        return fallback ? fallback.label : `背景 ${index + 1}`;
       }
 
       function updateStealthBackground() {
+        state.stealthBgIndex = resolveStealthBgIndex(state.stealthBgIndex);
         const index = state.stealthBgIndex;
         const src = getBackgroundSource(index);
         const label = getBackgroundLabel(index);
@@ -669,14 +693,21 @@
         stealthBg.style.backgroundPosition = "top center";
         stealthBg.style.backgroundRepeat = "no-repeat";
         stealthBg.style.backgroundSize = "100% auto";
-        chromeRefresh.title = `切換偽裝背景（${label}）`;
+        chromeRefresh.title = `切換偽裝背景（${label}，${index + 1}/${STEALTH_BG_COUNT}）`;
         chromeRefresh.setAttribute("aria-label", `切換偽裝背景（${label}）`);
       }
 
       function cycleStealthBackground() {
-        state.stealthBgIndex = (state.stealthBgIndex + 1) % STEALTH_BACKGROUNDS.length;
-        saveState();
-        updateStealthBackground();
+        let next = state.stealthBgIndex;
+        for (let step = 0; step < STEALTH_BG_COUNT; step += 1) {
+          next = (next + 1) % STEALTH_BG_COUNT;
+          if (hasStealthBackground(next)) {
+            state.stealthBgIndex = next;
+            saveState();
+            updateStealthBackground();
+            return;
+          }
+        }
       }
 
       async function bootstrapWindow() {
@@ -54123,8 +54154,7 @@
           state.fileName = typeof saved.n === "string" ? saved.n : "";
           state.translateTraditional = Boolean(saved.tr);
           if (Number.isFinite(saved.bg)) {
-            state.stealthBgIndex = ((saved.bg % STEALTH_BACKGROUNDS.length) + STEALTH_BACKGROUNDS.length)
-              % STEALTH_BACKGROUNDS.length;
+            state.stealthBgIndex = normalizeStealthBgIndex(Number(saved.bg) || 0);
           }
         } catch (error) {
           localStorage.removeItem(STORAGE_KEY);
@@ -54450,16 +54480,17 @@
           return;
         }
 
-        if (files.length < STEALTH_BACKGROUNDS.length) {
+        if (files.length < STEALTH_BG_COUNT) {
           const proceed = confirm(
-            `你選了 ${files.length} 張圖。建議一次選 6 張（Outlook → Trello → Excel → PIM → Shopify → Colourliving 順序）。仍要繼續？`
+            `你選了 ${files.length} 張圖，最多可儲存 ${STEALTH_BG_COUNT} 張。` +
+            "圖片會按選取順序填入第 1 至第 " + files.length + " 格；前 6 格預設為 Outlook、Trello、Excel、PIM、Shopify、Colourliving。仍要繼續？"
           );
           if (!proceed) return;
         }
 
         try {
-          await saveCustomBackgrounds(files.slice(0, STEALTH_BACKGROUNDS.length));
-          alert(`已儲存 ${Math.min(files.length, STEALTH_BACKGROUNDS.length)} 張自訂偽裝背景。`);
+          await saveCustomBackgrounds(files.slice(0, STEALTH_BG_COUNT));
+          alert(`已儲存 ${Math.min(files.length, STEALTH_BG_COUNT)} 張自訂偽裝背景。`);
         } catch (error) {
           alert("儲存背景失敗，圖片可能太大或瀏覽器不支援 IndexedDB。");
         }
