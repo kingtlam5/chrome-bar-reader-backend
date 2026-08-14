@@ -84,7 +84,7 @@
       flex: 1;
       min-height: 0;
       overflow: hidden;
-      background-color: #ececec;
+      background-color: #ffffff;
       background-repeat: no-repeat;
       background-position: top center;
       background-size: 100% auto;
@@ -395,14 +395,6 @@
       const COMPACT_TOOLBAR_HEIGHT = 52;
       const BOSS_CHROME_URL = "https://chrome.google.com/webstore/detail/developer-tools";
       const STEALTH_BG_COUNT = 20;
-      const DEFAULT_STEALTH_BACKGROUNDS = [
-        { src: "assets/stealth-outlook.png", label: "Outlook" },
-        { src: "assets/stealth-trello.png", label: "Trello" },
-        { src: "assets/stealth-excel.png", label: "Excel" },
-        { src: "assets/stealth-pim.png", label: "PIM" },
-        { src: "assets/stealth-shopify.png", label: "Shopify" },
-        { src: "assets/stealth-colourliving.png", label: "Colourliving" }
-      ];
       const USER_MANUAL = [
         "【Stealth Memo Reader 使用說明】",
         "這是一個偽裝成 Chrome 工具列的隱蔽閱讀器。",
@@ -606,12 +598,12 @@
         customBackgroundUrls = [];
       }
 
-      function getDefaultStealthBackground(index) {
-        return DEFAULT_STEALTH_BACKGROUNDS[index] || null;
+      function hasStealthBackground(index) {
+        return Boolean(customBackgroundUrls[index]);
       }
 
-      function hasStealthBackground(index) {
-        return Boolean(customBackgroundUrls[index] || getDefaultStealthBackground(index)?.src);
+      function hasAnyStealthBackground() {
+        return customBackgroundUrls.some(Boolean);
       }
 
       function normalizeStealthBgIndex(index) {
@@ -674,25 +666,26 @@
       }
 
       function getBackgroundSource(index) {
-        if (customBackgroundUrls[index]) return customBackgroundUrls[index];
-        return getDefaultStealthBackground(index)?.src || null;
+        return customBackgroundUrls[index] || null;
       }
 
       function getBackgroundLabel(index) {
-        if (customBackgroundUrls[index]) return `自訂 ${index + 1}`;
-        const fallback = getDefaultStealthBackground(index);
-        return fallback ? fallback.label : `背景 ${index + 1}`;
+        return `背景 ${index + 1}`;
       }
 
       function updateStealthBackground() {
+        if (!hasAnyStealthBackground()) {
+          stealthBg.style.backgroundImage = "none";
+          chromeRefresh.title = "切換偽裝背景（尚未上傳）";
+          chromeRefresh.setAttribute("aria-label", "切換偽裝背景（尚未上傳）");
+          return;
+        }
+
         state.stealthBgIndex = resolveStealthBgIndex(state.stealthBgIndex);
         const index = state.stealthBgIndex;
         const src = getBackgroundSource(index);
         const label = getBackgroundLabel(index);
         stealthBg.style.backgroundImage = src ? `url("${src}")` : "none";
-        stealthBg.style.backgroundPosition = "top center";
-        stealthBg.style.backgroundRepeat = "no-repeat";
-        stealthBg.style.backgroundSize = "100% auto";
         chromeRefresh.title = `切換偽裝背景（${label}，${index + 1}/${STEALTH_BG_COUNT}）`;
         chromeRefresh.setAttribute("aria-label", `切換偽裝背景（${label}）`);
       }
@@ -54483,7 +54476,7 @@
         if (files.length < STEALTH_BG_COUNT) {
           const proceed = confirm(
             `你選了 ${files.length} 張圖，最多可儲存 ${STEALTH_BG_COUNT} 張。` +
-            "圖片會按選取順序填入第 1 至第 " + files.length + " 格；前 6 格預設為 Outlook、Trello、Excel、PIM、Shopify、Colourliving。仍要繼續？"
+            "圖片會按選取順序填入第 1 至第 " + files.length + " 格。仍要繼續？"
           );
           if (!proceed) return;
         }
