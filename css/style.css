@@ -1,14 +1,25 @@
 :root {
   --stealth-ink: #07090d;
-  --stealth-panel: #11151c;
-  --stealth-line: rgba(255, 255, 255, 0.08);
+  --stealth-panel: #151a22;
+  --stealth-line: rgba(255, 255, 255, 0.1);
   --stealth-accent: #3b82f6;
   --stealth-accent-2: #22d3ee;
   --stealth-gold: #f5c16c;
+  --stealth-text: #e8eef8;
+  --stealth-muted: #c5d0e0;
 }
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--stealth-ink);
+  color-scheme: dark;
+}
+
+html,
+body {
+  min-height: 100%;
+  background-color: var(--stealth-ink) !important;
+  color: var(--stealth-text) !important;
 }
 
 body {
@@ -18,10 +29,10 @@ body {
 .noise-bg {
   background-color: var(--stealth-ink);
   background-image:
-    radial-gradient(1200px 500px at 80% -10%, rgba(59, 130, 246, 0.18), transparent 55%),
-    radial-gradient(900px 420px at 0% 10%, rgba(34, 211, 238, 0.08), transparent 50%),
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    radial-gradient(1200px 500px at 80% -10%, rgba(59, 130, 246, 0.22), transparent 55%),
+    radial-gradient(900px 420px at 0% 10%, rgba(34, 211, 238, 0.1), transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
   background-size: auto, auto, 48px 48px, 48px 48px;
 }
 
@@ -46,16 +57,19 @@ body {
 }
 
 .card-surface {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+  background-color: var(--stealth-panel);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .compare-bad {
-  background: linear-gradient(180deg, rgba(248, 113, 113, 0.08), rgba(255, 255, 255, 0.02));
+  background-color: #1c1518;
+  background-image: linear-gradient(180deg, rgba(248, 113, 113, 0.16), rgba(21, 26, 34, 0.92));
 }
 
 .compare-good {
-  background: linear-gradient(180deg, rgba(34, 211, 238, 0.1), rgba(255, 255, 255, 0.02));
+  background-color: #121c22;
+  background-image: linear-gradient(180deg, rgba(34, 211, 238, 0.16), rgba(21, 26, 34, 0.92));
 }
 
 .faq-item[open] .faq-chevron {

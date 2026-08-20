@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" class="bg-[#07090d]">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
   <title>Stealth Reader｜辦公室隱蔽閱讀器</title>
   <meta name="description" content="專為上班族打造的極致偽裝 Web 閱讀器。一鍵化身 Chrome 網址列與工作介面，再也不怕老細行過背後。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -16,8 +17,8 @@
           colors: {
             stealth: {
               ink: "#07090d",
-              panel: "#11151c",
-              muted: "#94a3b8",
+              panel: "#151a22",
+              muted: "#c5d0e0",
               accent: "#3b82f6",
               mint: "#22d3ee",
               gold: "#f5c16c"
@@ -30,16 +31,23 @@
       }
     };
   </script>
+  <style>
+    html, body {
+      background-color: #07090d !important;
+      color: #e8eef8 !important;
+      color-scheme: dark;
+    }
+  </style>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="noise-bg text-slate-100 antialiased">
+<body class="noise-bg min-h-screen bg-[#07090d] text-slate-200 antialiased">
   <header id="siteNav" class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition">
     <div class="mx-auto flex max-w-content items-center justify-between px-5 py-4">
       <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight">
         <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500 text-sm text-white">SR</span>
         <span>Stealth Reader</span>
       </a>
-      <nav class="hidden items-center gap-8 text-sm text-slate-300 md:flex">
+      <nav class="hidden items-center gap-8 text-sm text-slate-200 md:flex">
         <a href="#pain" class="hover:text-white">痛點對比</a>
         <a href="#features" class="hover:text-white">核心功能</a>
         <a href="#pricing" class="hover:text-white">價格方案</a>
@@ -76,7 +84,7 @@
           <h1 class="text-4xl font-extrabold leading-tight tracking-tight text-white md:text-5xl lg:text-[3.4rem]">
             在辦公室，安心享受屬於你的閱讀時光
           </h1>
-          <p class="mt-5 max-w-xl text-base leading-7 text-slate-300 md:text-lg">
+          <p class="mt-5 max-w-xl text-base leading-7 text-slate-200 md:text-lg">
             專為上班族打造的極致偽裝 Web 閱讀器。一鍵化身 Chrome 網址列與工作介面，再也不怕老細行過背後。
           </p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -87,7 +95,7 @@
               啟動 Demo 演示
             </button>
           </div>
-          <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400">
+          <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300">
             <span>免安裝</span>
             <span>無雙重網址列破綻</span>
             <span>一鍵秒切 Panic Button</span>
@@ -113,7 +121,7 @@
             <div class="relative rounded-xl border border-white/10 bg-black/30 p-4 text-sm text-slate-300">
               <p class="text-xs uppercase tracking-[0.2em] text-cyan-300">Boss 接近時</p>
               <p class="mt-2 font-medium text-white">空白鍵 → 毫秒切換假工作畫面</p>
-              <p class="mt-1 text-slate-400">網址列立刻變成 Chrome Web Store，背景化身工作介面。</p>
+              <p class="mt-1 text-slate-200">網址列立刻變成 Chrome Web Store，背景化身工作介面。</p>
             </div>
           </div>
         </div>
@@ -124,24 +132,24 @@
       <div class="mx-auto max-w-content">
         <div class="max-w-2xl">
           <p class="text-sm font-medium text-cyan-300">Pain Points & Solutions</p>
-          <h2 class="mt-2 text-3xl font-bold tracking-tight md:text-4xl">傳統睇書，一眼就被識穿</h2>
-          <p class="mt-3 text-slate-300">老細行過背後，電子書 App、雙重網址列、切換唔切都係破綻。Stealth Reader 專攻這三個死位。</p>
+          <h2 class="mt-2 text-3xl font-bold tracking-tight text-white md:text-4xl">傳統睇書，一眼就被識穿</h2>
+          <p class="mt-3 text-slate-200">老細行過背後，電子書 App、雙重網址列、切換唔切都係破綻。Stealth Reader 專攻這三個死位。</p>
         </div>
         <div class="mt-10 grid gap-6 md:grid-cols-2">
-          <article class="compare-bad card-surface rounded-2xl border border-red-400/20 p-6">
+          <article class="compare-bad card-surface rounded-2xl border border-red-400/20 bg-[#1c1518] p-6">
             <p class="text-sm font-semibold text-red-300">傳統睇書</p>
-            <h3 class="mt-2 text-xl font-semibold">破綻太多，心驚驚</h3>
-            <ul class="mt-5 space-y-3 text-sm text-slate-300">
+            <h3 class="mt-2 text-xl font-semibold text-white">破綻太多，心驚驚</h3>
+            <ul class="mt-5 space-y-3 text-sm text-slate-200">
               <li>電子書 App 圖示、閱讀版面一眼穿幫</li>
               <li>瀏覽器再套一層，出現雙重網址列</li>
               <li>老闆走近先切視窗，已經太遲</li>
               <li>要安裝 Extension，權限多、痕跡重</li>
             </ul>
           </article>
-          <article class="compare-good card-surface rounded-2xl border border-cyan-400/20 p-6">
+          <article class="compare-good card-surface rounded-2xl border border-cyan-400/20 bg-[#121c22] p-6">
             <p class="text-sm font-semibold text-cyan-300">Stealth Reader</p>
-            <h3 class="mt-2 text-xl font-semibold">看起來就係工作中</h3>
-            <ul class="mt-5 space-y-3 text-sm text-slate-300">
+            <h3 class="mt-2 text-xl font-semibold text-white">看起來就係工作中</h3>
+            <ul class="mt-5 space-y-3 text-sm text-slate-200">
               <li><strong class="text-white">免安裝</strong>：純網頁即開即用，唔留桌面痕跡</li>
               <li><strong class="text-white">無雙重網址列破綻</strong>：Popup 隱藏原生 Chrome 欄，只剩偽裝工具列</li>
               <li><strong class="text-white">一鍵秒切（Panic Button）</strong>：空白鍵即時變假工作畫面</li>
@@ -156,23 +164,23 @@
       <div class="mx-auto max-w-content">
         <div class="max-w-2xl">
           <p class="text-sm font-medium text-blue-300">Features</p>
-          <h2 class="mt-2 text-3xl font-bold tracking-tight md:text-4xl">核心功能，專為辦公室場景而設</h2>
+          <h2 class="mt-2 text-3xl font-bold tracking-tight text-white md:text-4xl">核心功能，專為辦公室場景而設</h2>
         </div>
         <div class="mt-10 grid gap-6 md:grid-cols-3">
-          <article class="card-surface rounded-2xl border border-white/10 p-6">
+          <article class="card-surface rounded-2xl border border-white/10 bg-[#151a22] p-6">
             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/15 text-blue-300">01</div>
-            <h3 class="mt-5 text-lg font-semibold">頂級偽裝 UI</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-300">Chrome Bar、VS Code、Excel 三種工作介面主題，句子直接寫進網址列，遠睇完全係日常操作。</p>
+            <h3 class="mt-5 text-lg font-semibold text-white">頂級偽裝 UI</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-200">Chrome Bar、VS Code、Excel 三種工作介面主題，句子直接寫進網址列，遠睇完全係日常操作。</p>
           </article>
-          <article class="card-surface rounded-2xl border border-white/10 p-6">
+          <article class="card-surface rounded-2xl border border-white/10 bg-[#151a22] p-6">
             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-400/15 text-cyan-300">02</div>
-            <h3 class="mt-5 text-lg font-semibold">毫秒級一鍵秒切防禦</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-300">Panic Button 一按，閱讀內容瞬間換成假網址與工作背景，唔使搵分頁、唔使縮窗。</p>
+            <h3 class="mt-5 text-lg font-semibold text-white">毫秒級一鍵秒切防禦</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-200">Panic Button 一按，閱讀內容瞬間換成假網址與工作背景，唔使搵分頁、唔使縮窗。</p>
           </article>
-          <article class="card-surface rounded-2xl border border-white/10 p-6">
+          <article class="card-surface rounded-2xl border border-white/10 bg-[#151a22] p-6">
             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-400/15 text-stealth-gold">03</div>
-            <h3 class="mt-5 text-lg font-semibold">雲端進度跨裝置同步</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-300">公司電腦睇到邊，返屋企手機、筆電接住睇。進度加密同步，唔使再靠記憶。</p>
+            <h3 class="mt-5 text-lg font-semibold text-white">雲端進度跨裝置同步</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-200">公司電腦睇到邊，返屋企手機、筆電接住睇。進度加密同步，唔使再靠記憶。</p>
           </article>
         </div>
       </div>
@@ -183,8 +191,8 @@
         <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
             <p class="text-sm font-medium text-amber-300">Pricing</p>
-            <h2 class="mt-2 text-3xl font-bold tracking-tight md:text-4xl">簡單定價，用完先升級</h2>
-            <p class="mt-3 text-slate-300">Free 已經可以開始隱蔽閱讀。需要完整偽裝與同步，再轉 Pro。</p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight text-white md:text-4xl">簡單定價，用完先升級</h2>
+            <p class="mt-3 text-slate-200">Free 已經可以開始隱蔽閱讀。需要完整偽裝與同步，再轉 Pro。</p>
           </div>
           <div class="flex rounded-full border border-white/10 bg-white/5 p-1">
             <button id="billingMonthly" type="button" class="billing-pill rounded-full px-4 py-2 text-sm" aria-pressed="true">按月 $2.99</button>
@@ -192,19 +200,19 @@
           </div>
         </div>
         <div class="mt-10 grid gap-6 md:grid-cols-2">
-          <article class="card-surface rounded-2xl border border-white/10 p-8">
-            <p class="text-sm text-slate-400">Free</p>
-            <p class="mt-3 text-4xl font-bold">$0</p>
-            <p class="mt-2 text-sm text-slate-400">永久免費，適合先試水溫</p>
-            <ul class="mt-6 space-y-3 text-sm text-slate-300">
+          <article class="card-surface rounded-2xl border border-white/10 bg-[#151a22] p-8">
+            <p class="text-sm text-slate-300">Free</p>
+            <p class="mt-3 text-4xl font-bold text-white">$0</p>
+            <p class="mt-2 text-sm text-slate-300">永久免費，適合先試水溫</p>
+            <ul class="mt-6 space-y-3 text-sm text-slate-200">
               <li>基本閱讀體驗</li>
               <li>TXT 檔案支援</li>
               <li>本機進度保存</li>
-              <li class="text-slate-500">不含完整偽裝主題 / Panic Button / 雲端同步</li>
+              <li class="text-slate-300">不含完整偽裝主題 / Panic Button / 雲端同步</li>
             </ul>
             <a href="dashboard.html" class="mt-8 inline-flex w-full items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-medium hover:bg-white/5">免費開始</a>
           </article>
-          <article class="rounded-2xl border border-blue-400/40 bg-gradient-to-b from-blue-500/15 to-white/5 p-8">
+          <article class="rounded-2xl border border-blue-400/40 bg-[#152033] bg-gradient-to-b from-blue-500/25 to-[#152033] p-8">
             <div class="flex items-center justify-between">
               <p class="text-sm text-blue-200">Pro</p>
               <span class="rounded-full bg-blue-500 px-2.5 py-1 text-xs font-medium">最受歡迎</span>
@@ -225,42 +233,42 @@
 
     <section id="faq" class="px-5 py-20">
       <div class="mx-auto max-w-content">
-        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">常見問題</h2>
-        <div class="mt-8 divide-y divide-white/10 rounded-2xl border border-white/10">
+        <h2 class="text-3xl font-bold tracking-tight text-white md:text-4xl">常見問題</h2>
+        <div class="mt-8 divide-y divide-white/10 rounded-2xl border border-white/10 bg-[#151a22]">
           <details class="faq-item group open:bg-white/[0.03] px-6 py-5" open>
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium">
               老細行過會唔會被發現？
               <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-400 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
             </summary>
-            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-300">閱讀內容顯示在偽裝網址列，畫面其餘部分可以是工作截圖。搭配 Panic Button，老闆走近只需一鍵，介面即變成假工作狀態。</p>
+            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-200">閱讀內容顯示在偽裝網址列，畫面其餘部分可以是工作截圖。搭配 Panic Button，老闆走近只需一鍵，介面即變成假工作狀態。</p>
           </details>
           <details class="faq-item px-6 py-5">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium">
               點解唔會出現雙重網址列？
               <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-400 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
             </summary>
-            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-300">會員中心會以無邊框 Popup（popup=1）開啟閱讀器，隱藏瀏覽器原生分頁欄與網址列，只留下我們繪製的 Chrome 工具列。</p>
+            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-200">會員中心會以無邊框 Popup（popup=1）開啟閱讀器，隱藏瀏覽器原生分頁欄與網址列，只留下我們繪製的 Chrome 工具列。</p>
           </details>
           <details class="faq-item px-6 py-5">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium">
               需要安裝 Extension 或下載 App 嗎？
               <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-400 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
             </summary>
-            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-300">唔需要。Stealth Reader 係純 Web 應用，用公司電腦瀏覽器即可，避免安裝紀錄同額外權限審查。</p>
+            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-200">唔需要。Stealth Reader 係純 Web 應用，用公司電腦瀏覽器即可，避免安裝紀錄同額外權限審查。</p>
           </details>
           <details class="faq-item px-6 py-5">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium">
               Free 同 Pro 有咩分別？
               <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-400 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
             </summary>
-            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-300">Free 支援基本閱讀與 TXT。Pro（$2.99/月或 $19.99 買斷）解鎖全部偽裝主題、Panic Button、雲端同步與進階快捷鍵。</p>
+            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-200">Free 支援基本閱讀與 TXT。Pro（$2.99/月或 $19.99 買斷）解鎖全部偽裝主題、Panic Button、雲端同步與進階快捷鍵。</p>
           </details>
           <details class="faq-item px-6 py-5">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium">
               書本內容會上傳到伺服器嗎？
               <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-400 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
             </summary>
-            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-300">Free 進度只存在你的瀏覽器。Pro 雲端同步只傳送閱讀進度與檔名，唔會把整本書明文存到我們伺服器。</p>
+            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-200">Free 進度只存在你的瀏覽器。Pro 雲端同步只傳送閱讀進度與檔名，唔會把整本書明文存到我們伺服器。</p>
           </details>
         </div>
       </div>
@@ -271,9 +279,9 @@
     <div class="mx-auto flex max-w-content flex-col gap-6 md:flex-row md:items-center md:justify-between">
       <div>
         <p class="font-semibold">Stealth Reader</p>
-        <p class="mt-1 text-sm text-slate-400">© 2026 Stealth Reader. All rights reserved.</p>
+        <p class="mt-1 text-sm text-slate-300">© 2026 Stealth Reader. All rights reserved.</p>
       </div>
-      <div class="flex flex-wrap gap-5 text-sm text-slate-400">
+      <div class="flex flex-wrap gap-5 text-sm text-slate-300">
         <a href="dashboard.html" class="hover:text-white">會員中心</a>
         <a href="reader.html" class="hover:text-white">閱讀器</a>
         <a href="#pricing" class="hover:text-white">價格</a>
