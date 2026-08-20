@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會員中心｜Stealth Reader</title>
+  <meta name="description" content="啟動隱蔽閱讀器、查看閱讀進度，並管理 Pro 專屬設定。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            stealth: {
+              ink: "#07090d",
+              panel: "#11151c",
+              gold: "#f5c16c"
+            }
+          },
+          maxWidth: {
+            content: "960px"
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="noise-bg min-h-screen text-slate-100 antialiased">
+  <header class="border-b border-white/10 bg-black/30">
+    <div class="mx-auto flex max-w-content items-center justify-between px-5 py-4">
+      <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500 text-sm text-white">SR</span>
+        <span>Stealth Reader</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <span class="rounded-full bg-gradient-to-r from-amber-300 to-yellow-500 px-2.5 py-1 text-xs font-semibold text-slate-900">Pro</span>
+        <div class="text-right">
+          <p class="text-sm font-medium">user@example.com</p>
+          <p class="text-xs text-slate-400">會員中心</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-content px-5 py-10">
+    <section class="card-surface rounded-3xl border border-white/10 p-8 text-center md:p-12">
+      <p class="text-sm text-cyan-300">獨立無邊框視窗</p>
+      <h1 class="mt-2 text-2xl font-bold md:text-3xl">準備進入隱蔽閱讀模式</h1>
+      <p class="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-300">
+        點擊後將以獨立無邊框視窗開啟閱讀器，自動隱藏瀏覽器原生網址列。
+      </p>
+      <button id="launchReaderBtn" type="button" class="launch-pulse glow-btn mt-8 inline-flex items-center justify-center rounded-full bg-blue-500 px-8 py-4 text-base font-semibold text-white hover:bg-blue-400">
+        🚀 啟動隱蔽閱讀器 (Launch Stealth Reader)
+      </button>
+    </section>
+
+    <section class="mt-8 grid gap-4 md:grid-cols-3">
+      <article class="card-surface rounded-2xl border border-white/10 p-5">
+        <p class="text-xs uppercase tracking-wider text-slate-400">當前書本</p>
+        <p id="currentBook" class="mt-2 text-lg font-semibold">《三體》</p>
+      </article>
+      <article class="card-surface rounded-2xl border border-white/10 p-5">
+        <p class="text-xs uppercase tracking-wider text-slate-400">當前進度</p>
+        <p id="currentProgress" class="mt-2 text-lg font-semibold">67%</p>
+        <div class="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
+          <div id="progressBar" class="progress-fill h-full rounded-full bg-blue-500" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="67"></div>
+        </div>
+      </article>
+      <article class="card-surface rounded-2xl border border-white/10 p-5">
+        <p class="text-xs uppercase tracking-wider text-slate-400">上次閱讀</p>
+        <p id="lastReadAt" class="mt-2 text-lg font-semibold">今天 14:32</p>
+      </article>
+    </section>
+
+    <section class="card-surface mt-8 rounded-2xl border border-white/10 p-6 md:p-8">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <p class="text-sm font-medium text-stealth-gold">Pro 專屬設定</p>
+          <h2 class="mt-1 text-xl font-semibold">Panic Button 快捷鍵</h2>
+          <p class="mt-2 text-sm text-slate-300">自訂老闆模式快捷鍵，預設為空白鍵。此功能僅限 Pro 會員。</p>
+        </div>
+        <span class="flex h-10 w-10 items-center justify-center rounded-full border border-amber-300/30 bg-amber-300/10 text-lg" aria-hidden="true">🔒</span>
+      </div>
+      <div class="relative mt-6">
+        <div class="grid gap-4 md:grid-cols-2">
+          <label class="block text-left text-sm text-slate-300">
+            快捷鍵
+            <input data-locked type="text" value="Space" readonly class="mt-2 w-full cursor-not-allowed rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none">
+          </label>
+          <label class="block text-left text-sm text-slate-300">
+            偽裝主題
+            <select data-locked disabled class="mt-2 w-full cursor-not-allowed rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none">
+              <option>Chrome Bar</option>
+              <option>VS Code</option>
+              <option>Excel</option>
+            </select>
+          </label>
+        </div>
+        <div class="lock-veil mt-4 flex items-center justify-between gap-4 rounded-xl border border-amber-300/20 bg-amber-300/10 px-4 py-3">
+          <p class="text-sm text-amber-100">🔒 此區塊已鎖定。升級 Pro 後即可自訂 Panic Button 與偽裝主題。</p>
+          <a href="index.html#pricing" class="shrink-0 rounded-full bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-400">查看方案</a>
+        </div>
+      </div>
+    </section>
+
+    <p class="mt-8 text-center text-sm text-slate-500">
+      <a href="index.html" class="hover:text-slate-300">← 返回產品官網</a>
+    </p>
+  </main>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
