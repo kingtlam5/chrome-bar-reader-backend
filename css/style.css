@@ -7,7 +7,14 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+}
+
+#pain,
+#features,
+#pricing,
+#faq {
+  scroll-margin-top: 88px;
 }
 
 body {

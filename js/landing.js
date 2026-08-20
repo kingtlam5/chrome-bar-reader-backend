@@ -74,4 +74,67 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
   setBilling("monthly");
+
+  let scrollAnimation = 0;
+
+  function prefersReducedMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function getHeaderOffset() {
+    return (nav?.offsetHeight || 72) + 12;
+  }
+
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function slideTo(target) {
+    const destination = Math.max(
+      0,
+      target.getBoundingClientRect().top + window.scrollY - getHeaderOffset()
+    );
+    const start = window.scrollY;
+    const distance = destination - start;
+
+    if (Math.abs(distance) < 2 || prefersReducedMotion()) {
+      window.scrollTo(0, destination);
+      return;
+    }
+
+    const duration = Math.min(1100, Math.max(600, Math.abs(distance) * 0.5));
+    const startTime = performance.now();
+    cancelAnimationFrame(scrollAnimation);
+
+    function tick(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      window.scrollTo(0, start + distance * easeInOutCubic(progress));
+      if (progress < 1) {
+        scrollAnimation = requestAnimationFrame(tick);
+      }
+    }
+
+    scrollAnimation = requestAnimationFrame(tick);
+  }
+
+  function closeMobileMenu() {
+    if (!mobileMenu || mobileMenu.classList.contains("hidden")) return;
+    mobileMenu.classList.add("hidden");
+    menuBtn?.setAttribute("aria-expanded", "false");
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const id = link.getAttribute("href")?.slice(1);
+      if (!id) return;
+
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      event.preventDefault();
+      closeMobileMenu();
+      slideTo(target);
+      history.pushState(null, "", `#${id}`);
+    });
+  });
 })();
