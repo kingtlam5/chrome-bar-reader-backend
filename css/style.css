@@ -11,8 +11,10 @@ html {
 }
 
 body {
-  font-family: "Inter", "Noto Sans TC", system-ui, -apple-system, sans-serif;
+  font-family: "Bricolage Grotesque", "Noto Sans TC", sans-serif;
 }
+
+/* English glyphs come from Bricolage Grotesque; Chinese falls back to Noto Sans TC. */
 
 .theme-light,
 .theme-light body {
@@ -99,9 +101,8 @@ body.theme-light {
 }
 
 .theme-light .nav-scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  border-bottom-color: #e2e8f0;
-  backdrop-filter: blur(16px);
+  background: #1e40af;
+  box-shadow: 0 10px 28px rgba(29, 78, 216, 0.28);
 }
 
 .theme-light .billing-pill[aria-pressed="true"] {

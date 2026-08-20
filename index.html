@@ -8,7 +8,7 @@
   <meta name="description" content="專為上班族打造的極致偽裝 Web 閱讀器。一鍵化身 Chrome 網址列與工作介面，再也不怕老細行過背後。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
     tailwind.config = {
@@ -22,6 +22,9 @@
               600: "#2563eb",
               700: "#1d4ed8"
             }
+          },
+          fontFamily: {
+            sans: ['"Bricolage Grotesque"', '"Noto Sans TC"', "sans-serif"]
           },
           maxWidth: {
             content: "1120px"
@@ -39,35 +42,35 @@
   </style>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="theme-light min-h-screen bg-white text-slate-900 antialiased">
-  <header id="siteNav" class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition">
+<body class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
+  <header id="siteNav" class="site-header fixed inset-x-0 top-0 z-50 bg-blue-700 text-white">
     <div class="mx-auto flex max-w-content items-center justify-between px-5 py-4">
-      <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight text-slate-900">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-sm text-white">SR</span>
+      <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight text-white">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-sm text-blue-700">SR</span>
         <span>Stealth Reader</span>
       </a>
-      <nav class="hidden items-center gap-8 text-sm text-slate-600 md:flex">
-        <a href="#pain" class="hover:text-blue-700">痛點對比</a>
-        <a href="#features" class="hover:text-blue-700">核心功能</a>
-        <a href="#pricing" class="hover:text-blue-700">價格方案</a>
-        <a href="#faq" class="hover:text-blue-700">常見問題</a>
+      <nav class="hidden items-center gap-8 text-sm text-blue-100 md:flex">
+        <a href="#pain" class="hover:text-white">痛點對比</a>
+        <a href="#features" class="hover:text-white">核心功能</a>
+        <a href="#pricing" class="hover:text-white">價格方案</a>
+        <a href="#faq" class="hover:text-white">常見問題</a>
       </nav>
       <div class="hidden items-center gap-3 md:flex">
-        <button type="button" data-demo-launch class="rounded-full border border-slate-300 px-4 py-2 text-sm text-slate-800 hover:border-blue-300 hover:text-blue-700">啟動 Demo</button>
-        <a href="dashboard.html" class="glow-btn rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500">免費試用 / 登入</a>
+        <button type="button" data-demo-launch class="rounded-full border border-white/40 px-4 py-2 text-sm text-white hover:bg-white/10">啟動 Demo</button>
+        <a href="dashboard.html" class="rounded-full bg-white px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-50">免費試用 / 登入</a>
       </div>
-      <button id="menuBtn" type="button" class="rounded-md border border-slate-300 p-2 text-slate-800 md:hidden" aria-expanded="false" aria-controls="mobileMenu" aria-label="開啟選單">
+      <button id="menuBtn" type="button" class="rounded-md border border-white/30 p-2 text-white md:hidden" aria-expanded="false" aria-controls="mobileMenu" aria-label="開啟選單">
         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
-    <div id="mobileMenu" class="hidden border-t border-slate-200 bg-white px-5 py-4 md:hidden">
-      <div class="flex flex-col gap-3 text-sm text-slate-700">
-        <a href="#pain">痛點對比</a>
-        <a href="#features">核心功能</a>
-        <a href="#pricing">價格方案</a>
-        <a href="#faq">常見問題</a>
-        <button type="button" data-demo-launch class="rounded-full border border-slate-300 px-4 py-2 text-left">啟動 Demo</button>
-        <a href="dashboard.html" class="rounded-full bg-blue-600 px-4 py-2 text-center font-medium text-white">免費試用 / 登入</a>
+    <div id="mobileMenu" class="hidden border-t border-white/15 bg-blue-800 px-5 py-4 md:hidden">
+      <div class="flex flex-col gap-3 text-sm text-blue-100">
+        <a href="#pain" class="hover:text-white">痛點對比</a>
+        <a href="#features" class="hover:text-white">核心功能</a>
+        <a href="#pricing" class="hover:text-white">價格方案</a>
+        <a href="#faq" class="hover:text-white">常見問題</a>
+        <button type="button" data-demo-launch class="rounded-full border border-white/30 px-4 py-2 text-left text-white">啟動 Demo</button>
+        <a href="dashboard.html" class="rounded-full bg-white px-4 py-2 text-center font-medium text-blue-700">免費試用 / 登入</a>
       </div>
     </div>
   </header>
