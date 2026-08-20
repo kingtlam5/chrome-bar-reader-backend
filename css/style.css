@@ -70,6 +70,10 @@ body.theme-light {
   background-color: #f0f7ff;
 }
 
+.feature-art {
+  max-height: 120px;
+}
+
 .faq-item[open] .faq-chevron {
   transform: rotate(180deg);
 }
