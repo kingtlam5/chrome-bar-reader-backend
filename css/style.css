@@ -86,17 +86,13 @@ body.theme-light {
 }
 
 .faq-panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.45s ease;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
 }
 
 .faq-item.is-open {
   background-color: #f8fafc;
-}
-
-.faq-item.is-open .faq-panel {
-  grid-template-rows: 1fr;
 }
 
 .faq-panel-inner {

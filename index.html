@@ -41,6 +41,74 @@
     }
   </style>
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    window.scrollToSection = function (id, event) {
+      if (event) event.preventDefault();
+      var target = document.getElementById(id);
+      if (!target) return false;
+
+      var header = document.getElementById("siteNav");
+      var offset = (header ? header.offsetHeight : 72) + 16;
+      var start = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var dest = Math.max(0, start + target.getBoundingClientRect().top - offset);
+      var change = dest - start;
+      var duration = 800;
+      var t0 = null;
+
+      if (Math.abs(change) < 2) return false;
+
+      var menu = document.getElementById("mobileMenu");
+      var menuBtn = document.getElementById("menuBtn");
+      if (menu && !menu.classList.contains("hidden")) {
+        menu.classList.add("hidden");
+        if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
+      }
+
+      function ease(t) {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      }
+
+      function step(now) {
+        if (!t0) t0 = now;
+        var p = Math.min(1, (now - t0) / duration);
+        var y = start + change * ease(p);
+        document.documentElement.scrollTop = y;
+        document.body.scrollTop = y;
+        window.scrollTo(0, y);
+        if (p < 1) window.requestAnimationFrame(step);
+      }
+
+      window.requestAnimationFrame(step);
+      return false;
+    };
+
+    window.toggleFaq = function (btn) {
+      var item = btn.closest(".faq-item");
+      if (!item) return;
+      var opening = !item.classList.contains("is-open");
+      var items = document.querySelectorAll(".faq-item");
+      for (var i = 0; i < items.length; i += 1) {
+        var other = items[i];
+        var panel = other.querySelector(".faq-panel");
+        var trigger = other.querySelector(".faq-trigger");
+        if (!panel) continue;
+        if (opening && other === item) {
+          other.classList.add("is-open");
+          if (trigger) trigger.setAttribute("aria-expanded", "true");
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        } else {
+          other.classList.remove("is-open");
+          if (trigger) trigger.setAttribute("aria-expanded", "false");
+          panel.style.maxHeight = "0px";
+        }
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var openPanel = document.querySelector(".faq-item.is-open .faq-panel");
+      if (openPanel) openPanel.style.maxHeight = openPanel.scrollHeight + "px";
+    });
+  </script>
 </head>
 <body class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header id="siteNav" class="site-header fixed inset-x-0 top-0 z-50 bg-blue-700 text-white">
@@ -50,10 +118,10 @@
         <span>Stealth Reader</span>
       </a>
       <nav class="hidden items-center gap-8 text-sm text-blue-100 md:flex">
-        <a href="#pain" class="hover:text-white">痛點對比</a>
-        <a href="#features" class="hover:text-white">核心功能</a>
-        <a href="#pricing" class="hover:text-white">價格方案</a>
-        <a href="#faq" class="hover:text-white">常見問題</a>
+        <a href="#pain" onclick="return scrollToSection('pain', event)" class="hover:text-white">痛點對比</a>
+        <a href="#features" onclick="return scrollToSection('features', event)" class="hover:text-white">核心功能</a>
+        <a href="#pricing" onclick="return scrollToSection('pricing', event)" class="hover:text-white">價格方案</a>
+        <a href="#faq" onclick="return scrollToSection('faq', event)" class="hover:text-white">常見問題</a>
       </nav>
       <div class="hidden items-center gap-3 md:flex">
         <button type="button" data-demo-launch class="rounded-full border border-white/40 px-4 py-2 text-sm text-white hover:bg-white/10">啟動 Demo</button>
@@ -65,10 +133,10 @@
     </div>
     <div id="mobileMenu" class="hidden border-t border-white/15 bg-blue-800 px-5 py-4 md:hidden">
       <div class="flex flex-col gap-3 text-sm text-blue-100">
-        <a href="#pain" class="hover:text-white">痛點對比</a>
-        <a href="#features" class="hover:text-white">核心功能</a>
-        <a href="#pricing" class="hover:text-white">價格方案</a>
-        <a href="#faq" class="hover:text-white">常見問題</a>
+        <a href="#pain" onclick="return scrollToSection('pain', event)" class="hover:text-white">痛點對比</a>
+        <a href="#features" onclick="return scrollToSection('features', event)" class="hover:text-white">核心功能</a>
+        <a href="#pricing" onclick="return scrollToSection('pricing', event)" class="hover:text-white">價格方案</a>
+        <a href="#faq" onclick="return scrollToSection('faq', event)" class="hover:text-white">常見問題</a>
         <button type="button" data-demo-launch class="rounded-full border border-white/30 px-4 py-2 text-left text-white">啟動 Demo</button>
         <a href="dashboard.html" class="rounded-full bg-white px-4 py-2 text-center font-medium text-blue-700">免費試用 / 登入</a>
       </div>
@@ -275,7 +343,7 @@
         <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">常見問題</h2>
         <div class="mt-8 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
           <div class="faq-item is-open px-6 py-5">
-            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" aria-expanded="true">
+            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" onclick="toggleFaq(this)" aria-expanded="true">
               老細行過會唔會被發現？
               <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
             </button>
@@ -286,7 +354,7 @@
             </div>
           </div>
           <div class="faq-item px-6 py-5">
-            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" aria-expanded="false">
+            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" onclick="toggleFaq(this)" aria-expanded="false">
               點解唔會出現雙重網址列？
               <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
             </button>
@@ -297,7 +365,7 @@
             </div>
           </div>
           <div class="faq-item px-6 py-5">
-            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" aria-expanded="false">
+            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" onclick="toggleFaq(this)" aria-expanded="false">
               需要安裝 Extension 或下載 App 嗎？
               <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
             </button>
@@ -308,7 +376,7 @@
             </div>
           </div>
           <div class="faq-item px-6 py-5">
-            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" aria-expanded="false">
+            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" onclick="toggleFaq(this)" aria-expanded="false">
               Free 同 Pro 有咩分別？
               <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
             </button>
@@ -319,7 +387,7 @@
             </div>
           </div>
           <div class="faq-item px-6 py-5">
-            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" aria-expanded="false">
+            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" onclick="toggleFaq(this)" aria-expanded="false">
               書本內容會上傳到伺服器嗎？
               <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
             </button>
@@ -343,12 +411,12 @@
       <div class="flex flex-wrap gap-5 text-sm text-slate-600">
         <a href="dashboard.html" class="hover:text-blue-700">會員中心</a>
         <a href="reader.html" class="hover:text-blue-700">閱讀器</a>
-        <a href="#pricing" class="hover:text-blue-700">價格</a>
-        <a href="#faq" class="hover:text-blue-700">FAQ</a>
+        <a href="#pricing" onclick="return scrollToSection('pricing', event)" class="hover:text-blue-700">價格</a>
+        <a href="#faq" onclick="return scrollToSection('faq', event)" class="hover:text-blue-700">FAQ</a>
       </div>
     </div>
   </footer>
 
-  <script src="js/landing.js?v=2"></script>
+  <script src="js/landing.js?v=3"></script>
 </body>
 </html>
