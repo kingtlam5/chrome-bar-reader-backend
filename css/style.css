@@ -14,7 +14,7 @@ html {
 #features,
 #pricing,
 #faq {
-  scroll-margin-top: 88px;
+  scroll-margin-top: 96px;
 }
 
 body {
@@ -81,12 +81,34 @@ body.theme-light {
   max-height: 120px;
 }
 
-.faq-item[open] .faq-chevron {
-  transform: rotate(180deg);
+.faq-trigger {
+  background: transparent;
 }
 
-.faq-item summary::-webkit-details-marker {
-  display: none;
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s ease;
+}
+
+.faq-item.is-open {
+  background-color: #f8fafc;
+}
+
+.faq-item.is-open .faq-panel {
+  grid-template-rows: 1fr;
+}
+
+.faq-panel-inner {
+  overflow: hidden;
+}
+
+.faq-chevron {
+  transition: transform 0.45s ease;
+}
+
+.faq-item.is-open .faq-chevron {
+  transform: rotate(180deg);
 }
 
 .launch-pulse {
@@ -161,7 +183,10 @@ body.theme-dark {
     scroll-behavior: auto;
   }
 
-  .launch-pulse {
+  .launch-pulse,
+  .faq-panel,
+  .faq-chevron {
     animation: none;
+    transition: none;
   }
 }

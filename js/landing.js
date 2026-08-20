@@ -12,9 +12,11 @@
   const proNote = document.getElementById("proNote");
   const faqItems = document.querySelectorAll(".faq-item");
 
+  let scrollAnimation = 0;
+
   function onScroll() {
     if (!nav) return;
-    nav.classList.toggle("nav-scrolled", window.scrollY > 12);
+    nav.classList.toggle("nav-scrolled", getScrollTop() > 12);
   }
 
   function launchDemo() {
@@ -49,40 +51,26 @@
     }
   }
 
-  menuBtn?.addEventListener("click", () => {
-    const expanded = menuBtn.getAttribute("aria-expanded") === "true";
-    menuBtn.setAttribute("aria-expanded", String(!expanded));
-    mobileMenu?.classList.toggle("hidden");
-  });
-
-  demoButtons.forEach((button) => {
-    button.addEventListener("click", launchDemo);
-  });
-
-  monthlyBtn?.addEventListener("click", () => setBilling("monthly"));
-  lifetimeBtn?.addEventListener("click", () => setBilling("lifetime"));
-
-  faqItems.forEach((item) => {
-    item.addEventListener("toggle", () => {
-      if (!item.open) return;
-      faqItems.forEach((other) => {
-        if (other !== item) other.open = false;
-      });
-    });
-  });
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-  setBilling("monthly");
-
-  let scrollAnimation = 0;
-
   function prefersReducedMotion() {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 
   function getHeaderOffset() {
-    return (nav?.offsetHeight || 72) + 12;
+    return (nav?.getBoundingClientRect().height || 72) + 16;
+  }
+
+  function getScrollTop() {
+    return window.pageYOffset
+      || document.documentElement.scrollTop
+      || document.body.scrollTop
+      || 0;
+  }
+
+  function setScrollTop(y) {
+    const top = Math.max(0, y);
+    document.documentElement.scrollTop = top;
+    document.body.scrollTop = top;
+    window.scrollTo(0, top);
   }
 
   function easeInOutCubic(t) {
@@ -90,25 +78,27 @@
   }
 
   function slideTo(target) {
+    const start = getScrollTop();
     const destination = Math.max(
       0,
-      target.getBoundingClientRect().top + window.scrollY - getHeaderOffset()
+      start + target.getBoundingClientRect().top - getHeaderOffset()
     );
-    const start = window.scrollY;
     const distance = destination - start;
 
-    if (Math.abs(distance) < 2 || prefersReducedMotion()) {
-      window.scrollTo(0, destination);
+    if (Math.abs(distance) < 1) return;
+
+    if (prefersReducedMotion()) {
+      setScrollTop(destination);
       return;
     }
 
-    const duration = Math.min(1100, Math.max(600, Math.abs(distance) * 0.5));
+    const duration = 900;
     const startTime = performance.now();
     cancelAnimationFrame(scrollAnimation);
 
     function tick(now) {
       const progress = Math.min((now - startTime) / duration, 1);
-      window.scrollTo(0, start + distance * easeInOutCubic(progress));
+      setScrollTop(start + distance * easeInOutCubic(progress));
       if (progress < 1) {
         scrollAnimation = requestAnimationFrame(tick);
       }
@@ -123,18 +113,52 @@
     menuBtn?.setAttribute("aria-expanded", "false");
   }
 
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const id = link.getAttribute("href")?.slice(1);
-      if (!id) return;
+  function setFaqOpen(item, open) {
+    item.classList.toggle("is-open", open);
+    const trigger = item.querySelector(".faq-trigger");
+    trigger?.setAttribute("aria-expanded", String(open));
+  }
 
-      const target = document.getElementById(id);
-      if (!target) return;
+  menuBtn?.addEventListener("click", () => {
+    const expanded = menuBtn.getAttribute("aria-expanded") === "true";
+    menuBtn.setAttribute("aria-expanded", String(!expanded));
+    mobileMenu?.classList.toggle("hidden");
+  });
 
-      event.preventDefault();
-      closeMobileMenu();
-      slideTo(target);
-      history.pushState(null, "", `#${id}`);
+  demoButtons.forEach((button) => {
+    button.addEventListener("click", launchDemo);
+  });
+
+  monthlyBtn?.addEventListener("click", () => setBilling("monthly"));
+  lifetimeBtn?.addEventListener("click", () => setBilling("lifetime"));
+
+  faqItems.forEach((item) => {
+    const trigger = item.querySelector(".faq-trigger");
+    trigger?.addEventListener("click", () => {
+      const willOpen = !item.classList.contains("is-open");
+      faqItems.forEach((other) => setFaqOpen(other, other === item && willOpen));
     });
   });
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link || link.getAttribute("href") === "#") return;
+
+    const id = decodeURIComponent(link.getAttribute("href").slice(1));
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    closeMobileMenu();
+    slideTo(target);
+    if (history.replaceState) {
+      history.replaceState(null, "", `#${id}`);
+    }
+  }, true);
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+  setBilling("monthly");
+  window.__stealthNavBound = true;
 })();

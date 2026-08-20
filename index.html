@@ -274,41 +274,61 @@
       <div class="mx-auto max-w-content">
         <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">常見問題</h2>
         <div class="mt-8 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
-          <details class="faq-item px-6 py-5 open:bg-slate-50" open>
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium text-slate-900">
+          <div class="faq-item is-open px-6 py-5">
+            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" aria-expanded="true">
               老細行過會唔會被發現？
-              <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
-            </summary>
-            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">閱讀內容顯示在偽裝網址列，畫面其餘部分可以是工作截圖。搭配 Panic Button，老闆走近只需一鍵，介面即變成假工作狀態。</p>
-          </details>
-          <details class="faq-item px-6 py-5 open:bg-slate-50">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium text-slate-900">
+              <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+            </button>
+            <div class="faq-panel">
+              <div class="faq-panel-inner">
+                <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">閱讀內容顯示在偽裝網址列，畫面其餘部分可以是工作截圖。搭配 Panic Button，老闆走近只需一鍵，介面即變成假工作狀態。</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item px-6 py-5">
+            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" aria-expanded="false">
               點解唔會出現雙重網址列？
-              <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
-            </summary>
-            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">會員中心會以無邊框 Popup（popup=1）開啟閱讀器，隱藏瀏覽器原生分頁欄與網址列，只留下我們繪製的 Chrome 工具列。</p>
-          </details>
-          <details class="faq-item px-6 py-5 open:bg-slate-50">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium text-slate-900">
+              <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+            </button>
+            <div class="faq-panel">
+              <div class="faq-panel-inner">
+                <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">會員中心會以無邊框 Popup（popup=1）開啟閱讀器，隱藏瀏覽器原生分頁欄與網址列，只留下我們繪製的 Chrome 工具列。</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item px-6 py-5">
+            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" aria-expanded="false">
               需要安裝 Extension 或下載 App 嗎？
-              <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
-            </summary>
-            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">唔需要。Stealth Reader 係純 Web 應用，用公司電腦瀏覽器即可，避免安裝紀錄同額外權限審查。</p>
-          </details>
-          <details class="faq-item px-6 py-5 open:bg-slate-50">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium text-slate-900">
+              <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+            </button>
+            <div class="faq-panel">
+              <div class="faq-panel-inner">
+                <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">唔需要。Stealth Reader 係純 Web 應用，用公司電腦瀏覽器即可，避免安裝紀錄同額外權限審查。</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item px-6 py-5">
+            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" aria-expanded="false">
               Free 同 Pro 有咩分別？
-              <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
-            </summary>
-            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">Free 支援基本閱讀與 TXT。Pro（$2.99/月或 $19.99 買斷）解鎖全部偽裝主題、Panic Button、雲端同步與進階快捷鍵。</p>
-          </details>
-          <details class="faq-item px-6 py-5 open:bg-slate-50">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-medium text-slate-900">
+              <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+            </button>
+            <div class="faq-panel">
+              <div class="faq-panel-inner">
+                <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">Free 支援基本閱讀與 TXT。Pro（$2.99/月或 $19.99 買斷）解鎖全部偽裝主題、Panic Button、雲端同步與進階快捷鍵。</p>
+              </div>
+            </div>
+          </div>
+          <div class="faq-item px-6 py-5">
+            <button type="button" class="faq-trigger flex w-full cursor-pointer items-center justify-between gap-4 text-left font-medium text-slate-900" aria-expanded="false">
               書本內容會上傳到伺服器嗎？
-              <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
-            </summary>
-            <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">Free 進度只存在你的瀏覽器。Pro 雲端同步只傳送閱讀進度與檔名，唔會把整本書明文存到我們伺服器。</p>
-          </details>
+              <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+            </button>
+            <div class="faq-panel">
+              <div class="faq-panel-inner">
+                <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">Free 進度只存在你的瀏覽器。Pro 雲端同步只傳送閱讀進度與檔名，唔會把整本書明文存到我們伺服器。</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -329,6 +349,6 @@
     </div>
   </footer>
 
-  <script src="js/landing.js"></script>
+  <script src="js/landing.js?v=2"></script>
 </body>
 </html>
