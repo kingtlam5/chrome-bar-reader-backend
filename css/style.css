@@ -85,25 +85,21 @@ body.theme-light {
   background: transparent;
 }
 
-.faq-panel {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
+.faq-item summary::-webkit-details-marker,
+.faq-item summary::marker {
+  display: none;
+  content: "";
 }
 
-.faq-item.is-open {
+.faq-item[open] {
   background-color: #f8fafc;
 }
 
-.faq-panel-inner {
-  overflow: hidden;
-}
-
 .faq-chevron {
-  transition: transform 0.45s ease;
+  transition: transform 0.4s ease;
 }
 
-.faq-item.is-open .faq-chevron {
+.faq-item[open] .faq-chevron {
   transform: rotate(180deg);
 }
 
@@ -180,7 +176,6 @@ body.theme-dark {
   }
 
   .launch-pulse,
-  .faq-panel,
   .faq-chevron {
     animation: none;
     transition: none;
