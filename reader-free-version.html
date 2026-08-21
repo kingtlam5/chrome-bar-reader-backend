@@ -396,8 +396,8 @@
         "匯入文件：點 ★ 按鈕。",
         "免費版支援 .txt（UTF-8、Big5、GB18030）。",
         "中文以句號（。）、英文以句點（.）分段。",
-        "下一句：按 R 鍵或 →。",
-        "上一句：按 Q 鍵或 ←。",
+        "下一句：按 →。",
+        "上一句：按 ←。",
         "↻ 按鈕：切換下方偽裝網頁背景。",
         "B 按鈕：上傳自訂偽裝背景（最多 2 張）。",
         "網址列右側數字：顯示進度，點擊可跳轉。",
@@ -1016,8 +1016,7 @@
       document.addEventListener("keydown", (event) => {
         if (document.activeElement === chromeJumpInput) return;
 
-        const navKeys = ["q", "Q", "r", "R", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
-        if (navKeys.includes(event.key)) {
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
           event.preventDefault();
         }
 
@@ -1026,14 +1025,10 @@
           return;
         }
 
-        if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+        if (event.key === "ArrowLeft") {
           prevSentence();
-        } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+        } else if (event.key === "ArrowRight") {
           nextSentence();
-        } else if (event.key === "r" || event.key === "R") {
-          nextSentence();
-        } else if (event.key === "q" || event.key === "Q") {
-          prevSentence();
         }
       });
 

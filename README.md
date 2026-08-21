@@ -15,6 +15,7 @@
 - `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
 - `js/login.js` — 登入表單
 - `js/dashboard.js` — 啟動閱讀視窗（Free 一般視窗 / Pro 無邊框 Popup）
+- `js/guide.js` — 使用說明頁 Free / Pro 切換
 - `css/style.css` — 共用樣式
 
 ## 本機測試
@@ -49,9 +50,9 @@ python3 -m http.server 8765
 |------|------|------|
 | 匯入 TXT | ★ 掣 | Free / Pro |
 | 匯入 EPUB | ★ 掣 | Pro |
-| 上一句 / 下一句 | Q / R 或 ← / →（Pro 可自訂） | Free / Pro |
+| 上一句 / 下一句 | Free：← / →；Pro：Q / R 或 ← / →（可自訂） | Free / Pro |
 | 簡轉繁 | ⇄ 掣（Pro 可自訂快捷鍵） | Pro |
 | Panic Button | 空白鍵（Pro 可自訂） | Pro |
-| 自訂快捷鍵 | B 掣右邊漢堡選單（設定會自動保存） | Pro |
+| 自訂快捷鍵 | B 掣右邊三條橫線選單（設定會自動保存） | Pro |
 | 上傳背景 | B 掣 | Free 2 張 / Pro 20 張 |
 | 切換背景 | ↻ 掣 | Free / Pro |
