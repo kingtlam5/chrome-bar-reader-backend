@@ -1,20 +1,34 @@
-# Stealth Memo Reader
+# Stealth Reader
 
-偽裝成 Chrome 工具列的隱蔽閱讀器。
+辦公室隱蔽閱讀器：偽裝成 Chrome 工具列的 Web 閱讀器。
 
-## 測試
+## 專案結構
 
-開啟：https://kingtlam5.github.io/memo-reader/
+- `index.html` — 產品官網 Landing Page
+- `login.html` — 會員登入
+- `free.html` — 免費會員中心
+- `dashboard.html` — Pro 付費會員中心
+- `reader.html` — 核心隱蔽閱讀器（登入後由會員中心啟動）
+- `js/landing.js` — Landing Page 互動
+- `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
+- `js/login.js` — 登入表單
+- `js/dashboard.js` — 啟動閱讀視窗（Free 一般視窗 / Pro 無邊框 Popup）
+- `css/style.css` — 共用樣式
 
-本機測試：
+## 本機測試
 
 ```bash
-git clone https://github.com/kingtlam5/memo-reader.git
-cd memo-reader
+git clone https://github.com/kingtlam5/chrome-bar-reader-saas.git
+cd chrome-bar-reader-saas
 python3 -m http.server 8765
 ```
 
-瀏覽器開：**http://localhost:8765/index.html**
+瀏覽器開：
+
+- 官網：http://localhost:8765/index.html
+- 登入：http://localhost:8765/login.html
+- 免費會員：http://localhost:8765/free.html
+- Pro 會員：http://localhost:8765/dashboard.html
 
 ## 上傳偽裝背景
 
