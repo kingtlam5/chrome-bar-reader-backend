@@ -10,12 +10,22 @@
   const lockedControls = document.querySelectorAll("[data-locked]");
 
   function launchReader() {
+    const mode = launchBtn?.dataset.launchMode || "pro";
+
+    if (mode === "basic") {
+      const win = window.open("/reader.html", "StealthReaderBasic");
+      if (!win) {
+        window.location.href = "reader.html";
+      }
+      return;
+    }
+
     const width = Math.floor(window.screen.width * 0.85);
     const height = Math.floor(window.screen.height * 0.85);
     const left = Math.floor((window.screen.width - width) / 2);
     const top = Math.floor((window.screen.height - height) / 2);
 
-    // 使用 popup=1 隱藏原生 Chrome 網址列與分頁欄
+    // Pro：popup=1 隱藏原生 Chrome 網址列與分頁欄
     const popup = window.open(
       "/reader.html",
       "StealthReaderWindow",
@@ -86,7 +96,7 @@
   lockedControls.forEach((control) => {
     control.addEventListener("click", (event) => {
       event.preventDefault();
-      alert("此為 Pro 專屬功能。升級後即可自訂 Panic Button 快捷鍵與更多偽裝主題。");
+      window.location.href = "index.html#pricing";
     });
   });
 

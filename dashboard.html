@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light">
-  <title>會員中心｜Stealth Reader</title>
-  <meta name="description" content="啟動隱蔽閱讀器、查看閱讀進度，並管理 Pro 專屬設定。">
+  <title>付費會員中心｜Stealth Reader</title>
+  <meta name="description" content="Pro 會員專用：啟動隱蔽閱讀器、查看閱讀進度，並管理偽裝設定。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
   </style>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
+<body data-require-plan="pro" class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header class="bg-blue-700 text-white">
     <div class="mx-auto flex max-w-content items-center justify-between px-5 py-4">
       <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight text-white">
@@ -51,10 +51,11 @@
       </a>
       <div class="flex items-center gap-4">
         <a href="index.html" class="hidden text-sm text-blue-100 hover:text-white sm:inline">產品官網</a>
+        <a href="login.html" data-logout class="hidden text-sm text-blue-100 hover:text-white sm:inline">登出</a>
         <span class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-blue-700">Pro</span>
         <div class="text-right">
-          <p class="text-sm font-medium text-white">user@example.com</p>
-          <p class="text-xs text-blue-100">會員中心</p>
+          <p data-member-email class="text-sm font-medium text-white">user@example.com</p>
+          <p class="text-xs text-blue-100">付費會員中心</p>
         </div>
       </div>
     </div>
@@ -99,29 +100,23 @@
           <div>
             <p class="text-sm font-medium text-blue-700">Pro 專屬設定</p>
             <h2 class="mt-1 text-xl font-semibold text-slate-900">Panic Button 快捷鍵</h2>
-            <p class="mt-2 text-sm text-slate-600">自訂老闆模式快捷鍵，預設為空白鍵。此功能僅限 Pro 會員。</p>
+            <p class="mt-2 text-sm text-slate-600">自訂老闆模式快捷鍵，預設為空白鍵。你的 Pro 帳號已解鎖全部偽裝主題。</p>
           </div>
-          <span class="flex h-10 w-10 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-lg" aria-hidden="true">🔒</span>
+          <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">已解鎖</span>
         </div>
-        <div class="relative mt-6">
-          <div class="grid gap-4 md:grid-cols-2">
-            <label class="block text-left text-sm text-slate-700">
-              快捷鍵
-              <input data-locked type="text" value="Space" readonly class="mt-2 w-full cursor-not-allowed rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none">
-            </label>
-            <label class="block text-left text-sm text-slate-700">
-              偽裝主題
-              <select data-locked disabled class="mt-2 w-full cursor-not-allowed rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none">
-                <option>Chrome Bar</option>
-                <option>VS Code</option>
-                <option>Excel</option>
-              </select>
-            </label>
-          </div>
-          <div class="lock-veil mt-4 flex flex-col items-start justify-between gap-3 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 sm:flex-row sm:items-center">
-            <p class="text-sm text-slate-700">🔒 此區塊已鎖定。升級 Pro 後即可自訂 Panic Button 與偽裝主題。</p>
-            <a href="index.html#pricing" class="shrink-0 rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500">查看方案</a>
-          </div>
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+          <label class="block text-left text-sm text-slate-700">
+            快捷鍵
+            <input type="text" value="Space" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+          </label>
+          <label class="block text-left text-sm text-slate-700">
+            偽裝主題
+            <select class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+              <option>Chrome Bar</option>
+              <option>VS Code</option>
+              <option>Excel</option>
+            </select>
+          </label>
         </div>
       </section>
     </div>
@@ -134,6 +129,7 @@
     </div>
   </footer>
 
+  <script src="js/auth.js"></script>
   <script src="js/dashboard.js"></script>
 </body>
 </html>

@@ -5,11 +5,6 @@
   const menuBtn = document.getElementById("menuBtn");
   const mobileMenu = document.getElementById("mobileMenu");
   const demoButtons = document.querySelectorAll("[data-demo-launch]");
-  const monthlyBtn = document.getElementById("billingMonthly");
-  const lifetimeBtn = document.getElementById("billingLifetime");
-  const proPrice = document.getElementById("proPrice");
-  const proPeriod = document.getElementById("proPeriod");
-  const proNote = document.getElementById("proNote");
 
   function onScroll() {
     if (!nav) return;
@@ -34,21 +29,6 @@
     }
   }
 
-  function setBilling(mode) {
-    const isLifetime = mode === "lifetime";
-
-    monthlyBtn?.setAttribute("aria-pressed", String(!isLifetime));
-    lifetimeBtn?.setAttribute("aria-pressed", String(isLifetime));
-
-    if (proPrice) proPrice.textContent = isLifetime ? "$19.99" : "$2.99";
-    if (proPeriod) proPeriod.textContent = isLifetime ? "一次買斷" : "/ 月";
-    if (proNote) {
-      proNote.textContent = isLifetime
-        ? "一次付款，永久解鎖所有偽裝主題、Panic Button 與雲端同步。"
-        : "可隨時改為 $19.99 買斷。解鎖所有偽裝主題、Panic Button 與雲端同步。";
-    }
-  }
-
   menuBtn?.addEventListener("click", () => {
     const expanded = menuBtn.getAttribute("aria-expanded") === "true";
     menuBtn.setAttribute("aria-expanded", String(!expanded));
@@ -59,10 +39,6 @@
     button.addEventListener("click", launchDemo);
   });
 
-  monthlyBtn?.addEventListener("click", () => setBilling("monthly"));
-  lifetimeBtn?.addEventListener("click", () => setBilling("lifetime"));
-
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
-  setBilling("monthly");
 })();

@@ -176,7 +176,7 @@
       </nav>
       <div class="hidden items-center gap-3 md:flex">
         <button type="button" data-demo-launch class="rounded-full border border-white/40 px-4 py-2 text-sm text-white hover:bg-white/10">啟動 Demo</button>
-        <a href="dashboard.html" class="rounded-full bg-white px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-50">免費試用 / 登入</a>
+        <a href="login.html" class="rounded-full bg-white px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-50">免費試用 / 登入</a>
       </div>
       <button id="menuBtn" type="button" class="rounded-md border border-white/30 p-2 text-white md:hidden" aria-expanded="false" aria-controls="mobileMenu" aria-label="開啟選單">
         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -189,7 +189,7 @@
         <a href="#pricing" onclick="return scrollToSection('pricing', event)" class="hover:text-white">價格方案</a>
         <a href="#faq" onclick="return scrollToSection('faq', event)" class="hover:text-white">常見問題</a>
         <button type="button" data-demo-launch class="rounded-full border border-white/30 px-4 py-2 text-left text-white">啟動 Demo</button>
-        <a href="dashboard.html" class="rounded-full bg-white px-4 py-2 text-center font-medium text-blue-700">免費試用 / 登入</a>
+        <a href="login.html" class="rounded-full bg-white px-4 py-2 text-center font-medium text-blue-700">免費試用 / 登入</a>
       </div>
     </div>
   </header>
@@ -209,7 +209,7 @@
             專為上班族打造的極致偽裝 Web 閱讀器。一鍵化身 Chrome 網址列與工作介面，再也不怕老細行過背後。
           </p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="dashboard.html" class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+            <a href="login.html" class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">
               免費試用 / 登入
             </a>
             <button type="button" data-demo-launch class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700">
@@ -346,16 +346,10 @@
 
     <section id="pricing" class="bg-slate-50 px-5 py-20">
       <div class="mx-auto max-w-content">
-        <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div>
-            <p class="text-sm font-medium text-blue-700">Pricing</p>
-            <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">簡單定價，用完先升級</h2>
-            <p class="mt-3 text-slate-600">Free 已經可以開始隱蔽閱讀。需要完整偽裝與同步，再轉 Pro。</p>
-          </div>
-          <div class="flex rounded-full border border-slate-200 bg-white p-1">
-            <button id="billingMonthly" type="button" class="billing-pill rounded-full px-4 py-2 text-sm text-slate-700" aria-pressed="true">按月 $2.99</button>
-            <button id="billingLifetime" type="button" class="billing-pill rounded-full px-4 py-2 text-sm text-slate-700" aria-pressed="false">買斷 $19.99</button>
-          </div>
+        <div>
+          <p class="text-sm font-medium text-blue-700">Pricing</p>
+          <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">簡單定價，用完先升級</h2>
+          <p class="mt-3 text-slate-600">Free 已經可以開始基本閱讀。需要完整偽裝與同步，再以 $2.99／月升級 Pro。</p>
         </div>
         <div class="mt-10 grid gap-6 md:grid-cols-2">
           <article class="card-surface rounded-2xl border border-slate-200 bg-white p-8">
@@ -368,22 +362,22 @@
               <li>本機進度保存</li>
               <li class="text-slate-500">不含完整偽裝主題 / Panic Button / 雲端同步</li>
             </ul>
-            <a href="dashboard.html" class="mt-8 inline-flex w-full items-center justify-center rounded-full border border-slate-300 px-5 py-3 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700">免費開始</a>
+            <a href="login.html" class="mt-8 inline-flex w-full items-center justify-center rounded-full border border-slate-300 px-5 py-3 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700">免費開始</a>
           </article>
           <article class="rounded-2xl border border-blue-200 bg-blue-600 p-8 text-white">
             <div class="flex items-center justify-between">
               <p class="text-sm text-blue-100">Pro</p>
               <span class="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-blue-700">最受歡迎</span>
             </div>
-            <p class="mt-3 text-4xl font-bold"><span id="proPrice">$2.99</span> <span id="proPeriod" class="text-lg font-medium text-blue-100">/ 月</span></p>
-            <p id="proNote" class="mt-2 text-sm text-blue-100">可隨時改為 $19.99 買斷。解鎖所有偽裝主題、Panic Button 與雲端同步。</p>
+            <p class="mt-3 text-4xl font-bold">$2.99 <span class="text-lg font-medium text-blue-100">/ 月</span></p>
+            <p class="mt-2 text-sm text-blue-100">解鎖所有偽裝主題、Panic Button 與雲端同步。</p>
             <ul class="mt-6 space-y-3 text-sm text-white">
               <li>解鎖所有偽裝主題（Chrome / VS Code / Excel）</li>
               <li>Panic Button 一鍵秒切</li>
               <li>雲端進度跨裝置同步</li>
               <li>EPUB 支援與自訂快捷鍵</li>
             </ul>
-            <a href="dashboard.html" class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-50">升級 Pro</a>
+            <a href="login.html" class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-50">升級 Pro</a>
           </article>
         </div>
       </div>
@@ -426,7 +420,7 @@
               <svg class="faq-chevron h-4 w-4 shrink-0 text-slate-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
             </summary>
             <div class="faq-content">
-              <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">Free 支援基本閱讀與 TXT。Pro（$2.99/月或 $19.99 買斷）解鎖全部偽裝主題、Panic Button、雲端同步與進階快捷鍵。</p>
+              <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">Free 支援基本閱讀與 TXT。Pro（$2.99／月）解鎖全部偽裝主題、Panic Button、雲端同步與進階快捷鍵。</p>
             </div>
           </details>
           <details class="faq-item px-6 py-5">
@@ -450,8 +444,7 @@
         <p class="mt-1 text-sm text-slate-500">© 2026 Stealth Reader. All rights reserved.</p>
       </div>
       <div class="flex flex-wrap gap-5 text-sm text-slate-600">
-        <a href="dashboard.html" class="hover:text-blue-700">會員中心</a>
-        <a href="reader.html" class="hover:text-blue-700">閱讀器</a>
+        <a href="login.html" class="hover:text-blue-700">登入</a>
         <a href="#pricing" onclick="return scrollToSection('pricing', event)" class="hover:text-blue-700">價格</a>
         <a href="#faq" onclick="return scrollToSection('faq', event)" class="hover:text-blue-700">FAQ</a>
       </div>

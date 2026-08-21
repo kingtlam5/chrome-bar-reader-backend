@@ -5,10 +5,14 @@
 ## 專案結構
 
 - `index.html` — 產品官網 Landing Page
-- `dashboard.html` — 會員中心（由此以 Popup 啟動閱讀器）
-- `reader.html` — 核心隱蔽閱讀器
+- `login.html` — 會員登入
+- `free.html` — 免費會員中心
+- `dashboard.html` — Pro 付費會員中心
+- `reader.html` — 核心隱蔽閱讀器（登入後由會員中心啟動）
 - `js/landing.js` — Landing Page 互動
-- `js/dashboard.js` — 啟動無邊框閱讀視窗
+- `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
+- `js/login.js` — 登入表單
+- `js/dashboard.js` — 啟動閱讀視窗（Free 一般視窗 / Pro 無邊框 Popup）
 - `css/style.css` — 共用樣式
 
 ## 本機測試
@@ -22,8 +26,9 @@ python3 -m http.server 8765
 瀏覽器開：
 
 - 官網：http://localhost:8765/index.html
-- 會員中心：http://localhost:8765/dashboard.html
-- 閱讀器：http://localhost:8765/reader.html
+- 登入：http://localhost:8765/login.html
+- 免費會員：http://localhost:8765/free.html
+- Pro 會員：http://localhost:8765/dashboard.html
 
 ## 上傳偽裝背景
 
