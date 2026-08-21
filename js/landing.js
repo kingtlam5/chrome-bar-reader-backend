@@ -19,13 +19,13 @@
     const top = Math.floor((window.screen.height - height) / 2);
 
     const popup = window.open(
-      "/reader.html",
+      "/reader-pro-version.html?popup=1",
       "StealthReaderWindow",
       `popup=1,width=${width},height=${height},top=${top},left=${left},scrollbars=no,resizable=yes`
     );
 
     if (!popup) {
-      window.location.href = "reader.html";
+      window.location.href = "reader-pro-version.html?popup=1";
     }
   }
 

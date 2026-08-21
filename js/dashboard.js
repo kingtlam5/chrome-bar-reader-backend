@@ -1,21 +1,23 @@
 (() => {
   "use strict";
 
-  const STORAGE_KEY = "stealthMemoReader.v1";
+  const STORAGE_KEY = document.body?.dataset.readerStorage || "stealthMemoReader.v1";
+  const SETTINGS_KEY = "stealthMemoReader.settings.v1";
   const launchBtn = document.getElementById("launchReaderBtn");
   const bookNameEl = document.getElementById("currentBook");
   const progressEl = document.getElementById("currentProgress");
   const progressBarEl = document.getElementById("progressBar");
   const lastReadEl = document.getElementById("lastReadAt");
   const lockedControls = document.querySelectorAll("[data-locked]");
+  const panicKeyInput = document.getElementById("panicKeyInput");
 
   function launchReader() {
     const mode = launchBtn?.dataset.launchMode || "pro";
 
     if (mode === "basic") {
-      const win = window.open("/reader.html", "StealthReaderBasic");
+      const win = window.open("/reader-free-version.html", "StealthReaderBasic");
       if (!win) {
-        window.location.href = "reader.html";
+        window.location.href = "reader-free-version.html";
       }
       return;
     }
@@ -27,7 +29,7 @@
 
     // Pro：popup=1 隱藏原生 Chrome 網址列與分頁欄
     const popup = window.open(
-      "/reader.html",
+      "/reader-pro-version.html?popup=1",
       "StealthReaderWindow",
       `popup=1,width=${width},height=${height},top=${top},left=${left},scrollbars=no,resizable=yes`
     );
@@ -52,6 +54,24 @@
     return `${date.getMonth() + 1}/${date.getDate()} ${hours}:${minutes}`;
   }
 
+  function formatKeyLabel(key) {
+    if (!key || key === " " || key === "Space" || key === "Spacebar") return "Space";
+    if (key === "Escape") return "Esc";
+    return key.length === 1 ? key.toUpperCase() : key;
+  }
+
+  function loadSettings() {
+    try {
+      return JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}") || {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function saveSettings(next) {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(next));
+  }
+
   function loadReadingCard() {
     const fallback = {
       fileName: "《三體》",
@@ -72,7 +92,7 @@
       return {
         fileName: saved.n || "未命名文件",
         percent,
-        lastRead: formatLastRead(Date.now())
+        lastRead: formatLastRead(saved.syncedAt || Date.now())
       };
     } catch (error) {
       return fallback;
@@ -91,6 +111,12 @@
     }
   }
 
+  function renderPanicKey() {
+    if (!panicKeyInput) return;
+    const settings = loadSettings();
+    panicKeyInput.value = formatKeyLabel(settings.panicKey || " ");
+  }
+
   launchBtn?.addEventListener("click", launchReader);
 
   lockedControls.forEach((control) => {
@@ -100,5 +126,14 @@
     });
   });
 
+  panicKeyInput?.addEventListener("keydown", (event) => {
+    event.preventDefault();
+    const settings = loadSettings();
+    settings.panicKey = event.key;
+    saveSettings(settings);
+    panicKeyInput.value = formatKeyLabel(event.key);
+  });
+
   renderReadingCard();
+  renderPanicKey();
 })();
