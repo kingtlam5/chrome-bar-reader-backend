@@ -33,7 +33,7 @@
       return;
     }
     if (auth.plan !== required) {
-      window.location.replace(auth.plan === "pro" ? "dashboard.html" : "free.html");
+      window.location.replace(auth.plan === "pro" ? "dashboard-pro-version.html" : "dashboard-free-version.html");
       return;
     }
   }

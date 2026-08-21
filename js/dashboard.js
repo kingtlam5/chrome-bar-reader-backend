@@ -11,13 +11,22 @@
   const lockedControls = document.querySelectorAll("[data-locked]");
   const panicKeyInput = document.getElementById("panicKeyInput");
 
+  function readerUrl(fileName) {
+    try {
+      return new URL(fileName, window.location.href).href;
+    } catch (error) {
+      return fileName;
+    }
+  }
+
   function launchReader() {
     const mode = launchBtn?.dataset.launchMode || "pro";
 
     if (mode === "basic") {
-      const win = window.open("/reader-free-version.html", "StealthReaderBasic");
+      const url = readerUrl("reader-free-version.html");
+      const win = window.open(url, "_blank");
       if (!win) {
-        window.location.href = "reader-free-version.html";
+        window.location.assign(url);
       }
       return;
     }
@@ -26,10 +35,10 @@
     const height = Math.floor(window.screen.height * 0.85);
     const left = Math.floor((window.screen.width - width) / 2);
     const top = Math.floor((window.screen.height - height) / 2);
+    const url = readerUrl("reader-pro-version.html?popup=1");
 
-    // Pro：popup=1 隱藏原生 Chrome 網址列與分頁欄
     const popup = window.open(
-      "/reader-pro-version.html?popup=1",
+      url,
       "StealthReaderWindow",
       `popup=1,width=${width},height=${height},top=${top},left=${left},scrollbars=no,resizable=yes`
     );
@@ -114,7 +123,8 @@
   function renderPanicKey() {
     if (!panicKeyInput) return;
     const settings = loadSettings();
-    panicKeyInput.value = formatKeyLabel(settings.panicKey || " ");
+    const panic = settings.shortcuts?.panic || settings.panicKey || " ";
+    panicKeyInput.value = formatKeyLabel(panic);
   }
 
   launchBtn?.addEventListener("click", launchReader);
@@ -130,6 +140,7 @@
     event.preventDefault();
     const settings = loadSettings();
     settings.panicKey = event.key;
+    settings.shortcuts = { ...(settings.shortcuts || {}), panic: event.key };
     saveSettings(settings);
     panicKeyInput.value = formatKeyLabel(event.key);
   });

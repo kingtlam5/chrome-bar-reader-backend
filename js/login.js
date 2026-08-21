@@ -14,7 +14,7 @@
   form?.addEventListener("submit", (event) => {
     event.preventDefault();
     window.StealthAuth?.set({ email: emailFromForm(), plan: "free" });
-    window.location.href = "free.html";
+    window.location.href = "dashboard-free-version.html";
   });
 
   registerLink?.addEventListener("click", () => {
