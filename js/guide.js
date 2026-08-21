@@ -9,13 +9,14 @@
 
   function currentPlan() {
     const hash = (window.location.hash || "").replace("#", "").toLowerCase();
-    if (hash === "pro" || hash === "free") return hash;
+    if (hash === "free") return "free";
+    if (hash === "pro" || hash === "chrome-app-shortcut") return "pro";
     const params = new URLSearchParams(window.location.search);
     const plan = (params.get("plan") || "").toLowerCase();
     return plan === "pro" ? "pro" : "free";
   }
 
-  function showPlan(plan) {
+  function showPlan(plan, scrollTarget) {
     const next = plan === "pro" ? "pro" : "free";
     Object.entries(panels).forEach(([name, panel]) => {
       panel?.classList.toggle("hidden", name !== next);
@@ -24,8 +25,12 @@
       const active = button.getAttribute("data-guide-plan") === next;
       button.setAttribute("aria-pressed", String(active));
     });
-    if (window.location.hash.replace("#", "") !== next) {
+    const hash = (window.location.hash || "").replace("#", "");
+    if (!scrollTarget && hash !== next) {
       history.replaceState(null, "", `#${next}`);
+    }
+    if (scrollTarget) {
+      document.getElementById(scrollTarget)?.scrollIntoView({ block: "start" });
     }
   }
 
@@ -35,6 +40,12 @@
     });
   });
 
-  window.addEventListener("hashchange", () => showPlan(currentPlan()));
-  showPlan(currentPlan());
+  function applyHash() {
+    const hash = (window.location.hash || "").replace("#", "").toLowerCase();
+    const plan = currentPlan();
+    showPlan(plan, hash === "chrome-app-shortcut" ? "chrome-app-shortcut" : "");
+  }
+
+  window.addEventListener("hashchange", applyHash);
+  applyHash();
 })();
