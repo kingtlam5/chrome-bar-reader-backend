@@ -1,0 +1,30 @@
+{
+  "name": "Stealth Reader Pro",
+  "short_name": "Stealth Reader",
+  "description": "偽裝成 Chrome 工具列的隱蔽閱讀器",
+  "start_url": "./reader-pro-version.html?popup=1",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#1d4ed8",
+  "lang": "zh-Hant",
+  "launch_handler": {
+    "client_mode": "navigate-new"
+  },
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

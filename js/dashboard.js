@@ -19,6 +19,28 @@
     }
   }
 
+  function openProReaderWindow(url) {
+    const width = Math.floor(window.screen.availWidth * 0.92);
+    const height = Math.floor(window.screen.availHeight * 0.92);
+    const left = Math.floor((window.screen.availWidth - width) / 2) + (window.screen.availLeft || 0);
+    const top = Math.floor((window.screen.availHeight - height) / 2) + (window.screen.availTop || 0);
+    const features = [
+      "popup=yes",
+      "location=no",
+      "toolbar=no",
+      "menubar=no",
+      "status=no",
+      "scrollbars=no",
+      "resizable=yes",
+      `width=${width}`,
+      `height=${height}`,
+      `left=${left}`,
+      `top=${top}`
+    ].join(",");
+
+    return window.open(url, "StealthReaderWindow", features);
+  }
+
   function launchReader() {
     const mode = launchBtn?.dataset.launchMode || "pro";
 
@@ -31,20 +53,44 @@
       return;
     }
 
-    const width = Math.floor(window.screen.width * 0.85);
-    const height = Math.floor(window.screen.height * 0.85);
-    const left = Math.floor((window.screen.width - width) / 2);
-    const top = Math.floor((window.screen.height - height) / 2);
     const url = readerUrl("reader-pro-version.html?popup=1");
-
-    const popup = window.open(
-      url,
-      "StealthReaderWindow",
-      `popup=1,width=${width},height=${height},top=${top},left=${left},scrollbars=no,resizable=yes`
-    );
-
+    const popup = openProReaderWindow(url);
     if (!popup) {
       alert("無法開啟彈出視窗。請允許此網站的彈出視窗後再試。");
+    }
+  }
+
+  function syncInstallUi() {
+    const installBtn = document.getElementById("installAppBtn");
+    const hint = document.getElementById("launchHint");
+    const pwa = window.StealthPwa;
+    if (!installBtn) return;
+
+    if (pwa?.isStandalone()) {
+      installBtn.hidden = true;
+      if (hint) {
+        hint.textContent = "目前已在獨立應用視窗中。按啟動即可開啟無網址列的閱讀器。";
+      }
+      return;
+    }
+
+    if (pwa?.isInstalled()) {
+      installBtn.hidden = true;
+      if (hint) {
+        hint.textContent = "應用程式已安裝。按啟動會以獨立視窗開啟，效果等同 Chrome --app=。";
+      }
+      return;
+    }
+
+    installBtn.hidden = !window.StealthPwaInstall;
+  }
+
+  async function installApp() {
+    const pwa = window.StealthPwa;
+    if (!pwa?.promptInstall) return;
+    const accepted = await pwa.promptInstall();
+    if (accepted) {
+      syncInstallUi();
     }
   }
 
@@ -128,6 +174,10 @@
   }
 
   launchBtn?.addEventListener("click", launchReader);
+  document.getElementById("installAppBtn")?.addEventListener("click", installApp);
+  window.addEventListener("stealth-pwa-install-ready", syncInstallUi);
+  window.addEventListener("stealth-pwa-installed", syncInstallUi);
+  syncInstallUi();
 
   lockedControls.forEach((control) => {
     control.addEventListener("click", (event) => {
