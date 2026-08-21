@@ -33,6 +33,86 @@
       color: #0f172a;
       color-scheme: light;
     }
+
+    .guide-chrome-cluster {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      vertical-align: middle;
+    }
+
+    .guide-chrome-nav,
+    .guide-chrome-omnibox-btn,
+    .guide-chrome-profile {
+      display: inline-flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .guide-chrome-nav {
+      width: 36px;
+      height: 36px;
+      color: #5f6368;
+    }
+
+    .guide-chrome-nav svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .guide-chrome-nav svg.icon-stroke {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+    }
+
+    .guide-chrome-omnibox-btn {
+      width: 28px;
+      height: 28px;
+      color: #5f6368;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .guide-chrome-omnibox-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .guide-chrome-profile {
+      width: 28px;
+      height: 28px;
+      background: #8e24aa;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 28px;
+    }
+
+    .guide-chrome-progress {
+      display: inline-flex;
+      align-items: center;
+      padding-left: 10px;
+      border-left: 1px solid #dadce0;
+      color: #5f6368;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 12px;
+      line-height: 28px;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -85,24 +165,52 @@
                 </tr>
               </thead>
               <tbody class="text-slate-700">
-                <tr class="border-b border-slate-100"><td class="py-3 pr-4">← / →</td><td class="py-3">上一句 / 下一句</td></tr>
-                <tr class="border-b border-slate-100"><td class="py-3 pr-4">↻</td><td class="py-3">切換已上傳嘅偽裝背景</td></tr>
-                <tr class="border-b border-slate-100"><td class="py-3 pr-4">★</td><td class="py-3">匯入 TXT 書本</td></tr>
-                <tr class="border-b border-slate-100"><td class="py-3 pr-4">網址列右側數字</td><td class="py-3">顯示進度，撳下去可以跳轉句子</td></tr>
-                <tr><td class="py-3 pr-4">紫色 B</td><td class="py-3">上傳偽裝背景（免費版最多 2 張）</td></tr>
+                <tr class="border-b border-slate-100">
+                  <td class="py-3 pr-4">
+                    <span class="sr-only">上一句／下一句</span>
+                    <span class="guide-chrome-cluster" aria-hidden="true">
+                      <span class="guide-chrome-nav" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6v12z"/></svg>
+                      </span>
+                      <span class="guide-chrome-nav" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6v12z"/></svg>
+                      </span>
+                    </span>
+                  </td>
+                  <td class="py-3">上一句 / 下一句（鍵盤只可以用 ← / →）</td>
+                </tr>
+                <tr class="border-b border-slate-100">
+                  <td class="py-3 pr-4">
+                    <span class="sr-only">切換偽裝背景</span>
+                    <span class="guide-chrome-nav" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08a5.99 5.99 0 01-5.65 4c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                    </span>
+                  </td>
+                  <td class="py-3">切換已上傳嘅偽裝背景</td>
+                </tr>
+                <tr class="border-b border-slate-100">
+                  <td class="py-3 pr-4">
+                    <span class="guide-chrome-omnibox-btn" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </span>
+                  </td>
+                  <td class="py-3">匯入 TXT 書本</td>
+                </tr>
+                <tr class="border-b border-slate-100">
+                  <td class="py-3 pr-4">
+                    <span class="guide-chrome-progress" aria-hidden="true">12/48</span>
+                  </td>
+                  <td class="py-3">顯示進度，撳下去可以跳轉句子</td>
+                </tr>
+                <tr>
+                  <td class="py-3 pr-4">
+                    <span class="guide-chrome-profile" aria-hidden="true">B</span>
+                  </td>
+                  <td class="py-3">上傳偽裝背景（免費版最多 2 張）</td>
+                </tr>
               </tbody>
             </table>
           </div>
-        </article>
-
-        <article class="card-surface rounded-3xl border border-slate-200 p-6 md:p-8">
-          <h2 class="text-xl font-semibold text-slate-900">閱讀同背景</h2>
-          <ul class="mt-4 space-y-2 text-sm leading-6 text-slate-700">
-            <li>鍵盤：<strong>Q</strong> 上一句，<strong>R</strong> 下一句；方向鍵 ← → ↑ ↓ 都可以。</li>
-            <li>只支援 <strong>.txt</strong>。中文以「。」分段，英文以「.」分段。</li>
-            <li>上傳 PNG / JPG / WEBP 工作截圖做背景。未上傳時下方係空白。</li>
-            <li>Shift + ↻ 都可以開啟上傳。進度只保存在呢部瀏覽器。</li>
-          </ul>
         </article>
       </section>
 
@@ -128,25 +236,60 @@
                 </tr>
               </thead>
               <tbody class="text-slate-700">
-                <tr class="border-b border-slate-100"><td class="py-3 pr-4">← / →</td><td class="py-3">上一句 / 下一句</td></tr>
-                <tr class="border-b border-slate-100"><td class="py-3 pr-4">↻</td><td class="py-3">切換偽裝背景（最多 20 張）</td></tr>
-                <tr class="border-b border-slate-100"><td class="py-3 pr-4">⇄</td><td class="py-3">簡體轉繁體</td></tr>
-                <tr class="border-b border-slate-100"><td class="py-3 pr-4">★</td><td class="py-3">匯入 TXT 或 EPUB</td></tr>
-                <tr class="border-b border-slate-100"><td class="py-3 pr-4">紫色 B</td><td class="py-3">上傳偽裝背景</td></tr>
-                <tr><td class="py-3 pr-4">漢堡選單（B 右邊）</td><td class="py-3">自訂快捷鍵同 Panic 顯示文字</td></tr>
+                <tr class="border-b border-slate-100">
+                  <td class="py-3 pr-4">
+                    <span class="sr-only">上一句／下一句</span>
+                    <span class="guide-chrome-cluster" aria-hidden="true">
+                      <span class="guide-chrome-nav" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6v12z"/></svg>
+                      </span>
+                      <span class="guide-chrome-nav" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6v12z"/></svg>
+                      </span>
+                    </span>
+                  </td>
+                  <td class="py-3">上一句 / 下一句</td>
+                </tr>
+                <tr class="border-b border-slate-100">
+                  <td class="py-3 pr-4">
+                    <span class="sr-only">切換偽裝背景</span>
+                    <span class="guide-chrome-nav" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08a5.99 5.99 0 01-5.65 4c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                    </span>
+                  </td>
+                  <td class="py-3">切換偽裝背景（最多 20 張）</td>
+                </tr>
+                <tr class="border-b border-slate-100">
+                  <td class="py-3 pr-4">
+                    <span class="guide-chrome-omnibox-btn" aria-hidden="true">⇄</span>
+                  </td>
+                  <td class="py-3">簡體轉繁體</td>
+                </tr>
+                <tr class="border-b border-slate-100">
+                  <td class="py-3 pr-4">
+                    <span class="guide-chrome-omnibox-btn" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </span>
+                  </td>
+                  <td class="py-3">匯入 TXT 或 EPUB</td>
+                </tr>
+                <tr class="border-b border-slate-100">
+                  <td class="py-3 pr-4">
+                    <span class="guide-chrome-profile" aria-hidden="true">B</span>
+                  </td>
+                  <td class="py-3">上傳偽裝背景</td>
+                </tr>
+                <tr>
+                  <td class="py-3 pr-4">
+                    <span class="guide-chrome-nav" aria-hidden="true">
+                      <svg class="icon-stroke" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                    </span>
+                  </td>
+                  <td class="py-3">自訂快捷鍵同 Panic 顯示文字</td>
+                </tr>
               </tbody>
             </table>
           </div>
-        </article>
-
-        <article class="card-surface rounded-3xl border border-slate-200 p-6 md:p-8">
-          <h2 class="text-xl font-semibold text-slate-900">Pro 專屬操作</h2>
-          <ul class="mt-4 space-y-2 text-sm leading-6 text-slate-700">
-            <li><strong>Panic Button</strong>：預設空白鍵。網址列會即時換成你設定嘅假網址／文字。</li>
-            <li><strong>自訂快捷鍵</strong>：撳 B 右邊漢堡選單，再撳一列功能，按下你想用嘅鍵。設定會自動保存。</li>
-            <li><strong>Panic 顯示文字</strong>：同一個彈窗入面可以改老闆模式顯示嘅內容。</li>
-            <li>閱讀進度會寫入本機，並同步到雲端示範儲存。</li>
-          </ul>
         </article>
       </section>
     </div>
