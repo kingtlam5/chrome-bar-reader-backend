@@ -170,6 +170,11 @@ body.theme-light {
   padding: 24px;
 }
 
+.sr-site-modal[hidden],
+.sr-site-modal.hidden {
+  display: none !important;
+}
+
 .sr-site-modal-backdrop {
   position: absolute;
   inset: 0;
