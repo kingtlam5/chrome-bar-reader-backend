@@ -541,43 +541,28 @@
       fill: currentColor;
     }
 
-    html.pro-reader-locked,
-    html.pro-reader-locked body {
-      background: #ffffff;
-    }
-
     html.pro-reader-locked .memo {
-      visibility: hidden;
       pointer-events: none;
     }
 
     .pro-reader-gate {
-      position: fixed;
-      inset: 0;
-      z-index: 2147483646;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      font-family: "Bricolage Grotesque", "Noto Sans TC", sans-serif;
+      width: min(420px, calc(100vw - 32px));
+      padding: 0;
+      border: 0;
+      border-radius: 24px;
+      background: #ffffff;
       color: #0f172a;
-      background:
-        radial-gradient(900px 420px at 85% -10%, rgba(37, 99, 235, 0.16), transparent 55%),
-        radial-gradient(700px 360px at 0% 0%, rgba(59, 130, 246, 0.08), transparent 50%),
-        #ffffff;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+      font-family: "Bricolage Grotesque", "Noto Sans TC", sans-serif;
+      overflow: hidden;
+    }
+
+    .pro-reader-gate::backdrop {
+      background: rgba(15, 23, 42, 0.48);
     }
 
     .pro-reader-gate[hidden] {
       display: none !important;
-    }
-
-    .pro-reader-gate-card {
-      width: min(420px, 100%);
-      overflow: hidden;
-      border: 1px solid #e2e8f0;
-      border-radius: 24px;
-      background: #ffffff;
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
     }
 
     .pro-reader-gate-header {
@@ -698,6 +683,36 @@
   </style>
 </head>
 <body class="compact">
+  <dialog id="proReaderGate" class="pro-reader-gate" aria-labelledby="proReaderLoginTitle">
+    <header class="pro-reader-gate-header">
+      <span class="pro-reader-gate-logo">SR</span>
+      Stealth Reader
+    </header>
+    <div class="pro-reader-gate-body">
+      <p class="pro-reader-gate-kicker">Pro Login</p>
+      <h1 id="proReaderLoginTitle">登入後即可使用閱讀器</h1>
+      <p>每次開啟均須輸入用戶名稱及密碼。此為靜態示範，用戶名稱與密碼均為 testing。</p>
+      <form id="proReaderLoginForm" class="pro-reader-gate-form">
+        <label>
+          用戶名稱
+          <input id="proReaderUsername" name="username" type="text" required autocomplete="username" spellcheck="false">
+        </label>
+        <label>
+          密碼
+          <input id="proReaderPassword" name="password" type="password" required autocomplete="current-password">
+        </label>
+        <p id="proReaderLoginError" class="pro-reader-gate-error" hidden></p>
+        <button type="submit" class="pro-reader-gate-submit">登入</button>
+      </form>
+    </div>
+  </dialog>
+  <script>
+    try {
+      document.getElementById("proReaderGate").showModal();
+    } catch (error) {
+      document.getElementById("proReaderGate")?.setAttribute("open", "");
+    }
+  </script>
   <main class="memo" id="memo" aria-label="隱蔽文字閱讀器" aria-hidden="true" inert>
     <div class="chrome-shell" id="chromeShell">
       <header class="chrome-toolbar" id="chromeToolbar" aria-label="Chrome 工具列（偽裝）">
@@ -805,32 +820,6 @@
     <input class="hidden" id="fileInput" type="file" accept=".txt,.epub,text/plain,application/epub+zip">
     <input class="hidden" id="bgInput" type="file" accept="image/png,image/jpeg,image/webp,image/*" multiple>
   </main>
-
-  <div id="proReaderGate" class="pro-reader-gate" role="dialog" aria-modal="true" aria-labelledby="proReaderLoginTitle">
-    <section class="pro-reader-gate-card">
-      <header class="pro-reader-gate-header">
-        <span class="pro-reader-gate-logo">SR</span>
-        Stealth Reader
-      </header>
-      <div class="pro-reader-gate-body">
-        <p class="pro-reader-gate-kicker">Pro Login</p>
-        <h1 id="proReaderLoginTitle">登入後即可使用閱讀器</h1>
-        <p>請輸入用戶名稱及密碼。此為靜態示範，用戶名稱與密碼均為 testing。</p>
-        <form id="proReaderLoginForm" class="pro-reader-gate-form">
-          <label>
-            用戶名稱
-            <input id="proReaderUsername" name="username" type="text" required autocomplete="username" spellcheck="false">
-          </label>
-          <label>
-            密碼
-            <input id="proReaderPassword" name="password" type="password" required autocomplete="current-password">
-          </label>
-          <p id="proReaderLoginError" class="pro-reader-gate-error" hidden></p>
-          <button type="submit" class="pro-reader-gate-submit">登入</button>
-        </form>
-      </div>
-    </section>
-  </div>
 
   <script src="js/pro-reader-login.js"></script>
   <script>
