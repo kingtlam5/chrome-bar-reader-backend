@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="theme-light bg-white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>使用說明｜Stealth Reader</title>
+  <meta name="description" content="Stealth Reader 免費版與 Pro 版閱讀器使用說明。匯入書本、切換偽裝背景、Panic Button 與自訂快捷鍵。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: "#eff6ff", 100: "#dbeafe", 500: "#3b82f6", 600: "#2563eb", 700: "#1d4ed8" }
+          },
+          fontFamily: {
+            sans: ['"Bricolage Grotesque"', '"Noto Sans TC"', "sans-serif"]
+          },
+          maxWidth: {
+            content: "1120px"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html, body {
+      background-color: #ffffff;
+      color: #0f172a;
+      color-scheme: light;
+    }
+  </style>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
+  <header class="bg-blue-700 text-white">
+    <div class="mx-auto flex max-w-content items-center justify-between px-5 py-4">
+      <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight text-white">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-sm text-blue-700">SR</span>
+        <span>Stealth Reader</span>
+      </a>
+      <div class="flex items-center gap-4 text-sm">
+        <a href="index.html" class="text-blue-100 hover:text-white">產品官網</a>
+        <a href="login.html" class="rounded-full bg-white px-4 py-2 font-medium text-blue-700 hover:bg-blue-50">登入</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="hero-wash">
+    <div class="mx-auto max-w-content px-5 py-10 md:py-14">
+      <p class="text-sm font-medium text-blue-700">User Guide</p>
+      <h1 class="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">點樣使用 Stealth Reader</h1>
+      <p class="mt-3 max-w-2xl text-sm leading-7 text-slate-600 md:text-base">
+        兩個版本都係偽裝成 Chrome 工具列嘅閱讀器：句子顯示喺網址列，下方可以放工作截圖。用下面掣切換免費版同 Pro 版說明。
+      </p>
+
+      <div class="mt-8 inline-flex rounded-full border border-slate-200 bg-slate-50 p-1" role="tablist" aria-label="選擇閱讀器版本">
+        <button type="button" class="billing-pill px-5 py-2" data-guide-plan="free" aria-pressed="true">免費版</button>
+        <button type="button" class="billing-pill px-5 py-2" data-guide-plan="pro" aria-pressed="false">Pro 版</button>
+      </div>
+
+      <section id="guideFree" class="mt-8 space-y-6">
+        <article class="card-surface rounded-3xl border border-slate-200 p-6 md:p-8">
+          <p class="text-sm font-medium text-blue-700">開始之前</p>
+          <h2 class="mt-1 text-xl font-semibold text-slate-900">由免費會員中心啟動</h2>
+          <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm leading-6 text-slate-700">
+            <li>登入後會進入免費會員中心。</li>
+            <li>撳「啟動免費閱讀器」，會以一般瀏覽器視窗開啟。</li>
+            <li>免費版唔會隱藏原生網址列，適合先熟悉操作。</li>
+          </ol>
+        </article>
+
+        <article class="card-surface rounded-3xl border border-slate-200 p-6 md:p-8">
+          <h2 class="text-xl font-semibold text-slate-900">工具列按鈕</h2>
+          <div class="mt-5 overflow-x-auto">
+            <table class="w-full min-w-[520px] text-left text-sm">
+              <thead>
+                <tr class="border-b border-slate-200 text-slate-500">
+                  <th class="py-3 pr-4 font-medium">掣</th>
+                  <th class="py-3 font-medium">用途</th>
+                </tr>
+              </thead>
+              <tbody class="text-slate-700">
+                <tr class="border-b border-slate-100"><td class="py-3 pr-4">← / →</td><td class="py-3">上一句 / 下一句</td></tr>
+                <tr class="border-b border-slate-100"><td class="py-3 pr-4">↻</td><td class="py-3">切換已上傳嘅偽裝背景</td></tr>
+                <tr class="border-b border-slate-100"><td class="py-3 pr-4">★</td><td class="py-3">匯入 TXT 書本</td></tr>
+                <tr class="border-b border-slate-100"><td class="py-3 pr-4">網址列右側數字</td><td class="py-3">顯示進度，撳下去可以跳轉句子</td></tr>
+                <tr><td class="py-3 pr-4">紫色 B</td><td class="py-3">上傳偽裝背景（免費版最多 2 張）</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card-surface rounded-3xl border border-slate-200 p-6 md:p-8">
+          <h2 class="text-xl font-semibold text-slate-900">閱讀同背景</h2>
+          <ul class="mt-4 space-y-2 text-sm leading-6 text-slate-700">
+            <li>鍵盤：<strong>Q</strong> 上一句，<strong>R</strong> 下一句；方向鍵 ← → ↑ ↓ 都可以。</li>
+            <li>只支援 <strong>.txt</strong>。中文以「。」分段，英文以「.」分段。</li>
+            <li>上傳 PNG / JPG / WEBP 工作截圖做背景。未上傳時下方係空白。</li>
+            <li>Shift + ↻ 都可以開啟上傳。進度只保存在呢部瀏覽器。</li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="guidePro" class="mt-8 hidden space-y-6">
+        <article class="card-surface rounded-3xl border border-slate-200 p-6 md:p-8">
+          <p class="text-sm font-medium text-blue-700">開始之前</p>
+          <h2 class="mt-1 text-xl font-semibold text-slate-900">由付費會員中心啟動</h2>
+          <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm leading-6 text-slate-700">
+            <li>用 Pro 帳號登入付費會員中心。</li>
+            <li>撳「啟動隱蔽閱讀器」，會以無邊框視窗開啟，隱藏瀏覽器原生網址列。</li>
+            <li>如果彈窗被攔截，請允許此網站嘅彈出視窗後再試。</li>
+          </ol>
+        </article>
+
+        <article class="card-surface rounded-3xl border border-slate-200 p-6 md:p-8">
+          <h2 class="text-xl font-semibold text-slate-900">工具列按鈕</h2>
+          <div class="mt-5 overflow-x-auto">
+            <table class="w-full min-w-[520px] text-left text-sm">
+              <thead>
+                <tr class="border-b border-slate-200 text-slate-500">
+                  <th class="py-3 pr-4 font-medium">掣</th>
+                  <th class="py-3 font-medium">用途</th>
+                </tr>
+              </thead>
+              <tbody class="text-slate-700">
+                <tr class="border-b border-slate-100"><td class="py-3 pr-4">← / →</td><td class="py-3">上一句 / 下一句</td></tr>
+                <tr class="border-b border-slate-100"><td class="py-3 pr-4">↻</td><td class="py-3">切換偽裝背景（最多 20 張）</td></tr>
+                <tr class="border-b border-slate-100"><td class="py-3 pr-4">⇄</td><td class="py-3">簡體轉繁體</td></tr>
+                <tr class="border-b border-slate-100"><td class="py-3 pr-4">★</td><td class="py-3">匯入 TXT 或 EPUB</td></tr>
+                <tr class="border-b border-slate-100"><td class="py-3 pr-4">紫色 B</td><td class="py-3">上傳偽裝背景</td></tr>
+                <tr><td class="py-3 pr-4">漢堡選單（B 右邊）</td><td class="py-3">自訂快捷鍵同 Panic 顯示文字</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card-surface rounded-3xl border border-slate-200 p-6 md:p-8">
+          <h2 class="text-xl font-semibold text-slate-900">Pro 專屬操作</h2>
+          <ul class="mt-4 space-y-2 text-sm leading-6 text-slate-700">
+            <li><strong>Panic Button</strong>：預設空白鍵。網址列會即時換成你設定嘅假網址／文字。</li>
+            <li><strong>自訂快捷鍵</strong>：撳 B 右邊漢堡選單，再撳一列功能，按下你想用嘅鍵。設定會自動保存。</li>
+            <li><strong>Panic 顯示文字</strong>：同一個彈窗入面可以改老闆模式顯示嘅內容。</li>
+            <li>閱讀進度會寫入本機，並同步到雲端示範儲存。</li>
+          </ul>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white px-5 py-8">
+    <div class="mx-auto flex max-w-content flex-col items-center justify-between gap-4 text-sm text-slate-600 md:flex-row">
+      <a href="index.html" class="hover:text-blue-700">← 返回產品官網</a>
+      <p>© 2026 Stealth Reader. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/guide.js"></script>
+</body>
+</html>
