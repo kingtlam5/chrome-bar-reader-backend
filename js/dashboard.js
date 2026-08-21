@@ -60,40 +60,6 @@
     }
   }
 
-  function syncInstallUi() {
-    const installBtn = document.getElementById("installAppBtn");
-    const hint = document.getElementById("launchHint");
-    const pwa = window.StealthPwa;
-    if (!installBtn) return;
-
-    if (pwa?.isStandalone()) {
-      installBtn.hidden = true;
-      if (hint) {
-        hint.textContent = "目前已在獨立應用視窗中。按啟動即可開啟無網址列的閱讀器。";
-      }
-      return;
-    }
-
-    if (pwa?.isInstalled()) {
-      installBtn.hidden = true;
-      if (hint) {
-        hint.textContent = "應用程式已安裝。按啟動會以獨立視窗開啟，效果等同 Chrome --app=。";
-      }
-      return;
-    }
-
-    installBtn.hidden = !window.StealthPwaInstall;
-  }
-
-  async function installApp() {
-    const pwa = window.StealthPwa;
-    if (!pwa?.promptInstall) return;
-    const accepted = await pwa.promptInstall();
-    if (accepted) {
-      syncInstallUi();
-    }
-  }
-
   function formatLastRead(timestamp) {
     if (!timestamp) return "今天 14:32";
 
@@ -174,10 +140,6 @@
   }
 
   launchBtn?.addEventListener("click", launchReader);
-  document.getElementById("installAppBtn")?.addEventListener("click", installApp);
-  window.addEventListener("stealth-pwa-install-ready", syncInstallUi);
-  window.addEventListener("stealth-pwa-installed", syncInstallUi);
-  syncInstallUi();
 
   lockedControls.forEach((control) => {
     control.addEventListener("click", (event) => {

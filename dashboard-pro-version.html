@@ -41,10 +41,6 @@
     }
   </style>
   <link rel="stylesheet" href="css/style.css">
-  <meta name="theme-color" content="#1d4ed8">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="manifest" href="manifest.json">
 </head>
 <body data-require-plan="pro" data-reader-storage="stealthMemoReader.v1" class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header class="bg-blue-700 text-white">
@@ -70,24 +66,18 @@
       <section class="card-surface rounded-3xl border border-slate-200 p-8 text-center md:p-12">
         <p class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
           <span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>
-          獨立應用視窗
+          獨立彈出視窗
         </p>
         <h1 class="mt-4 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">準備進入隱蔽閱讀模式</h1>
         <p class="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-600">
-          現時 Chrome 不允許一般網頁直接隱藏網址列。請先安裝 Stealth Reader 應用程式（效果等同 Windows 捷徑的 chrome.exe --app=），再啟動閱讀器。
+          按一下即可在獨立彈出視窗開啟閱讀器，無須安裝應用程式。
         </p>
         <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <button id="launchReaderBtn" type="button" class="launch-pulse glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-4 text-base font-semibold text-white hover:bg-blue-500">
             啟動隱蔽閱讀器
           </button>
-          <button id="installAppBtn" type="button" hidden class="inline-flex items-center justify-center rounded-full border border-blue-300 bg-white px-8 py-4 text-base font-semibold text-blue-700 hover:bg-blue-50">
-            安裝為獨立視窗
-          </button>
           <a href="guide.html#pro" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-4 text-base font-semibold text-slate-800 hover:border-blue-300 hover:text-blue-700">使用說明</a>
         </div>
-        <p id="launchHint" class="mx-auto mt-4 max-w-xl text-sm leading-6 text-slate-500">
-          若瀏覽器未出現安裝按鈕，可使用 Chrome 選單的「安裝 Stealth Reader Pro」，或繼續使用你現有的 --app= 捷徑。
-        </p>
       </section>
 
       <section class="mt-8 grid gap-4 md:grid-cols-3">
@@ -114,7 +104,7 @@
             <p class="text-sm font-medium text-blue-700">Pro 專屬設定</p>
             <h2 class="mt-1 text-xl font-semibold text-slate-900">你已解鎖全部 Pro 功能</h2>
             <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-              EPUB、簡轉繁、20 張偽裝背景、無邊框視窗、Panic Button、雲端同步、自訂快捷鍵及 Panic 顯示文字均已可以使用。如仍需要其他功能，可以提出請求，我們會有專人聯絡你跟進。
+              EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗、Panic Button、雲端同步、自訂快捷鍵及 Panic 顯示文字均已可以使用。如仍需要其他功能，可以提出請求，我們會有專人聯絡你跟進。
             </p>
           </div>
           <span class="shrink-0 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">已全部解鎖</span>
@@ -123,7 +113,7 @@
           <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">EPUB 檔案支援</li>
           <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">簡體轉繁體</li>
           <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">偽裝背景上限 20 張</li>
-          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">無邊框偽裝視窗</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">獨立彈出視窗</li>
           <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">Panic Button 一鍵轉換</li>
           <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">雲端進度同步</li>
           <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">自訂快捷鍵</li>
@@ -189,7 +179,6 @@
   </footer>
 
   <script src="js/auth.js"></script>
-  <script src="js/pwa.js"></script>
   <script src="js/dashboard.js"></script>
 </body>
 </html>
