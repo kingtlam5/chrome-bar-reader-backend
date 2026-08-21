@@ -13,7 +13,9 @@ html {
 #pain,
 #features,
 #pricing,
-#faq {
+#faq,
+#chrome-app-shortcut,
+#member-account {
   scroll-margin-top: 96px;
 }
 
