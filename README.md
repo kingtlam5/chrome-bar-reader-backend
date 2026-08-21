@@ -10,7 +10,6 @@
 - `dashboard-pro-version.html` — Pro 付費會員中心
 - `reader-free-version.html` — 免費版閱讀器（TXT、2 張背景、本機進度）
 - `reader-pro-version.html` — 付費版閱讀器（EPUB、簡轉繁、20 張背景、Panic Button 等）
-- `free.html` / `dashboard.html` / `reader.html` — 舊連結轉址
 - `js/landing.js` — Landing Page 互動
 - `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
 - `js/login.js` — 登入表單
@@ -51,6 +50,6 @@ python3 -m http.server 8765
 | 上一句 / 下一句 | Q / R 或 ← / →（Pro 可自訂） | Free / Pro |
 | 簡轉繁 | ⇄ 掣（Pro 可自訂快捷鍵） | Pro |
 | Panic Button | 空白鍵（Pro 可自訂） | Pro |
-| 自訂快捷鍵 | ↻ 掣隔離嘅漢堡選單 | Pro |
+| 自訂快捷鍵 | B 掣右邊漢堡選單（設定會自動保存） | Pro |
 | 上傳背景 | B 掣 | Free 2 張 / Pro 20 張 |
 | 切換背景 | ↻ 掣 | Free / Pro |
