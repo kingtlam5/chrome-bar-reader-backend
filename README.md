@@ -18,6 +18,7 @@
 - `js/login.js` — 登入表單
 - `js/register.js` — 註冊表單（免費顯示未接 API 提示／Pro 前往付款頁）
 - `js/dashboard.js` — 啟動閱讀視窗（Free 一般分頁 / Pro 獨立彈出視窗）
+- `js/pro-reader-login.js` — Pro 閱讀器開啟時的登入彈窗（示範帳密：testing / testing）
 - `js/guide.js` — 使用說明頁 Free / Pro 切換
 - `css/style.css` — 共用樣式
 

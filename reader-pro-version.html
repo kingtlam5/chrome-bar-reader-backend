@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant" class="compact">
+<html lang="zh-Hant" class="compact pro-reader-locked">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -540,10 +540,165 @@
       height: 18px;
       fill: currentColor;
     }
+
+    html.pro-reader-locked,
+    html.pro-reader-locked body {
+      background: #ffffff;
+    }
+
+    html.pro-reader-locked .memo {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .pro-reader-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 2147483646;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: "Bricolage Grotesque", "Noto Sans TC", sans-serif;
+      color: #0f172a;
+      background:
+        radial-gradient(900px 420px at 85% -10%, rgba(37, 99, 235, 0.16), transparent 55%),
+        radial-gradient(700px 360px at 0% 0%, rgba(59, 130, 246, 0.08), transparent 50%),
+        #ffffff;
+    }
+
+    .pro-reader-gate[hidden] {
+      display: none !important;
+    }
+
+    .pro-reader-gate-card {
+      width: min(420px, 100%);
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      border-radius: 24px;
+      background: #ffffff;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+    }
+
+    .pro-reader-gate-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 20px;
+      background: #1d4ed8;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .pro-reader-gate-logo {
+      display: flex;
+      width: 32px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #1d4ed8;
+      font-size: 12px;
+    }
+
+    .pro-reader-gate-body {
+      padding: 24px 28px 28px;
+    }
+
+    .pro-reader-gate-kicker {
+      margin: 0;
+      color: #1d4ed8;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .pro-reader-gate-body h1 {
+      margin: 8px 0 0;
+      color: #0f172a;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      word-break: keep-all;
+    }
+
+    .pro-reader-gate-body > p {
+      margin: 10px 0 0;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    .pro-reader-gate-form {
+      display: grid;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .pro-reader-gate-form label {
+      display: block;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 500;
+      word-break: keep-all;
+    }
+
+    .pro-reader-gate-form input {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #0f172a;
+      font: inherit;
+      outline: none;
+    }
+
+    .pro-reader-gate-form input:focus {
+      border-color: #60a5fa;
+    }
+
+    .pro-reader-gate-error {
+      margin: 0;
+      color: #b91c1c;
+      font-size: 13px;
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+
+    .pro-reader-gate-error[hidden] {
+      display: none !important;
+    }
+
+    .pro-reader-gate-submit {
+      display: inline-flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      margin-top: 4px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 999px;
+      background: #2563eb;
+      color: #ffffff;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.28);
+    }
+
+    .pro-reader-gate-submit:hover {
+      background: #3b82f6;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.36);
+    }
   </style>
 </head>
 <body class="compact">
-  <main class="memo" id="memo" aria-label="隱蔽文字閱讀器">
+  <main class="memo" id="memo" aria-label="隱蔽文字閱讀器" aria-hidden="true" inert>
     <div class="chrome-shell" id="chromeShell">
       <header class="chrome-toolbar" id="chromeToolbar" aria-label="Chrome 工具列（偽裝）">
         <div class="chrome-nav-group">
@@ -651,6 +806,33 @@
     <input class="hidden" id="bgInput" type="file" accept="image/png,image/jpeg,image/webp,image/*" multiple>
   </main>
 
+  <div id="proReaderGate" class="pro-reader-gate" role="dialog" aria-modal="true" aria-labelledby="proReaderLoginTitle">
+    <section class="pro-reader-gate-card">
+      <header class="pro-reader-gate-header">
+        <span class="pro-reader-gate-logo">SR</span>
+        Stealth Reader
+      </header>
+      <div class="pro-reader-gate-body">
+        <p class="pro-reader-gate-kicker">Pro Login</p>
+        <h1 id="proReaderLoginTitle">登入後即可使用閱讀器</h1>
+        <p>請輸入用戶名稱及密碼。此為靜態示範，用戶名稱與密碼均為 testing。</p>
+        <form id="proReaderLoginForm" class="pro-reader-gate-form">
+          <label>
+            用戶名稱
+            <input id="proReaderUsername" name="username" type="text" required autocomplete="username" spellcheck="false">
+          </label>
+          <label>
+            密碼
+            <input id="proReaderPassword" name="password" type="password" required autocomplete="current-password">
+          </label>
+          <p id="proReaderLoginError" class="pro-reader-gate-error" hidden></p>
+          <button type="submit" class="pro-reader-gate-submit">登入</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/pro-reader-login.js"></script>
   <script>
     (() => {
       "use strict";
