@@ -303,6 +303,48 @@
       box-shadow: 0 8px 24px rgba(37, 99, 235, 0.28);
     }
 
+    .sr-panic-field {
+      margin-top: 18px;
+      padding: 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      background: #f8fafc;
+    }
+
+    .sr-panic-field label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .sr-panic-field textarea {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #0f172a;
+      font: inherit;
+      line-height: 1.5;
+      resize: vertical;
+    }
+
+    .sr-panic-field textarea:focus {
+      outline: none;
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .sr-save-note {
+      margin: 8px 0 0;
+      color: #2563eb;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
     .chrome-nav:hover,
     .chrome-nav:focus-visible {
       background: var(--chrome-icon-hover-bg);
@@ -514,9 +556,6 @@
           <button class="chrome-nav" id="chromeRefresh" type="button" aria-label="切換偽裝背景" title="切換偽裝背景">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08a5.99 5.99 0 01-5.65 4c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
           </button>
-          <button class="chrome-nav" id="chromeShortcutBtn" type="button" aria-label="自訂快捷鍵" title="自訂快捷鍵">
-            <svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-          </button>
         </div>
         <div class="chrome-omnibox" id="chromeAddressWrap">
           <span class="chrome-lock" aria-hidden="true">
@@ -543,9 +582,9 @@
         </div>
         <div class="chrome-toolbar-actions">
           <button class="chrome-profile" id="chromeProfileBtn" type="button" title="上傳自訂偽裝背景（最多 20 張）" aria-label="上傳自訂偽裝背景">B</button>
-          <span class="chrome-menu-btn" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-          </span>
+          <button class="chrome-nav" id="chromeShortcutBtn" type="button" aria-label="自訂快捷鍵" title="自訂快捷鍵">
+            <svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
         </div>
       </header>
     </div>
@@ -564,7 +603,7 @@
         </header>
         <div class="sr-modal-body">
           <h2 id="shortcutModalTitle">自訂快捷鍵</h2>
-          <p>撳其中一列，再按下你想用嘅鍵。同一粒鍵只會綁定一個功能。</p>
+          <p>撳其中一列，再按下你想用嘅鍵。同一粒鍵只會綁定一個功能。所有設定會自動保存在呢部瀏覽器，下次開啟仍然有效。</p>
           <div class="sr-shortcut-list">
             <button type="button" class="sr-shortcut-row" data-shortcut-action="prev">
               <span class="sr-shortcut-label">上一句</span>
@@ -594,6 +633,11 @@
               <span class="sr-shortcut-label">上傳偽裝背景</span>
               <span class="sr-shortcut-key" data-shortcut-key="uploadBg">未設定</span>
             </button>
+          </div>
+          <div class="sr-panic-field">
+            <label for="panicTextInput">Panic Button 顯示文字</label>
+            <textarea id="panicTextInput" rows="3" placeholder="例如：https://chrome.google.com/webstore/detail/developer-tools"></textarea>
+            <p class="sr-save-note">老闆模式會把網址列換成以上文字。更改後即時自動保存。</p>
           </div>
           <div class="sr-modal-actions">
             <button type="button" class="sr-modal-btn" id="resetShortcutsBtn">恢復預設</button>
@@ -641,7 +685,7 @@
         "Panic Button：按空白鍵（可在會員中心自訂），切換假工作網址。",
         "↻ 按鈕：切換下方偽裝網頁背景。",
         "B 按鈕：上傳自訂偽裝背景（最多 20 張，按選取順序填入）。",
-        "漢堡選單：自訂上一句、下一句、切換背景、簡轉繁、Panic Button 等快捷鍵。",
+        "漢堡選單（B 掣右邊）：自訂快捷鍵同 Panic Button 顯示文字，設定會自動保存。",
         "⇄ 按鈕：簡體轉繁體。",
         "★ 按鈕：匯入 TXT 或 EPUB 書本。",
         "網址列右側數字：顯示進度，點擊可跳轉。",
@@ -656,6 +700,7 @@
         bossMode: false,
         panicKey: " ",
         shortcuts: { ...DEFAULT_SHORTCUTS },
+        panicText: BOSS_CHROME_URL,
         manualMode: false,
         manualIndex: 0,
         translateTraditional: false,
@@ -680,6 +725,7 @@
       const chromeShortcutBtn = document.getElementById("chromeShortcutBtn");
       const shortcutModal = document.getElementById("shortcutModal");
       const resetShortcutsBtn = document.getElementById("resetShortcutsBtn");
+      const panicTextInput = document.getElementById("panicTextInput");
       let recordingAction = null;
 
       let customBackgroundUrls = [];
@@ -729,7 +775,7 @@
 
       function updateChromeToolbar() {
         if (state.bossMode) {
-          updateChromeUrlDisplay(BOSS_CHROME_URL);
+          updateChromeUrlDisplay(getPanicText());
           chromeProgress.classList.add("hidden");
         } else {
           updateChromeUrlDisplay(getCurrentSentenceText());
@@ -54369,8 +54415,18 @@
         }
         saved.shortcuts = { ...state.shortcuts };
         saved.panicKey = state.shortcuts.panic || " ";
+        saved.panicText = state.panicText;
         state.panicKey = saved.panicKey;
         localStorage.setItem(SETTINGS_KEY, JSON.stringify(saved));
+      }
+
+      function getPanicText() {
+        const text = (state.panicText || "").trim();
+        return text || BOSS_CHROME_URL;
+      }
+
+      function syncPanicTextInput() {
+        if (panicTextInput) panicTextInput.value = state.panicText || BOSS_CHROME_URL;
       }
 
       function renderShortcutLabels() {
@@ -54387,6 +54443,7 @@
         recordingAction = null;
         shortcutModal?.classList.remove("hidden");
         renderShortcutLabels();
+        syncPanicTextInput();
       }
 
       function closeShortcutModal() {
@@ -54436,10 +54493,17 @@
             state.shortcuts.panic = saved.panicKey;
           }
           state.panicKey = state.shortcuts.panic || " ";
+          if (saved && typeof saved.panicText === "string" && saved.panicText.trim()) {
+            state.panicText = saved.panicText;
+          } else {
+            state.panicText = BOSS_CHROME_URL;
+          }
           renderShortcutLabels();
+          syncPanicTextInput();
         } catch (error) {
           state.shortcuts = { ...DEFAULT_SHORTCUTS };
           state.panicKey = " ";
+          state.panicText = BOSS_CHROME_URL;
         }
       }
 
@@ -54799,7 +54863,22 @@
       resetShortcutsBtn?.addEventListener("click", (event) => {
         event.stopPropagation();
         state.shortcuts = { ...DEFAULT_SHORTCUTS };
+        state.panicText = BOSS_CHROME_URL;
         persistShortcuts();
+        recordingAction = null;
+        renderShortcutLabels();
+        syncPanicTextInput();
+        if (state.bossMode) updateChromeUrlDisplay(getPanicText());
+      });
+
+      panicTextInput?.addEventListener("input", () => {
+        state.panicText = panicTextInput.value;
+        persistShortcuts();
+        if (state.bossMode) updateChromeUrlDisplay(getPanicText());
+      });
+
+      panicTextInput?.addEventListener("click", (event) => {
+        event.stopPropagation();
         recordingAction = null;
         renderShortcutLabels();
       });
@@ -54865,7 +54944,13 @@
       chromeJumpInput.addEventListener("blur", closeChromeJumpInput);
 
       document.addEventListener("keydown", (event) => {
-        if (document.activeElement === chromeJumpInput) return;
+        if (document.activeElement === chromeJumpInput || document.activeElement === panicTextInput) {
+          if (document.activeElement === panicTextInput && event.key === "Escape") {
+            event.preventDefault();
+            closeShortcutModal();
+          }
+          return;
+        }
 
         if (shortcutModal && !shortcutModal.classList.contains("hidden")) {
           event.preventDefault();
@@ -54925,7 +55010,7 @@
         if (isCompactPopupContext()) {
           applyCompactWindowFrame();
           if (state.bossMode) {
-            updateChromeUrlDisplay(BOSS_CHROME_URL);
+            updateChromeUrlDisplay(getPanicText());
           } else {
             updateChromeUrlDisplay(getCurrentSentenceText());
           }
