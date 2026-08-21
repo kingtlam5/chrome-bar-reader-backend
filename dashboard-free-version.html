@@ -45,6 +45,7 @@
       </a>
       <div class="flex items-center gap-4">
         <a href="index.html" class="hidden text-sm text-blue-100 hover:text-white sm:inline">產品官網</a>
+        <a href="#member-account" class="text-sm text-blue-100 hover:text-white">會員資料</a>
         <a href="login.html" data-logout class="hidden text-sm text-blue-100 hover:text-white sm:inline">登出</a>
         <span class="rounded-full border border-white/40 bg-blue-800 px-2.5 py-1 text-xs font-semibold text-white">Free</span>
         <div class="text-right">
@@ -57,7 +58,35 @@
 
   <main class="hero-wash">
     <div class="mx-auto max-w-content px-5 py-10 md:py-14">
-      <section class="card-surface rounded-3xl border border-slate-200 p-8 text-center md:p-12">
+      <section id="member-account" class="card-surface rounded-3xl border border-slate-200 p-6 md:p-8">
+        <p class="text-sm font-medium text-blue-700">Member Account</p>
+        <h2 class="mt-1 text-xl font-semibold text-slate-900">會員資料</h2>
+        <p class="mt-2 text-sm leading-6 text-slate-600">可在此查看用戶名稱、訂閱狀態，以及更改密碼或計劃。</p>
+        <dl class="mt-6 grid gap-4 sm:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
+            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700">用戶名稱</dt>
+            <dd data-member-username class="mt-2 text-lg font-semibold text-slate-900">testing</dd>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
+            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700">訂閱狀態</dt>
+            <dd data-member-plan-label class="mt-2 text-lg font-semibold text-slate-900">免費計劃</dd>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
+            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700">下次自動扣款</dt>
+            <dd data-next-payment class="mt-2 text-lg font-semibold text-slate-900">不適用</dd>
+          </div>
+        </dl>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <button type="button" data-open-change-password class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 hover:border-blue-300 hover:text-blue-700">
+            更改密碼
+          </button>
+          <button type="button" data-open-payment-gateway class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+            升級至 Pro
+          </button>
+        </div>
+      </section>
+
+      <section class="card-surface mt-8 rounded-3xl border border-slate-200 p-8 text-center md:p-12">
         <p class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600">
           免費會員 · TXT
         </p>
@@ -92,34 +121,6 @@
             <p class="text-xs font-medium uppercase tracking-wider text-blue-700">上次閱讀</p>
             <p id="lastReadAt" class="mt-2 text-lg font-semibold text-slate-900">今天 14:32</p>
           </article>
-        </div>
-      </section>
-
-      <section class="card-surface mt-8 rounded-3xl border border-slate-200 p-6 md:p-8">
-        <p class="text-sm font-medium text-blue-700">Member Account</p>
-        <h2 class="mt-1 text-xl font-semibold text-slate-900">會員資料</h2>
-        <p class="mt-2 text-sm leading-6 text-slate-600">可在此查看用戶名稱、訂閱狀態，以及更改密碼或計劃。</p>
-        <dl class="mt-6 grid gap-4 sm:grid-cols-3">
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
-            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700">用戶名稱</dt>
-            <dd data-member-username class="mt-2 text-lg font-semibold text-slate-900">testing</dd>
-          </div>
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
-            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700">訂閱狀態</dt>
-            <dd data-member-plan-label class="mt-2 text-lg font-semibold text-slate-900">免費計劃</dd>
-          </div>
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
-            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700">下次自動扣款</dt>
-            <dd data-next-payment class="mt-2 text-lg font-semibold text-slate-900">不適用</dd>
-          </div>
-        </dl>
-        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-          <button type="button" data-open-change-password class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 hover:border-blue-300 hover:text-blue-700">
-            更改密碼
-          </button>
-          <button type="button" data-open-payment-gateway class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">
-            升級至 Pro
-          </button>
         </div>
       </section>
 
