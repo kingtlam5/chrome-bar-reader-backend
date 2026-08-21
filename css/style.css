@@ -19,6 +19,33 @@ html {
 
 body {
   font-family: "Bricolage Grotesque", "Noto Sans TC", sans-serif;
+  line-break: strict;
+  overflow-wrap: break-word;
+}
+
+/* Prefer wrapping after punctuation, not in the middle of a Chinese word. */
+p,
+li,
+dd,
+dt,
+td,
+th,
+label,
+legend,
+blockquote,
+h1,
+h2,
+h3,
+h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: pretty;
 }
 
 /* English glyphs come from Bricolage Grotesque; Chinese falls back to Noto Sans TC. */
