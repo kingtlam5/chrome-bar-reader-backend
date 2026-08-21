@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notes - Task List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --compact-height: 52px;
@@ -129,6 +132,175 @@
       width: 18px;
       height: 18px;
       fill: currentColor;
+    }
+
+    .chrome-nav svg.icon-stroke {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+    }
+
+    .sr-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: "Bricolage Grotesque", "Noto Sans TC", sans-serif;
+    }
+
+    .sr-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.48);
+    }
+
+    .sr-modal-card {
+      position: relative;
+      z-index: 1;
+      width: min(520px, 100%);
+      max-height: min(88vh, 720px);
+      overflow: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 24px;
+      background: #ffffff;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+      color: #0f172a;
+    }
+
+    .sr-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 22px;
+      background: #1d4ed8;
+      color: #ffffff;
+    }
+
+    .sr-modal-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+
+    .sr-modal-brand span {
+      display: flex;
+      width: 32px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #1d4ed8;
+      font-size: 12px;
+    }
+
+    .sr-modal-close {
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .sr-modal-body {
+      padding: 22px;
+    }
+
+    .sr-modal-body h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .sr-modal-body p {
+      margin: 8px 0 0;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .sr-shortcut-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .sr-shortcut-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      background: #ffffff;
+      color: #0f172a;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .sr-shortcut-row:hover {
+      border-color: #93c5fd;
+    }
+
+    .sr-shortcut-row.is-recording {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .sr-shortcut-label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .sr-shortcut-key {
+      min-width: 72px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .sr-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .sr-modal-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #0f172a;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .sr-modal-btn.primary {
+      border: 0;
+      background: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.28);
     }
 
     .chrome-nav:hover,
@@ -342,6 +514,9 @@
           <button class="chrome-nav" id="chromeRefresh" type="button" aria-label="切換偽裝背景" title="切換偽裝背景">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08a5.99 5.99 0 01-5.65 4c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
           </button>
+          <button class="chrome-nav" id="chromeShortcutBtn" type="button" aria-label="自訂快捷鍵" title="自訂快捷鍵">
+            <svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
         </div>
         <div class="chrome-omnibox" id="chromeAddressWrap">
           <span class="chrome-lock" aria-hidden="true">
@@ -377,6 +552,57 @@
 
     <div class="stealth-bg" id="stealthBg" aria-hidden="true"></div>
 
+    <div id="shortcutModal" class="sr-modal hidden" role="dialog" aria-modal="true" aria-labelledby="shortcutModalTitle">
+      <div class="sr-modal-backdrop" data-close-shortcut-modal></div>
+      <section class="sr-modal-card">
+        <header class="sr-modal-header">
+          <div class="sr-modal-brand">
+            <span>SR</span>
+            Stealth Reader Pro
+          </div>
+          <button type="button" class="sr-modal-close" data-close-shortcut-modal aria-label="關閉">×</button>
+        </header>
+        <div class="sr-modal-body">
+          <h2 id="shortcutModalTitle">自訂快捷鍵</h2>
+          <p>撳其中一列，再按下你想用嘅鍵。同一粒鍵只會綁定一個功能。</p>
+          <div class="sr-shortcut-list">
+            <button type="button" class="sr-shortcut-row" data-shortcut-action="prev">
+              <span class="sr-shortcut-label">上一句</span>
+              <span class="sr-shortcut-key" data-shortcut-key="prev">Q</span>
+            </button>
+            <button type="button" class="sr-shortcut-row" data-shortcut-action="next">
+              <span class="sr-shortcut-label">下一句</span>
+              <span class="sr-shortcut-key" data-shortcut-key="next">R</span>
+            </button>
+            <button type="button" class="sr-shortcut-row" data-shortcut-action="cycleBg">
+              <span class="sr-shortcut-label">切換偽裝背景</span>
+              <span class="sr-shortcut-key" data-shortcut-key="cycleBg">未設定</span>
+            </button>
+            <button type="button" class="sr-shortcut-row" data-shortcut-action="translate">
+              <span class="sr-shortcut-label">簡體轉繁體</span>
+              <span class="sr-shortcut-key" data-shortcut-key="translate">未設定</span>
+            </button>
+            <button type="button" class="sr-shortcut-row" data-shortcut-action="panic">
+              <span class="sr-shortcut-label">Panic Button</span>
+              <span class="sr-shortcut-key" data-shortcut-key="panic">Space</span>
+            </button>
+            <button type="button" class="sr-shortcut-row" data-shortcut-action="importBook">
+              <span class="sr-shortcut-label">匯入書本</span>
+              <span class="sr-shortcut-key" data-shortcut-key="importBook">未設定</span>
+            </button>
+            <button type="button" class="sr-shortcut-row" data-shortcut-action="uploadBg">
+              <span class="sr-shortcut-label">上傳偽裝背景</span>
+              <span class="sr-shortcut-key" data-shortcut-key="uploadBg">未設定</span>
+            </button>
+          </div>
+          <div class="sr-modal-actions">
+            <button type="button" class="sr-modal-btn" id="resetShortcutsBtn">恢復預設</button>
+            <button type="button" class="sr-modal-btn primary" data-close-shortcut-modal>完成</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
     <input class="hidden" id="fileInput" type="file" accept=".txt,.epub,text/plain,application/epub+zip">
     <input class="hidden" id="bgInput" type="file" accept="image/png,image/jpeg,image/webp,image/*" multiple>
   </main>
@@ -387,6 +613,15 @@
 
       const STORAGE_KEY = "stealthMemoReader.v1";
       const SETTINGS_KEY = "stealthMemoReader.settings.v1";
+      const DEFAULT_SHORTCUTS = {
+        prev: "q",
+        next: "r",
+        cycleBg: "",
+        translate: "",
+        panic: " ",
+        importBook: "",
+        uploadBg: ""
+      };
       const CLOUD_KEY = "stealthMemoReader.cloud.v1";
       const BG_DB_NAME = "stealthMemoReader.bg.v1";
       const BG_DB_STORE = "backgrounds";
@@ -406,6 +641,7 @@
         "Panic Button：按空白鍵（可在會員中心自訂），切換假工作網址。",
         "↻ 按鈕：切換下方偽裝網頁背景。",
         "B 按鈕：上傳自訂偽裝背景（最多 20 張，按選取順序填入）。",
+        "漢堡選單：自訂上一句、下一句、切換背景、簡轉繁、Panic Button 等快捷鍵。",
         "⇄ 按鈕：簡體轉繁體。",
         "★ 按鈕：匯入 TXT 或 EPUB 書本。",
         "網址列右側數字：顯示進度，點擊可跳轉。",
@@ -419,6 +655,7 @@
         fileName: "",
         bossMode: false,
         panicKey: " ",
+        shortcuts: { ...DEFAULT_SHORTCUTS },
         manualMode: false,
         manualIndex: 0,
         translateTraditional: false,
@@ -440,6 +677,10 @@
       const fileInput = document.getElementById("fileInput");
       const bgInput = document.getElementById("bgInput");
       const chromeProfileBtn = document.getElementById("chromeProfileBtn");
+      const chromeShortcutBtn = document.getElementById("chromeShortcutBtn");
+      const shortcutModal = document.getElementById("shortcutModal");
+      const resetShortcutsBtn = document.getElementById("resetShortcutsBtn");
+      let recordingAction = null;
 
       let customBackgroundUrls = [];
       let bgDbPromise = null;
@@ -54099,27 +54340,111 @@
       }
 
 
+      function formatShortcutLabel(key) {
+        if (!key) return "未設定";
+        if (key === " " || key === "Space" || key === "Spacebar") return "Space";
+        if (key === "Escape") return "Esc";
+        if (key === "ArrowLeft") return "←";
+        if (key === "ArrowRight") return "→";
+        if (key === "ArrowUp") return "↑";
+        if (key === "ArrowDown") return "↓";
+        return key.length === 1 ? key.toUpperCase() : key;
+      }
+
+      function keysEqual(left, right) {
+        if (!left || !right) return false;
+        const normalize = (key) => {
+          if (key === "Space" || key === "Spacebar") return " ";
+          return key.length === 1 ? key.toLowerCase() : key;
+        };
+        return normalize(left) === normalize(right);
+      }
+
+      function persistShortcuts() {
+        let saved = {};
+        try {
+          saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}") || {};
+        } catch (error) {
+          saved = {};
+        }
+        saved.shortcuts = { ...state.shortcuts };
+        saved.panicKey = state.shortcuts.panic || " ";
+        state.panicKey = saved.panicKey;
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(saved));
+      }
+
+      function renderShortcutLabels() {
+        document.querySelectorAll("[data-shortcut-key]").forEach((el) => {
+          const action = el.getAttribute("data-shortcut-key");
+          el.textContent = formatShortcutLabel(state.shortcuts[action]);
+        });
+        document.querySelectorAll("[data-shortcut-action]").forEach((row) => {
+          row.classList.toggle("is-recording", row.getAttribute("data-shortcut-action") === recordingAction);
+        });
+      }
+
+      function openShortcutModal() {
+        recordingAction = null;
+        shortcutModal?.classList.remove("hidden");
+        renderShortcutLabels();
+      }
+
+      function closeShortcutModal() {
+        recordingAction = null;
+        shortcutModal?.classList.add("hidden");
+        renderShortcutLabels();
+      }
+
+      function assignShortcut(action, key) {
+        if (!Object.prototype.hasOwnProperty.call(state.shortcuts, action)) return;
+        if (key === "Escape") {
+          recordingAction = null;
+          renderShortcutLabels();
+          return;
+        }
+
+        Object.keys(state.shortcuts).forEach((name) => {
+          if (name !== action && keysEqual(state.shortcuts[name], key)) {
+            state.shortcuts[name] = "";
+          }
+        });
+        state.shortcuts[action] = key;
+        persistShortcuts();
+        recordingAction = null;
+        renderShortcutLabels();
+      }
+
+      function matchesAction(event, action) {
+        return keysEqual(event.key, state.shortcuts[action]);
+      }
+
+      function keyIsCustomBound(key) {
+        return Object.values(state.shortcuts).some((value) => value && keysEqual(value, key));
+      }
+
       function loadSettings() {
         try {
           const saved = JSON.parse(localStorage.getItem(SETTINGS_KEY));
-          if (!saved) return;
-          if (typeof saved.panicKey === "string" && saved.panicKey) {
-            state.panicKey = saved.panicKey;
+          state.shortcuts = { ...DEFAULT_SHORTCUTS };
+          if (saved && saved.shortcuts && typeof saved.shortcuts === "object") {
+            Object.keys(DEFAULT_SHORTCUTS).forEach((action) => {
+              if (typeof saved.shortcuts[action] === "string") {
+                state.shortcuts[action] = saved.shortcuts[action];
+              }
+            });
+          } else if (saved && typeof saved.panicKey === "string" && saved.panicKey) {
+            state.shortcuts.panic = saved.panicKey;
           }
+          state.panicKey = state.shortcuts.panic || " ";
+          renderShortcutLabels();
         } catch (error) {
-          // 設定損毀時沿用預設空白鍵。
+          state.shortcuts = { ...DEFAULT_SHORTCUTS };
+          state.panicKey = " ";
         }
       }
 
       function isPanicKey(event) {
-        const panicKey = state.panicKey || " ";
-        if (panicKey === " " || panicKey === "Space" || panicKey === "Spacebar") {
-          return event.key === " ";
-        }
-        if (panicKey.length === 1) {
-          return event.key.toLowerCase() === panicKey.toLowerCase();
-        }
-        return event.key === panicKey;
+        return matchesAction(event, "panic");
       }
 
       function loadState() {
@@ -54451,6 +54776,34 @@
         bgInput.click();
       });
 
+      chromeShortcutBtn?.addEventListener("click", (event) => {
+        event.stopPropagation();
+        if (shortcutModal?.classList.contains("hidden")) {
+          openShortcutModal();
+        } else {
+          closeShortcutModal();
+        }
+      });
+
+      shortcutModal?.addEventListener("click", (event) => {
+        if (event.target.closest("[data-close-shortcut-modal]")) {
+          closeShortcutModal();
+          return;
+        }
+        const row = event.target.closest("[data-shortcut-action]");
+        if (!row) return;
+        recordingAction = row.getAttribute("data-shortcut-action");
+        renderShortcutLabels();
+      });
+
+      resetShortcutsBtn?.addEventListener("click", (event) => {
+        event.stopPropagation();
+        state.shortcuts = { ...DEFAULT_SHORTCUTS };
+        persistShortcuts();
+        recordingAction = null;
+        renderShortcutLabels();
+      });
+
       bgInput.addEventListener("change", async () => {
         const files = Array.from(bgInput.files || []).filter((file) => file.type.startsWith("image/"));
         bgInput.value = "";
@@ -54514,8 +54867,17 @@
       document.addEventListener("keydown", (event) => {
         if (document.activeElement === chromeJumpInput) return;
 
-        const navKeys = ["q", "Q", "r", "R", " ", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
-        if (navKeys.includes(event.key)) {
+        if (shortcutModal && !shortcutModal.classList.contains("hidden")) {
+          event.preventDefault();
+          if (recordingAction) {
+            assignShortcut(recordingAction, event.key);
+          } else if (event.key === "Escape") {
+            closeShortcutModal();
+          }
+          return;
+        }
+
+        if (matchesAction(event, "prev") || matchesAction(event, "next") || matchesAction(event, "cycleBg") || matchesAction(event, "translate") || matchesAction(event, "panic") || matchesAction(event, "importBook") || matchesAction(event, "uploadBg") || event.key === " " || event.key.startsWith("Arrow")) {
           event.preventDefault();
         }
 
@@ -54524,15 +54886,31 @@
           return;
         }
 
-        if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+        if (matchesAction(event, "prev") || ((event.key === "ArrowLeft" || event.key === "ArrowUp") && !keyIsCustomBound(event.key))) {
           prevSentence();
-        } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+          return;
+        }
+        if (matchesAction(event, "next") || ((event.key === "ArrowRight" || event.key === "ArrowDown") && !keyIsCustomBound(event.key))) {
           nextSentence();
-        } else if (event.key === "r" || event.key === "R") {
-          nextSentence();
-        } else if (event.key === "q" || event.key === "Q") {
-          prevSentence();
-        } else if (isPanicKey(event)) {
+          return;
+        }
+        if (matchesAction(event, "cycleBg")) {
+          cycleStealthBackground();
+          return;
+        }
+        if (matchesAction(event, "translate")) {
+          toggleTranslate();
+          return;
+        }
+        if (matchesAction(event, "importBook")) {
+          fileInput.click();
+          return;
+        }
+        if (matchesAction(event, "uploadBg")) {
+          bgInput.click();
+          return;
+        }
+        if (isPanicKey(event)) {
           state.bossMode = !state.bossMode;
           render();
         }

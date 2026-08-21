@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="theme-light bg-white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>付費會員中心｜Stealth Reader</title>
+  <meta name="description" content="Pro 會員專用：啟動隱蔽閱讀器、查看閱讀進度，並管理偽裝設定。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: "#eff6ff",
+              100: "#dbeafe",
+              500: "#3b82f6",
+              600: "#2563eb",
+              700: "#1d4ed8"
+            }
+          },
+          fontFamily: {
+            sans: ['"Bricolage Grotesque"', '"Noto Sans TC"', "sans-serif"]
+          },
+          maxWidth: {
+            content: "1120px"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html, body {
+      background-color: #ffffff;
+      color: #0f172a;
+      color-scheme: light;
+    }
+  </style>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-require-plan="pro" data-reader-storage="stealthMemoReader.v1" class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
+  <header class="bg-blue-700 text-white">
+    <div class="mx-auto flex max-w-content items-center justify-between px-5 py-4">
+      <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight text-white">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-sm text-blue-700">SR</span>
+        <span>Stealth Reader</span>
+      </a>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hidden text-sm text-blue-100 hover:text-white sm:inline">產品官網</a>
+        <a href="login.html" data-logout class="hidden text-sm text-blue-100 hover:text-white sm:inline">登出</a>
+        <span class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-blue-700">Pro</span>
+        <div class="text-right">
+          <p data-member-email class="text-sm font-medium text-white">user@example.com</p>
+          <p class="text-xs text-blue-100">付費會員中心</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="hero-wash">
+    <div class="mx-auto max-w-content px-5 py-10 md:py-14">
+      <section class="card-surface rounded-3xl border border-slate-200 p-8 text-center md:p-12">
+        <p class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+          <span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>
+          獨立無邊框視窗
+        </p>
+        <h1 class="mt-4 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">準備進入隱蔽閱讀模式</h1>
+        <p class="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-600">
+          點擊後將以獨立無邊框視窗開啟閱讀器，自動隱藏瀏覽器原生網址列。
+        </p>
+        <button id="launchReaderBtn" type="button" class="launch-pulse glow-btn mt-8 inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-4 text-base font-semibold text-white hover:bg-blue-500">
+          🚀 啟動隱蔽閱讀器 (Launch Stealth Reader)
+        </button>
+      </section>
+
+      <section class="mt-8 grid gap-4 md:grid-cols-3">
+        <article class="card-surface rounded-2xl border border-slate-200 p-5">
+          <p class="text-xs font-medium uppercase tracking-wider text-blue-700">當前書本</p>
+          <p id="currentBook" class="mt-2 text-lg font-semibold text-slate-900">《三體》</p>
+        </article>
+        <article class="card-surface rounded-2xl border border-slate-200 p-5">
+          <p class="text-xs font-medium uppercase tracking-wider text-blue-700">當前進度</p>
+          <p id="currentProgress" class="mt-2 text-lg font-semibold text-slate-900">67%</p>
+          <div class="mt-3 h-2 overflow-hidden rounded-full bg-slate-100">
+            <div id="progressBar" class="progress-fill h-full rounded-full bg-blue-600" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="67"></div>
+          </div>
+        </article>
+        <article class="card-surface rounded-2xl border border-slate-200 p-5">
+          <p class="text-xs font-medium uppercase tracking-wider text-blue-700">上次閱讀</p>
+          <p id="lastReadAt" class="mt-2 text-lg font-semibold text-slate-900">今天 14:32</p>
+        </article>
+      </section>
+
+      <section class="card-surface mt-8 rounded-2xl border border-slate-200 p-6 md:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-sm font-medium text-blue-700">Pro 專屬設定</p>
+            <h2 class="mt-1 text-xl font-semibold text-slate-900">自訂快捷鍵</h2>
+            <p class="mt-2 text-sm text-slate-600">喺閱讀器撳「切換偽裝背景」隔離嘅漢堡選單，可以自訂所有快捷鍵。呢度可以先改 Panic Button，預設為空白鍵。</p>
+          </div>
+          <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">已解鎖</span>
+        </div>
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+          <label class="block text-left text-sm text-slate-700">
+            Panic Button 快捷鍵
+            <input id="panicKeyInput" type="text" readonly value="Space" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+          </label>
+          <div class="rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-left text-sm text-slate-700">
+            <p class="font-medium text-blue-700">雲端進度同步</p>
+            <p class="mt-1 text-slate-600">已開啟。閱讀進度會備份到雲端示範儲存，並保留本機副本。</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white px-5 py-8">
+    <div class="mx-auto flex max-w-content flex-col items-center justify-between gap-4 text-sm text-slate-600 md:flex-row">
+      <a href="index.html" class="hover:text-blue-700">← 返回產品官網</a>
+      <p>© 2026 Stealth Reader. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

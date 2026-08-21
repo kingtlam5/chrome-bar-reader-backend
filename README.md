@@ -6,11 +6,11 @@
 
 - `index.html` — 產品官網 Landing Page
 - `login.html` — 會員登入
-- `free.html` — 免費會員中心
-- `dashboard.html` — Pro 付費會員中心
+- `dashboard-free-version.html` — 免費會員中心
+- `dashboard-pro-version.html` — Pro 付費會員中心
 - `reader-free-version.html` — 免費版閱讀器（TXT、2 張背景、本機進度）
 - `reader-pro-version.html` — 付費版閱讀器（EPUB、簡轉繁、20 張背景、Panic Button 等）
-- `reader.html` — 舊連結，會轉去登入頁
+- `free.html` / `dashboard.html` / `reader.html` — 舊連結轉址
 - `js/landing.js` — Landing Page 互動
 - `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
 - `js/login.js` — 登入表單
@@ -29,10 +29,10 @@ python3 -m http.server 8765
 
 - 官網：http://localhost:8765/index.html
 - 登入：http://localhost:8765/login.html
-- 免費會員：http://localhost:8765/free.html
-- Pro 會員：http://localhost:8765/dashboard.html
+- 免費會員：http://localhost:8765/dashboard-free-version.html
+- Pro 會員：http://localhost:8765/dashboard-pro-version.html
 
-請用本地伺服器開啟，唔好直接雙擊 HTML。免費會員由 `free.html` 啟動閱讀器；Pro 由 `dashboard.html` 以無邊框視窗啟動。
+請用本地伺服器開啟，唔好直接雙擊 HTML。免費會員由免費會員中心啟動閱讀器；Pro 由付費會員中心以無邊框視窗啟動。
 
 ## 上傳偽裝背景
 
@@ -48,8 +48,9 @@ python3 -m http.server 8765
 |------|------|------|
 | 匯入 TXT | ★ 掣 | Free / Pro |
 | 匯入 EPUB | ★ 掣 | Pro |
-| 上一句 / 下一句 | Q / R 或 ← / → | Free / Pro |
-| 簡轉繁 | ⇄ 掣 | Pro |
-| Panic Button | 空白鍵（Pro 可於會員中心自訂） | Pro |
+| 上一句 / 下一句 | Q / R 或 ← / →（Pro 可自訂） | Free / Pro |
+| 簡轉繁 | ⇄ 掣（Pro 可自訂快捷鍵） | Pro |
+| Panic Button | 空白鍵（Pro 可自訂） | Pro |
+| 自訂快捷鍵 | ↻ 掣隔離嘅漢堡選單 | Pro |
 | 上傳背景 | B 掣 | Free 2 張 / Pro 20 張 |
 | 切換背景 | ↻ 掣 | Free / Pro |
