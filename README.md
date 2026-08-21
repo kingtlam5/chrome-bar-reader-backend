@@ -8,7 +8,9 @@
 - `login.html` — 會員登入
 - `free.html` — 免費會員中心
 - `dashboard.html` — Pro 付費會員中心
-- `reader.html` — 核心隱蔽閱讀器（登入後由會員中心啟動）
+- `reader-free-version.html` — 免費版閱讀器（TXT、2 張背景、本機進度）
+- `reader-pro-version.html` — 付費版閱讀器（EPUB、簡轉繁、20 張背景、Panic Button 等）
+- `reader.html` — 舊連結，會轉去登入頁
 - `js/landing.js` — Landing Page 互動
 - `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
 - `js/login.js` — 登入表單
@@ -30,9 +32,11 @@ python3 -m http.server 8765
 - 免費會員：http://localhost:8765/free.html
 - Pro 會員：http://localhost:8765/dashboard.html
 
+請用本地伺服器開啟，唔好直接雙擊 HTML。免費會員由 `free.html` 啟動閱讀器；Pro 由 `dashboard.html` 以無邊框視窗啟動。
+
 ## 上傳偽裝背景
 
-1. 準備最多 **20 張**全螢幕截圖
+1. 免費版最多 **2 張**；Pro 最多 **20 張**全螢幕截圖
 2. 撳右上角紫色 **B** 掣（或 Shift + ↻）
 3. 一次過選取圖片（按選取順序填入第 1 至第 N 格）
 4. 未上傳任何圖片時，下方顯示空白畫面
@@ -40,12 +44,12 @@ python3 -m http.server 8765
 
 ## 基本操作
 
-| 操作 | 方法 |
-|------|------|
-| 匯入書 | ★ 掣 |
-| 上一句 / 下一句 | Q / R 或 ← / → |
-| 簡轉繁 | ⇄ 掣 |
-| 老闆模式 | 空白鍵 |
-| 全螢幕彈出視窗 | 拼圖掣 |
-| 上傳背景 | B 掣 |
-| 切換背景 | ↻ 掣 |
+| 操作 | 方法 | 方案 |
+|------|------|------|
+| 匯入 TXT | ★ 掣 | Free / Pro |
+| 匯入 EPUB | ★ 掣 | Pro |
+| 上一句 / 下一句 | Q / R 或 ← / → | Free / Pro |
+| 簡轉繁 | ⇄ 掣 | Pro |
+| Panic Button | 空白鍵（Pro 可於會員中心自訂） | Pro |
+| 上傳背景 | B 掣 | Free 2 張 / Pro 20 張 |
+| 切換背景 | ↻ 掣 | Free / Pro |
