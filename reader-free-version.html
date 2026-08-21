@@ -1,9 +1,12 @@
 <!doctype html>
-<html lang="zh-Hant" class="compact">
+<html lang="zh-Hant" class="compact reader-login-locked">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notes - Task List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --compact-height: 52px;
@@ -326,10 +329,241 @@
       height: 18px;
       fill: currentColor;
     }
+
+    html.reader-login-locked .memo {
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    .reader-login-gate {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2147483647;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.55);
+      font-family: "Bricolage Grotesque", "Noto Sans TC", sans-serif;
+      color: #0f172a;
+    }
+
+    html.reader-login-locked .reader-login-gate {
+      display: flex !important;
+    }
+
+    .reader-login-card {
+      width: min(420px, 100%);
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      border-radius: 24px;
+      background: #ffffff;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+    }
+
+    .reader-login-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 20px;
+      background: #1d4ed8;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .reader-login-logo {
+      display: flex;
+      width: 32px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #1d4ed8;
+      font-size: 12px;
+    }
+
+    .reader-login-body {
+      padding: 24px 28px 28px;
+    }
+
+    .reader-login-kicker {
+      margin: 0;
+      color: #1d4ed8;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .reader-login-body h1 {
+      margin: 8px 0 0;
+      color: #0f172a;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      word-break: keep-all;
+    }
+
+    .reader-login-body > p {
+      margin: 10px 0 0;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    .reader-login-form {
+      display: grid;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .reader-login-form label {
+      display: block;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 500;
+      word-break: keep-all;
+    }
+
+    .reader-login-form input {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #0f172a;
+      font: inherit;
+      outline: none;
+    }
+
+    .reader-login-form input:focus {
+      border-color: #60a5fa;
+    }
+
+    .reader-login-error {
+      margin: 0;
+      color: #b91c1c;
+      font-size: 13px;
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+
+    .reader-login-error[hidden] {
+      display: none !important;
+    }
+
+    .reader-login-submit {
+      display: inline-flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      margin-top: 4px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 999px;
+      background: #2563eb;
+      color: #ffffff;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.28);
+    }
+
+    .reader-login-submit:hover {
+      background: #3b82f6;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.36);
+    }
   </style>
 </head>
 <body class="compact">
-  <main class="memo" id="memo" aria-label="隱蔽文字閱讀器">
+  <div id="readerLoginGate" class="reader-login-gate" role="dialog" aria-modal="true" aria-labelledby="readerLoginTitle">
+    <section class="reader-login-card">
+      <header class="reader-login-header">
+        <span class="reader-login-logo">SR</span>
+        Stealth Reader
+      </header>
+      <div class="reader-login-body">
+        <p class="reader-login-kicker">Free Login</p>
+        <h1 id="readerLoginTitle">登入後即可使用閱讀器</h1>
+        <p>每次開啟均須輸入用戶名稱及密碼。此為靜態示範，用戶名稱與密碼均為 testing。</p>
+        <form id="readerLoginForm" class="reader-login-form">
+          <label>
+            用戶名稱
+            <input id="readerLoginUsername" name="username" type="text" required autocomplete="username" spellcheck="false">
+          </label>
+          <label>
+            密碼
+            <input id="readerLoginPassword" name="password" type="password" required autocomplete="current-password">
+          </label>
+          <p id="readerLoginError" class="reader-login-error" hidden></p>
+          <button type="submit" class="reader-login-submit">登入</button>
+        </form>
+      </div>
+    </section>
+  </div>
+  <script>
+    (() => {
+      const DEMO_USERNAME = "testing";
+      const DEMO_PASSWORD = "testing";
+      const html = document.documentElement;
+      const gate = document.getElementById("readerLoginGate");
+      const form = document.getElementById("readerLoginForm");
+      const usernameInput = document.getElementById("readerLoginUsername");
+      const passwordInput = document.getElementById("readerLoginPassword");
+      const errorEl = document.getElementById("readerLoginError");
+      let locked = true;
+
+      html.classList.add("reader-login-locked");
+
+      function unlockReader() {
+        locked = false;
+        html.classList.remove("reader-login-locked");
+        const memo = document.getElementById("memo");
+        if (memo) {
+          memo.removeAttribute("aria-hidden");
+          memo.removeAttribute("inert");
+        }
+      }
+
+      function blockWhileLocked(event) {
+        if (!locked) return;
+        if (gate && gate.contains(event.target)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+      }
+
+      ["keydown", "keyup", "keypress", "wheel", "mousedown", "pointerdown"].forEach((type) => {
+        document.addEventListener(type, blockWhileLocked, true);
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const username = (usernameInput.value || "").trim();
+        const password = passwordInput.value || "";
+        if (username === DEMO_USERNAME && password === DEMO_PASSWORD) {
+          if (errorEl) {
+            errorEl.hidden = true;
+            errorEl.textContent = "";
+          }
+          unlockReader();
+          return;
+        }
+        if (errorEl) {
+          errorEl.hidden = false;
+          errorEl.textContent = "用戶名稱或密碼不正確。";
+        }
+        passwordInput.focus();
+        passwordInput.select();
+      });
+
+      usernameInput.focus();
+    })();
+  </script>
+  <main class="memo" id="memo" aria-label="隱蔽文字閱讀器" aria-hidden="true" inert>
     <div class="chrome-shell" id="chromeShell">
       <header class="chrome-toolbar" id="chromeToolbar" aria-label="Chrome 工具列（偽裝）">
         <div class="chrome-nav-group">
