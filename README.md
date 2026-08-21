@@ -10,7 +10,7 @@
 - `payment.html` — Pro 付款閘道參考頁（尚未接駁真實付款）
 - `dashboard-free-version.html` — 免費會員中心
 - `dashboard-pro-version.html` — Pro 付費會員中心
-- `reader-free-version.html` — 免費版閱讀器（TXT、2 張背景、本機進度）
+- `reader-free-version.html` — 免費版閱讀器（TXT、2 張背景、本機進度；開啟時須以 testing / testing 登入）
 - `reader-pro-version.html` — 付費版閱讀器（EPUB、簡轉繁、20 張背景、Panic Button 等；開啟時須以 testing / testing 登入）
 - `guide.html` — 免費版 / Pro 版閱讀器使用說明
 - `js/landing.js` — Landing Page 互動
