@@ -162,6 +162,60 @@
   renderReadingCard();
   renderPanicKey();
   initRequestModal();
+  initAccountModals();
+
+  function bindModal(modal, closeAttr) {
+    if (!modal) return { open() {}, close() {} };
+
+    function open() {
+      modal.classList.remove("hidden");
+    }
+
+    function close() {
+      modal.classList.add("hidden");
+    }
+
+    modal.addEventListener("click", (event) => {
+      if (event.target.closest(`[${closeAttr}]`)) close();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !modal.classList.contains("hidden")) {
+        close();
+      }
+    });
+
+    return { open, close };
+  }
+
+  function initAccountModals() {
+    const passwordModal = document.getElementById("changePasswordModal");
+    const passwordForm = document.getElementById("changePasswordForm");
+    const passwordFormWrap = document.getElementById("changePasswordFormWrap");
+    const passwordFail = document.getElementById("changePasswordFail");
+    const paymentModal = document.getElementById("paymentGatewayModal");
+    const passwordUi = bindModal(passwordModal, "data-close-change-password");
+    const paymentUi = bindModal(paymentModal, "data-close-payment-gateway");
+
+    document.querySelectorAll("[data-open-change-password]").forEach((button) => {
+      button.addEventListener("click", () => {
+        passwordForm?.reset();
+        passwordFormWrap?.classList.remove("hidden");
+        passwordFail?.classList.add("hidden");
+        passwordUi.open();
+      });
+    });
+
+    document.querySelectorAll("[data-open-payment-gateway]").forEach((button) => {
+      button.addEventListener("click", () => paymentUi.open());
+    });
+
+    passwordForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      passwordFormWrap?.classList.add("hidden");
+      passwordFail?.classList.remove("hidden");
+    });
+  }
 
   function initRequestModal() {
     const modal = document.getElementById("requestModal");
