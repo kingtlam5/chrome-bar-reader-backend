@@ -16,7 +16,7 @@
 - `js/landing.js` — Landing Page 互動
 - `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
 - `js/login.js` — 登入表單
-- `js/register.js` — 註冊表單（免費示範登入／Pro 前往付款頁）
+- `js/register.js` — 註冊表單（免費顯示未接 API 提示／Pro 前往付款頁）
 - `js/dashboard.js` — 啟動閱讀視窗（Free 一般視窗 / Pro 無邊框 Popup）
 - `js/guide.js` — 使用說明頁 Free / Pro 切換
 - `css/style.css` — 共用樣式

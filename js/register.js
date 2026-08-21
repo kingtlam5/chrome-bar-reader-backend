@@ -5,8 +5,10 @@
   const form = document.getElementById("registerForm");
   const nameInput = document.getElementById("registerName");
   const emailInput = document.getElementById("registerEmail");
-  const freeBtn = document.getElementById("registerFreeBtn");
+  const freeWrap = document.getElementById("registerFreeWrap");
+  const payWrap = document.getElementById("registerPayWrap");
   const payBtn = document.getElementById("registerPayBtn");
+  const failModal = document.getElementById("registerFailModal");
   const planInputs = Array.from(document.querySelectorAll('input[name="plan"]'));
 
   function selectedPlan() {
@@ -15,8 +17,8 @@
 
   function updateCta() {
     const isPro = selectedPlan() === "pro";
-    if (freeBtn) freeBtn.hidden = isPro;
-    if (payBtn) payBtn.hidden = !isPro;
+    freeWrap?.classList.toggle("hidden", isPro);
+    payWrap?.classList.toggle("hidden", !isPro);
   }
 
   function collectProfile() {
@@ -28,10 +30,12 @@
     };
   }
 
-  function savePendingSignup(profile) {
-    // Placeholder until the member database is connected.
-    // Do not persist the password in the browser.
-    localStorage.setItem(PENDING_KEY, JSON.stringify(profile));
+  function openFailModal() {
+    failModal?.classList.remove("hidden");
+  }
+
+  function closeFailModal() {
+    failModal?.classList.add("hidden");
   }
 
   function preselectPlanFromQuery() {
@@ -41,7 +45,6 @@
     const proInput = planInputs.find((input) => input.value === "pro");
     if (proInput) {
       proInput.checked = true;
-      updateCta();
     }
   }
 
@@ -53,25 +56,28 @@
     event.preventDefault();
     if (selectedPlan() !== "free") return;
     if (!form.reportValidity()) return;
-
-    const profile = collectProfile();
-    // TODO: POST name / email / password to the member database, then sign in.
-    savePendingSignup(profile);
-    window.StealthAuth?.set({
-      email: profile.email,
-      name: profile.name,
-      plan: "free"
-    });
-    window.location.href = "dashboard-free-version.html";
+    // No member API yet: do not send or store signup data.
+    openFailModal();
   });
 
   payBtn?.addEventListener("click", () => {
     if (!form?.reportValidity()) return;
     const profile = collectProfile();
     profile.plan = "pro";
-    savePendingSignup(profile);
-    // Placeholder payment gateway page. Replace with the real checkout URL later.
+    localStorage.setItem(PENDING_KEY, JSON.stringify(profile));
     window.location.href = "payment.html";
+  });
+
+  failModal?.addEventListener("click", (event) => {
+    if (event.target.closest("[data-close-register-fail]")) {
+      closeFailModal();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && failModal && !failModal.classList.contains("hidden")) {
+      closeFailModal();
+    }
   });
 
   preselectPlanFromQuery();
