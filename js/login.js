@@ -11,17 +11,37 @@
     return value || "user@example.com";
   }
 
+  function usernameFromEmail(email) {
+    const at = email.indexOf("@");
+    return at > 0 ? email.slice(0, at) : email;
+  }
+
+  function memberProfile(plan) {
+    const email = emailFromForm();
+    const profile = {
+      email,
+      username: usernameFromEmail(email),
+      plan
+    };
+    if (plan === "pro") {
+      const next = new Date();
+      next.setMonth(next.getMonth() + 1);
+      profile.nextPaymentAt = next.toISOString();
+    }
+    return profile;
+  }
+
   form?.addEventListener("submit", (event) => {
     event.preventDefault();
-    window.StealthAuth?.set({ email: emailFromForm(), plan: "free" });
+    window.StealthAuth?.set(memberProfile("free"));
     window.location.href = "dashboard-free-version.html";
   });
 
   previewFree?.addEventListener("click", () => {
-    window.StealthAuth?.set({ email: emailFromForm(), plan: "free" });
+    window.StealthAuth?.set(memberProfile("free"));
   });
 
   previewPro?.addEventListener("click", () => {
-    window.StealthAuth?.set({ email: emailFromForm(), plan: "pro" });
+    window.StealthAuth?.set(memberProfile("pro"));
   });
 })();
