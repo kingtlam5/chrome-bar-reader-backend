@@ -6,6 +6,8 @@
 
 - `index.html` — 產品官網 Landing Page
 - `login.html` — 會員登入
+- `register.html` — 免費／Pro 註冊（示範；尚未接駁會員資料庫）
+- `payment.html` — Pro 付款閘道參考頁（尚未接駁真實付款）
 - `dashboard-free-version.html` — 免費會員中心
 - `dashboard-pro-version.html` — Pro 付費會員中心
 - `reader-free-version.html` — 免費版閱讀器（TXT、2 張背景、本機進度）
@@ -14,6 +16,7 @@
 - `js/landing.js` — Landing Page 互動
 - `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
 - `js/login.js` — 登入表單
+- `js/register.js` — 註冊表單（免費示範登入／Pro 前往付款頁）
 - `js/dashboard.js` — 啟動閱讀視窗（Free 一般視窗 / Pro 無邊框 Popup）
 - `js/guide.js` — 使用說明頁 Free / Pro 切換
 - `css/style.css` — 共用樣式
@@ -30,6 +33,7 @@ python3 -m http.server 8765
 
 - 官網：http://localhost:8765/index.html
 - 登入：http://localhost:8765/login.html
+- 註冊：http://localhost:8765/register.html
 - 免費會員：http://localhost:8765/dashboard-free-version.html
 - Pro 會員：http://localhost:8765/dashboard-pro-version.html
 - 使用說明：http://localhost:8765/guide.html

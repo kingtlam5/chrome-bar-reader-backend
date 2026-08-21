@@ -3,8 +3,8 @@
 
   const form = document.getElementById("loginForm");
   const emailInput = document.getElementById("loginEmail");
-  const registerLink = document.getElementById("registerLink");
-  const proLink = document.getElementById("proLoginLink");
+  const previewFree = document.getElementById("previewFreeLink");
+  const previewPro = document.getElementById("previewProLink");
 
   function emailFromForm() {
     const value = (emailInput?.value || "").trim();
@@ -17,11 +17,11 @@
     window.location.href = "dashboard-free-version.html";
   });
 
-  registerLink?.addEventListener("click", () => {
+  previewFree?.addEventListener("click", () => {
     window.StealthAuth?.set({ email: emailFromForm(), plan: "free" });
   });
 
-  proLink?.addEventListener("click", () => {
+  previewPro?.addEventListener("click", () => {
     window.StealthAuth?.set({ email: emailFromForm(), plan: "pro" });
   });
 })();
