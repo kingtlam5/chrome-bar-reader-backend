@@ -10,6 +10,7 @@
 - `dashboard-pro-version.html` — Pro 付費會員中心
 - `reader-free-version.html` — 免費版閱讀器（TXT、2 張背景、本機進度）
 - `reader-pro-version.html` — 付費版閱讀器（EPUB、簡轉繁、20 張背景、Panic Button 等）
+- `guide.html` — 免費版 / Pro 版閱讀器使用說明
 - `js/landing.js` — Landing Page 互動
 - `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
 - `js/login.js` — 登入表單
@@ -30,6 +31,7 @@ python3 -m http.server 8765
 - 登入：http://localhost:8765/login.html
 - 免費會員：http://localhost:8765/dashboard-free-version.html
 - Pro 會員：http://localhost:8765/dashboard-pro-version.html
+- 使用說明：http://localhost:8765/guide.html
 
 請用本地伺服器開啟，唔好直接雙擊 HTML。免費會員由免費會員中心啟動閱讀器；Pro 由付費會員中心以無邊框視窗啟動。
 

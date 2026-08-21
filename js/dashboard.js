@@ -147,4 +147,63 @@
 
   renderReadingCard();
   renderPanicKey();
+  initRequestModal();
+
+  function initRequestModal() {
+    const modal = document.getElementById("requestModal");
+    const openBtn = document.getElementById("requestFeatureBtn");
+    const form = document.getElementById("requestFeatureForm");
+    const formWrap = document.getElementById("requestFormWrap");
+    const success = document.getElementById("requestSuccess");
+    const emailInput = document.getElementById("requestEmail");
+    if (!modal || !openBtn || !form) return;
+
+    function openModal() {
+      const auth = window.StealthAuth?.get();
+      if (emailInput && auth?.email && !emailInput.value) {
+        emailInput.value = auth.email;
+      }
+      formWrap?.classList.remove("hidden");
+      success?.classList.add("hidden");
+      modal.classList.remove("hidden");
+    }
+
+    function closeModal() {
+      modal.classList.add("hidden");
+    }
+
+    openBtn.addEventListener("click", openModal);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target.closest("[data-close-request-modal]")) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !modal.classList.contains("hidden")) {
+        closeModal();
+      }
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const payload = {
+        name: document.getElementById("requestName")?.value.trim() || "",
+        email: document.getElementById("requestEmail")?.value.trim() || "",
+        message: document.getElementById("requestMessage")?.value.trim() || "",
+        createdAt: new Date().toISOString()
+      };
+      try {
+        const existing = JSON.parse(localStorage.getItem("stealthReader.featureRequests") || "[]");
+        existing.push(payload);
+        localStorage.setItem("stealthReader.featureRequests", JSON.stringify(existing));
+      } catch (error) {
+        // 示範環境仍顯示成功畫面，避免打斷客人。
+      }
+      form.reset();
+      formWrap?.classList.add("hidden");
+      success?.classList.remove("hidden");
+    });
+  }
 })();

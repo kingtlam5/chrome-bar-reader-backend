@@ -72,9 +72,12 @@
         <p class="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-600">
           點擊後將以獨立無邊框視窗開啟閱讀器，自動隱藏瀏覽器原生網址列。
         </p>
-        <button id="launchReaderBtn" type="button" class="launch-pulse glow-btn mt-8 inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-4 text-base font-semibold text-white hover:bg-blue-500">
-          🚀 啟動隱蔽閱讀器 (Launch Stealth Reader)
-        </button>
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <button id="launchReaderBtn" type="button" class="launch-pulse glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-4 text-base font-semibold text-white hover:bg-blue-500">
+            🚀 啟動隱蔽閱讀器 (Launch Stealth Reader)
+          </button>
+          <a href="guide.html#pro" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-4 text-base font-semibold text-slate-800 hover:border-blue-300 hover:text-blue-700">使用說明</a>
+        </div>
       </section>
 
       <section class="mt-8 grid gap-4 md:grid-cols-3">
@@ -96,27 +99,77 @@
       </section>
 
       <section class="card-surface mt-8 rounded-2xl border border-slate-200 p-6 md:p-8">
-        <div class="flex items-start justify-between gap-4">
+        <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
           <div>
             <p class="text-sm font-medium text-blue-700">Pro 專屬設定</p>
-            <h2 class="mt-1 text-xl font-semibold text-slate-900">自訂快捷鍵</h2>
-            <p class="mt-2 text-sm text-slate-600">喺閱讀器撳上傳背景（B）右邊嘅漢堡選單，可以自訂所有快捷鍵同 Panic 顯示文字。設定會自動保存。呢度可以先改 Panic Button，預設為空白鍵。</p>
+            <h2 class="mt-1 text-xl font-semibold text-slate-900">你已解鎖全部 Pro 功能</h2>
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+              EPUB、簡轉繁、20 張偽裝背景、無邊框視窗、Panic Button、雲端同步、自訂快捷鍵同 Panic 顯示文字都已經可以使用。如果仲需要其他功能，可以提出請求，我們會有專人聯絡你跟進。
+            </p>
           </div>
-          <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">已解鎖</span>
+          <span class="shrink-0 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">已全部解鎖</span>
         </div>
-        <div class="mt-6 grid gap-4 md:grid-cols-2">
-          <label class="block text-left text-sm text-slate-700">
-            Panic Button 快捷鍵
-            <input id="panicKeyInput" type="text" readonly value="Space" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
-          </label>
-          <div class="rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-left text-sm text-slate-700">
-            <p class="font-medium text-blue-700">雲端進度同步</p>
-            <p class="mt-1 text-slate-600">已開啟。閱讀進度會備份到雲端示範儲存，並保留本機副本。</p>
-          </div>
+        <ul class="mt-6 grid gap-3 text-sm text-slate-700 sm:grid-cols-2">
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">EPUB 檔案支援</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">簡體轉繁體</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">偽裝背景上限 20 張</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">無邊框偽裝視窗</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">Panic Button 一鍵轉換</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">雲端進度同步</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">自訂快捷鍵</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">自訂 Panic 顯示文字</li>
+        </ul>
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <button id="requestFeatureBtn" type="button" class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+            提出功能請求
+          </button>
+          <p class="text-sm text-slate-500">提交後會有專人用你提供嘅電郵聯絡跟進。</p>
         </div>
       </section>
     </div>
   </main>
+
+  <div id="requestModal" class="sr-site-modal hidden" role="dialog" aria-modal="true" aria-labelledby="requestModalTitle">
+    <div class="sr-site-modal-backdrop" data-close-request-modal></div>
+    <section class="sr-site-modal-card">
+      <header class="sr-site-modal-header">
+        <div class="flex items-center gap-2.5 font-semibold">
+          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-sm text-blue-700">SR</span>
+          功能請求
+        </div>
+        <button type="button" class="sr-site-modal-close" data-close-request-modal aria-label="關閉">×</button>
+      </header>
+      <div class="p-6 md:p-8">
+        <div id="requestFormWrap">
+          <h2 id="requestModalTitle" class="text-xl font-bold text-slate-900">想要其他功能？告訴我們</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600">填寫你的資料同需求。提交後會有專人聯絡你，跟進可行性同時間表。</p>
+          <form id="requestFeatureForm" class="mt-6 space-y-4">
+            <label class="block text-sm font-medium text-slate-700">
+              姓名
+              <input id="requestName" name="name" type="text" required autocomplete="name" placeholder="陳大文" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+            </label>
+            <label class="block text-sm font-medium text-slate-700">
+              電郵
+              <input id="requestEmail" name="email" type="email" required autocomplete="email" placeholder="you@example.com" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+            </label>
+            <label class="block text-sm font-medium text-slate-700">
+              功能請求
+              <textarea id="requestMessage" name="message" required rows="4" placeholder="例如：希望支援 PDF、或者可以自訂偽裝網址列字型……" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400"></textarea>
+            </label>
+            <button type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+              提交請求
+            </button>
+          </form>
+        </div>
+        <div id="requestSuccess" class="hidden text-center">
+          <p class="text-sm font-medium text-blue-700">已收到</p>
+          <h2 class="mt-2 text-xl font-bold text-slate-900">我們會有專人同你聯絡</h2>
+          <p class="mt-3 text-sm leading-6 text-slate-600">多謝你的功能請求。團隊會用你提供嘅電郵跟進，了解你需要嘅功能同使用場景。</p>
+          <button type="button" data-close-request-modal class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">完成</button>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <footer class="border-t border-slate-200 bg-white px-5 py-8">
     <div class="mx-auto flex max-w-content flex-col items-center justify-between gap-4 text-sm text-slate-600 md:flex-row">
