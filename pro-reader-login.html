@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="theme-light bg-white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Pro 登入｜Stealth Reader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: "#eff6ff", 100: "#dbeafe", 500: "#3b82f6", 600: "#2563eb", 700: "#1d4ed8" }
+          },
+          fontFamily: {
+            sans: ['"Bricolage Grotesque"', '"Noto Sans TC"', "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html, body {
+      background-color: #ffffff;
+      color: #0f172a;
+      color-scheme: light;
+    }
+  </style>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-pro-login-page="1" class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
+  <header class="bg-blue-700 text-white">
+    <div class="flex items-center gap-2.5 px-5 py-4 font-semibold tracking-tight">
+      <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-sm text-blue-700">SR</span>
+      <span>Stealth Reader</span>
+    </div>
+  </header>
+
+  <main class="hero-wash min-h-[calc(100vh-64px)] px-5 py-8">
+    <section class="card-surface mx-auto w-full max-w-sm rounded-3xl border border-slate-200 p-6">
+      <p class="text-sm font-medium text-blue-700">Pro Login</p>
+      <h1 class="mt-2 text-2xl font-bold tracking-tight text-slate-900">登入後即可使用閱讀器</h1>
+      <p class="mt-2 text-sm leading-6 text-slate-600">每次開啟 Pro 閱讀器均須登入。此為靜態示範，用戶名稱與密碼均為 testing。</p>
+
+      <form id="proReaderLoginForm" class="mt-6 space-y-4">
+        <label class="block text-sm font-medium text-slate-700">
+          用戶名稱
+          <input id="proReaderUsername" name="username" type="text" required autocomplete="username" spellcheck="false" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+        </label>
+        <label class="block text-sm font-medium text-slate-700">
+          密碼
+          <input id="proReaderPassword" name="password" type="password" required autocomplete="current-password" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+        </label>
+        <p id="proReaderLoginError" class="text-sm text-red-700" hidden></p>
+        <button type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+          登入
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/pro-reader-login.js"></script>
+</body>
+</html>

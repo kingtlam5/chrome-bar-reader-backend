@@ -19,9 +19,7 @@
     }
   }
 
-  function openProReaderWindow(url) {
-    const width = Math.floor(window.screen.availWidth * 0.92);
-    const height = Math.floor(window.screen.availHeight * 0.92);
+  function openCenteredPopup(url, name, width, height) {
     const left = Math.floor((window.screen.availWidth - width) / 2) + (window.screen.availLeft || 0);
     const top = Math.floor((window.screen.availHeight - height) / 2) + (window.screen.availTop || 0);
     const features = [
@@ -30,15 +28,14 @@
       "toolbar=no",
       "menubar=no",
       "status=no",
-      "scrollbars=no",
+      "scrollbars=yes",
       "resizable=yes",
       `width=${width}`,
       `height=${height}`,
       `left=${left}`,
       `top=${top}`
     ].join(",");
-
-    return window.open(url, "StealthReaderWindow", features);
+    return window.open(url, name, features);
   }
 
   function launchReader() {
@@ -53,11 +50,17 @@
       return;
     }
 
-    const url = readerUrl("reader-pro-version.html?popup=1");
-    const popup = openProReaderWindow(url);
-    if (!popup) {
+    const loginPopup = openCenteredPopup(
+      readerUrl("pro-reader-login.html"),
+      "StealthReaderLogin",
+      440,
+      640
+    );
+    if (!loginPopup) {
       alert("無法開啟彈出視窗。請允許此網站的彈出視窗後再試。");
+      return;
     }
+    loginPopup.focus();
   }
 
   function formatLastRead(timestamp) {

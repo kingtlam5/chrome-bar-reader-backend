@@ -12,13 +12,14 @@
 - `dashboard-pro-version.html` — Pro 付費會員中心
 - `reader-free-version.html` — 免費版閱讀器（TXT、2 張背景、本機進度）
 - `reader-pro-version.html` — 付費版閱讀器（EPUB、簡轉繁、20 張背景、Panic Button 等）
+- `pro-reader-login.html` — Pro 閱讀器登入彈出視窗（示範帳密：testing / testing）
 - `guide.html` — 免費版 / Pro 版閱讀器使用說明
 - `js/landing.js` — Landing Page 互動
 - `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
 - `js/login.js` — 登入表單
 - `js/register.js` — 註冊表單（免費顯示未接 API 提示／Pro 前往付款頁）
 - `js/dashboard.js` — 啟動閱讀視窗（Free 一般分頁 / Pro 獨立彈出視窗）
-- `js/pro-reader-login.js` — Pro 閱讀器開啟時的登入彈窗（示範帳密：testing / testing）
+- `js/pro-reader-login.js` — Pro 登入彈窗與閱讀器登入閘
 - `js/guide.js` — 使用說明頁 Free / Pro 切換
 - `css/style.css` — 共用樣式
 
