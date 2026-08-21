@@ -13,6 +13,9 @@
 - `reader-free-version.html` — 免費版閱讀器（TXT、2 張背景、本機進度）
 - `reader-pro-version.html` — 付費版閱讀器（EPUB、簡轉繁、20 張背景、Panic Button 等）
 - `guide.html` — 免費版 / Pro 版閱讀器使用說明
+- `manifest.json` — Pro 閱讀器獨立視窗（PWA，效果等同 Chrome --app=）
+- `sw.js` — PWA 安裝所需的 Service Worker
+- `js/pwa.js` — 註冊 Service Worker 與安裝提示
 - `js/landing.js` — Landing Page 互動
 - `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
 - `js/login.js` — 登入表單
@@ -38,7 +41,7 @@ python3 -m http.server 8765
 - Pro 會員：http://localhost:8765/dashboard-pro-version.html
 - 使用說明：http://localhost:8765/guide.html
 
-請以本地伺服器開啟，請勿直接雙擊 HTML。免費會員由免費會員中心啟動閱讀器；Pro 由付費會員中心以無邊框視窗啟動。
+請以本地伺服器開啟，請勿直接雙擊 HTML。免費會員由免費會員中心啟動閱讀器；Pro 由付費會員中心啟動。若要隱藏 Chrome 網址列，請在 Pro 頁安裝為獨立應用程式（等同 chrome.exe --app=）。
 
 ## 上傳偽裝背景
 
