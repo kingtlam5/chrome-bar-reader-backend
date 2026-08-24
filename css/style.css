@@ -19,12 +19,14 @@ html {
 }
 
 html.theme-light {
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 body.theme-light {
+  width: 100%;
   max-width: 100%;
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 body {
@@ -73,7 +75,15 @@ h4 {
 h1,
 h2,
 h3 {
-  text-wrap: pretty;
+  text-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  h1,
+  h2,
+  h3 {
+    text-wrap: pretty;
+  }
 }
 
 .theme-light header,
@@ -118,27 +128,40 @@ body.theme-light {
 }
 
 @media (max-width: 767px) {
-  p,
-  li,
-  dd,
-  dt,
-  td,
-  th,
-  label,
-  legend,
-  blockquote,
-  h1,
-  h2,
-  h3,
-  h4 {
-    word-break: break-word;
-    overflow-wrap: anywhere;
-    line-break: anywhere;
+  html.theme-light,
+  body.theme-light {
+    overflow: visible;
   }
 
-  .chrome-mock .flex {
-    min-width: 0;
+  #pain,
+  #features,
+  .hero-wash {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  #pain h2,
+  #features h2 {
+    font-size: 1.25rem;
+    line-height: 1.4;
     max-width: 100%;
+  }
+
+  #pain li,
+  #features li,
+  #pain p,
+  #features p,
+  .hero-wash p,
+  .hero-wash li,
+  .hero-wash h1,
+  .hero-wash h2 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .feature-art {
+    max-height: none;
   }
 }
 
@@ -176,7 +199,20 @@ body.theme-light {
 }
 
 .feature-art {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
   max-height: 120px;
+}
+
+.theme-light article,
+.theme-light svg,
+.theme-light ul,
+.theme-light li {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .faq-trigger {
