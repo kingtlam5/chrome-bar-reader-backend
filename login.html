@@ -34,7 +34,7 @@
       color-scheme: light;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header class="bg-blue-700 text-white">
@@ -48,26 +48,26 @@
   </header>
 
   <main class="hero-wash">
-    <div class="mx-auto grid max-w-content items-start gap-8 px-5 py-8 md:gap-10 md:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-      <section class="order-2 min-w-0 lg:order-1">
+    <div class="mx-auto flex max-w-content flex-col-reverse gap-8 px-5 py-8 md:gap-10 md:py-20 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      <section class="min-w-0">
         <p class="text-sm font-medium text-blue-700">Member Login</p>
-        <h1 class="mt-2 max-w-full text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl">登入後即可開啟閱讀器</h1>
+        <h1 class="mt-2 max-w-full text-xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl">登入後即可開啟閱讀器</h1>
         <p class="mt-4 max-w-full text-sm leading-7 text-slate-600 md:max-w-lg md:text-base">
           訪客無法直接進入程式。登入後將以免費會員開始：TXT 閱讀、2 張偽裝背景、本機進度。如需 EPUB、簡轉繁、獨立彈出視窗、Panic Button 及雲端同步，可再升級 Pro。
         </p>
         <ul class="mt-8 space-y-3 text-sm text-slate-700">
-          <li class="flex gap-3">
+          <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">1</span>
-            免費會員：基本閱讀、TXT、2 張背景、本機進度
+            <span class="min-w-0 flex-1">免費會員：基本閱讀、TXT、2 張背景、本機進度</span>
           </li>
-          <li class="flex gap-3">
+          <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">2</span>
-            Pro 會員：$2.99／月，解鎖 EPUB、簡轉繁、獨立彈出視窗與 Panic Button
+            <span class="min-w-0 flex-1">Pro 會員：$2.99／月，解鎖 EPUB、簡轉繁、獨立彈出視窗與 Panic Button</span>
           </li>
         </ul>
       </section>
 
-      <section class="card-surface order-1 w-full rounded-3xl border border-slate-200 p-5 sm:p-8 md:p-10 lg:order-2">
+      <section class="card-surface min-w-0 w-full rounded-3xl border border-slate-200 p-5 sm:p-8 md:p-10">
         <h2 class="text-xl font-bold tracking-tight text-slate-900">登入會員中心</h2>
         <p class="mt-2 text-sm leading-6 text-slate-600">請使用電郵及密碼登入。此為靜態示範，任何有效電郵格式均可進入。</p>
 

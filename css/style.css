@@ -19,12 +19,14 @@ html {
 }
 
 html.theme-light {
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 body.theme-light {
+  width: 100%;
   max-width: 100%;
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 body {
@@ -73,7 +75,15 @@ h4 {
 h1,
 h2,
 h3 {
-  text-wrap: pretty;
+  text-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  h1,
+  h2,
+  h3 {
+    text-wrap: pretty;
+  }
 }
 
 .theme-light header,
@@ -176,7 +186,20 @@ body.theme-light {
 }
 
 .feature-art {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
   max-height: 120px;
+}
+
+.theme-light article,
+.theme-light svg,
+.theme-light ul,
+.theme-light li {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .faq-trigger {
