@@ -477,13 +477,37 @@
       box-shadow: 0 12px 28px rgba(37, 99, 235, 0.36);
     }
   </style>
+  <link rel="stylesheet" href="css/readbar-device-notice.css">
 </head>
 <body class="compact">
+  <div id="readbarDeviceNotice" class="rb-device-notice" hidden>
+    <div class="rb-device-notice-header">
+      <span class="rb-device-notice-mark">Rb</span>
+      Readbar
+    </div>
+    <section class="rb-device-notice-card" role="status" aria-labelledby="readbarDeviceTitle">
+      <header class="rb-device-notice-card-head">
+        <span class="rb-device-notice-mark">Rb</span>
+        Readbar
+      </header>
+      <div class="rb-device-notice-body">
+        <p class="rb-device-notice-kicker">Office desktop</p>
+        <h1 id="readbarDeviceTitle">請改用電腦開啟閱讀器</h1>
+        <p>Readbar 專為辦公室電腦瀏覽器而設，讓閱讀融入工作畫面。手機或平板的螢幕與操作方式並不適用，因此無法在流動裝置開啟閱讀器。</p>
+        <p>請改以電腦登入會員中心後再啟動。</p>
+        <div class="rb-device-notice-actions">
+          <a class="rb-device-notice-primary" href="index.html">返回產品官網</a>
+          <a class="rb-device-notice-secondary" href="login.html">前往登入</a>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="js/readbar-device-notice.js"></script>
   <div id="readerLoginGate" class="reader-login-gate" role="dialog" aria-modal="true" aria-labelledby="readerLoginTitle">
     <section class="reader-login-card">
       <header class="reader-login-header">
-        <span class="reader-login-logo">SR</span>
-        Stealth Reader
+        <span class="reader-login-logo">Rb</span>
+        Readbar
       </header>
       <div class="reader-login-body">
         <p class="reader-login-kicker">Free Login</p>
@@ -506,6 +530,8 @@
   </div>
   <script>
     (() => {
+      if (document.documentElement.classList.contains("rb-device-blocked")) return;
+
       const DEMO_USERNAME = "testing";
       const DEMO_PASSWORD = "testing";
       const html = document.documentElement;
@@ -618,6 +644,8 @@
     (() => {
       "use strict";
 
+      if (document.documentElement.classList.contains("rb-device-blocked")) return;
+
       const STORAGE_KEY = "stealthMemoReader.free.v1";
       const BG_DB_NAME = "stealthMemoReader.bg.free.v1";
       const BG_DB_STORE = "backgrounds";
@@ -625,7 +653,7 @@
       const BOSS_CHROME_URL = "https://chrome.google.com/webstore/detail/developer-tools";
       const STEALTH_BG_COUNT = 2;
       const USER_MANUAL = [
-        "【Stealth Memo Reader 免費版使用說明】",
+        "【Readbar 免費版使用說明】",
         "這是一個偽裝成 Chrome 工具列的隱蔽閱讀器。",
         "匯入文件：點 ★ 按鈕。",
         "免費版支援 .txt（UTF-8、Big5、GB18030）。",
@@ -670,7 +698,7 @@
 
       function getCurrentSentenceText() {
         if (state.manualMode) {
-          return USER_MANUAL[state.manualIndex] || "Stealth Memo Reader user manual";
+          return USER_MANUAL[state.manualIndex] || "Readbar user manual";
         }
         if (!state.sentences.length) {
           return "Ready to import document";
