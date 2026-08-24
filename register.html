@@ -4,8 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light">
-  <title>免費註冊｜Readbar</title>
-  <meta name="description" content="註冊 Readbar 免費或 Pro 會員。填寫姓名、電郵、密碼並選擇方案。">
+  <script>
+    (function () {
+      try {
+        var q = new URLSearchParams(location.search).get("lang");
+        var stored = localStorage.getItem("readbar.lang");
+        var lang = q === "en" || q === "zh-Hant" ? q : stored === "en" ? "en" : "zh-Hant";
+        if (q === "en" || q === "zh-Hant") localStorage.setItem("readbar.lang", q);
+        document.documentElement.lang = lang;
+        document.documentElement.classList.toggle("lang-en", lang === "en");
+      } catch (e) {}
+    })();
+  </script>
+  <title data-i18n="meta.register.title">免費註冊｜Readbar</title>
+  <meta name="description" data-i18n-content="meta.register.description" content="註冊 Readbar 免費或 Pro 會員。填寫姓名、電郵、密碼並選擇方案。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,90 +46,97 @@
       color-scheme: light;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=8">
+  <script src="js/i18n.js?v=1"></script>
 </head>
 <body class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header class="bg-blue-700 text-white">
-    <div class="mx-auto flex max-w-content items-center justify-between px-5 py-4">
+    <div class="mx-auto flex max-w-content items-center justify-between gap-3 px-5 py-4">
       <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight text-white">
         <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-sm text-blue-700">Rb</span>
         <span>Readbar</span>
       </a>
-      <a href="login.html" class="rounded-full bg-white px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-50">登入</a>
+      <div class="site-page-header-actions">
+        <div class="site-lang-switch" role="group" data-i18n-aria="lang.aria" aria-label="語言">
+          <button type="button" class="site-lang-btn" data-set-lang="zh-Hant" aria-pressed="true">繁</button>
+          <button type="button" class="site-lang-btn" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a href="login.html" class="rounded-full bg-white px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-50" data-i18n="nav.login">登入</a>
+      </div>
     </div>
   </header>
 
   <main class="hero-wash">
-    <div class="mx-auto grid max-w-content items-start gap-10 px-5 py-14 md:py-20 lg:grid-cols-[1.05fr_0.95fr]">
-      <section>
-        <p class="text-sm font-medium text-blue-700">Create Account</p>
-        <h1 class="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">註冊後即可開始閱讀</h1>
-        <p class="mt-4 max-w-lg text-sm leading-7 text-slate-600 md:text-base">
+    <div class="mx-auto flex max-w-content flex-col-reverse gap-8 px-5 py-8 md:gap-10 md:py-20 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+      <section class="min-w-0">
+        <p class="text-sm font-medium text-blue-700" data-i18n="register.kicker">Create Account</p>
+        <h1 class="mt-2 max-w-full text-xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl" data-i18n="register.h1">註冊後即可開始閱讀</h1>
+        <p class="mt-4 max-w-full text-sm leading-7 text-slate-600 md:max-w-lg md:text-base" data-i18n="register.lead">
           請填寫姓名、電郵及密碼，再選擇免費或 Pro 方案。會員 API 及付款閘道稍後接駁。
         </p>
         <ul class="mt-8 space-y-3 text-sm text-slate-700">
-          <li class="flex gap-3">
+          <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">1</span>
-            免費方案：按「免費註冊」。尚未連接會員 API 時，會提示未能成功註冊
+            <span class="min-w-0 flex-1" data-i18n="register.point1">免費方案：按「免費註冊」。尚未連接會員 API 時，會提示未能成功註冊</span>
           </li>
-          <li class="flex gap-3">
+          <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">2</span>
-            Pro 方案：$2.99／月，按「前往付款」前往付款閘道參考頁
+            <span class="min-w-0 flex-1" data-i18n="register.point2">Pro 方案：$2.99／月，按「前往付款」前往付款閘道參考頁</span>
           </li>
         </ul>
       </section>
 
-      <section class="card-surface w-full rounded-3xl border border-slate-200 p-8 md:p-10">
-        <h2 class="text-xl font-bold tracking-tight text-slate-900">建立帳號</h2>
-        <p class="mt-2 text-sm leading-6 text-slate-600">此為靜態示範，尚未連接會員資料庫或付款閘道。</p>
+      <section class="card-surface min-w-0 w-full rounded-3xl border border-slate-200 p-5 sm:p-8 md:p-10">
+        <h2 class="text-xl font-bold tracking-tight text-slate-900" data-i18n="register.h2">建立帳號</h2>
+        <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="register.formLead">此為靜態示範，尚未連接會員資料庫或付款閘道。</p>
 
         <form id="registerForm" class="mt-8 space-y-4">
           <label class="block text-sm font-medium text-slate-700">
-            姓名
-            <input id="registerName" name="name" type="text" required autocomplete="name" placeholder="陳大文" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+            <span data-i18n="common.name">姓名</span>
+            <input id="registerName" name="name" type="text" required autocomplete="name" data-i18n-placeholder="register.namePlaceholder" placeholder="陳大文" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
           </label>
           <label class="block text-sm font-medium text-slate-700">
-            電郵
+            <span data-i18n="common.email">電郵</span>
             <input id="registerEmail" name="email" type="email" required autocomplete="email" placeholder="you@example.com" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
           </label>
           <label class="block text-sm font-medium text-slate-700">
-            密碼
-            <input id="registerPassword" name="password" type="password" required minlength="8" autocomplete="new-password" placeholder="最少 8 個字元" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+            <span data-i18n="common.password">密碼</span>
+            <input id="registerPassword" name="password" type="password" required minlength="8" autocomplete="new-password" data-i18n-placeholder="register.passwordPlaceholder" placeholder="最少 8 個字元" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
           </label>
 
           <fieldset class="pt-2">
-            <legend class="text-sm font-medium text-slate-700">選擇方案</legend>
-            <div class="mt-3 grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label="選擇方案">
+            <legend class="text-sm font-medium text-slate-700" data-i18n="register.choosePlan">選擇方案</legend>
+            <div class="mt-3 grid gap-3 sm:grid-cols-2" role="radiogroup" data-i18n-aria="register.choosePlan" aria-label="選擇方案">
               <label class="plan-choice">
                 <input type="radio" name="plan" value="free" checked>
                 <span class="block text-xs font-medium text-slate-500">Free</span>
                 <span class="mt-1 block text-lg font-bold text-slate-900">$0</span>
-                <span class="mt-1 block text-xs leading-5 text-slate-600">TXT、2 張背景、本機進度</span>
+                <span class="mt-1 block text-xs leading-5 text-slate-600" data-i18n="register.freeDetail">TXT、2 張背景、本機進度</span>
               </label>
               <label class="plan-choice">
                 <input type="radio" name="plan" value="pro">
                 <span class="block text-xs font-medium text-slate-500">Pro</span>
-                <span class="mt-1 block text-lg font-bold text-slate-900">$2.99<span class="text-sm font-medium text-slate-500">／月</span></span>
-                <span class="mt-1 block text-xs leading-5 text-slate-600">EPUB、簡轉繁、Panic Button</span>
+                <span class="mt-1 block text-lg font-bold text-slate-900">$2.99<span class="text-sm font-medium text-slate-500" data-i18n="register.proPerMonth">／月</span></span>
+                <span class="mt-1 block text-xs leading-5 text-slate-600" data-i18n="register.proDetail">EPUB、簡轉繁、Panic Button</span>
               </label>
             </div>
           </fieldset>
 
           <div id="registerFreeWrap" class="mt-2">
-            <button id="registerFreeBtn" type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+            <button id="registerFreeBtn" type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="register.freeCta">
               免費註冊
             </button>
           </div>
           <div id="registerPayWrap" class="mt-2 hidden">
-            <button id="registerPayBtn" type="button" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+            <button id="registerPayBtn" type="button" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="register.payCta">
               前往付款
             </button>
           </div>
         </form>
 
         <p class="mt-6 text-center text-sm text-slate-600">
-          已有帳號？
-          <a href="login.html" class="font-medium text-blue-700 hover:text-blue-800">登入</a>
+          <span data-i18n="register.hasAccount">已有帳號？</span>
+          <a href="login.html" class="font-medium text-blue-700 hover:text-blue-800" data-i18n="register.loginLink">登入</a>
         </p>
       </section>
     </div>
@@ -125,7 +144,7 @@
 
   <footer class="border-t border-slate-200 bg-white px-5 py-8">
     <div class="mx-auto flex max-w-content flex-col items-center justify-between gap-4 text-sm text-slate-600 md:flex-row">
-      <a href="index.html" class="hover:text-blue-700">← 返回產品官網</a>
+      <a href="index.html" class="hover:text-blue-700" data-i18n="footer.backHome">← 返回產品官網</a>
       <p>© 2026 Readbar. All rights reserved.</p>
     </div>
   </footer>
@@ -134,17 +153,17 @@
     <div class="sr-site-modal-backdrop" data-close-register-fail></div>
     <section class="sr-site-modal-card">
       <header class="sr-site-modal-header">
-        <div class="flex items-center gap-2.5 font-semibold">
-          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-sm text-blue-700">Rb</span>
-          註冊
+        <div class="flex min-w-0 items-center gap-2.5 font-semibold">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-sm text-blue-700">Rb</span>
+          <span data-i18n="register.modalBrand">註冊</span>
         </div>
-        <button type="button" class="sr-site-modal-close" data-close-register-fail aria-label="關閉">×</button>
+        <button type="button" class="sr-site-modal-close" data-close-register-fail data-i18n-aria="common.close" aria-label="關閉">×</button>
       </header>
       <div class="p-6 text-center md:p-8">
-        <p class="text-sm font-medium text-blue-700">未能完成</p>
-        <h2 id="registerFailTitle" class="mt-2 text-xl font-bold text-slate-900">未能成功註冊</h2>
-        <p class="mt-3 text-sm leading-6 text-slate-600">未連接會員 API，暫時未能完成註冊。接駁會員系統之後，此按鈕會將資料傳送至資料庫。</p>
-        <button type="button" data-close-register-fail class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">知道了</button>
+        <p class="text-sm font-medium text-blue-700" data-i18n="register.failKicker">未能完成</p>
+        <h2 id="registerFailTitle" class="mt-2 text-xl font-bold text-slate-900" data-i18n="register.failTitle">未能成功註冊</h2>
+        <p class="mt-3 text-sm leading-6 text-slate-600" data-i18n="register.failBody">未連接會員 API，暫時未能完成註冊。接駁會員系統之後，此按鈕會將資料傳送至資料庫。</p>
+        <button type="button" data-close-register-fail class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="common.gotIt">知道了</button>
       </div>
     </section>
   </div>

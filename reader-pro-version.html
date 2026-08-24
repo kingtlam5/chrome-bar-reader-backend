@@ -3,6 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        var q = new URLSearchParams(location.search).get("lang");
+        var stored = localStorage.getItem("readbar.lang");
+        var lang = q === "en" || q === "zh-Hant" ? q : stored === "en" ? "en" : "zh-Hant";
+        if (q === "en" || q === "zh-Hant") localStorage.setItem("readbar.lang", q);
+        document.documentElement.lang = lang;
+        document.documentElement.classList.toggle("lang-en", lang === "en");
+      } catch (e) {}
+    })();
+  </script>
   <title>Notes - Task List</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -575,11 +587,19 @@
     .pro-reader-gate-header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 10px;
       padding: 16px 20px;
       background: #1d4ed8;
       color: #ffffff;
       font-weight: 600;
+    }
+
+    .pro-reader-gate-header-brand {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 10px;
     }
 
     .pro-reader-gate-logo {
@@ -687,28 +707,45 @@
       background: #3b82f6;
       box-shadow: 0 12px 28px rgba(37, 99, 235, 0.36);
     }
+
+    html.lang-en .pro-reader-gate-body h1,
+    html.lang-en .pro-reader-gate-body > p,
+    html.lang-en .pro-reader-gate-form label,
+    html.lang-en .pro-reader-gate-error {
+      word-break: normal;
+      overflow-wrap: break-word;
+    }
   </style>
-  <link rel="stylesheet" href="css/readbar-device-notice.css?v=2">
+  <link rel="stylesheet" href="css/readbar-device-notice.css?v=3">
+  <script src="js/i18n.js?v=1"></script>
 </head>
 <body class="compact">
   <div id="readbarDeviceNotice" class="rb-device-notice" hidden>
     <div class="rb-device-notice-header">
-      <span class="rb-device-notice-mark">Rb</span>
-      Readbar
+      <span class="rb-device-notice-brand">
+        <span class="rb-device-notice-mark">Rb</span>
+        Readbar
+      </span>
+      <div class="site-lang-switch" role="group" data-i18n-aria="lang.aria" aria-label="語言">
+        <button type="button" class="site-lang-btn" data-set-lang="zh-Hant" aria-pressed="true">繁</button>
+        <button type="button" class="site-lang-btn" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
     </div>
     <section class="rb-device-notice-card" role="status" aria-labelledby="proReadbarDeviceTitle">
       <header class="rb-device-notice-card-head">
-        <span class="rb-device-notice-mark">Rb</span>
-        Readbar
+        <span class="rb-device-notice-brand">
+          <span class="rb-device-notice-mark">Rb</span>
+          Readbar
+        </span>
       </header>
       <div class="rb-device-notice-body">
-        <p class="rb-device-notice-kicker">Office desktop</p>
-        <h1 id="proReadbarDeviceTitle">請改用電腦<wbr>開啟閱讀器</h1>
-        <p>Readbar 專為辦公室電腦瀏覽器而設，讓閱讀融入工作畫面。手機或平板的螢幕與操作方式並不適用，因此無法在流動裝置開啟閱讀器。</p>
-        <p>請改以電腦登入會員中心後再啟動。</p>
+        <p class="rb-device-notice-kicker" data-i18n="reader.noticeKicker">Office desktop</p>
+        <h1 id="proReadbarDeviceTitle" data-i18n-html="reader.noticeH1">請改用電腦<wbr>開啟閱讀器</h1>
+        <p data-i18n="reader.noticeP1">Readbar 專為辦公室電腦瀏覽器而設，讓閱讀融入工作畫面。手機或平板的螢幕與操作方式並不適用，因此無法在流動裝置開啟閱讀器。</p>
+        <p data-i18n="reader.noticeP2">請改以電腦登入會員中心後再啟動。</p>
         <div class="rb-device-notice-actions">
-          <a class="rb-device-notice-primary" href="index.html">返回產品官網</a>
-          <a class="rb-device-notice-secondary" href="login.html">前往登入</a>
+          <a class="rb-device-notice-primary" href="index.html" data-i18n="reader.noticeHome">返回產品官網</a>
+          <a class="rb-device-notice-secondary" href="login.html" data-i18n="reader.noticeLogin">前往登入</a>
         </div>
       </div>
     </section>
@@ -717,24 +754,30 @@
   <div id="proReaderGate" class="pro-reader-gate" role="dialog" aria-modal="true" aria-labelledby="proReaderLoginTitle">
     <section class="pro-reader-gate-card">
       <header class="pro-reader-gate-header">
-        <span class="pro-reader-gate-logo">Rb</span>
-        Readbar
+        <span class="pro-reader-gate-header-brand">
+          <span class="pro-reader-gate-logo">Rb</span>
+          Readbar
+        </span>
+        <div class="site-lang-switch" role="group" data-i18n-aria="lang.aria" aria-label="語言">
+          <button type="button" class="site-lang-btn" data-set-lang="zh-Hant" aria-pressed="true">繁</button>
+          <button type="button" class="site-lang-btn" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
       </header>
       <div class="pro-reader-gate-body">
-        <p class="pro-reader-gate-kicker">Pro Login</p>
-        <h1 id="proReaderLoginTitle">登入後即可使用閱讀器</h1>
-        <p>每次開啟均須輸入用戶名稱及密碼。此為靜態示範，用戶名稱與密碼均為 testing。</p>
+        <p class="pro-reader-gate-kicker" data-i18n="reader.loginProKicker">Pro Login</p>
+        <h1 id="proReaderLoginTitle" data-i18n="reader.loginH1">登入後即可使用閱讀器</h1>
+        <p data-i18n="reader.loginLead">每次開啟均須輸入用戶名稱及密碼。此為靜態示範，用戶名稱與密碼均為 testing。</p>
         <form id="proReaderLoginForm" class="pro-reader-gate-form">
           <label>
-            用戶名稱
+            <span data-i18n="common.username">用戶名稱</span>
             <input id="proReaderUsername" name="username" type="text" required autocomplete="username" spellcheck="false">
           </label>
           <label>
-            密碼
+            <span data-i18n="common.password">密碼</span>
             <input id="proReaderPassword" name="password" type="password" required autocomplete="current-password">
           </label>
           <p id="proReaderLoginError" class="pro-reader-gate-error" hidden></p>
-          <button type="submit" class="pro-reader-gate-submit">登入</button>
+          <button type="submit" class="pro-reader-gate-submit" data-i18n="reader.loginSubmit">登入</button>
         </form>
       </div>
     </section>
@@ -791,7 +834,7 @@
         }
         if (errorEl) {
           errorEl.hidden = false;
-          errorEl.textContent = "用戶名稱或密碼不正確。";
+          errorEl.textContent = window.ReadbarI18n?.t("reader.loginError") || "用戶名稱或密碼不正確。";
         }
         passwordInput.focus();
         passwordInput.select();
