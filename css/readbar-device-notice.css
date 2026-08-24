@@ -1,6 +1,13 @@
 html.rb-device-blocked,
 html.rb-device-blocked body {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 100% !important;
+  min-height: 100dvh !important;
   overflow: auto !important;
+  overflow-x: hidden !important;
+  position: static !important;
   background: #ffffff !important;
   color: #0f172a;
 }
@@ -13,10 +20,19 @@ html.rb-device-blocked .pro-reader-gate {
   pointer-events: none !important;
 }
 
+.rb-device-notice,
+.rb-device-notice * {
+  box-sizing: border-box;
+}
+
 .rb-device-notice {
   display: none;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
-  padding: 24px 20px 40px;
+  min-height: 100dvh;
+  padding: 16px 16px 32px;
+  overflow: visible;
   background:
     radial-gradient(900px 420px at 85% -10%, rgba(37, 99, 235, 0.16), transparent 55%),
     radial-gradient(700px 360px at 0% 0%, rgba(59, 130, 246, 0.08), transparent 50%),
@@ -54,9 +70,10 @@ html.rb-device-blocked .rb-device-notice {
 }
 
 .rb-device-notice-card {
-  max-width: 32rem;
-  margin: 48px auto 0;
-  overflow: hidden;
+  width: 100%;
+  max-width: min(32rem, 100%);
+  margin: 24px auto 0;
+  overflow: visible;
   border: 1px solid #e2e8f0;
   border-radius: 24px;
   background: #ffffff;
@@ -67,7 +84,7 @@ html.rb-device-blocked .rb-device-notice {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 16px 20px;
+  padding: 14px 16px;
   background: #1d4ed8;
   color: #ffffff;
   font-weight: 600;
@@ -79,7 +96,7 @@ html.rb-device-blocked .rb-device-notice {
 }
 
 .rb-device-notice-body {
-  padding: 28px 24px 32px;
+  padding: 20px 16px 24px;
 }
 
 .rb-device-notice-kicker {
@@ -91,26 +108,30 @@ html.rb-device-blocked .rb-device-notice {
 
 .rb-device-notice-body h1 {
   margin: 8px 0 0;
-  font-size: 1.5rem;
+  max-width: 100%;
+  font-size: clamp(1.15rem, 5.6vw, 1.5rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.35;
-  word-break: keep-all;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .rb-device-notice-body p {
   margin: 12px 0 0;
+  max-width: 100%;
   color: #475569;
   font-size: 0.95rem;
   line-height: 1.75;
-  word-break: keep-all;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .rb-device-notice-actions {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
 .rb-device-notice-actions a {
@@ -119,11 +140,12 @@ html.rb-device-blocked .rb-device-notice {
   justify-content: center;
   width: 100%;
   min-height: 48px;
-  padding: 12px 20px;
+  padding: 12px 16px;
   border-radius: 999px;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
+  text-align: center;
 }
 
 .rb-device-notice-primary {
@@ -136,4 +158,22 @@ html.rb-device-blocked .rb-device-notice {
   border: 1px solid #cbd5e1;
   background: #ffffff;
   color: #1e293b;
+}
+
+@media (min-width: 480px) {
+  .rb-device-notice {
+    padding: 24px 20px 40px;
+  }
+
+  .rb-device-notice-card {
+    margin-top: 48px;
+  }
+
+  .rb-device-notice-card-head {
+    padding: 16px 20px;
+  }
+
+  .rb-device-notice-body {
+    padding: 28px 24px 32px;
+  }
 }
