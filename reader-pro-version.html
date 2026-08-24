@@ -688,13 +688,37 @@
       box-shadow: 0 12px 28px rgba(37, 99, 235, 0.36);
     }
   </style>
+  <link rel="stylesheet" href="css/readbar-device-notice.css">
 </head>
 <body class="compact">
+  <div id="readbarDeviceNotice" class="rb-device-notice" hidden>
+    <div class="rb-device-notice-header">
+      <span class="rb-device-notice-mark">Rb</span>
+      Readbar
+    </div>
+    <section class="rb-device-notice-card" role="status" aria-labelledby="proReadbarDeviceTitle">
+      <header class="rb-device-notice-card-head">
+        <span class="rb-device-notice-mark">Rb</span>
+        Readbar
+      </header>
+      <div class="rb-device-notice-body">
+        <p class="rb-device-notice-kicker">Office desktop</p>
+        <h1 id="proReadbarDeviceTitle">請改用電腦開啟閱讀器</h1>
+        <p>Readbar 專為辦公室電腦瀏覽器而設，讓閱讀融入工作畫面。手機或平板的螢幕與操作方式並不適用，因此無法在流動裝置開啟閱讀器。</p>
+        <p>請改以電腦登入會員中心後再啟動。</p>
+        <div class="rb-device-notice-actions">
+          <a class="rb-device-notice-primary" href="index.html">返回產品官網</a>
+          <a class="rb-device-notice-secondary" href="login.html">前往登入</a>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="js/readbar-device-notice.js"></script>
   <div id="proReaderGate" class="pro-reader-gate" role="dialog" aria-modal="true" aria-labelledby="proReaderLoginTitle">
     <section class="pro-reader-gate-card">
       <header class="pro-reader-gate-header">
-        <span class="pro-reader-gate-logo">SR</span>
-        Stealth Reader
+        <span class="pro-reader-gate-logo">Rb</span>
+        Readbar
       </header>
       <div class="pro-reader-gate-body">
         <p class="pro-reader-gate-kicker">Pro Login</p>
@@ -717,6 +741,8 @@
   </div>
   <script>
     (() => {
+      if (document.documentElement.classList.contains("rb-device-blocked")) return;
+
       const DEMO_USERNAME = "testing";
       const DEMO_PASSWORD = "testing";
       const html = document.documentElement;
@@ -827,8 +853,8 @@
       <section class="sr-modal-card">
         <header class="sr-modal-header">
           <div class="sr-modal-brand">
-            <span>SR</span>
-            Stealth Reader Pro
+            <span>Rb</span>
+            Readbar Pro
           </div>
           <button type="button" class="sr-modal-close" data-close-shortcut-modal aria-label="關閉">×</button>
         </header>
@@ -886,6 +912,8 @@
     (() => {
       "use strict";
 
+      if (document.documentElement.classList.contains("rb-device-blocked")) return;
+
       const STORAGE_KEY = "stealthMemoReader.v1";
       const SETTINGS_KEY = "stealthMemoReader.settings.v1";
       const DEFAULT_SHORTCUTS = {
@@ -904,7 +932,7 @@
       const BOSS_CHROME_URL = "https://chrome.google.com/webstore/detail/developer-tools";
       const STEALTH_BG_COUNT = 20;
       const USER_MANUAL = [
-        "【Stealth Memo Reader Pro 使用說明】",
+        "【Readbar Pro 使用說明】",
         "這是一個偽裝成 Chrome 工具列的隱蔽閱讀器。",
         "匯入文件：點 ★ 按鈕。",
         "支援 .txt 與 .epub 電子書格式。",
@@ -964,7 +992,7 @@
 
       function getCurrentSentenceText() {
         if (state.manualMode) {
-          return USER_MANUAL[state.manualIndex] || "Stealth Memo Reader user manual";
+          return USER_MANUAL[state.manualIndex] || "Readbar user manual";
         }
         if (!state.sentences.length) {
           return "Ready to import document";

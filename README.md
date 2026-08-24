@@ -1,4 +1,4 @@
-# Stealth Reader
+# Readbar
 
 辦公室隱蔽閱讀器：偽裝成 Chrome 工具列的 Web 閱讀器。
 
@@ -38,7 +38,7 @@ python3 -m http.server 8765
 - Pro 會員：http://localhost:8765/dashboard-pro-version.html
 - 使用說明：http://localhost:8765/guide.html
 
-請以本地伺服器開啟，請勿直接雙擊 HTML。免費會員由免費會員中心以一般分頁啟動閱讀器；Pro 由付費會員中心以獨立彈出視窗啟動。
+請以本地伺服器開啟，請勿直接雙擊 HTML。免費會員由免費會員中心以一般分頁啟動閱讀器；Pro 由付費會員中心以獨立彈出視窗啟動。閱讀器僅供電腦瀏覽器使用，流動裝置會顯示提示並無法開啟。
 
 ## 上傳偽裝背景
 

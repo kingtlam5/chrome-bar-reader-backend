@@ -41,8 +41,28 @@
     return window.open(url, "StealthReaderWindow", features);
   }
 
+  function isMobileReaderDevice() {
+    const ua = navigator.userAgent || "";
+    if (/Android.+Mobile|iPhone|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(ua)) {
+      return true;
+    }
+    if (/iPad|Tablet|Android(?!.*Mobile)/i.test(ua)) {
+      return true;
+    }
+    if (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) {
+      return true;
+    }
+    return false;
+  }
+
   function launchReader() {
     const mode = launchBtn?.dataset.launchMode || "pro";
+
+    if (isMobileReaderDevice()) {
+      const fileName = mode === "basic" ? "reader-free-version.html" : "reader-pro-version.html";
+      window.location.assign(readerUrl(fileName));
+      return;
+    }
 
     if (mode === "basic") {
       const url = readerUrl("reader-free-version.html");
