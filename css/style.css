@@ -18,9 +18,13 @@ html {
   scroll-margin-top: 96px;
 }
 
-html.theme-light,
+html.theme-light {
+  overflow-x: hidden;
+}
+
 body.theme-light {
-  overflow-x: clip;
+  max-width: 100%;
+  overflow: visible;
 }
 
 body {
@@ -29,7 +33,7 @@ body {
   overflow-wrap: break-word;
 }
 
-/* Prefer wrapping after punctuation, not in the middle of a Chinese word. */
+/* Prefer wrapping after punctuation on wider screens; small phones must wrap. */
 p,
 li,
 dd,
@@ -43,15 +47,42 @@ h1,
 h2,
 h3,
 h4 {
-  word-break: keep-all;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   line-break: strict;
+}
+
+@media (min-width: 768px) {
+  p,
+  li,
+  dd,
+  dt,
+  td,
+  th,
+  label,
+  legend,
+  blockquote,
+  h1,
+  h2,
+  h3,
+  h4 {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
 }
 
 h1,
 h2,
 h3 {
   text-wrap: pretty;
+}
+
+.theme-light header,
+.theme-light main,
+.theme-light footer,
+.theme-light .grid > *,
+.theme-light .card-surface {
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* English glyphs come from Bricolage Grotesque; Chinese falls back to Noto Sans TC. */
@@ -78,15 +109,49 @@ body.theme-light {
 }
 
 .chrome-mock {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   box-shadow:
     0 0 0 1px rgba(15, 23, 42, 0.08),
     0 24px 60px rgba(15, 23, 42, 0.12);
+}
+
+@media (max-width: 767px) {
+  p,
+  li,
+  dd,
+  dt,
+  td,
+  th,
+  label,
+  legend,
+  blockquote,
+  h1,
+  h2,
+  h3,
+  h4 {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-break: anywhere;
+  }
+
+  .chrome-mock .flex {
+    min-width: 0;
+    max-width: 100%;
+  }
 }
 
 .chrome-mock-url {
   overflow: hidden;
   white-space: nowrap;
   mask-image: linear-gradient(90deg, #000 75%, transparent);
+}
+
+@media (max-width: 767px) {
+  .chrome-mock-url {
+    mask-image: linear-gradient(90deg, #000 70%, transparent);
+  }
 }
 
 .glow-btn {
