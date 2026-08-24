@@ -4,8 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light">
-  <title>付費會員中心｜Readbar</title>
-  <meta name="description" content="Pro 會員專用：啟動隱蔽閱讀器、查看閱讀進度，並管理偽裝設定。">
+  <script>
+    (function () {
+      try {
+        var q = new URLSearchParams(location.search).get("lang");
+        var stored = localStorage.getItem("readbar.lang");
+        var lang = q === "en" || q === "zh-Hant" ? q : stored === "en" ? "en" : "zh-Hant";
+        if (q === "en" || q === "zh-Hant") localStorage.setItem("readbar.lang", q);
+        document.documentElement.lang = lang;
+        document.documentElement.classList.toggle("lang-en", lang === "en");
+      } catch (e) {}
+    })();
+  </script>
+  <title data-i18n="meta.dashPro.title">付費會員中心｜Readbar</title>
+  <meta name="description" data-i18n-content="meta.dashPro.description" content="Pro 會員專用：啟動隱蔽閱讀器、查看閱讀進度，並管理偽裝設定。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -40,7 +52,8 @@
       color-scheme: light;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=8">
+  <script src="js/i18n.js?v=1"></script>
 </head>
 <body data-require-plan="pro" data-reader-storage="stealthMemoReader.v1" class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header class="bg-blue-700 text-white">
@@ -50,13 +63,17 @@
         <span>Readbar</span>
       </a>
       <div class="site-page-header-actions">
-        <a href="index.html" class="hidden text-sm text-blue-100 hover:text-white sm:inline">產品官網</a>
-        <a href="#member-account" class="text-sm text-blue-100 hover:text-white">會員資料</a>
-        <a href="login.html" data-logout class="text-sm text-blue-100 hover:text-white">登出</a>
+        <div class="site-lang-switch" role="group" data-i18n-aria="lang.aria" aria-label="語言">
+          <button type="button" class="site-lang-btn" data-set-lang="zh-Hant" aria-pressed="true">繁</button>
+          <button type="button" class="site-lang-btn" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a href="index.html" class="hidden text-sm text-blue-100 hover:text-white sm:inline" data-i18n="nav.home">產品官網</a>
+        <a href="#member-account" class="text-sm text-blue-100 hover:text-white" data-i18n="nav.account">會員資料</a>
+        <a href="login.html" data-logout class="text-sm text-blue-100 hover:text-white" data-i18n="nav.logout">登出</a>
         <span class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-blue-700">Pro</span>
         <div class="site-page-header-email">
           <p data-member-email class="text-sm font-medium text-white">user@example.com</p>
-          <p class="text-xs text-blue-100">付費會員中心</p>
+          <p class="text-xs text-blue-100" data-i18n="auth.memberPro">付費會員中心</p>
         </div>
       </div>
     </div>
@@ -64,113 +81,113 @@
 
   <main class="hero-wash">
     <div class="mx-auto max-w-content px-5 py-10 md:py-14">
-      <section id="member-account" class="card-surface rounded-3xl border border-slate-200 p-6 md:p-8">
-        <p class="text-sm font-medium text-blue-700">Member Account</p>
-        <h2 class="mt-1 text-xl font-semibold text-slate-900">會員資料</h2>
-        <p class="mt-2 text-sm leading-6 text-slate-600">可在此查看用戶名稱、訂閱狀態，以及更改密碼或管理訂閱。</p>
+      <section id="member-account" class="card-surface min-w-0 rounded-3xl border border-slate-200 p-5 sm:p-6 md:p-8">
+        <p class="text-sm font-medium text-blue-700" data-i18n="dash.accountKicker">Member Account</p>
+        <h2 class="mt-1 text-xl font-semibold text-slate-900" data-i18n="dash.accountH2">會員資料</h2>
+        <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="dash.accountLeadPro">可在此查看用戶名稱、訂閱狀態，以及更改密碼或管理訂閱。</p>
         <dl class="mt-6 grid gap-4 sm:grid-cols-3">
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
-            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700">用戶名稱</dt>
-            <dd data-member-username class="mt-2 text-lg font-semibold text-slate-900">testing</dd>
+          <div class="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
+            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700" data-i18n="dash.username">用戶名稱</dt>
+            <dd data-member-username class="mt-2 break-words text-lg font-semibold text-slate-900">testing</dd>
           </div>
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
-            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700">訂閱狀態</dt>
-            <dd data-member-plan-label class="mt-2 text-lg font-semibold text-slate-900">Pro 計劃（每月 $2.99，自動續訂）</dd>
+          <div class="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
+            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700" data-i18n="dash.status">訂閱狀態</dt>
+            <dd data-member-plan-label class="mt-2 break-words text-lg font-semibold text-slate-900">Pro 計劃（每月 $2.99，自動續訂）</dd>
           </div>
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
-            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700">下次自動扣款</dt>
-            <dd data-next-payment class="mt-2 text-lg font-semibold text-slate-900">2026年9月21日</dd>
+          <div class="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
+            <dt class="text-xs font-medium uppercase tracking-wider text-blue-700" data-i18n="dash.nextPay">下次自動扣款</dt>
+            <dd data-next-payment class="mt-2 break-words text-lg font-semibold text-slate-900">2026年9月21日</dd>
           </div>
         </dl>
         <div class="mt-6 flex flex-col gap-3 sm:flex-row">
-          <button type="button" data-open-change-password class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 hover:border-blue-300 hover:text-blue-700">
+          <button type="button" data-open-change-password class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 hover:border-blue-300 hover:text-blue-700" data-i18n="dash.changePassword">
             更改密碼
           </button>
-          <button type="button" data-open-payment-gateway class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+          <button type="button" data-open-payment-gateway class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="dash.manageSub">
             管理訂閱
           </button>
         </div>
       </section>
 
-      <section class="card-surface mt-8 rounded-3xl border border-slate-200 p-8 text-center md:p-12">
-        <p class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+      <section class="card-surface mt-8 min-w-0 rounded-3xl border border-slate-200 p-5 text-center sm:p-8 md:p-12">
+        <p class="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
           <span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span>
-          獨立彈出視窗
+          <span data-i18n="dash.proBadge">獨立彈出視窗</span>
         </p>
-        <h1 class="mt-4 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">準備進入隱蔽閱讀模式</h1>
-        <p class="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-600">
+        <h1 class="mt-4 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl" data-i18n="dash.proH1">準備進入隱蔽閱讀模式</h1>
+        <p class="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-600" data-i18n="dash.proLead">
           按「啟動隱蔽閱讀器」會以獨立彈出視窗開啟，並減少分頁列。Chrome 原生網址列仍然會顯示。此方式無須安裝應用程式。
         </p>
         <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <button id="launchReaderBtn" type="button" class="launch-pulse glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-4 text-base font-semibold text-white hover:bg-blue-500">
+          <button id="launchReaderBtn" type="button" class="launch-pulse glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-4 text-base font-semibold text-white hover:bg-blue-500" data-i18n="dash.launchPro">
             啟動隱蔽閱讀器
           </button>
-          <a href="guide.html#pro" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-4 text-base font-semibold text-slate-800 hover:border-blue-300 hover:text-blue-700">使用說明</a>
+          <a href="guide.html#pro" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-4 text-base font-semibold text-slate-800 hover:border-blue-300 hover:text-blue-700" data-i18n="dash.guide">使用說明</a>
         </div>
 
         <div id="chrome-app-shortcut" class="mt-10 border-t border-slate-200 pt-8 text-left">
-          <p class="text-sm font-medium text-blue-700">進階啟動方式</p>
-          <h2 class="mt-1 text-xl font-semibold text-slate-900">以 Windows 桌面捷徑隱藏網址列</h2>
-          <p class="mt-3 text-sm leading-6 text-slate-600">上方啟動按鈕無法隱藏 Chrome 原生網址列。如需沒有原生網址列的視窗，可在 Windows 桌面建立專屬啟動捷徑。此方法使用 Chrome 的應用程式視窗（<span class="whitespace-nowrap">--app=</span>），並非在本網站安裝應用程式。</p>
+          <p class="text-sm font-medium text-blue-700" data-i18n="dash.shortcutKicker">進階啟動方式</p>
+          <h2 class="mt-1 text-xl font-semibold text-slate-900" data-i18n="dash.shortcutH2">以 Windows 桌面捷徑隱藏網址列</h2>
+          <p class="mt-3 text-sm leading-6 text-slate-600"><span data-i18n="dash.shortcutLead">上方啟動按鈕無法隱藏 Chrome 原生網址列。如需沒有原生網址列的視窗，可在 Windows 桌面建立專屬啟動捷徑。此方法使用 Chrome 的應用程式視窗（</span><span class="whitespace-nowrap">--app=</span><span data-i18n="dash.shortcutLead2">），並非在本網站安裝應用程式。</span></p>
           <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm leading-6 text-slate-700">
-            <li>在桌面空白處按滑鼠右鍵。</li>
-            <li>選擇「新增」→「捷徑」。</li>
-            <li>在「輸入物件的位置」欄位貼上以下內容：</li>
+            <li data-i18n="dash.shortcut1">在桌面空白處按滑鼠右鍵。</li>
+            <li data-i18n="dash.shortcut2">選擇「新增」→「捷徑」。</li>
+            <li data-i18n="dash.shortcut3">在「輸入物件的位置」欄位貼上以下內容：</li>
           </ol>
           <pre class="mt-4 overflow-x-auto rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-left text-xs leading-6 text-slate-800"><code>"C:\Program Files\Google\Chrome\Application\chrome.exe" --app=https://kingtlam5.github.io/chrome-bar-reader-frontend/reader-pro-version.html</code></pre>
           <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm leading-6 text-slate-700" start="4">
-            <li>按「下一步」，為捷徑命名，例如 Readbar Pro。</li>
-            <li>按「完成」。</li>
-            <li>其後以該捷徑啟動。Chrome 會以應用程式視窗開啟，原生網址列不會顯示。閱讀器內的登入畫面仍然需要輸入用戶名稱及密碼。</li>
+            <li data-i18n="dash.shortcut4">按「下一步」，為捷徑命名，例如 Readbar Pro。</li>
+            <li data-i18n="dash.shortcut5">按「完成」。</li>
+            <li data-i18n="dash.shortcut6">其後以該捷徑啟動。Chrome 會以應用程式視窗開啟，原生網址列不會顯示。閱讀器內的登入畫面仍然需要輸入用戶名稱及密碼。</li>
           </ol>
-          <p class="mt-4 text-sm leading-6 text-slate-500">若 Chrome 安裝於其他資料夾，請把路徑改為你電腦上的 chrome.exe 位置。</p>
+          <p class="mt-4 text-sm leading-6 text-slate-500" data-i18n="dash.shortcutNote">若 Chrome 安裝於其他資料夾，請把路徑改為你電腦上的 chrome.exe 位置。</p>
         </div>
       </section>
 
       <section class="mt-8 grid gap-4 md:grid-cols-3">
-        <article class="card-surface rounded-2xl border border-slate-200 p-5">
-          <p class="text-xs font-medium uppercase tracking-wider text-blue-700">當前書本</p>
-          <p id="currentBook" class="mt-2 text-lg font-semibold text-slate-900">《三體》</p>
+        <article class="card-surface min-w-0 rounded-2xl border border-slate-200 p-5">
+          <p class="text-xs font-medium uppercase tracking-wider text-blue-700" data-i18n="dash.currentBook">當前書本</p>
+          <p id="currentBook" class="mt-2 break-words text-lg font-semibold text-slate-900">《三體》</p>
         </article>
-        <article class="card-surface rounded-2xl border border-slate-200 p-5">
-          <p class="text-xs font-medium uppercase tracking-wider text-blue-700">當前進度</p>
+        <article class="card-surface min-w-0 rounded-2xl border border-slate-200 p-5">
+          <p class="text-xs font-medium uppercase tracking-wider text-blue-700" data-i18n="dash.currentProgress">當前進度</p>
           <p id="currentProgress" class="mt-2 text-lg font-semibold text-slate-900">67%</p>
           <div class="mt-3 h-2 overflow-hidden rounded-full bg-slate-100">
             <div id="progressBar" class="progress-fill h-full rounded-full bg-blue-600" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="67"></div>
           </div>
         </article>
         <article class="card-surface rounded-2xl border border-slate-200 p-5">
-          <p class="text-xs font-medium uppercase tracking-wider text-blue-700">上次閱讀</p>
+          <p class="text-xs font-medium uppercase tracking-wider text-blue-700" data-i18n="dash.lastRead">上次閱讀</p>
           <p id="lastReadAt" class="mt-2 text-lg font-semibold text-slate-900">今天 14:32</p>
         </article>
       </section>
 
-      <section class="card-surface mt-8 rounded-2xl border border-slate-200 p-6 md:p-8">
+      <section class="card-surface mt-8 min-w-0 rounded-2xl border border-slate-200 p-5 sm:p-6 md:p-8">
         <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-          <div>
-            <p class="text-sm font-medium text-blue-700">Pro 專屬設定</p>
-            <h2 class="mt-1 text-xl font-semibold text-slate-900">你已解鎖全部 Pro 功能</h2>
-            <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+          <div class="min-w-0">
+            <p class="text-sm font-medium text-blue-700" data-i18n="dash.proSettingsKicker">Pro 專屬設定</p>
+            <h2 class="mt-1 text-xl font-semibold text-slate-900" data-i18n="dash.proSettingsH2">你已解鎖全部 Pro 功能</h2>
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600" data-i18n="dash.proSettingsLead">
               EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗、Panic Button、雲端同步、自訂快捷鍵及 Panic 顯示文字均已可以使用。如仍需要其他功能，可以提出請求，我們會有專人聯絡你跟進。
             </p>
           </div>
-          <span class="shrink-0 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">已全部解鎖</span>
+          <span class="shrink-0 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700" data-i18n="dash.unlocked">已全部解鎖</span>
         </div>
         <ul class="mt-6 grid gap-3 text-sm text-slate-700 sm:grid-cols-2">
-          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">EPUB 檔案支援</li>
-          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">簡體轉繁體</li>
-          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">偽裝背景上限 20 張</li>
-          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">獨立彈出視窗</li>
-          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">Panic Button 一鍵轉換</li>
-          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">雲端進度同步</li>
-          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">自訂快捷鍵</li>
-          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">自訂 Panic 顯示文字</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3" data-i18n="dash.featEpub">EPUB 檔案支援</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3" data-i18n="dash.featConvert">簡體轉繁體</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3" data-i18n="dash.featBg">偽裝背景上限 20 張</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3" data-i18n="dash.featPopup">獨立彈出視窗</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3" data-i18n="dash.featPanic">Panic Button 一鍵轉換</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3" data-i18n="dash.featCloud">雲端進度同步</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3" data-i18n="dash.featShortcuts">自訂快捷鍵</li>
+          <li class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3" data-i18n="dash.featPanicText">自訂 Panic 顯示文字</li>
         </ul>
         <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <button id="requestFeatureBtn" type="button" class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+          <button id="requestFeatureBtn" type="button" class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="dash.requestCta">
             提出功能請求
           </button>
-          <p class="text-sm text-slate-500">提交後會有專人透過你提供的電郵聯絡跟進。</p>
+          <p class="text-sm text-slate-500" data-i18n="dash.requestHint">提交後會有專人透過你提供的電郵聯絡跟進。</p>
         </div>
       </section>
     </div>
@@ -180,39 +197,39 @@
     <div class="sr-site-modal-backdrop" data-close-request-modal></div>
     <section class="sr-site-modal-card">
       <header class="sr-site-modal-header">
-        <div class="flex items-center gap-2.5 font-semibold">
-          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-sm text-blue-700">Rb</span>
-          功能請求
+        <div class="flex min-w-0 items-center gap-2.5 font-semibold">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-sm text-blue-700">Rb</span>
+          <span data-i18n="dash.requestBrand">功能請求</span>
         </div>
-        <button type="button" class="sr-site-modal-close" data-close-request-modal aria-label="關閉">×</button>
+        <button type="button" class="sr-site-modal-close" data-close-request-modal data-i18n-aria="common.close" aria-label="關閉">×</button>
       </header>
       <div class="p-6 md:p-8">
         <div id="requestFormWrap">
-          <h2 id="requestModalTitle" class="text-xl font-bold text-slate-900">想要其他功能？告訴我們</h2>
-          <p class="mt-2 text-sm leading-6 text-slate-600">請填寫你的資料及需求。提交後會有專人聯絡你，跟進可行性及時間表。</p>
+          <h2 id="requestModalTitle" class="text-xl font-bold text-slate-900" data-i18n="dash.requestTitle">想要其他功能？告訴我們</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="dash.requestLead">請填寫你的資料及需求。提交後會有專人聯絡你，跟進可行性及時間表。</p>
           <form id="requestFeatureForm" class="mt-6 space-y-4">
             <label class="block text-sm font-medium text-slate-700">
-              姓名
-              <input id="requestName" name="name" type="text" required autocomplete="name" placeholder="陳大文" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+              <span data-i18n="common.name">姓名</span>
+              <input id="requestName" name="name" type="text" required autocomplete="name" data-i18n-placeholder="register.namePlaceholder" placeholder="陳大文" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
             </label>
             <label class="block text-sm font-medium text-slate-700">
-              電郵
+              <span data-i18n="common.email">電郵</span>
               <input id="requestEmail" name="email" type="email" required autocomplete="email" placeholder="you@example.com" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
             </label>
             <label class="block text-sm font-medium text-slate-700">
-              功能請求
-              <textarea id="requestMessage" name="message" required rows="4" placeholder="例如：希望支援 PDF、或者可以自訂偽裝網址列字型……" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400"></textarea>
+              <span data-i18n="dash.requestMessage">功能請求</span>
+              <textarea id="requestMessage" name="message" required rows="4" data-i18n-placeholder="dash.requestPlaceholder" placeholder="例如：希望支援 PDF、或者可以自訂偽裝網址列字型……" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400"></textarea>
             </label>
-            <button type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+            <button type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="dash.requestSubmit">
               提交請求
             </button>
           </form>
         </div>
         <div id="requestSuccess" class="hidden text-center">
-          <p class="text-sm font-medium text-blue-700">已收到</p>
-          <h2 class="mt-2 text-xl font-bold text-slate-900">我們會有專人與你聯絡</h2>
-          <p class="mt-3 text-sm leading-6 text-slate-600">多謝你的功能請求。團隊會以你提供的電郵跟進，了解你需要的功能及使用場景。</p>
-          <button type="button" data-close-request-modal class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">完成</button>
+          <p class="text-sm font-medium text-blue-700" data-i18n="dash.requestOkKicker">已收到</p>
+          <h2 class="mt-2 text-xl font-bold text-slate-900" data-i18n="dash.requestOkTitle">我們會有專人與你聯絡</h2>
+          <p class="mt-3 text-sm leading-6 text-slate-600" data-i18n="dash.requestOkBody">多謝你的功能請求。團隊會以你提供的電郵跟進，了解你需要的功能及使用場景。</p>
+          <button type="button" data-close-request-modal class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="common.done">完成</button>
         </div>
       </div>
     </section>
@@ -222,39 +239,39 @@
     <div class="sr-site-modal-backdrop" data-close-change-password></div>
     <section class="sr-site-modal-card">
       <header class="sr-site-modal-header">
-        <div class="flex items-center gap-2.5 font-semibold">
-          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-sm text-blue-700">Rb</span>
-          更改密碼
+        <div class="flex min-w-0 items-center gap-2.5 font-semibold">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-sm text-blue-700">Rb</span>
+          <span data-i18n="dash.pwBrand">更改密碼</span>
         </div>
-        <button type="button" class="sr-site-modal-close" data-close-change-password aria-label="關閉">×</button>
+        <button type="button" class="sr-site-modal-close" data-close-change-password data-i18n-aria="common.close" aria-label="關閉">×</button>
       </header>
       <div class="p-6 md:p-8">
         <div id="changePasswordFormWrap">
-          <h2 id="changePasswordTitle" class="text-xl font-bold text-slate-900">更新登入密碼</h2>
-          <p class="mt-2 text-sm leading-6 text-slate-600">請輸入目前密碼及新密碼。接駁會員系統之後，更改會寫入你的帳號。</p>
+          <h2 id="changePasswordTitle" class="text-xl font-bold text-slate-900" data-i18n="dash.pwTitle">更新登入密碼</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="dash.pwLead">請輸入目前密碼及新密碼。接駁會員系統之後，更改會寫入你的帳號。</p>
           <form id="changePasswordForm" class="mt-6 space-y-4">
             <label class="block text-sm font-medium text-slate-700">
-              目前密碼
+              <span data-i18n="dash.pwCurrent">目前密碼</span>
               <input name="currentPassword" type="password" required autocomplete="current-password" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
             </label>
             <label class="block text-sm font-medium text-slate-700">
-              新密碼
+              <span data-i18n="dash.pwNew">新密碼</span>
               <input name="newPassword" type="password" required autocomplete="new-password" minlength="6" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
             </label>
             <label class="block text-sm font-medium text-slate-700">
-              確認新密碼
+              <span data-i18n="dash.pwConfirm">確認新密碼</span>
               <input name="confirmPassword" type="password" required autocomplete="new-password" minlength="6" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
             </label>
-            <button type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+            <button type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="dash.pwSave">
               儲存新密碼
             </button>
           </form>
         </div>
         <div id="changePasswordFail" class="hidden text-center">
-          <p class="text-sm font-medium text-blue-700">未能完成</p>
-          <h2 class="mt-2 text-xl font-bold text-slate-900">尚未接駁會員資料庫</h2>
-          <p class="mt-3 text-sm leading-6 text-slate-600">暫時未能更改密碼。接駁會員系統之後，此表格會將新密碼寫入你的帳號。</p>
-          <button type="button" data-close-change-password class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">知道了</button>
+          <p class="text-sm font-medium text-blue-700" data-i18n="dash.pwFailKicker">未能完成</p>
+          <h2 class="mt-2 text-xl font-bold text-slate-900" data-i18n="dash.pwFailTitle">尚未接駁會員資料庫</h2>
+          <p class="mt-3 text-sm leading-6 text-slate-600" data-i18n="dash.pwFailBody">暫時未能更改密碼。接駁會員系統之後，此表格會將新密碼寫入你的帳號。</p>
+          <button type="button" data-close-change-password class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="common.gotIt">知道了</button>
         </div>
       </div>
     </section>
@@ -264,24 +281,24 @@
     <div class="sr-site-modal-backdrop" data-close-payment-gateway></div>
     <section class="sr-site-modal-card">
       <header class="sr-site-modal-header">
-        <div class="flex items-center gap-2.5 font-semibold">
-          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-sm text-blue-700">Rb</span>
-          付款閘道
+        <div class="flex min-w-0 items-center gap-2.5 font-semibold">
+          <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-sm text-blue-700">Rb</span>
+          <span data-i18n="dash.payBrand">付款閘道</span>
         </div>
-        <button type="button" class="sr-site-modal-close" data-close-payment-gateway aria-label="關閉">×</button>
+        <button type="button" class="sr-site-modal-close" data-close-payment-gateway data-i18n-aria="common.close" aria-label="關閉">×</button>
       </header>
       <div class="p-6 text-center md:p-8">
-        <p class="text-sm font-medium text-blue-700">尚未接駁</p>
-        <h2 id="paymentGatewayTitle" class="mt-2 text-xl font-bold text-slate-900">尚未連接付款閘道</h2>
-        <p class="mt-3 text-sm leading-6 text-slate-600">付款閘道尚未接駁。接駁之後，此按鈕會前往外部付款頁，供你升級或管理訂閱。</p>
-        <button type="button" data-close-payment-gateway class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500">知道了</button>
+        <p class="text-sm font-medium text-blue-700" data-i18n="dash.payKicker">尚未接駁</p>
+        <h2 id="paymentGatewayTitle" class="mt-2 text-xl font-bold text-slate-900" data-i18n="dash.payTitle">尚未連接付款閘道</h2>
+        <p class="mt-3 text-sm leading-6 text-slate-600" data-i18n="dash.payBody">付款閘道尚未接駁。接駁之後，此按鈕會前往外部付款頁，供你升級或管理訂閱。</p>
+        <button type="button" data-close-payment-gateway class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="common.gotIt">知道了</button>
       </div>
     </section>
   </div>
 
   <footer class="border-t border-slate-200 bg-white px-5 py-8">
     <div class="mx-auto flex max-w-content flex-col items-center justify-between gap-4 text-sm text-slate-600 md:flex-row">
-      <a href="index.html" class="hover:text-blue-700">← 返回產品官網</a>
+      <a href="index.html" class="hover:text-blue-700" data-i18n="footer.backHome">← 返回產品官網</a>
       <p>© 2026 Readbar. All rights reserved.</p>
     </div>
   </footer>

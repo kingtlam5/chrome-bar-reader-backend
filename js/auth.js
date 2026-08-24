@@ -3,6 +3,10 @@
 
   const AUTH_KEY = "stealthReader.auth";
 
+  function t(key, vars) {
+    return window.ReadbarI18n?.t(key, vars) || key;
+  }
+
   function getAuth() {
     try {
       const raw = sessionStorage.getItem(AUTH_KEY);
@@ -38,8 +42,9 @@
     }
   }
 
-  const auth = getAuth();
-  if (auth) {
+  function fillMemberLabels() {
+    const auth = getAuth();
+    if (!auth) return;
     document.querySelectorAll("[data-member-email]").forEach((el) => {
       el.textContent = auth.email || "user@example.com";
     });
@@ -54,6 +59,10 @@
     });
   }
 
+  const auth = getAuth();
+  if (auth) fillMemberLabels();
+  window.ReadbarI18n?.onChange(fillMemberLabels);
+
   function usernameOf(member) {
     if (member.username) return member.username;
     const email = member.email || "";
@@ -63,14 +72,18 @@
   }
 
   function planLabelOf(member) {
-    if (member.plan === "pro") return "Pro 計劃（每月 $2.99，自動續訂）";
-    return "免費計劃";
+    if (member.plan === "pro") return t("auth.planPro");
+    return t("auth.planFree");
   }
 
   function nextPaymentLabelOf(member) {
-    if (member.plan !== "pro") return "不適用";
+    if (member.plan !== "pro") return t("auth.nextPaymentNA");
     const source = member.nextPaymentAt ? new Date(member.nextPaymentAt) : addOneMonth(new Date());
-    if (Number.isNaN(source.getTime())) return "不適用";
+    if (Number.isNaN(source.getTime())) return t("auth.nextPaymentNA");
+    const lang = window.ReadbarI18n?.getLang() || "zh-Hant";
+    if (lang === "en") {
+      return source.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+    }
     return `${source.getFullYear()}年${source.getMonth() + 1}月${source.getDate()}日`;
   }
 

@@ -4,8 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light">
-  <title>會員登入｜Readbar</title>
-  <meta name="description" content="登入 Readbar 會員中心。訪客須先登入，方可開啟閱讀器。">
+  <script>
+    (function () {
+      try {
+        var q = new URLSearchParams(location.search).get("lang");
+        var stored = localStorage.getItem("readbar.lang");
+        var lang = q === "en" || q === "zh-Hant" ? q : stored === "en" ? "en" : "zh-Hant";
+        if (q === "en" || q === "zh-Hant") localStorage.setItem("readbar.lang", q);
+        document.documentElement.lang = lang;
+        document.documentElement.classList.toggle("lang-en", lang === "en");
+      } catch (e) {}
+    })();
+  </script>
+  <title data-i18n="meta.login.title">會員登入｜Readbar</title>
+  <meta name="description" data-i18n-content="meta.login.description" content="登入 Readbar 會員中心。訪客須先登入，方可開啟閱讀器。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,66 +46,73 @@
       color-scheme: light;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
+  <script src="js/i18n.js?v=1"></script>
 </head>
 <body class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header class="bg-blue-700 text-white">
-    <div class="mx-auto flex max-w-content items-center justify-between px-5 py-4">
+    <div class="mx-auto flex max-w-content items-center justify-between gap-3 px-5 py-4">
       <a href="index.html" class="flex items-center gap-2.5 font-semibold tracking-tight text-white">
         <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-sm text-blue-700">Rb</span>
         <span>Readbar</span>
       </a>
-      <a href="index.html" class="text-sm text-blue-100 hover:text-white">產品官網</a>
+      <div class="site-page-header-actions">
+        <div class="site-lang-switch" role="group" data-i18n-aria="lang.aria" aria-label="語言">
+          <button type="button" class="site-lang-btn" data-set-lang="zh-Hant" aria-pressed="true">繁</button>
+          <button type="button" class="site-lang-btn" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a href="index.html" class="text-sm text-blue-100 hover:text-white" data-i18n="nav.home">產品官網</a>
+      </div>
     </div>
   </header>
 
   <main class="hero-wash">
     <div class="mx-auto flex max-w-content flex-col-reverse gap-8 px-5 py-8 md:gap-10 md:py-20 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
       <section class="min-w-0">
-        <p class="text-sm font-medium text-blue-700">Member Login</p>
-        <h1 class="mt-2 max-w-full text-xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl">登入後即可開啟閱讀器</h1>
-        <p class="mt-4 max-w-full text-sm leading-7 text-slate-600 md:max-w-lg md:text-base">
+        <p class="text-sm font-medium text-blue-700" data-i18n="login.kicker">Member Login</p>
+        <h1 class="mt-2 max-w-full text-xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl" data-i18n="login.h1">登入後即可開啟閱讀器</h1>
+        <p class="mt-4 max-w-full text-sm leading-7 text-slate-600 md:max-w-lg md:text-base" data-i18n="login.lead">
           訪客無法直接進入程式。登入後將以免費會員開始：TXT 閱讀、2 張偽裝背景、本機進度。如需 EPUB、簡轉繁、獨立彈出視窗、Panic Button 及雲端同步，可再升級 Pro。
         </p>
         <ul class="mt-8 space-y-3 text-sm text-slate-700">
           <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">1</span>
-            <span class="min-w-0 flex-1">免費會員：基本閱讀、TXT、2 張背景、本機進度</span>
+            <span class="min-w-0 flex-1" data-i18n="login.point1">免費會員：基本閱讀、TXT、2 張背景、本機進度</span>
           </li>
           <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">2</span>
-            <span class="min-w-0 flex-1">Pro 會員：$2.99／月，解鎖 EPUB、簡轉繁、獨立彈出視窗與 Panic Button</span>
+            <span class="min-w-0 flex-1" data-i18n="login.point2">Pro 會員：$2.99／月，解鎖 EPUB、簡轉繁、獨立彈出視窗與 Panic Button</span>
           </li>
         </ul>
       </section>
 
       <section class="card-surface min-w-0 w-full rounded-3xl border border-slate-200 p-5 sm:p-8 md:p-10">
-        <h2 class="text-xl font-bold tracking-tight text-slate-900">登入會員中心</h2>
-        <p class="mt-2 text-sm leading-6 text-slate-600">請使用電郵及密碼登入。此為靜態示範，任何有效電郵格式均可進入。</p>
+        <h2 class="text-xl font-bold tracking-tight text-slate-900" data-i18n="login.h2">登入會員中心</h2>
+        <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="login.formLead">請使用電郵及密碼登入。此為靜態示範，任何有效電郵格式均可進入。</p>
 
         <form id="loginForm" class="mt-8 space-y-4">
           <label class="block text-sm font-medium text-slate-700">
-            電郵
+            <span data-i18n="common.email">電郵</span>
             <input id="loginEmail" name="email" type="email" required autocomplete="username" placeholder="you@example.com" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
           </label>
           <label class="block text-sm font-medium text-slate-700">
-            密碼
+            <span data-i18n="common.password">密碼</span>
             <input id="loginPassword" name="password" type="password" required autocomplete="current-password" placeholder="••••••••" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
           </label>
-          <button type="submit" class="glow-btn mt-2 inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500">
+          <button type="submit" class="glow-btn mt-2 inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="login.submit">
             登入免費會員
           </button>
         </form>
 
         <p class="mt-6 text-center text-sm text-slate-600">
-          還沒有帳號？
-          <a href="register.html" class="font-medium text-blue-700 hover:text-blue-800">免費註冊</a>
+          <span data-i18n="login.noAccount">還沒有帳號？</span>
+          <a href="register.html" class="font-medium text-blue-700 hover:text-blue-800" data-i18n="login.registerLink">免費註冊</a>
         </p>
         <div class="mt-6 border-t border-slate-200 pt-5">
-          <p class="text-center text-xs font-medium uppercase tracking-wide text-slate-400">預覽 Dashboard</p>
+          <p class="text-center text-xs font-medium uppercase tracking-wide text-slate-400" data-i18n="login.preview">預覽 Dashboard</p>
           <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <a id="previewFreeLink" href="dashboard-free-version.html" class="inline-flex w-full items-center justify-center rounded-full border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700">免費版本</a>
-            <a id="previewProLink" href="dashboard-pro-version.html" class="inline-flex w-full items-center justify-center rounded-full border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700">Pro版本</a>
+            <a id="previewFreeLink" href="dashboard-free-version.html" class="inline-flex w-full items-center justify-center rounded-full border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700" data-i18n="login.previewFree">免費版本</a>
+            <a id="previewProLink" href="dashboard-pro-version.html" class="inline-flex w-full items-center justify-center rounded-full border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700" data-i18n="login.previewPro">Pro版本</a>
           </div>
         </div>
       </section>
@@ -102,7 +121,7 @@
 
   <footer class="border-t border-slate-200 bg-white px-5 py-8">
     <div class="mx-auto flex max-w-content flex-col items-center justify-between gap-4 text-sm text-slate-600 md:flex-row">
-      <a href="index.html" class="hover:text-blue-700">← 返回產品官網</a>
+      <a href="index.html" class="hover:text-blue-700" data-i18n="footer.backHome">← 返回產品官網</a>
       <p>© 2026 Readbar. All rights reserved.</p>
     </div>
   </footer>

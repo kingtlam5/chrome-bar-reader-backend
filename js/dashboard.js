@@ -11,6 +11,10 @@
   const lockedControls = document.querySelectorAll("[data-locked]");
   const panicKeyInput = document.getElementById("panicKeyInput");
 
+  function t(key, vars) {
+    return window.ReadbarI18n?.t(key, vars) || key;
+  }
+
   function readerUrl(fileName) {
     try {
       return new URL(fileName, window.location.href).href;
@@ -76,24 +80,28 @@
     const url = readerUrl("reader-pro-version.html?popup=1");
     const popup = openProReaderWindow(url);
     if (!popup) {
-      alert("無法開啟彈出視窗。請允許此網站的彈出視窗後再試。");
+      alert(t("dash.popupBlocked"));
       return;
     }
     popup.focus();
   }
 
   function formatLastRead(timestamp) {
-    if (!timestamp) return "今天 14:32";
+    if (!timestamp) return t("dash.sampleLastRead");
 
     const date = new Date(timestamp);
-    if (Number.isNaN(date.getTime())) return "今天 14:32";
+    if (Number.isNaN(date.getTime())) return t("dash.sampleLastRead");
 
     const now = new Date();
     const sameDay = date.toDateString() === now.toDateString();
     const hours = String(date.getHours()).padStart(2, "0");
     const minutes = String(date.getMinutes()).padStart(2, "0");
 
-    if (sameDay) return `今天 ${hours}:${minutes}`;
+    if (sameDay) return t("dash.todayTime", { time: `${hours}:${minutes}` });
+    const lang = window.ReadbarI18n?.getLang() || "zh-Hant";
+    if (lang === "en") {
+      return date.toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false });
+    }
     return `${date.getMonth() + 1}/${date.getDate()} ${hours}:${minutes}`;
   }
 
@@ -117,9 +125,9 @@
 
   function loadReadingCard() {
     const fallback = {
-      fileName: "《三體》",
+      fileName: t("dash.sampleBook"),
       percent: 67,
-      lastRead: "今天 14:32"
+      lastRead: t("dash.sampleLastRead")
     };
 
     try {
@@ -133,7 +141,7 @@
       const percent = Math.round((index + 1) / total * 100);
 
       return {
-        fileName: saved.n || "未命名文件",
+        fileName: saved.n || t("dash.unnamed"),
         percent,
         lastRead: formatLastRead(saved.syncedAt || Date.now())
       };
@@ -183,6 +191,7 @@
   renderPanicKey();
   initRequestModal();
   initAccountModals();
+  window.ReadbarI18n?.onChange(renderReadingCard);
 
   function bindModal(modal, closeAttr) {
     if (!modal) return { open() {}, close() {} };

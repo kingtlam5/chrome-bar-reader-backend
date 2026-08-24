@@ -48,11 +48,84 @@ html.rb-device-blocked .rb-device-notice {
 .rb-device-notice-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   max-width: 1120px;
   margin: 0 auto;
   color: #1d4ed8;
   font-weight: 600;
+}
+
+.rb-device-notice-brand {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.rb-device-notice-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px 16px;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.rb-device-notice-card-head .rb-device-notice-brand {
+  color: #ffffff;
+}
+
+.site-lang-switch {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.12);
+}
+
+.rb-device-notice-header .site-lang-switch {
+  border-color: rgba(29, 78, 216, 0.28);
+  background: #eff6ff;
+}
+
+.rb-device-notice-header .site-lang-btn {
+  color: #1d4ed8;
+}
+
+.rb-device-notice-header .site-lang-btn[aria-pressed="true"] {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+.site-lang-btn {
+  min-width: 1.85rem;
+  padding: 0.28rem 0.52rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #dbeafe;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.site-lang-btn[aria-pressed="true"] {
+  background: #ffffff;
+  color: #1d4ed8;
+}
+
+html.lang-en .rb-device-notice-body h1,
+html.lang-en .rb-device-notice-body p {
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .rb-device-notice-mark {
@@ -78,16 +151,6 @@ html.rb-device-blocked .rb-device-notice {
   border-radius: 24px;
   background: #ffffff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
-}
-
-.rb-device-notice-card-head {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 16px;
-  background: #1d4ed8;
-  color: #ffffff;
-  font-weight: 600;
 }
 
 .rb-device-notice-card-head .rb-device-notice-mark {
