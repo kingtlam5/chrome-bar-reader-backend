@@ -25,8 +25,8 @@
 ## 本機測試
 
 ```bash
-git clone https://github.com/kingtlam5/chrome-bar-reader-frontend.git
-cd chrome-bar-reader-frontend
+git clone https://github.com/kingtlam5/chrome-bar-reader-backend.git
+cd chrome-bar-reader-backend
 python3 -m http.server 8765
 ```
 
@@ -40,6 +40,8 @@ python3 -m http.server 8765
 - 使用說明：http://localhost:8765/guide.html
 
 請以本地伺服器開啟，請勿直接雙擊 HTML。免費會員由免費會員中心以一般分頁啟動閱讀器；Pro 由付費會員中心以獨立彈出視窗啟動。閱讀器僅供電腦瀏覽器使用，流動裝置會顯示提示並無法開啟。
+
+線上網站（已接 Clerk）係 https://kingtlam5.github.io/chrome-bar-reader-backend/ 。舊網址 https://kingtlam5.github.io/chrome-bar-reader-frontend/ 仲係未接會員系統嘅舊版，喺嗰度改密碼會永遠顯示「尚未接駁會員資料庫」。
 
 ## 點樣分辨 Free trial 同 Pro 申請
 
