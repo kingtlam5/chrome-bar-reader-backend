@@ -420,6 +420,17 @@ code {
   }
 }
 
+.auth-form-error {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #b91c1c;
+}
+
+.clerk-captcha {
+  min-height: 0;
+}
+
 .sr-site-modal {
   position: fixed;
   inset: 0;

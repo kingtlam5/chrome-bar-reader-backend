@@ -46,8 +46,8 @@
       color-scheme: light;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css?v=8">
-  <script src="js/i18n.js?v=1"></script>
+  <link rel="stylesheet" href="css/style.css?v=9">
+  <script src="js/i18n.js?v=2"></script>
 </head>
 <body class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header class="bg-blue-700 text-white">
@@ -88,20 +88,38 @@
 
       <section class="card-surface min-w-0 w-full rounded-3xl border border-slate-200 p-5 sm:p-8 md:p-10">
         <h2 class="text-xl font-bold tracking-tight text-slate-900" data-i18n="login.h2">登入會員中心</h2>
-        <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="login.formLead">請使用電郵及密碼登入。此為靜態示範，任何有效電郵格式均可進入。</p>
+        <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="login.formLead">請使用已註冊的電郵及密碼登入。</p>
 
         <form id="loginForm" class="mt-8 space-y-4">
-          <label class="block text-sm font-medium text-slate-700">
-            <span data-i18n="common.email">電郵</span>
-            <input id="loginEmail" name="email" type="email" required autocomplete="username" placeholder="you@example.com" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
-          </label>
-          <label class="block text-sm font-medium text-slate-700">
-            <span data-i18n="common.password">密碼</span>
-            <input id="loginPassword" name="password" type="password" required autocomplete="current-password" placeholder="••••••••" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
-          </label>
-          <button type="submit" class="glow-btn mt-2 inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="login.submit">
-            登入免費會員
-          </button>
+          <div id="loginFields" class="space-y-4">
+            <label class="block text-sm font-medium text-slate-700">
+              <span data-i18n="common.email">電郵</span>
+              <input id="loginEmail" name="email" type="email" required autocomplete="username" placeholder="you@example.com" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+            </label>
+            <label class="block text-sm font-medium text-slate-700">
+              <span data-i18n="common.password">密碼</span>
+              <input id="loginPassword" name="password" type="password" required autocomplete="current-password" placeholder="••••••••" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+            </label>
+            <button type="submit" class="glow-btn mt-2 inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500 disabled:opacity-60" data-i18n="login.submit">
+              登入免費會員
+            </button>
+          </div>
+
+          <div id="loginVerifyWrap" class="space-y-4 hidden">
+            <p class="text-sm leading-6 text-slate-600" data-i18n="login.verifyLead">請輸入寄到你電郵的驗證碼。</p>
+            <label class="block text-sm font-medium text-slate-700">
+              <span data-i18n="login.code">驗證碼</span>
+              <input id="loginVerifyCode" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" data-i18n-placeholder="login.codePlaceholder" placeholder="6 位數字" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+            </label>
+            <button id="loginVerifyBtn" type="button" class="glow-btn mt-2 inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500 disabled:opacity-60" data-i18n="login.verifySubmit">
+              驗證並登入
+            </button>
+            <button id="loginResendBtn" type="button" class="inline-flex w-full items-center justify-center rounded-full border border-slate-300 px-5 py-3 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700 disabled:opacity-60" data-i18n="login.resend">
+              重發驗證碼
+            </button>
+          </div>
+
+          <p id="loginError" class="auth-form-error hidden" role="alert"></p>
         </form>
 
         <p class="mt-6 text-center text-sm text-slate-600">
@@ -126,6 +144,7 @@
     </div>
   </footer>
 
+  <script src="js/clerk-client.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/login.js"></script>
 </body>
