@@ -66,11 +66,51 @@
     return loadPromise;
   }
 
-  function planOf(user) {
-    const meta = user?.publicMetadata || {};
+  function normalizePlan(value) {
+    return String(value || "").toLowerCase() === "pro" ? "pro" : "free";
+  }
+
+  function membershipMeta(signupPlan, extra) {
+    const requested = normalizePlan(signupPlan);
+    return {
+      plan: "free",
+      signupPlan: requested,
+      ...(requested === "pro" ? { proRequestedAt: new Date().toISOString() } : {}),
+      ...(extra || {})
+    };
+  }
+
+  function signupPlanOf(user) {
     const unsafe = user?.unsafeMetadata || {};
-    const plan = String(unsafe.plan || meta.plan || "free").toLowerCase();
-    return plan === "pro" ? "pro" : "free";
+    return normalizePlan(unsafe.signupPlan || unsafe.requestedPlan || unsafe.plan);
+  }
+
+  function planOf(user) {
+    const publicMeta = user?.publicMetadata || {};
+    const unsafe = user?.unsafeMetadata || {};
+    if (normalizePlan(publicMeta.plan) === "pro") return "pro";
+    return normalizePlan(unsafe.plan);
+  }
+
+  async function persistMembership(signupPlan) {
+    const clerk = await ready();
+    const user = clerk?.user;
+    if (!user?.update) return user || null;
+
+    const current = { ...(user.unsafeMetadata || {}) };
+    const requested = normalizePlan(signupPlan || current.signupPlan || current.plan);
+    const entitled = normalizePlan(user.publicMetadata?.plan) === "pro";
+    const next = {
+      ...current,
+      signupPlan: requested,
+      plan: entitled ? "pro" : "free"
+    };
+    if (requested === "pro" && !entitled && !next.proRequestedAt) {
+      next.proRequestedAt = new Date().toISOString();
+    }
+
+    await user.update({ unsafeMetadata: next });
+    return clerk.user;
   }
 
   function emailOf(user) {
@@ -164,6 +204,9 @@
     PUBLISHABLE_KEY,
     ready,
     planOf,
+    signupPlanOf,
+    membershipMeta,
+    persistMembership,
     profileFromUser,
     dashboardFor,
     errorMessage,

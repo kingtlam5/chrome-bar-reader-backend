@@ -97,7 +97,7 @@
     const payload = {
       emailAddress,
       password,
-      unsafeMetadata: { name, plan }
+      unsafeMetadata: window.ReadbarClerk.membershipMeta(plan, { name })
     };
     if (firstName) payload.firstName = firstName;
     if (lastName) payload.lastName = lastName;
@@ -118,7 +118,7 @@
           clerk.client.signUp.create({
             emailAddress,
             password,
-            unsafeMetadata: { name, plan }
+            unsafeMetadata: window.ReadbarClerk.membershipMeta(plan, { name })
           }),
           timeoutMs,
           timeoutMessage
@@ -135,8 +135,9 @@
     });
   }
 
-  function finishSignedIn(user, plan) {
-    const profile = window.ReadbarClerk.applySession(user);
+  async function finishSignedIn(user, plan) {
+    const nextUser = (await window.ReadbarClerk.persistMembership(plan)) || user;
+    const profile = window.ReadbarClerk.applySession(nextUser);
     if (plan === "pro") {
       const pending = collectProfile("pro");
       localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
@@ -149,7 +150,7 @@
   async function completeIfReady(signUp, plan) {
     if (signUp.status === "complete") {
       const user = await window.ReadbarClerk.activateSession(signUp.createdSessionId);
-      finishSignedIn(user, plan);
+      await finishSignedIn(user, plan);
       return true;
     }
     return false;
