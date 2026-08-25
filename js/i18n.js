@@ -215,7 +215,7 @@
     "login.point2": { "zh-Hant": "Pro 會員：$2.99／月，解鎖 EPUB、簡轉繁、獨立彈出視窗與 Panic Button", "en": "Pro: $2.99 / month — EPUB, Simplified-to-Traditional, standalone popup, and Panic Button" },
     "login.h2": { "zh-Hant": "登入會員中心", "en": "Log in to the member centre" },
     "login.formLead": { "zh-Hant": "請使用已註冊的電郵及密碼登入。", "en": "Use the email and password you registered with." },
-    "login.submit": { "zh-Hant": "登入免費會員", "en": "Log in as free member" },
+    "login.submit": { "zh-Hant": "登入", "en": "Log in" },
     "login.code": { "zh-Hant": "驗證碼", "en": "Verification code" },
     "login.codePlaceholder": { "zh-Hant": "6 位數字", "en": "6-digit code" },
     "login.verifyLead": { "zh-Hant": "請輸入寄到你電郵的驗證碼。", "en": "Enter the verification code sent to your email." },
@@ -293,7 +293,7 @@
     "guide.before": { "zh-Hant": "開始之前", "en": "Before you start" },
     "guide.freeH2": { "zh-Hant": "由免費會員中心啟動", "en": "Launch from the free member centre" },
     "guide.free1": { "zh-Hant": "登入後將進入免費會員中心。", "en": "After login you enter the free member centre." },
-    "guide.free2": { "zh-Hant": "按「啟動免費閱讀器」，會以一般瀏覽器分頁開啟。頁面內會先出現登入畫面，輸入用戶名稱及密碼後才可使用閱讀器。", "en": "Tap “Launch free reader” to open a normal browser tab. A login screen appears first; enter the username and password before using the reader." },
+    "guide.free2": { "zh-Hant": "按「啟動免費閱讀器」，會以一般瀏覽器分頁開啟。頁面內會先出現登入畫面，請輸入 Clerk 電郵及密碼。", "en": "Tap “Launch free reader” to open a normal browser tab. A login screen appears first; enter your Clerk email and password." },
     "guide.free3": { "zh-Hant": "免費版以一般瀏覽器分頁開啟，適合先熟悉操作。", "en": "Free opens as a normal browser tab — a good way to learn the controls first." },
     "guide.toolbarH2": { "zh-Hant": "工具列按鈕", "en": "Toolbar buttons" },
     "guide.colButton": { "zh-Hant": "按鈕", "en": "Button" },
@@ -307,7 +307,7 @@
     "guide.freeUpload": { "zh-Hant": "上傳偽裝背景（免費版最多 2 張）", "en": "Upload camouflage backgrounds (Free: up to 2)" },
     "guide.proH2": { "zh-Hant": "由付費會員中心啟動", "en": "Launch from the Pro member centre" },
     "guide.pro1": { "zh-Hant": "使用 Pro 帳號登入付費會員中心。", "en": "Log in to the Pro member centre with a Pro account." },
-    "guide.pro2": { "zh-Hant": "按「啟動隱蔽閱讀器」，會以獨立彈出視窗開啟，並減少分頁列。Chrome 原生網址列仍然會顯示。視窗內會先出現登入畫面，輸入用戶名稱及密碼後才可使用閱讀器。", "en": "Tap “Launch stealth reader” to open a standalone popup with fewer tab bars. Chrome’s real address bar still shows. A login screen appears first; enter the username and password before using the reader." },
+    "guide.pro2": { "zh-Hant": "按「啟動隱蔽閱讀器」，會以獨立彈出視窗開啟。視窗內請用 Clerk 電郵及密碼登入。免費會員無法進入 Pro 閱讀器。", "en": "Tap “Launch stealth reader” to open a standalone popup. Sign in with your Clerk email and password. Free members cannot open the Pro reader." },
     "guide.pro3": { "zh-Hant": "如彈出視窗被攔截，請允許此網站的彈出視窗後再試。", "en": "If the popup is blocked, allow pop-ups for this site and try again." },
     "guide.proPrevNext": { "zh-Hant": "上一句 / 下一句", "en": "Previous / next sentence" },
     "guide.proBg": { "zh-Hant": "切換偽裝背景（最多 20 張）", "en": "Switch camouflage backgrounds (up to 20)" },
@@ -386,7 +386,7 @@
     "dash.shortcut3": { "zh-Hant": "在「輸入物件的位置」欄位貼上以下內容：", "en": "Paste the following into the location field:" },
     "dash.shortcut4": { "zh-Hant": "按「下一步」，為捷徑命名，例如 Readbar Pro。", "en": "Click Next and name the shortcut, for example Readbar Pro." },
     "dash.shortcut5": { "zh-Hant": "按「完成」。", "en": "Click Finish." },
-    "dash.shortcut6": { "zh-Hant": "其後以該捷徑啟動。Chrome 會以應用程式視窗開啟，原生網址列不會顯示。閱讀器內的登入畫面仍然需要輸入用戶名稱及密碼。", "en": "Launch with that shortcut. Chrome opens as an app window without the real address bar. The in-reader login still requires the username and password." },
+    "dash.shortcut6": { "zh-Hant": "其後以該捷徑啟動。Chrome 會以應用程式視窗開啟，原生網址列不會顯示。閱讀器內的登入畫面請輸入 Clerk 電郵及密碼。", "en": "Launch with that shortcut. Chrome opens as an app window without the real address bar. The in-reader login requires your Clerk email and password." },
     "dash.shortcutNote": { "zh-Hant": "若 Chrome 安裝於其他資料夾，請把路徑改為你電腦上的 chrome.exe 位置。", "en": "If Chrome is installed in another folder, change the path to chrome.exe on your computer." },
 
     "dash.proSettingsKicker": { "zh-Hant": "Pro 專屬設定", "en": "Pro settings" },
@@ -454,9 +454,12 @@
     "reader.loginFreeKicker": { "zh-Hant": "Free Login", "en": "Free Login" },
     "reader.loginProKicker": { "zh-Hant": "Pro Login", "en": "Pro Login" },
     "reader.loginH1": { "zh-Hant": "登入後即可使用閱讀器", "en": "Log in to use the reader" },
-    "reader.loginLead": { "zh-Hant": "每次開啟均須輸入用戶名稱及密碼。此為靜態示範，用戶名稱與密碼均為 testing。", "en": "Each launch requires a username and password. This is a static demo — both are testing." },
+    "reader.loginLead": { "zh-Hant": "請輸入 Clerk 會員電郵及密碼。免費會員可開啟此閱讀器；Pro 會員會轉去 Pro 閱讀器。", "en": "Enter your Clerk email and password. Free members can open this reader; Pro members are sent to the Pro reader." },
+    "reader.loginLeadPro": { "zh-Hant": "請輸入 Clerk 會員電郵及密碼。只有已是 Pro 的帳號可以使用此閱讀器。", "en": "Enter your Clerk email and password. Only Pro accounts can open this reader." },
     "reader.loginSubmit": { "zh-Hant": "登入", "en": "Log in" },
-    "reader.loginError": { "zh-Hant": "用戶名稱或密碼不正確。", "en": "Incorrect username or password." }
+    "reader.loginError": { "zh-Hant": "電郵或密碼不正確。", "en": "Incorrect email or password." },
+    "reader.loginNeedPro": { "zh-Hant": "免費會員無法使用 Pro 閱讀器。請改用免費閱讀器，或請管理員把 Public metadata 的 plan 設為 pro。", "en": "Free members cannot open the Pro reader. Use the free reader, or ask an admin to set Public metadata plan to pro." },
+    "reader.loginGoFree": { "zh-Hant": "前往免費閱讀器", "en": "Go to the free reader" }
   };
 
   let currentLang = null;

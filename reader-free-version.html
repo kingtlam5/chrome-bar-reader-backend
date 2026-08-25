@@ -437,6 +437,10 @@
       margin-top: 24px;
     }
 
+    .reader-login-form[hidden] {
+      display: none !important;
+    }
+
     .reader-login-form label {
       display: block;
       color: #334155;
@@ -474,7 +478,8 @@
       display: none !important;
     }
 
-    .reader-login-submit {
+    .reader-login-submit,
+    .reader-login-secondary {
       display: inline-flex;
       width: 100%;
       align-items: center;
@@ -492,6 +497,32 @@
       box-shadow: 0 8px 24px rgba(37, 99, 235, 0.28);
     }
 
+    .reader-login-submit:disabled,
+    .reader-login-secondary:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .reader-login-secondary {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      box-shadow: none;
+    }
+
+    .reader-login-alt {
+      margin: 4px 0 0;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .reader-login-alt a {
+      color: #1d4ed8;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
     html.lang-en .reader-login-body h1,
     html.lang-en .reader-login-body > p,
     html.lang-en .reader-login-form label,
@@ -501,9 +532,9 @@
     }
   </style>
   <link rel="stylesheet" href="css/readbar-device-notice.css?v=3">
-  <script src="js/i18n.js?v=1"></script>
+  <script src="js/i18n.js?v=5"></script>
 </head>
-<body class="compact">
+<body class="compact" data-reader-plan="free">
   <div id="readbarDeviceNotice" class="rb-device-notice" hidden>
     <div class="rb-device-notice-header">
       <span class="rb-device-notice-brand">
@@ -535,7 +566,7 @@
     </section>
   </div>
   <script src="js/readbar-device-notice.js"></script>
-  <div id="readerLoginGate" class="reader-login-gate" role="dialog" aria-modal="true" aria-labelledby="readerLoginTitle">
+  <div id="readerLoginGate" class="reader-login-gate" data-reader-login-gate role="dialog" aria-modal="true" aria-labelledby="readerLoginTitle">
     <section class="reader-login-card">
       <header class="reader-login-header">
         <span class="reader-login-header-brand">
@@ -550,83 +581,37 @@
       <div class="reader-login-body">
         <p class="reader-login-kicker" data-i18n="reader.loginFreeKicker">Free Login</p>
         <h1 id="readerLoginTitle" data-i18n="reader.loginH1">登入後即可使用閱讀器</h1>
-        <p data-i18n="reader.loginLead">每次開啟均須輸入用戶名稱及密碼。此為靜態示範，用戶名稱與密碼均為 testing。</p>
+        <p data-i18n="reader.loginLead">請輸入 Clerk 會員電郵及密碼。免費會員可開啟此閱讀器；Pro 會員會轉去 Pro 閱讀器。</p>
         <form id="readerLoginForm" class="reader-login-form">
-          <label>
-            <span data-i18n="common.username">用戶名稱</span>
-            <input id="readerLoginUsername" name="username" type="text" required autocomplete="username" spellcheck="false">
-          </label>
-          <label>
-            <span data-i18n="common.password">密碼</span>
-            <input id="readerLoginPassword" name="password" type="password" required autocomplete="current-password">
-          </label>
-          <p id="readerLoginError" class="reader-login-error" hidden></p>
-          <button type="submit" class="reader-login-submit" data-i18n="reader.loginSubmit">登入</button>
+          <div data-reader-login-fields class="reader-login-form">
+            <label>
+              <span data-i18n="common.email">電郵</span>
+              <input id="readerLoginEmail" name="email" type="email" required autocomplete="username" spellcheck="false">
+            </label>
+            <label>
+              <span data-i18n="common.password">密碼</span>
+              <input id="readerLoginPassword" name="password" type="password" required autocomplete="current-password">
+            </label>
+            <div id="clerk-captcha" class="clerk-captcha"></div>
+            <button type="submit" class="reader-login-submit" data-i18n="reader.loginSubmit">登入</button>
+          </div>
+          <div data-reader-login-verify class="reader-login-form" hidden>
+            <p data-i18n="login.verifyLead">請輸入寄到你電郵的驗證碼。</p>
+            <label>
+              <span data-i18n="login.code">驗證碼</span>
+              <input data-reader-login-code name="code" type="text" inputmode="numeric" autocomplete="one-time-code">
+            </label>
+            <button data-reader-login-verify-btn type="button" class="reader-login-submit" data-i18n="login.verifySubmit">驗證並登入</button>
+            <button data-reader-login-resend type="button" class="reader-login-secondary" data-i18n="login.resend">重發驗證碼</button>
+          </div>
+          <p data-reader-login-error class="reader-login-error" hidden></p>
         </form>
       </div>
     </section>
   </div>
-  <script>
-    (() => {
-      if (document.documentElement.classList.contains("rb-device-blocked")) return;
-
-      const DEMO_USERNAME = "testing";
-      const DEMO_PASSWORD = "testing";
-      const html = document.documentElement;
-      const gate = document.getElementById("readerLoginGate");
-      const form = document.getElementById("readerLoginForm");
-      const usernameInput = document.getElementById("readerLoginUsername");
-      const passwordInput = document.getElementById("readerLoginPassword");
-      const errorEl = document.getElementById("readerLoginError");
-      let locked = true;
-
-      html.classList.add("reader-login-locked");
-
-      function unlockReader() {
-        locked = false;
-        html.classList.remove("reader-login-locked");
-        const memo = document.getElementById("memo");
-        if (memo) {
-          memo.removeAttribute("aria-hidden");
-          memo.removeAttribute("inert");
-        }
-      }
-
-      function blockWhileLocked(event) {
-        if (!locked) return;
-        if (gate && gate.contains(event.target)) return;
-        event.preventDefault();
-        event.stopPropagation();
-        if (event.stopImmediatePropagation) event.stopImmediatePropagation();
-      }
-
-      ["keydown", "keyup", "keypress", "wheel", "mousedown", "pointerdown"].forEach((type) => {
-        document.addEventListener(type, blockWhileLocked, true);
-      });
-
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const username = (usernameInput.value || "").trim();
-        const password = passwordInput.value || "";
-        if (username === DEMO_USERNAME && password === DEMO_PASSWORD) {
-          if (errorEl) {
-            errorEl.hidden = true;
-            errorEl.textContent = "";
-          }
-          unlockReader();
-          return;
-        }
-        if (errorEl) {
-          errorEl.hidden = false;
-          errorEl.textContent = window.ReadbarI18n?.t("reader.loginError") || "用戶名稱或密碼不正確。";
-        }
-        passwordInput.focus();
-        passwordInput.select();
-      });
-
-      usernameInput.focus();
-    })();
-  </script>
+  <script src="js/clerk-client.js?v=5"></script>
+  <script src="js/auth.js?v=5"></script>
+  <script src="js/reader-auth.js?v=5"></script>
   <main class="memo" id="memo" aria-label="隱蔽文字閱讀器" aria-hidden="true" inert>
     <div class="chrome-shell" id="chromeShell">
       <header class="chrome-toolbar" id="chromeToolbar" aria-label="Chrome 工具列（偽裝）">

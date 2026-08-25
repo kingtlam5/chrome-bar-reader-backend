@@ -648,6 +648,10 @@
       margin-top: 24px;
     }
 
+    .pro-reader-gate-form[hidden] {
+      display: none !important;
+    }
+
     .pro-reader-gate-form label {
       display: block;
       color: #334155;
@@ -685,7 +689,8 @@
       display: none !important;
     }
 
-    .pro-reader-gate-submit {
+    .pro-reader-gate-submit,
+    .pro-reader-gate-secondary {
       display: inline-flex;
       width: 100%;
       align-items: center;
@@ -708,6 +713,32 @@
       box-shadow: 0 12px 28px rgba(37, 99, 235, 0.36);
     }
 
+    .pro-reader-gate-submit:disabled,
+    .pro-reader-gate-secondary:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .pro-reader-gate-secondary {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      box-shadow: none;
+    }
+
+    .pro-reader-gate-alt {
+      margin: 4px 0 0;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .pro-reader-gate-alt a {
+      color: #1d4ed8;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
     html.lang-en .pro-reader-gate-body h1,
     html.lang-en .pro-reader-gate-body > p,
     html.lang-en .pro-reader-gate-form label,
@@ -717,9 +748,9 @@
     }
   </style>
   <link rel="stylesheet" href="css/readbar-device-notice.css?v=3">
-  <script src="js/i18n.js?v=1"></script>
+  <script src="js/i18n.js?v=5"></script>
 </head>
-<body class="compact">
+<body class="compact" data-reader-plan="pro">
   <div id="readbarDeviceNotice" class="rb-device-notice" hidden>
     <div class="rb-device-notice-header">
       <span class="rb-device-notice-brand">
@@ -751,7 +782,7 @@
     </section>
   </div>
   <script src="js/readbar-device-notice.js"></script>
-  <div id="proReaderGate" class="pro-reader-gate" role="dialog" aria-modal="true" aria-labelledby="proReaderLoginTitle">
+  <div id="proReaderGate" class="pro-reader-gate" data-reader-login-gate role="dialog" aria-modal="true" aria-labelledby="proReaderLoginTitle">
     <section class="pro-reader-gate-card">
       <header class="pro-reader-gate-header">
         <span class="pro-reader-gate-header-brand">
@@ -766,83 +797,40 @@
       <div class="pro-reader-gate-body">
         <p class="pro-reader-gate-kicker" data-i18n="reader.loginProKicker">Pro Login</p>
         <h1 id="proReaderLoginTitle" data-i18n="reader.loginH1">登入後即可使用閱讀器</h1>
-        <p data-i18n="reader.loginLead">每次開啟均須輸入用戶名稱及密碼。此為靜態示範，用戶名稱與密碼均為 testing。</p>
+        <p data-i18n="reader.loginLeadPro">請輸入 Clerk 會員電郵及密碼。只有已是 Pro 的帳號可以使用此閱讀器。</p>
         <form id="proReaderLoginForm" class="pro-reader-gate-form">
-          <label>
-            <span data-i18n="common.username">用戶名稱</span>
-            <input id="proReaderUsername" name="username" type="text" required autocomplete="username" spellcheck="false">
-          </label>
-          <label>
-            <span data-i18n="common.password">密碼</span>
-            <input id="proReaderPassword" name="password" type="password" required autocomplete="current-password">
-          </label>
-          <p id="proReaderLoginError" class="pro-reader-gate-error" hidden></p>
-          <button type="submit" class="pro-reader-gate-submit" data-i18n="reader.loginSubmit">登入</button>
+          <div data-reader-login-fields class="pro-reader-gate-form">
+            <label>
+              <span data-i18n="common.email">電郵</span>
+              <input id="proReaderEmail" name="email" type="email" required autocomplete="username" spellcheck="false">
+            </label>
+            <label>
+              <span data-i18n="common.password">密碼</span>
+              <input id="proReaderPassword" name="password" type="password" required autocomplete="current-password">
+            </label>
+            <div id="clerk-captcha" class="clerk-captcha"></div>
+            <button type="submit" class="pro-reader-gate-submit" data-i18n="reader.loginSubmit">登入</button>
+          </div>
+          <div data-reader-login-verify class="pro-reader-gate-form" hidden>
+            <p data-i18n="login.verifyLead">請輸入寄到你電郵的驗證碼。</p>
+            <label>
+              <span data-i18n="login.code">驗證碼</span>
+              <input data-reader-login-code name="code" type="text" inputmode="numeric" autocomplete="one-time-code">
+            </label>
+            <button data-reader-login-verify-btn type="button" class="pro-reader-gate-submit" data-i18n="login.verifySubmit">驗證並登入</button>
+            <button data-reader-login-resend type="button" class="pro-reader-gate-secondary" data-i18n="login.resend">重發驗證碼</button>
+          </div>
+          <p data-reader-login-error class="pro-reader-gate-error" hidden></p>
+          <p data-reader-login-alt class="pro-reader-gate-alt" hidden>
+            <a href="reader-free-version.html" data-i18n="reader.loginGoFree">前往免費閱讀器</a>
+          </p>
         </form>
       </div>
     </section>
   </div>
-  <script>
-    (() => {
-      if (document.documentElement.classList.contains("rb-device-blocked")) return;
-
-      const DEMO_USERNAME = "testing";
-      const DEMO_PASSWORD = "testing";
-      const html = document.documentElement;
-      const gate = document.getElementById("proReaderGate");
-      const form = document.getElementById("proReaderLoginForm");
-      const usernameInput = document.getElementById("proReaderUsername");
-      const passwordInput = document.getElementById("proReaderPassword");
-      const errorEl = document.getElementById("proReaderLoginError");
-      let locked = true;
-
-      html.classList.add("pro-reader-locked");
-
-      function unlockReader() {
-        locked = false;
-        html.classList.remove("pro-reader-locked");
-        const memo = document.getElementById("memo");
-        if (memo) {
-          memo.removeAttribute("aria-hidden");
-          memo.removeAttribute("inert");
-        }
-      }
-
-      function blockWhileLocked(event) {
-        if (!locked) return;
-        if (gate && gate.contains(event.target)) return;
-        event.preventDefault();
-        event.stopPropagation();
-        if (event.stopImmediatePropagation) event.stopImmediatePropagation();
-      }
-
-      ["keydown", "keyup", "keypress", "wheel", "mousedown", "pointerdown"].forEach((type) => {
-        document.addEventListener(type, blockWhileLocked, true);
-      });
-
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const username = (usernameInput.value || "").trim();
-        const password = passwordInput.value || "";
-        if (username === DEMO_USERNAME && password === DEMO_PASSWORD) {
-          if (errorEl) {
-            errorEl.hidden = true;
-            errorEl.textContent = "";
-          }
-          unlockReader();
-          return;
-        }
-        if (errorEl) {
-          errorEl.hidden = false;
-          errorEl.textContent = window.ReadbarI18n?.t("reader.loginError") || "用戶名稱或密碼不正確。";
-        }
-        passwordInput.focus();
-        passwordInput.select();
-      });
-
-      usernameInput.focus();
-    })();
-  </script>
+  <script src="js/clerk-client.js?v=5"></script>
+  <script src="js/auth.js?v=5"></script>
+  <script src="js/reader-auth.js?v=5"></script>
   <main class="memo" id="memo" aria-label="隱蔽文字閱讀器" aria-hidden="true" inert>
     <div class="chrome-shell" id="chromeShell">
       <header class="chrome-toolbar" id="chromeToolbar" aria-label="Chrome 工具列（偽裝）">
