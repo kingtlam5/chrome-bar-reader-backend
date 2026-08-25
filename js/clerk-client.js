@@ -135,6 +135,16 @@
     };
   }
 
+  function withTimeout(promise, ms, message) {
+    let timer = 0;
+    const timeout = new Promise((_, reject) => {
+      timer = window.setTimeout(() => {
+        reject(new Error(message || t("clerk.errorGeneric", "Could not complete authentication.")));
+      }, ms);
+    });
+    return Promise.race([promise, timeout]).finally(() => window.clearTimeout(timer));
+  }
+
   async function activateSession(sessionId) {
     const clerk = await ready();
     if (!sessionId) {
@@ -159,6 +169,7 @@
     errorMessage,
     splitName,
     activateSession,
-    applySession
+    applySession,
+    withTimeout
   };
 })();

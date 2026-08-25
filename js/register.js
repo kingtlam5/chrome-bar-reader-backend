@@ -102,16 +102,27 @@
     if (firstName) payload.firstName = firstName;
     if (lastName) payload.lastName = lastName;
 
+    const timeoutMs = 45000;
+    const timeoutMessage = t("register.captchaTimeout", "Verification took too long. Complete the checkbox and try again.");
+
     try {
-      return await clerk.client.signUp.create(payload);
+      return await window.ReadbarClerk.withTimeout(
+        clerk.client.signUp.create(payload),
+        timeoutMs,
+        timeoutMessage
+      );
     } catch (error) {
       const param = error?.errors?.[0]?.meta?.paramName || "";
       if (param === "first_name" || param === "last_name") {
-        return clerk.client.signUp.create({
-          emailAddress,
-          password,
-          unsafeMetadata: { name, plan }
-        });
+        return window.ReadbarClerk.withTimeout(
+          clerk.client.signUp.create({
+            emailAddress,
+            password,
+            unsafeMetadata: { name, plan }
+          }),
+          timeoutMs,
+          timeoutMessage
+        );
       }
       throw error;
     }

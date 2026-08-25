@@ -246,6 +246,8 @@
     "register.resend": { "zh-Hant": "重發驗證碼", "en": "Resend code" },
     "register.codeRequired": { "zh-Hant": "請輸入驗證碼。", "en": "Enter the verification code." },
     "register.needMoreSteps": { "zh-Hant": "此註冊還需要其他步驟，暫時未能在此頁完成。", "en": "Sign-up needs another step that is not available here." },
+    "register.captchaHint": { "zh-Hant": "如出現驗證框，請先完成驗證再繼續。", "en": "If a verification box appears, complete it to continue." },
+    "register.captchaTimeout": { "zh-Hant": "驗證等候過久。請完成驗證框後再試一次。", "en": "Verification took too long. Complete the checkbox and try again." },
     "register.namePlaceholder": { "zh-Hant": "陳大文", "en": "Alex Chan" },
     "register.passwordPlaceholder": { "zh-Hant": "最少 15 個字元", "en": "At least 15 characters" },
     "register.choosePlan": { "zh-Hant": "選擇方案", "en": "Choose a plan" },
