@@ -81,7 +81,8 @@
     try {
       const clerk = await window.ReadbarClerk.ready();
       if (clerk?.user) {
-        const profile = window.ReadbarClerk.profileFromUser(clerk.user);
+        const user = (await window.ReadbarClerk.ensureMembershipMetadata()) || clerk.user;
+        const profile = window.ReadbarClerk.profileFromUser(user);
         setAuth(profile);
         return profile;
       }

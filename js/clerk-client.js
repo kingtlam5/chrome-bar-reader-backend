@@ -92,6 +92,11 @@
     return normalizePlan(unsafe.plan);
   }
 
+  function hasPlanValue(value) {
+    const raw = String(value || "").toLowerCase();
+    return raw === "pro" || raw === "free";
+  }
+
   async function persistMembership(signupPlan) {
     const clerk = await ready();
     const user = clerk?.user;
@@ -109,6 +114,35 @@
       next.proRequestedAt = new Date().toISOString();
     }
 
+    await user.update({ unsafeMetadata: next });
+    return clerk.user;
+  }
+
+  async function ensureMembershipMetadata() {
+    const clerk = await ready();
+    const user = clerk?.user;
+    if (!user?.update) return user || null;
+
+    const current = { ...(user.unsafeMetadata || {}) };
+    const next = { ...current };
+    let changed = false;
+
+    if (!hasPlanValue(next.signupPlan)) {
+      next.signupPlan = normalizePlan(current.signupPlan || current.requestedPlan || current.plan);
+      changed = true;
+    }
+
+    if (normalizePlan(next.signupPlan) === "pro" && !next.proRequestedAt) {
+      next.proRequestedAt = new Date().toISOString();
+      changed = true;
+    }
+
+    if (!hasPlanValue(next.plan)) {
+      next.plan = normalizePlan(user.publicMetadata?.plan || current.plan);
+      changed = true;
+    }
+
+    if (!changed) return user;
     await user.update({ unsafeMetadata: next });
     return clerk.user;
   }
@@ -207,6 +241,7 @@
     signupPlanOf,
     membershipMeta,
     persistMembership,
+    ensureMembershipMetadata,
     profileFromUser,
     dashboardFor,
     errorMessage,

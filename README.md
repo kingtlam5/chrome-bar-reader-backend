@@ -53,6 +53,8 @@ python3 -m http.server 8765
 
 喺 [Clerk Dashboard](https://dashboard.clerk.com) → **Users** → 打開該用戶 → 向下捲到 **Metadata** → **Unsafe**。
 
+第一版 Clerk 接駁只寫咗 `name` 同 `plan`，所以舊用戶而家會睇唔到 `signupPlan`／`proRequestedAt`。合併呢次改動之後，佢哋下一次登入會員中心就會自動補上；新註冊會即時寫入。
+
 - `signupPlan = free`：純粹 free trial
 - `signupPlan = pro` 且 `plan = free`：申請咗 Pro，付款尚未完成
 - `plan = pro`：已有 Pro 權限（而家付款閘道未接，所以新註冊唔會出現呢個狀態）
