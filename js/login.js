@@ -67,15 +67,16 @@
     }
   }
 
-  function enterApp(user) {
-    const profile = window.ReadbarClerk.applySession(user);
+  async function enterApp(user) {
+    const nextUser = (await window.ReadbarClerk.ensureMembershipMetadata()) || user;
+    const profile = window.ReadbarClerk.applySession(nextUser);
     window.location.href = window.ReadbarClerk.dashboardFor(profile.plan);
   }
 
   async function finishSignIn(signIn) {
     if (signIn.status === "complete") {
       const user = await window.ReadbarClerk.activateSession(signIn.createdSessionId);
-      enterApp(user);
+      await enterApp(user);
       return;
     }
 
@@ -173,7 +174,7 @@
     try {
       const clerk = await window.ReadbarClerk.ready();
       if (clerk?.user) {
-        enterApp(clerk.user);
+        await enterApp(clerk.user);
       }
     } catch (error) {
       showError(window.ReadbarClerk?.errorMessage(error) || t("clerk.unavailable"));

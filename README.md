@@ -41,6 +41,26 @@ python3 -m http.server 8765
 
 請以本地伺服器開啟，請勿直接雙擊 HTML。免費會員由免費會員中心以一般分頁啟動閱讀器；Pro 由付費會員中心以獨立彈出視窗啟動。閱讀器僅供電腦瀏覽器使用，流動裝置會顯示提示並無法開啟。
 
+## 點樣分辨 Free trial 同 Pro 申請
+
+註冊時會把方案寫入 Clerk user 的 **Unsafe metadata**（付款接通前，Pro 只代表「申請咗」，未代表已付款）：
+
+| 欄位 | Free trial | 申請咗 Pro（未付款） | 已是 Pro（付款接通後） |
+|------|------------|----------------------|------------------------|
+| `signupPlan` | `"free"` | `"pro"` | `"pro"` |
+| `plan` | `"free"` | `"free"` | `"pro"` |
+| `proRequestedAt` | （無） | ISO 時間 | 保留申請時間 |
+
+喺 [Clerk Dashboard](https://dashboard.clerk.com) → **Users** → 打開該用戶 → 向下捲到 **Metadata** → **Unsafe**。
+
+第一版 Clerk 接駁只寫咗 `name` 同 `plan`，所以舊用戶而家會睇唔到 `signupPlan`／`proRequestedAt`。合併呢次改動之後，佢哋下一次登入會員中心就會自動補上；新註冊會即時寫入。
+
+- `signupPlan = free`：純粹 free trial
+- `signupPlan = pro` 且 `plan = free`：申請咗 Pro，付款尚未完成
+- `plan = pro`：已有 Pro 權限（而家付款閘道未接，所以新註冊唔會出現呢個狀態）
+
+Clerk 用戶列表本身冇按 metadata 過濾。要一次過列出全部申請者，需要 `CLERK_SECRET_KEY` 用 [Backend API 拉 users](https://clerk.com/docs/reference/backend-api/tag/users/get/users)，再篩 `unsafe_metadata.signupPlan === "pro"`。
+
 ## 上傳偽裝背景
 
 1. 免費版最多 **2 張**；Pro 最多 **20 張**全螢幕截圖
