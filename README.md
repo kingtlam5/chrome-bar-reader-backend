@@ -56,8 +56,44 @@ python3 -m http.server 8765
 第一版 Clerk 接駁只寫咗 `name` 同 `plan`，所以舊用戶而家會睇唔到 `signupPlan`／`proRequestedAt`。合併呢次改動之後，佢哋下一次登入會員中心就會自動補上；新註冊會即時寫入。
 
 - `signupPlan = free`：純粹 free trial
-- `signupPlan = pro` 且 `plan = free`：申請咗 Pro，付款尚未完成
-- `plan = pro`：已有 Pro 權限（而家付款閘道未接，所以新註冊唔會出現呢個狀態）
+- `signupPlan = pro` 且 `plan = free`：申請咗 Pro，付款尚未完成。**唔會**進入 Pro 會員中心
+- Public metadata `plan = pro`：已有 Pro 權限（而家要喺 Clerk Dashboard 人手改；付款接通後先會自動寫入）
+
+已存在、Unsafe `plan` 仍係 `"pro"` 嘅申請者：下一次登入會把 Unsafe `plan` 改返 `"free"`，並保留原有 `proRequestedAt`（冇先先補上）。之後只會進入免費會員中心。
+
+## Admin：點樣改用戶帳號類型（必須改 Public）
+
+網站只認 **Public metadata** 嘅 `plan` 決定進免費定 Pro 會員中心。Unsafe 可以由瀏覽器改，**唔好**當已付款／帳號類型。
+
+1. 開 [Clerk Dashboard](https://dashboard.clerk.com)，揀 Readbar 呢個 app
+2. 左側撳 **Users**，打開要改嘅用戶
+3. 向下捲到 **User metadata**
+4. 搵 **Public**（唔好改旁邊嘅 **Unsafe**）
+5. 撳 Edit／鉛筆，把 JSON 改成其中一種，然後 **Save**
+
+升級做 Pro：
+
+```json
+{
+  "plan": "pro"
+}
+```
+
+降返 Free trial：
+
+```json
+{
+  "plan": "free"
+}
+```
+
+6. 叫用戶重新整理會員中心，或者登出再登入。之後會自動去對應嘅 dashboard
+
+注意：
+
+- 只改 Unsafe 嘅 `plan` **唔會**開到 Pro。申請 Pro 而未付款嘅人，Unsafe 應該維持 `signupPlan: "pro"`、`plan: "free"`
+- Public 設咗 `"pro"` 之後，用戶下次登入會把 Unsafe 嘅 `plan` 鏡像成 `"pro"`（方便你對照，但權限仍然只睇 Public）
+- 會員中心「更改密碼」會呼叫 Clerk `user.updatePassword()`；新密碼最少 **15** 個字元（同註冊規則）。要用電郵／密碼正式登入，預覽 Dashboard 改唔到。登入超過約 10 分鐘後，會用你填嘅目前密碼再驗證一次 session，然後先改密碼。
 
 Clerk 用戶列表本身冇按 metadata 過濾。要一次過列出全部申請者，需要 `CLERK_SECRET_KEY` 用 [Backend API 拉 users](https://clerk.com/docs/reference/backend-api/tag/users/get/users)，再篩 `unsafe_metadata.signupPlan === "pro"`。
 
