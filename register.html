@@ -46,8 +46,8 @@
       color-scheme: light;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css?v=8">
-  <script src="js/i18n.js?v=1"></script>
+  <link rel="stylesheet" href="css/style.css?v=9">
+  <script src="js/i18n.js?v=2"></script>
 </head>
 <body class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header class="bg-blue-700 text-white">
@@ -72,12 +72,12 @@
         <p class="text-sm font-medium text-blue-700" data-i18n="register.kicker">Create Account</p>
         <h1 class="mt-2 max-w-full text-xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl" data-i18n="register.h1">註冊後即可開始閱讀</h1>
         <p class="mt-4 max-w-full text-sm leading-7 text-slate-600 md:max-w-lg md:text-base" data-i18n="register.lead">
-          請填寫姓名、電郵及密碼，再選擇免費或 Pro 方案。會員 API 及付款閘道稍後接駁。
+          請填寫姓名、電郵及密碼，再選擇免費或 Pro 方案。免費註冊會建立會員帳號；Pro 會先建立帳號，再前往付款頁。
         </p>
         <ul class="mt-8 space-y-3 text-sm text-slate-700">
           <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">1</span>
-            <span class="min-w-0 flex-1" data-i18n="register.point1">免費方案：按「免費註冊」。尚未連接會員 API 時，會提示未能成功註冊</span>
+            <span class="min-w-0 flex-1" data-i18n="register.point1">免費方案：按「免費註冊」建立帳號，驗證電郵後進入免費會員中心</span>
           </li>
           <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">2</span>
@@ -88,9 +88,10 @@
 
       <section class="card-surface min-w-0 w-full rounded-3xl border border-slate-200 p-5 sm:p-8 md:p-10">
         <h2 class="text-xl font-bold tracking-tight text-slate-900" data-i18n="register.h2">建立帳號</h2>
-        <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="register.formLead">此為靜態示範，尚未連接會員資料庫或付款閘道。</p>
+        <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="register.formLead">請填寫姓名、電郵及密碼。免費註冊會建立會員帳號；Pro 付款閘道稍後接駁。</p>
 
         <form id="registerForm" class="mt-8 space-y-4">
+          <div id="registerFields" class="space-y-4">
           <label class="block text-sm font-medium text-slate-700">
             <span data-i18n="common.name">姓名</span>
             <input id="registerName" name="name" type="text" required autocomplete="name" data-i18n-placeholder="register.namePlaceholder" placeholder="陳大文" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
@@ -101,7 +102,7 @@
           </label>
           <label class="block text-sm font-medium text-slate-700">
             <span data-i18n="common.password">密碼</span>
-            <input id="registerPassword" name="password" type="password" required minlength="8" autocomplete="new-password" data-i18n-placeholder="register.passwordPlaceholder" placeholder="最少 8 個字元" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+            <input id="registerPassword" name="password" type="password" required minlength="15" autocomplete="new-password" data-i18n-placeholder="register.passwordPlaceholder" placeholder="最少 15 個字元" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
           </label>
 
           <fieldset class="pt-2">
@@ -122,16 +123,35 @@
             </div>
           </fieldset>
 
+          <div id="clerk-captcha" class="clerk-captcha"></div>
+
           <div id="registerFreeWrap" class="mt-2">
-            <button id="registerFreeBtn" type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="register.freeCta">
+            <button id="registerFreeBtn" type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500 disabled:opacity-60" data-i18n="register.freeCta">
               免費註冊
             </button>
           </div>
           <div id="registerPayWrap" class="mt-2 hidden">
-            <button id="registerPayBtn" type="button" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="register.payCta">
+            <button id="registerPayBtn" type="button" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500 disabled:opacity-60" data-i18n="register.payCta">
               前往付款
             </button>
           </div>
+          </div>
+
+          <div id="registerVerifyWrap" class="space-y-4 hidden">
+            <p class="text-sm leading-6 text-slate-600" data-i18n="register.verifyLead">請輸入寄到你電郵的驗證碼，以完成註冊。</p>
+            <label class="block text-sm font-medium text-slate-700">
+              <span data-i18n="register.code">驗證碼</span>
+              <input id="registerVerifyCode" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" data-i18n-placeholder="register.codePlaceholder" placeholder="6 位數字" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+            </label>
+            <button id="registerVerifyBtn" type="button" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500 disabled:opacity-60" data-i18n="register.verifySubmit">
+              驗證並完成註冊
+            </button>
+            <button id="registerResendBtn" type="button" class="inline-flex w-full items-center justify-center rounded-full border border-slate-300 px-5 py-3 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700 disabled:opacity-60" data-i18n="register.resend">
+              重發驗證碼
+            </button>
+          </div>
+
+          <p id="registerError" class="auth-form-error hidden" role="alert"></p>
         </form>
 
         <p class="mt-6 text-center text-sm text-slate-600">
@@ -162,12 +182,14 @@
       <div class="p-6 text-center md:p-8">
         <p class="text-sm font-medium text-blue-700" data-i18n="register.failKicker">未能完成</p>
         <h2 id="registerFailTitle" class="mt-2 text-xl font-bold text-slate-900" data-i18n="register.failTitle">未能成功註冊</h2>
-        <p class="mt-3 text-sm leading-6 text-slate-600" data-i18n="register.failBody">未連接會員 API，暫時未能完成註冊。接駁會員系統之後，此按鈕會將資料傳送至資料庫。</p>
+        <p id="registerFailBody" class="mt-3 text-sm leading-6 text-slate-600" data-i18n="register.failBody">暫時未能完成註冊。請檢查電郵與密碼，或稍後再試。</p>
         <button type="button" data-close-register-fail class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="common.gotIt">知道了</button>
       </div>
     </section>
   </div>
 
+  <script src="js/clerk-client.js"></script>
+  <script src="js/auth.js"></script>
   <script src="js/register.js"></script>
 </body>
 </html>

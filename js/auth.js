@@ -29,19 +29,6 @@
 
   window.StealthAuth = { get: getAuth, set: setAuth, clear: clearAuth };
 
-  const required = document.body?.dataset.requirePlan;
-  if (required) {
-    const auth = getAuth();
-    if (!auth) {
-      window.location.replace("login.html");
-      return;
-    }
-    if (auth.plan !== required) {
-      window.location.replace(auth.plan === "pro" ? "dashboard-pro-version.html" : "dashboard-free-version.html");
-      return;
-    }
-  }
-
   function fillMemberLabels() {
     const auth = getAuth();
     if (!auth) return;
@@ -58,10 +45,6 @@
       el.textContent = nextPaymentLabelOf(auth);
     });
   }
-
-  const auth = getAuth();
-  if (auth) fillMemberLabels();
-  window.ReadbarI18n?.onChange(fillMemberLabels);
 
   function usernameOf(member) {
     if (member.username) return member.username;
@@ -93,11 +76,63 @@
     return next;
   }
 
+  async function syncClerkSession() {
+    if (!window.ReadbarClerk?.ready) return null;
+    try {
+      const clerk = await window.ReadbarClerk.ready();
+      if (clerk?.user) {
+        const profile = window.ReadbarClerk.profileFromUser(clerk.user);
+        setAuth(profile);
+        return profile;
+      }
+    } catch (error) {
+      // Keep any existing local session if Clerk cannot load.
+    }
+    return getAuth();
+  }
+
+  async function gateProtectedPage() {
+    const required = document.body?.dataset.requirePlan;
+    if (!required) {
+      fillMemberLabels();
+      return;
+    }
+
+    await syncClerkSession();
+    const auth = getAuth();
+    if (!auth) {
+      window.location.replace("login.html");
+      return;
+    }
+    if (auth.plan !== required) {
+      window.location.replace(auth.plan === "pro" ? "dashboard-pro-version.html" : "dashboard-free-version.html");
+      return;
+    }
+    fillMemberLabels();
+  }
+
+  window.ReadbarI18n?.onChange(fillMemberLabels);
+  gateProtectedPage();
+
   document.addEventListener("click", (event) => {
     const logout = event.target.closest("[data-logout]");
     if (!logout) return;
     event.preventDefault();
     clearAuth();
-    window.location.href = "login.html";
+
+    const leave = () => {
+      window.location.href = "login.html";
+    };
+
+    if (!window.ReadbarClerk?.ready) {
+      leave();
+      return;
+    }
+
+    window.ReadbarClerk
+      .ready()
+      .then((clerk) => clerk.signOut())
+      .catch(() => {})
+      .finally(leave);
   });
 })();

@@ -5,8 +5,8 @@
 ## 專案結構
 
 - `index.html` — 產品官網 Landing Page
-- `login.html` — 會員登入
-- `register.html` — 免費／Pro 註冊（示範；尚未接駁會員資料庫）
+- `login.html` — 會員登入（Clerk 電郵／密碼）
+- `register.html` — 免費／Pro 註冊（Clerk 建立帳號；Pro 付款閘道仍為參考頁）
 - `payment.html` — Pro 付款閘道參考頁（尚未接駁真實付款）
 - `dashboard-free-version.html` — 免費會員中心
 - `dashboard-pro-version.html` — Pro 付費會員中心
@@ -14,9 +14,10 @@
 - `reader-pro-version.html` — 付費版閱讀器（EPUB、簡轉繁、20 張背景、Panic Button 等；開啟時須以 testing / testing 登入）
 - `guide.html` — 免費版 / Pro 版閱讀器使用說明
 - `js/landing.js` — Landing Page 互動
-- `js/auth.js` — 靜態示範用會員狀態（免費 / Pro）
-- `js/login.js` — 登入表單
-- `js/register.js` — 註冊表單（免費顯示未接 API 提示／Pro 前往付款頁）
+- `js/clerk-client.js` — 載入 Clerk（使用 Publishable Key）
+- `js/auth.js` — 會員狀態（Clerk session 同步免費 / Pro）
+- `js/login.js` — 登入表單（Clerk 電郵／密碼）
+- `js/register.js` — 註冊表單（Clerk 建立帳號／Pro 前往付款頁）
 - `js/dashboard.js` — 啟動閱讀視窗（Free 一般分頁 / Pro 獨立彈出視窗）
 - `js/guide.js` — 使用說明頁 Free / Pro 切換
 - `css/style.css` — 共用樣式
