@@ -222,15 +222,44 @@
     const passwordForm = document.getElementById("changePasswordForm");
     const passwordFormWrap = document.getElementById("changePasswordFormWrap");
     const passwordFail = document.getElementById("changePasswordFail");
+    const passwordSuccess = document.getElementById("changePasswordSuccess");
+    const passwordError = document.getElementById("changePasswordError");
+    const passwordSubmit = passwordForm?.querySelector('button[type="submit"]');
+    const failTitle = passwordFail?.querySelector("[data-pw-fail-title]");
+    const failBody = passwordFail?.querySelector("[data-pw-fail-body]");
     const paymentModal = document.getElementById("paymentGatewayModal");
     const passwordUi = bindModal(passwordModal, "data-close-change-password");
     const paymentUi = bindModal(paymentModal, "data-close-payment-gateway");
+    const minLength = window.ReadbarClerk?.MIN_PASSWORD_LENGTH || 15;
+    let passwordBusy = false;
+
+    function showPasswordPanel(panel) {
+      passwordFormWrap?.classList.toggle("hidden", panel !== "form");
+      passwordFail?.classList.toggle("hidden", panel !== "fail");
+      passwordSuccess?.classList.toggle("hidden", panel !== "success");
+    }
+
+    function showPasswordError(message) {
+      if (!passwordError) return;
+      passwordError.textContent = message || "";
+      passwordError.classList.toggle("hidden", !message);
+    }
+
+    function setPasswordBusy(nextBusy) {
+      passwordBusy = nextBusy;
+      if (passwordSubmit) passwordSubmit.disabled = nextBusy;
+    }
+
+    function resetPasswordModal() {
+      passwordForm?.reset();
+      showPasswordError("");
+      setPasswordBusy(false);
+      showPasswordPanel("form");
+    }
 
     document.querySelectorAll("[data-open-change-password]").forEach((button) => {
       button.addEventListener("click", () => {
-        passwordForm?.reset();
-        passwordFormWrap?.classList.remove("hidden");
-        passwordFail?.classList.add("hidden");
+        resetPasswordModal();
         passwordUi.open();
       });
     });
@@ -239,10 +268,52 @@
       button.addEventListener("click", () => paymentUi.open());
     });
 
-    passwordForm?.addEventListener("submit", (event) => {
+    passwordModal?.addEventListener("click", (event) => {
+      if (event.target.closest("[data-retry-change-password]")) {
+        resetPasswordModal();
+      }
+    });
+
+    passwordForm?.addEventListener("submit", async (event) => {
       event.preventDefault();
-      passwordFormWrap?.classList.add("hidden");
-      passwordFail?.classList.remove("hidden");
+      if (passwordBusy) return;
+
+      const currentPassword = passwordForm.currentPassword?.value || "";
+      const newPassword = passwordForm.newPassword?.value || "";
+      const confirmPassword = passwordForm.confirmPassword?.value || "";
+
+      showPasswordError("");
+      if (newPassword !== confirmPassword) {
+        showPasswordError(t("dash.pwMismatch"));
+        return;
+      }
+      if (newPassword.length < minLength) {
+        showPasswordError(t("dash.pwTooShort"));
+        return;
+      }
+      if (!passwordForm.reportValidity()) return;
+      if (typeof window.ReadbarClerk?.updatePassword !== "function") {
+        showPasswordError(t("clerk.unavailable"));
+        return;
+      }
+
+      setPasswordBusy(true);
+      try {
+        await window.ReadbarClerk.updatePassword({ currentPassword, newPassword });
+        passwordForm.reset();
+        showPasswordPanel("success");
+      } catch (error) {
+        const message = window.ReadbarClerk?.errorMessage(error) || t("dash.pwFailBody");
+        if (error?.code === "not_signed_in") {
+          if (failTitle) failTitle.textContent = t("dash.pwNeedSignInTitle");
+          if (failBody) failBody.textContent = t("dash.pwNeedSignInBody");
+          showPasswordPanel("fail");
+        } else {
+          showPasswordError(message);
+        }
+      } finally {
+        setPasswordBusy(false);
+      }
     });
   }
 

@@ -248,8 +248,31 @@
     return profile;
   }
 
+  const MIN_PASSWORD_LENGTH = 15;
+
+  async function updatePassword({ currentPassword, newPassword }) {
+    const clerk = await ready();
+    const user = clerk?.user;
+    if (!user) {
+      const error = new Error(
+        t("dash.pwNeedSignInBody", "Sign in with your member account to change the password.")
+      );
+      error.code = "not_signed_in";
+      throw error;
+    }
+    if (typeof user.updatePassword !== "function") {
+      throw new Error(t("clerk.unavailable", "Clerk is not available."));
+    }
+    return user.updatePassword({
+      currentPassword,
+      newPassword,
+      signOutOfOtherSessions: true
+    });
+  }
+
   window.ReadbarClerk = {
     PUBLISHABLE_KEY,
+    MIN_PASSWORD_LENGTH,
     ready,
     planOf,
     signupPlanOf,
@@ -262,6 +285,7 @@
     splitName,
     activateSession,
     applySession,
-    withTimeout
+    withTimeout,
+    updatePassword
   };
 })();
