@@ -10,15 +10,15 @@
 - `payment.html` — Pro 付款閘道參考頁（尚未接駁真實付款）
 - `dashboard-free-version.html` — 免費會員中心
 - `dashboard-pro-version.html` — Pro 付費會員中心
-- `reader-free-version.html` — 免費版閱讀器（TXT、2 張背景、本機進度；開啟時須以 testing / testing 登入）
-- `reader-pro-version.html` — 付費版閱讀器（EPUB、簡轉繁、20 張背景、Panic Button 等；開啟時須以 testing / testing 登入）
+- `reader-free-version.html` — 免費版閱讀器（TXT、2 張背景、本機進度；須用 Clerk 電郵／密碼登入）
+- `reader-pro-version.html` — 付費版閱讀器（EPUB、簡轉繁、20 張背景、Panic Button 等；須用 Clerk 電郵／密碼登入，免費會員無法進入）
 - `guide.html` — 免費版 / Pro 版閱讀器使用說明
 - `js/landing.js` — Landing Page 互動
 - `js/clerk-client.js` — 載入 Clerk（使用 Publishable Key）
 - `js/auth.js` — 會員狀態（Clerk session 同步免費 / Pro）
 - `js/login.js` — 登入表單（Clerk 電郵／密碼）
 - `js/register.js` — 註冊表單（Clerk 建立帳號／Pro 前往付款頁）
-- `js/dashboard.js` — 啟動閱讀視窗（Free 一般分頁 / Pro 獨立彈出視窗）
+- `js/reader-auth.js` — 閱讀器登入閘（Clerk 電郵／密碼；Free／Pro 分流）
 - `js/guide.js` — 使用說明頁 Free / Pro 切換
 - `css/style.css` — 共用樣式
 
@@ -42,6 +42,8 @@ python3 -m http.server 8765
 請以本地伺服器開啟，請勿直接雙擊 HTML。免費會員由免費會員中心以一般分頁啟動閱讀器；Pro 由付費會員中心以獨立彈出視窗啟動。閱讀器僅供電腦瀏覽器使用，流動裝置會顯示提示並無法開啟。
 
 線上網站（已接 Clerk）係 https://kingtlam5.github.io/chrome-bar-reader-backend/ 。舊網址 https://kingtlam5.github.io/chrome-bar-reader-frontend/ 仲係未接會員系統嘅舊版，喺嗰度改密碼會永遠顯示「尚未接駁會員資料庫」。
+
+閱讀器登入用 Clerk 電郵／密碼（已取消 testing / testing）。免費會員無法進入 Pro 閱讀器；Pro 會員喺 `login.html` 登入後會直接開啟 Pro 閱讀器。若瀏覽器已有 Clerk session，從會員中心啟動閱讀器時會自動放行。
 
 ## 點樣分辨 Free trial 同 Pro 申請
 
