@@ -85,10 +85,16 @@
     return normalizePlan(unsafe.signupPlan || unsafe.requestedPlan || unsafe.plan);
   }
 
+  function isEntitledPro(user) {
+    return normalizePlan(user?.publicMetadata?.plan) === "pro";
+  }
+
   function planOf(user) {
-    const publicMeta = user?.publicMetadata || {};
+    if (isEntitledPro(user)) return "pro";
     const unsafe = user?.unsafeMetadata || {};
-    if (normalizePlan(publicMeta.plan) === "pro") return "pro";
+    // Applying for Pro must not unlock Pro until payment (or an admin publicMetadata grant).
+    if (normalizePlan(unsafe.signupPlan || unsafe.requestedPlan) === "pro") return "free";
+    if (!hasPlanValue(unsafe.signupPlan) && normalizePlan(unsafe.plan) === "pro") return "free";
     return normalizePlan(unsafe.plan);
   }
 
@@ -104,7 +110,7 @@
 
     const current = { ...(user.unsafeMetadata || {}) };
     const requested = normalizePlan(signupPlan || current.signupPlan || current.plan);
-    const entitled = normalizePlan(user.publicMetadata?.plan) === "pro";
+    const entitled = isEntitledPro(user);
     const next = {
       ...current,
       signupPlan: requested,
@@ -125,6 +131,7 @@
 
     const current = { ...(user.unsafeMetadata || {}) };
     const next = { ...current };
+    const entitled = isEntitledPro(user);
     let changed = false;
 
     if (!hasPlanValue(next.signupPlan)) {
@@ -132,13 +139,20 @@
       changed = true;
     }
 
-    if (normalizePlan(next.signupPlan) === "pro" && !next.proRequestedAt) {
-      next.proRequestedAt = new Date().toISOString();
+    if (normalizePlan(next.signupPlan) === "pro" && !entitled) {
+      if (next.plan !== "free") {
+        next.plan = "free";
+        changed = true;
+      }
+      if (!next.proRequestedAt) {
+        next.proRequestedAt = new Date().toISOString();
+        changed = true;
+      }
+    } else if (!hasPlanValue(next.plan)) {
+      next.plan = entitled ? "pro" : "free";
       changed = true;
-    }
-
-    if (!hasPlanValue(next.plan)) {
-      next.plan = normalizePlan(user.publicMetadata?.plan || current.plan);
+    } else if (entitled && next.plan !== "pro") {
+      next.plan = "pro";
       changed = true;
     }
 

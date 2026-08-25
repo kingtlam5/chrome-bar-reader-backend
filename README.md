@@ -56,8 +56,12 @@ python3 -m http.server 8765
 第一版 Clerk 接駁只寫咗 `name` 同 `plan`，所以舊用戶而家會睇唔到 `signupPlan`／`proRequestedAt`。合併呢次改動之後，佢哋下一次登入會員中心就會自動補上；新註冊會即時寫入。
 
 - `signupPlan = free`：純粹 free trial
-- `signupPlan = pro` 且 `plan = free`：申請咗 Pro，付款尚未完成
-- `plan = pro`：已有 Pro 權限（而家付款閘道未接，所以新註冊唔會出現呢個狀態）
+- `signupPlan = pro` 且 `plan = free`：申請咗 Pro，付款尚未完成。**唔會**進入 Pro 會員中心
+- Public metadata `plan = pro`：已有 Pro 權限（而家要喺 Clerk Dashboard 人手改；付款接通後先會自動寫入）
+
+要升級某個已申請 Pro 嘅用戶，請改 **Public metadata** 嘅 `plan` 為 `"pro"`，唔好只改 Unsafe 嘅 `plan`。Unsafe 可以由瀏覽器改，唔能單獨當成已付款。
+
+已存在、Unsafe `plan` 仍係 `"pro"` 嘅申請者：下一次登入會把 Unsafe `plan` 改返 `"free"`，並保留原有 `proRequestedAt`（冇先先補上）。之後只會進入免費會員中心。
 
 Clerk 用戶列表本身冇按 metadata 過濾。要一次過列出全部申請者，需要 `CLERK_SECRET_KEY` 用 [Backend API 拉 users](https://clerk.com/docs/reference/backend-api/tag/users/get/users)，再篩 `unsafe_metadata.signupPlan === "pro"`。
 

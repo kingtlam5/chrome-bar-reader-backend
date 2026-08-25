@@ -268,7 +268,8 @@
     try {
       const clerk = await window.ReadbarClerk.ready();
       if (clerk?.user) {
-        const profile = window.ReadbarClerk.applySession(clerk.user);
+        const user = (await window.ReadbarClerk.ensureMembershipMetadata()) || clerk.user;
+        const profile = window.ReadbarClerk.applySession(user);
         window.location.replace(window.ReadbarClerk.dashboardFor(profile.plan));
       }
     } catch (error) {
