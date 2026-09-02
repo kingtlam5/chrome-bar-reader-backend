@@ -52,8 +52,8 @@
       color-scheme: light;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css?v=10">
-  <script src="js/i18n.js?v=6"></script>
+  <link rel="stylesheet" href="css/style.css?v=11">
+  <script src="js/i18n.js?v=7"></script>
   <script>
     window.scrollToSection = function (id, event) {
       if (event) event.preventDefault();
@@ -184,7 +184,6 @@
       <nav class="hidden items-center gap-5 text-sm text-blue-100 lg:gap-8 md:flex">
         <a href="#pain" onclick="return scrollToSection('pain', event)" class="hover:text-white" data-i18n="nav.pain">安心閱讀</a>
         <a href="#features" onclick="return scrollToSection('features', event)" class="hover:text-white" data-i18n="nav.features">核心功能</a>
-        <a href="#start" onclick="return scrollToSection('start', event)" class="hover:text-white" data-i18n="nav.start">開始使用</a>
         <a href="guide.html" class="hover:text-white" data-i18n="nav.guide">使用說明</a>
         <a href="#faq" onclick="return scrollToSection('faq', event)" class="hover:text-white" data-i18n="nav.faq">常見問題</a>
       </nav>
@@ -209,7 +208,6 @@
       <div class="flex flex-col gap-3 text-sm text-blue-100">
         <a href="#pain" onclick="return scrollToSection('pain', event)" class="hover:text-white" data-i18n="nav.pain">安心閱讀</a>
         <a href="#features" onclick="return scrollToSection('features', event)" class="hover:text-white" data-i18n="nav.features">核心功能</a>
-        <a href="#start" onclick="return scrollToSection('start', event)" class="hover:text-white" data-i18n="nav.start">開始使用</a>
         <a href="guide.html" class="hover:text-white" data-i18n="nav.guide">使用說明</a>
         <a href="#faq" onclick="return scrollToSection('faq', event)" class="hover:text-white" data-i18n="nav.faq">常見問題</a>
         <a href="login.html" class="rounded-full bg-white px-4 py-2 text-center font-medium text-blue-700" data-i18n="nav.loginCta">登入</a>
@@ -240,6 +238,7 @@
             </a>
           </div>
           <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-600">
+            <span data-i18n="index.hero.pointFree">🎁 完全免費</span>
             <span data-i18n="index.hero.point1">🌐 免安裝，瀏覽器即用</span>
             <span data-i18n="index.hero.point2">🕵️ 獨立彈出視窗，減少分頁列</span>
             <span data-i18n="index.hero.point3">⚡ Panic Button 一鍵換成偽裝網址</span>
@@ -281,6 +280,14 @@
         </div>
         <div class="mt-10 grid gap-6 md:grid-cols-2">
           <article class="compare-bad card-surface min-w-0 rounded-2xl border border-red-200 p-4 sm:p-6">
+            <img
+              class="compare-shot"
+              src="images/office-reading-caught.jpg"
+              width="1600"
+              height="1067"
+              data-i18n-alt="index.pain.badAlt"
+              alt="示意圖：辦公室電腦正顯示電子書介面，上司從後走近並看見螢幕。"
+            >
             <p class="text-sm font-semibold text-red-700" data-i18n="index.pain.badKicker">一般閱讀方式</p>
             <h3 class="mt-2 text-xl font-semibold text-slate-900" data-i18n="index.pain.badH3">容易露出破綻</h3>
             <ul class="mt-5 space-y-3 break-words text-sm text-slate-700">
@@ -291,6 +298,14 @@
             </ul>
           </article>
           <article class="compare-good card-surface min-w-0 rounded-2xl border border-blue-200 p-4 sm:p-6">
+            <img
+              class="compare-shot"
+              src="images/office-reading-stealth.jpg"
+              width="1600"
+              height="1067"
+              data-i18n-alt="index.pain.goodAlt"
+              alt="示意圖：辦公室電腦看起來像在處理試算表，路過的人難以察覺正在閱讀。"
+            >
             <p class="text-sm font-semibold text-blue-700" data-i18n="index.pain.goodKicker">Readbar</p>
             <h3 class="mt-2 text-xl font-semibold text-slate-900" data-i18n="index.pain.goodH3">融入日常工作畫面</h3>
             <ul class="mt-5 space-y-3 break-words text-sm text-slate-700">
@@ -308,100 +323,55 @@
       <div class="mx-auto max-w-content">
         <div class="max-w-2xl">
           <p class="text-sm font-medium text-blue-700" data-i18n="index.features.kicker">Features</p>
-          <h2 class="mt-2 text-xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl" data-i18n-html="index.features.h2">核心功能：<wbr>對應實際產品能力</h2>
-          <p class="mt-3 text-slate-600" data-i18n="index.features.lead">全部功能均可使用：TXT 與 EPUB、簡轉繁、二十張偽裝背景、獨立彈出視窗、Panic Button、本機進度與自訂快捷鍵。</p>
+          <h2 class="mt-2 text-xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl" data-i18n-html="index.features.h2">核心功能：<wbr>全部均可使用</h2>
+          <p class="mt-3 text-slate-600" data-i18n="index.features.lead">註冊後即可使用全部八項功能，無需升級或付款。</p>
         </div>
-        <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 font-semibold text-blue-700">01</div>
-            <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f1h">偽裝 Chrome 工具列</h3>
-            <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f1p">閱讀句子顯示於網址列，並可顯示進度、跳轉句子。遠看如同日常瀏覽網頁，而非電子書介面。</p>
-            <svg class="feature-art mt-6 w-full min-w-0" viewBox="0 0 280 120" fill="none" aria-hidden="true">
-              <rect x="18" y="16" width="244" height="88" rx="14" fill="#EFF6FF" stroke="#BFDBFE"/>
-              <rect x="30" y="28" width="220" height="64" rx="10" fill="#FFFFFF" stroke="#DBEAFE"/>
-              <circle cx="44" cy="44" r="4" fill="#F87171"/>
-              <circle cx="58" cy="44" r="4" fill="#FBBF24"/>
-              <circle cx="72" cy="44" r="4" fill="#34D399"/>
-              <rect x="90" y="36" width="144" height="16" rx="8" fill="#DBEAFE"/>
-              <rect x="102" y="40" width="88" height="8" rx="4" fill="#2563EB"/>
-              <rect x="42" y="64" width="196" height="8" rx="4" fill="#E2E8F0"/>
-              <rect x="42" y="78" width="132" height="8" rx="4" fill="#BFDBFE"/>
-            </svg>
+            <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f1h">EPUB 檔案支援</h3>
+            <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f1p">可匯入 EPUB 電子書，亦支援 TXT。適合在辦公室以句子為單位閱讀。</p>
           </article>
           <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 font-semibold text-blue-700">02</div>
-            <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f2h">工作截圖偽裝背景</h3>
-            <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f2p">上傳 PNG、JPG 或 WEBP 工作截圖，讓畫面下方呈現日常工作內容。最多 20 張，並可隨時切換。</p>
-            <svg class="feature-art mt-6 w-full min-w-0" viewBox="0 0 280 120" fill="none" aria-hidden="true">
-              <rect x="24" y="28" width="92" height="64" rx="12" fill="#1E3A8A"/>
-              <rect x="36" y="40" width="68" height="8" rx="4" fill="#93C5FD"/>
-              <rect x="36" y="54" width="48" height="6" rx="3" fill="#60A5FA"/>
-              <rect x="36" y="66" width="58" height="6" rx="3" fill="#3B82F6"/>
-              <rect x="164" y="28" width="92" height="64" rx="12" fill="#EFF6FF" stroke="#BFDBFE"/>
-              <rect x="176" y="42" width="68" height="6" rx="3" fill="#CBD5E1"/>
-              <rect x="176" y="54" width="52" height="6" rx="3" fill="#E2E8F0"/>
-              <rect x="176" y="66" width="40" height="16" rx="4" fill="#2563EB"/>
-              <path d="M128 60h24" stroke="#2563EB" stroke-width="3" stroke-linecap="round"/>
-              <path d="M144 50l10 10-10 10" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              <rect x="110" y="84" width="60" height="18" rx="6" fill="#2563EB"/>
-              <text x="140" y="97" text-anchor="middle" fill="white" font-size="9" font-family="Bricolage Grotesque, sans-serif">BG</text>
-            </svg>
+            <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f2h">簡體轉繁體</h3>
+            <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f2p">一鍵將簡體中文轉為繁體，無需另外尋找轉換工具。</p>
           </article>
           <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 font-semibold text-blue-700">03</div>
-            <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f3h">辦公室防禦</h3>
-            <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f3p">以獨立彈出視窗開啟閱讀器，無須安裝。Panic Button 可自訂快捷鍵與顯示文字。另支援 EPUB、簡體轉繁體、本機進度與自訂快捷鍵。</p>
-            <svg class="feature-art mt-6 w-full min-w-0" viewBox="0 0 280 120" fill="none" aria-hidden="true">
-              <ellipse cx="140" cy="42" rx="42" ry="22" fill="#DBEAFE"/>
-              <ellipse cx="118" cy="48" rx="22" ry="16" fill="#BFDBFE"/>
-              <ellipse cx="162" cy="48" rx="24" ry="16" fill="#93C5FD"/>
-              <path d="M140 64v10" stroke="#2563EB" stroke-width="3" stroke-linecap="round"/>
-              <rect x="46" y="78" width="72" height="26" rx="6" fill="#1E3A8A"/>
-              <rect x="54" y="84" width="56" height="10" rx="3" fill="#60A5FA"/>
-              <rect x="168" y="74" width="28" height="34" rx="6" fill="#EFF6FF" stroke="#2563EB"/>
-              <rect x="174" y="80" width="16" height="18" rx="2" fill="#BFDBFE"/>
-              <rect x="204" y="82" width="40" height="22" rx="5" fill="#2563EB"/>
-              <rect x="210" y="88" width="28" height="6" rx="3" fill="#DBEAFE"/>
-            </svg>
+            <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f3h">偽裝背景上限 20 張</h3>
+            <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f3p">上傳 PNG、JPG 或 WEBP 工作截圖，讓畫面下方呈現日常工作內容，最多 20 張並可隨時切換。</p>
+          </article>
+          <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 font-semibold text-blue-700">04</div>
+            <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f4h">獨立彈出視窗</h3>
+            <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f4p">由會員中心以獨立彈出視窗開啟閱讀器，減少分頁列干擾，無須安裝。</p>
+          </article>
+          <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 font-semibold text-blue-700">05</div>
+            <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f5h">Panic Button 一鍵轉換</h3>
+            <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f5p">上司走近時，一鍵將網址列的書本句子換成偽裝文字，背景維持工作截圖。</p>
+          </article>
+          <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 font-semibold text-blue-700">06</div>
+            <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f6h">本機進度保存</h3>
+            <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f6p">閱讀進度保存在此瀏覽器。書本內容不會上傳到我們的伺服器。</p>
+          </article>
+          <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 font-semibold text-blue-700">07</div>
+            <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f7h">自訂快捷鍵</h3>
+            <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f7p">可自行設定上一句、下一句、Panic Button 等按鍵，設定會保存在此瀏覽器。</p>
+          </article>
+          <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 font-semibold text-blue-700">08</div>
+            <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f8h">自訂 Panic 顯示文字</h3>
+            <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f8p">預先設定網址列在 Panic 模式下顯示的假網址或文字，看起來更像日常瀏覽。</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="start" class="bg-slate-50 px-5 py-12 md:py-20">
-      <div id="pricing" class="mx-auto max-w-content">
-        <div>
-          <p class="text-sm font-medium text-blue-700" data-i18n="index.start.kicker">Get started</p>
-          <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl" data-i18n="index.start.h2">全部功能均可使用</h2>
-          <p class="mt-3 text-slate-600" data-i18n="index.start.lead">註冊帳號後即可啟動隱蔽閱讀器，無需選擇方案或付款。</p>
-        </div>
-        <div class="mt-10 grid gap-6 md:grid-cols-2 md:items-stretch">
-          <article class="card-surface flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 sm:p-8">
-            <p class="text-sm text-slate-500" data-i18n="index.start.includedKicker">Included</p>
-            <p class="mt-3 text-2xl font-bold text-slate-900" data-i18n="index.start.includedTitle">閱讀與偽裝</p>
-            <ul class="mt-6 flex-1 space-y-3 text-sm text-slate-700">
-              <li data-i18n="index.start.item1">TXT 與 EPUB 檔案支援</li>
-              <li data-i18n="index.start.item2">簡體轉繁體中文</li>
-              <li data-i18n="index.start.item3">偽裝背景上限 20 張</li>
-              <li data-i18n="index.start.item4">本機閱讀進度保存</li>
-            </ul>
-          </article>
-          <article class="flex h-full min-w-0 flex-col rounded-2xl border border-blue-200 bg-blue-600 p-5 text-white sm:p-8">
-            <p class="text-sm text-blue-100" data-i18n="index.start.officeKicker">Office</p>
-            <p class="mt-3 text-2xl font-bold" data-i18n="index.start.officeTitle">辦公室防禦</p>
-            <ul class="mt-6 flex-1 space-y-3 text-sm text-white">
-              <li data-i18n="index.start.item5">獨立彈出視窗</li>
-              <li data-i18n="index.start.item6">Panic Button 一鍵轉換</li>
-              <li data-i18n="index.start.item7">自訂快捷鍵</li>
-              <li data-i18n="index.start.item8">自訂 Panic 顯示文字</li>
-            </ul>
-            <a href="register.html" class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-50" data-i18n="index.start.cta">立即註冊</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" class="bg-white px-5 py-12 md:py-20">
+    <section id="faq" class="bg-slate-50 px-5 py-12 md:py-20">
       <div class="mx-auto max-w-content">
         <h2 class="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl" data-i18n="index.faq.h2">常見問題</h2>
         <div class="mt-8 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
@@ -473,7 +443,7 @@
       <div class="flex flex-wrap gap-5 text-sm text-slate-600">
         <a href="login.html" class="hover:text-blue-700" data-i18n="nav.login">登入</a>
         <a href="register.html" class="hover:text-blue-700" data-i18n="nav.register">註冊</a>
-        <a href="#start" onclick="return scrollToSection('start', event)" class="hover:text-blue-700" data-i18n="nav.start">開始使用</a>
+        <a href="#features" onclick="return scrollToSection('features', event)" class="hover:text-blue-700" data-i18n="nav.features">核心功能</a>
         <a href="guide.html" class="hover:text-blue-700" data-i18n="nav.guide">使用說明</a>
         <a href="#faq" onclick="return scrollToSection('faq', event)" class="hover:text-blue-700">FAQ</a>
       </div>
