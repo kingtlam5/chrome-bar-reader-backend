@@ -176,8 +176,8 @@
     },
     "index.faq.q4": { "zh-Hant": "Readbar 需要付款嗎？", "en": "Do I need to pay for Readbar?" },
     "index.faq.a4": {
-      "zh-Hant": "不需要。註冊帳號後即可使用全部功能，包括 EPUB、簡轉繁、20 張背景、獨立彈出視窗、偽裝網址鍵與自訂快捷鍵。若想支持 Readbar，可自願打賞，不會解鎖額外功能。",
-      "en": "No. After you sign up, every feature is available — EPUB, Simplified-to-Traditional Chinese, 20 backgrounds, a standalone popup, the Fake URL Key, and custom shortcuts. If you want to support Readbar, you can leave a tip. Tipping does not unlock extra features."
+      "zh-Hant": "不需要。註冊帳號後即可使用全部功能，包括 EPUB、簡轉繁、20 張背景、獨立彈出視窗、偽裝網址鍵與自訂快捷鍵。若願意的話，也可以請我們一杯咖啡，不會解鎖額外功能。",
+      "en": "No. After you sign up, every feature is available — EPUB, Simplified-to-Traditional Chinese, 20 backgrounds, a standalone popup, the Fake URL Key, and custom shortcuts. If you like, you can also buy us a coffee. That does not unlock extra features."
     },
     "index.faq.q5": { "zh-Hant": "可以用手機開啟閱讀器嗎？", "en": "Can I open the reader on a phone?" },
     "index.faq.a5": {
