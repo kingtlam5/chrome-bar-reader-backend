@@ -67,7 +67,7 @@
     "index.hero.ctaLogin": { "zh-Hant": "登入會員中心", "en": "Log in to the member centre" },
     "index.hero.ctaRegister": { "zh-Hant": "立即註冊", "en": "Sign up" },
     "index.hero.pointFree": { "zh-Hant": "🎁 完全免費", "en": "🎁 Completely free" },
-    "index.hero.point1": { "zh-Hant": "🌐 免安裝，瀏覽器即用", "en": "🌐 No install — use it in the browser" },
+    "index.hero.point1": { "zh-Hant": "🌐 免安裝", "en": "🌐 No install" },
     "index.hero.point2": { "zh-Hant": "🕵️ 完美融入瀏覽器 增加隱蔽性", "en": "🕵️ Blends into the browser for more stealth" },
     "index.mock.url": {
       "zh-Hant": "面對絕對的困境，唯一的辦法就是讓自己變得絕對強大。",
