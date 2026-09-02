@@ -193,6 +193,13 @@
       color: #ffffff;
     }
 
+    .rb-lockup {
+      display: block;
+      height: 32px;
+      width: auto;
+      flex-shrink: 0;
+    }
+
     .sr-modal-brand {
       display: flex;
       align-items: center;
@@ -206,9 +213,16 @@
       height: 32px;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       border-radius: 8px;
       background: #ffffff;
       color: #1d4ed8;
+    }
+
+    .sr-modal-brand span img {
+      display: block;
+      width: 100%;
+      height: 100%;
       font-size: 12px;
     }
 
@@ -608,10 +622,15 @@
       height: 32px;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       border-radius: 8px;
       background: #ffffff;
-      color: #1d4ed8;
-      font-size: 12px;
+    }
+
+    .pro-reader-gate-logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
     }
 
     .pro-reader-gate-body {
@@ -747,15 +766,15 @@
       overflow-wrap: break-word;
     }
   </style>
-  <link rel="stylesheet" href="css/readbar-device-notice.css?v=3">
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/readbar-device-notice.css?v=5">
   <script src="js/i18n.js?v=13"></script>
 </head>
 <body class="compact">
   <div id="readbarDeviceNotice" class="rb-device-notice" hidden>
     <div class="rb-device-notice-header">
       <span class="rb-device-notice-brand">
-        <span class="rb-device-notice-mark">Rb</span>
-        Readbar
+        <img class="rb-lockup" src="images/logo-lockup.svg" width="108" height="32" alt="Readbar">
       </span>
       <div class="site-lang-switch" role="group" data-i18n-aria="lang.aria" aria-label="語言">
         <button type="button" class="site-lang-btn" data-set-lang="zh-Hant" aria-pressed="true">繁</button>
@@ -765,8 +784,7 @@
     <section class="rb-device-notice-card" role="status" aria-labelledby="proReadbarDeviceTitle">
       <header class="rb-device-notice-card-head">
         <span class="rb-device-notice-brand">
-          <span class="rb-device-notice-mark">Rb</span>
-          Readbar
+          <img class="rb-lockup" src="images/logo-lockup-on-dark.svg" width="108" height="32" alt="Readbar">
         </span>
       </header>
       <div class="rb-device-notice-body">
@@ -786,8 +804,7 @@
     <section class="pro-reader-gate-card">
       <header class="pro-reader-gate-header">
         <span class="pro-reader-gate-header-brand">
-          <span class="pro-reader-gate-logo">Rb</span>
-          Readbar
+          <img class="rb-lockup" src="images/logo-lockup-on-dark.svg" width="108" height="32" alt="Readbar">
         </span>
         <div class="site-lang-switch" role="group" data-i18n-aria="lang.aria" aria-label="語言">
           <button type="button" class="site-lang-btn" data-set-lang="zh-Hant" aria-pressed="true">繁</button>
@@ -881,8 +898,7 @@
       <section class="sr-modal-card">
         <header class="sr-modal-header">
           <div class="sr-modal-brand">
-            <span>Rb</span>
-            Readbar
+            <img class="rb-lockup" src="images/logo-lockup-on-dark.svg" width="108" height="32" alt="Readbar">
           </div>
           <button type="button" class="sr-modal-close" data-close-shortcut-modal aria-label="關閉">×</button>
         </header>
