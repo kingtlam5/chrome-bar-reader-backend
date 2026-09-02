@@ -54,7 +54,7 @@
   </style>
   <link rel="icon" href="images/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css?v=20">
-  <script src="js/i18n.js?v=18"></script>
+  <script src="js/i18n.js?v=19"></script>
   <script>
     window.scrollToSection = function (id, event) {
       if (event) event.preventDefault();
@@ -253,13 +253,16 @@
         <p class="hero-lead max-w-xl text-base leading-7 text-slate-600 md:text-lg" data-i18n-html="index.hero.lead">
           專為上班族設計的偽裝式網頁閱讀器。<br>Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。
         </p>
-        <div class="hero-ctas flex flex-col gap-3 sm:flex-row">
+        <div class="hero-ctas flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a href="login.html" class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="index.hero.ctaLogin">
             登入會員中心
           </a>
           <a href="register.html" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700" data-i18n="index.hero.ctaRegister">
             立即註冊
           </a>
+          <button type="button" data-open-tip-modal class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700" data-i18n="index.hero.ctaTip">
+            請杯咖啡
+          </button>
         </div>
         <div class="hero-points text-sm text-slate-600">
           <span data-i18n="index.hero.pointFree">🎁 完全免費</span>
@@ -503,7 +506,7 @@
         <a href="#features" onclick="return scrollToSection('features', event)" class="hover:text-blue-700" data-i18n="nav.features">核心功能</a>
         <a href="guide.html" class="hover:text-blue-700" data-i18n="nav.guide">使用說明</a>
         <a href="#faq" onclick="return scrollToSection('faq', event)" class="hover:text-blue-700">FAQ</a>
-        <button type="button" data-open-tip-modal class="bg-transparent p-0 text-sm text-slate-600 hover:text-blue-700" data-i18n="nav.tip">打賞</button>
+        <button type="button" data-open-tip-modal class="bg-transparent p-0 text-sm text-slate-600 hover:text-blue-700" data-i18n="nav.tip">請杯咖啡</button>
       </div>
     </div>
   </footer>
@@ -514,14 +517,14 @@
       <header class="sr-site-modal-header">
         <div class="flex min-w-0 items-center gap-2.5 font-semibold">
           <img class="rb-mark" src="images/logo.svg" width="32" height="32" alt="">
-          <span data-i18n="tip.brand">打賞</span>
+          <span data-i18n="tip.brand">一點心意</span>
         </div>
         <button type="button" class="sr-site-modal-close" data-close-tip-modal data-i18n-aria="common.close" aria-label="關閉">×</button>
       </header>
       <div class="p-6 md:p-8">
         <div id="tipChooseWrap">
-          <h2 id="tipModalTitle" class="text-xl font-bold text-slate-900" data-i18n="tip.title">選擇金額</h2>
-          <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="tip.body">接著會前往 Stripe 完成付款。打賞為一次過、自願支持，不會改變你可使用的功能。</p>
+          <h2 id="tipModalTitle" class="text-xl font-bold text-slate-900" data-i18n="tip.title">謝謝你把這段時光留給自己</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="tip.body">Readbar 會一直免費。若它曾陪你度過幾頁安靜的書，歡迎請我們一杯咖啡——純粹是心意，不會解鎖任何功能。</p>
           <div class="tip-amounts mt-6">
             <a class="tip-amount" data-tip-amount="20" href="https://buy.stripe.com/test_7sY14n8tc4klfAR1N55Rm00" data-i18n="tip.hkd20">HK$20</a>
             <a class="tip-amount" data-tip-amount="50" href="https://buy.stripe.com/test_6oU28rdNwcQR74l4Zh5Rm01" data-i18n="tip.hkd50">HK$50</a>
@@ -529,9 +532,9 @@
           </div>
         </div>
         <div id="tipThanksWrap" class="hidden text-center">
-          <p class="text-sm font-medium text-blue-700" data-i18n="tip.okKicker">謝謝</p>
-          <h2 class="mt-2 text-xl font-bold text-slate-900" data-i18n="tip.okTitle">已收到你的打賞</h2>
-          <p class="mt-3 text-sm leading-6 text-slate-600" data-i18n="tip.okBody">感謝支持。Readbar 仍然完全免費，打賞不會解鎖額外功能。</p>
+          <p class="text-sm font-medium text-blue-700" data-i18n="tip.okKicker">收到了</p>
+          <h2 class="mt-2 text-xl font-bold text-slate-900" data-i18n="tip.okTitle">謝謝你的一杯咖啡</h2>
+          <p class="mt-3 text-sm leading-6 text-slate-600" data-i18n="tip.okBody">你的心意我們收到了。繼續安心讀你的那幾頁吧。Readbar 依然完全免費。</p>
           <button type="button" data-close-tip-modal class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="common.done">完成</button>
         </div>
       </div>

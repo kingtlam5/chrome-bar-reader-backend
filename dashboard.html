@@ -54,7 +54,7 @@
   </style>
   <link rel="icon" href="images/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css?v=20">
-  <script src="js/i18n.js?v=18"></script>
+  <script src="js/i18n.js?v=19"></script>
 </head>
 <body data-require-auth data-reader-storage="stealthMemoReader.v1" class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header class="bg-blue-700 text-white">
@@ -184,12 +184,12 @@
       </section>
 
       <section class="card-surface mt-8 min-w-0 rounded-2xl border border-slate-200 p-5 sm:p-6 md:p-8">
-        <p class="text-sm font-medium text-blue-700" data-i18n="tip.kicker">自願打賞</p>
-        <h2 class="mt-1 text-xl font-semibold text-slate-900" data-i18n="tip.h2">產品免費，若覺得好用可以打賞</h2>
-        <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600" data-i18n="tip.lead">打賞不會解鎖額外功能。可選擇 HK$20、HK$50 或 HK$100。</p>
+        <p class="text-sm font-medium text-blue-700" data-i18n="tip.kicker">一點心意</p>
+        <h2 class="mt-1 text-xl font-semibold text-slate-900" data-i18n="tip.h2">若這段閱讀時光對你有幫助</h2>
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600" data-i18n="tip.lead">Readbar 會一直免費。願意的話，請我們一杯咖啡就好。</p>
         <div class="mt-6">
           <button type="button" data-open-tip-modal class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 hover:border-blue-300 hover:text-blue-700" data-i18n="tip.cta">
-            打賞
+            請杯咖啡
           </button>
         </div>
       </section>
@@ -296,14 +296,14 @@
       <header class="sr-site-modal-header">
         <div class="flex min-w-0 items-center gap-2.5 font-semibold">
           <img class="rb-mark" src="images/logo.svg" width="32" height="32" alt="">
-          <span data-i18n="tip.brand">打賞</span>
+          <span data-i18n="tip.brand">一點心意</span>
         </div>
         <button type="button" class="sr-site-modal-close" data-close-tip-modal data-i18n-aria="common.close" aria-label="關閉">×</button>
       </header>
       <div class="p-6 md:p-8">
         <div id="tipChooseWrap">
-          <h2 id="tipModalTitle" class="text-xl font-bold text-slate-900" data-i18n="tip.title">選擇金額</h2>
-          <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="tip.body">接著會前往 Stripe 完成付款。打賞為一次過、自願支持，不會改變你可使用的功能。</p>
+          <h2 id="tipModalTitle" class="text-xl font-bold text-slate-900" data-i18n="tip.title">謝謝你把這段時光留給自己</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="tip.body">Readbar 會一直免費。若它曾陪你度過幾頁安靜的書，歡迎請我們一杯咖啡——純粹是心意，不會解鎖任何功能。</p>
           <div class="tip-amounts mt-6">
             <a class="tip-amount" data-tip-amount="20" href="https://buy.stripe.com/test_7sY14n8tc4klfAR1N55Rm00" data-i18n="tip.hkd20">HK$20</a>
             <a class="tip-amount" data-tip-amount="50" href="https://buy.stripe.com/test_6oU28rdNwcQR74l4Zh5Rm01" data-i18n="tip.hkd50">HK$50</a>
@@ -311,9 +311,9 @@
           </div>
         </div>
         <div id="tipThanksWrap" class="hidden text-center">
-          <p class="text-sm font-medium text-blue-700" data-i18n="tip.okKicker">謝謝</p>
-          <h2 class="mt-2 text-xl font-bold text-slate-900" data-i18n="tip.okTitle">已收到你的打賞</h2>
-          <p class="mt-3 text-sm leading-6 text-slate-600" data-i18n="tip.okBody">感謝支持。Readbar 仍然完全免費，打賞不會解鎖額外功能。</p>
+          <p class="text-sm font-medium text-blue-700" data-i18n="tip.okKicker">收到了</p>
+          <h2 class="mt-2 text-xl font-bold text-slate-900" data-i18n="tip.okTitle">謝謝你的一杯咖啡</h2>
+          <p class="mt-3 text-sm leading-6 text-slate-600" data-i18n="tip.okBody">你的心意我們收到了。繼續安心讀你的那幾頁吧。Readbar 依然完全免費。</p>
           <button type="button" data-close-tip-modal class="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="common.done">完成</button>
         </div>
       </div>
