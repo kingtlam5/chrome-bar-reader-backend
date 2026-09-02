@@ -246,14 +246,143 @@ body.theme-light {
   background-color: #f0f7ff;
 }
 
-.compare-shot {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  border-radius: 0.9rem;
+.compare-window {
   margin-bottom: 1.1rem;
-  background: #e2e8f0;
+  overflow: hidden;
+  border-radius: 0.9rem;
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.08),
+    0 16px 40px rgba(15, 23, 42, 0.1);
+}
+
+.ebook-mock {
+  background: #2b2142;
+}
+
+.ebook-mock-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.75rem;
+  background: #1f1733;
+}
+
+.ebook-mock-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: #7c6a9a;
+}
+
+.ebook-mock-title {
+  margin-left: 0.4rem;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  color: #d4c8e8;
+}
+
+.ebook-mock-body {
+  display: flex;
+  min-height: 148px;
+}
+
+.ebook-mock-nav {
+  display: flex;
+  width: 3.25rem;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.85rem 0.9rem;
+  background: #241a38;
+}
+
+.ebook-mock-nav span {
+  display: block;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: #6d5a8d;
+}
+
+.ebook-mock-page {
+  flex: 1;
+  min-width: 0;
+  padding: 0.85rem 1rem 1rem;
+  background: #f7f1e6;
+}
+
+.ebook-mock-chapter {
+  margin-bottom: 0.55rem;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8b6914;
+}
+
+.ebook-mock-line {
+  height: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 999px;
+  background: #d6c7a8;
+}
+
+.ebook-mock-line.short {
+  width: 62%;
+}
+
+.ebook-mock-progress {
+  margin-top: 0.75rem;
+  font-size: 10px;
+  color: #8a7a5a;
+}
+
+.sheet-mock {
+  padding: 0.55rem 0.65rem 0.75rem;
+  background: #ffffff;
+}
+
+.sheet-mock table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.sheet-mock th,
+.sheet-mock td {
+  border: 1px solid #e2e8f0;
+  padding: 0.32rem 0.4rem;
+  text-align: left;
+}
+
+.sheet-mock th {
+  background: #e8f0fe;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.sheet-mock td {
+  color: #475569;
+}
+
+.sheet-mock tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.feature-icon {
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.feature-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .feature-art {
@@ -262,7 +391,7 @@ body.theme-light {
   max-width: 100%;
   min-width: 0;
   height: auto;
-  max-height: 120px;
+  max-height: 96px;
 }
 
 .theme-light article,
