@@ -31,8 +31,8 @@
 
     "meta.index.title": { "zh-Hant": "Readbar｜辦公室隱蔽閱讀器", "en": "Readbar | Stealth office web reader" },
     "meta.index.description": {
-      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。句子顯示於 Chrome 網址列，畫面可呈現工作截圖，讓閱讀融入日常操作。",
-      "en": "A camouflaged web reader for office workers. Sentences appear in the Chrome address bar, and the page can show a work screenshot so reading blends into everyday work."
+      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。讓閱讀藏進日常工作的樣子裡，在辦公室也能安心讀完屬於自己的那幾頁。",
+      "en": "A camouflaged web reader designed for office workers. Hide the book in the look of ordinary work, and read a few pages of your own in the office."
     },
     "meta.login.title": { "zh-Hant": "會員登入｜Readbar", "en": "Member login | Readbar" },
     "meta.login.description": {
@@ -46,8 +46,8 @@
     },
     "meta.guide.title": { "zh-Hant": "使用說明｜Readbar", "en": "User guide | Readbar" },
     "meta.guide.description": {
-      "zh-Hant": "Readbar 閱讀器使用說明。匯入書本、切換偽裝背景、Panic Button 與自訂快捷鍵。",
-      "en": "How to use the Readbar reader: import a book, switch camouflage backgrounds, Panic Button, and custom shortcuts."
+      "zh-Hant": "Readbar 閱讀器使用說明。匯入書本、切換偽裝背景、偽裝網址鍵與自訂快捷鍵。",
+      "en": "How to use the Readbar reader: import a book, switch camouflage backgrounds, use the Fake URL Key, and set custom shortcuts."
     },
     "meta.dash.title": { "zh-Hant": "會員中心｜Readbar", "en": "Member centre | Readbar" },
     "meta.dash.description": {
@@ -61,15 +61,15 @@
       "en": "Enjoy your own reading time at the office"
     },
     "index.hero.lead": {
-      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。句子顯示於 Chrome 網址列，畫面可呈現工作截圖；可以獨立彈出視窗開啟。Panic Button 一鍵將書本句子換成預設或自訂的偽裝網址，背景維持工作截圖。閱讀器僅供電腦瀏覽器使用。",
-      "en": "A camouflaged web reader for office workers. Sentences appear in the Chrome address bar, and the page can show a work screenshot. Open it in a standalone popup. Panic Button replaces the book sentence with a default or custom disguised URL; the background stays. The reader is for computer browsers only."
+      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。工位上最想偷一段閱讀時光，卻總擔心一抬頭就被看見。Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。",
+      "en": "A camouflaged web reader designed for office workers. The hardest part of reading at your desk is not finding a spare minute — it is being seen. Readbar hides the book in the look of ordinary work, so you can finish a few pages of your own, quietly, in the office."
     },
     "index.hero.ctaLogin": { "zh-Hant": "登入會員中心", "en": "Log in to the member centre" },
     "index.hero.ctaRegister": { "zh-Hant": "立即註冊", "en": "Sign up" },
     "index.hero.pointFree": { "zh-Hant": "🎁 完全免費", "en": "🎁 Completely free" },
     "index.hero.point1": { "zh-Hant": "🌐 免安裝，瀏覽器即用", "en": "🌐 No install — use it in the browser" },
     "index.hero.point2": { "zh-Hant": "🕵️ 獨立彈出視窗，減少分頁列", "en": "🕵️ Standalone popup, fewer tab bars" },
-    "index.hero.point3": { "zh-Hant": "⚡ Panic Button 一鍵換成偽裝網址", "en": "⚡ Panic Button swaps in a disguised URL" },
+    "index.hero.point3": { "zh-Hant": "⚡ 偽裝網址鍵", "en": "⚡ Fake URL Key" },
     "index.mock.url": {
       "zh-Hant": "面對絕對的困境，唯一的辦法就是讓自己變得絕對強大。",
       "en": "In absolute hardship, the only way out is to become absolutely strong."
@@ -87,8 +87,8 @@
       "en": "Read at ease: looks like work, actually reading"
     },
     "index.pain.lead": {
-      "zh-Hant": "一般電子書應用、瀏覽器分頁或額外套層，都容易露出閱讀痕跡。Readbar 以偽裝網址列、工作截圖背景、獨立彈出視窗與 Panic Button，讓閱讀融入日常操作。",
-      "en": "E-book apps, browser tabs, or extra overlays are easy to spot. Readbar uses a camouflaged address bar, a work-screenshot background, a standalone popup, and Panic Button, so reading blends into everyday work."
+      "zh-Hant": "一般電子書介面遠看就像一塊招牌。Readbar 把句子放進看起來像網址列的位置，畫面其餘部分仍像你日常的工作視窗，讓閱讀不必從工作裡抽離出來。",
+      "en": "A typical e-book screen looks like a sign from across the room. Readbar puts the sentence where an address bar would be, and keeps the rest of the window looking like everyday work, so reading does not have to step out of the workday."
     },
     "index.pain.badKicker": { "zh-Hant": "一般閱讀方式", "en": "Typical reading" },
     "index.pain.badH3": { "zh-Hant": "容易露出破綻", "en": "Easy to get caught" },
@@ -104,16 +104,8 @@
     "index.pain.good2": { "zh-Hant": "：句子顯示於 Chrome 工具列，下方可放工作截圖", "en": ": sentences sit in the Chrome toolbar; a work screenshot can sit below" },
     "index.pain.good3Label": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup" },
     "index.pain.good3": { "zh-Hant": "：以免安裝方式開啟獨立視窗，減少分頁列干擾", "en": ": opens a separate window without installing, with fewer tab bars" },
-    "index.pain.good4Label": { "zh-Hant": "Panic Button", "en": "Panic Button" },
+    "index.pain.good4Label": { "zh-Hant": "偽裝網址鍵", "en": "Fake URL Key" },
     "index.pain.good4": { "zh-Hant": "：一鍵將網址列改為自訂假文字", "en": ": one key turns the address bar into custom fake text" },
-    "index.pain.badAlt": {
-      "zh-Hant": "示意圖：辦公室電腦正顯示電子書介面，上司從後走近並看見螢幕。",
-      "en": "Illustration: an office monitor showing an e-book app while a manager walks up and sees the screen."
-    },
-    "index.pain.goodAlt": {
-      "zh-Hant": "示意圖：辦公室電腦看起來像在處理試算表，路過的人難以察覺正在閱讀。",
-      "en": "Illustration: an office monitor that looks like a spreadsheet, so a passer-by is unlikely to notice reading."
-    },
 
     "index.features.kicker": { "zh-Hant": "Features", "en": "Features" },
     "index.features.h2": {
@@ -144,7 +136,7 @@
       "zh-Hant": "由會員中心以獨立彈出視窗開啟閱讀器，減少分頁列干擾，無須安裝。",
       "en": "Launch the reader from the member centre as a standalone popup, with fewer tab bars and no install."
     },
-    "index.features.f5h": { "zh-Hant": "Panic Button 一鍵轉換", "en": "Panic Button one-key swap" },
+    "index.features.f5h": { "zh-Hant": "偽裝網址鍵", "en": "Fake URL Key" },
     "index.features.f5p": {
       "zh-Hant": "上司走近時，一鍵將網址列的書本句子換成偽裝文字，背景維持工作截圖。",
       "en": "When someone walks over, one key replaces the book sentence in the address bar with disguised text. The work-screenshot background stays."
@@ -156,20 +148,20 @@
     },
     "index.features.f7h": { "zh-Hant": "自訂快捷鍵", "en": "Custom shortcuts" },
     "index.features.f7p": {
-      "zh-Hant": "可自行設定上一句、下一句、Panic Button 等按鍵，設定會保存在此瀏覽器。",
-      "en": "Set your own keys for previous/next sentence, Panic Button, and more. Settings stay in this browser."
+      "zh-Hant": "可自行設定上一句、下一句、偽裝網址鍵等按鍵，設定會保存在此瀏覽器。",
+      "en": "Set your own keys for previous/next sentence, the Fake URL Key, and more. Settings stay in this browser."
     },
-    "index.features.f8h": { "zh-Hant": "自訂 Panic 顯示文字", "en": "Custom Panic display text" },
+    "index.features.f8h": { "zh-Hant": "自訂偽裝網址文字", "en": "Custom camouflage URL text" },
     "index.features.f8p": {
-      "zh-Hant": "預先設定網址列在 Panic 模式下顯示的假網址或文字，看起來更像日常瀏覽。",
-      "en": "Choose the fake URL or text shown in the address bar during Panic mode, so it looks like ordinary browsing."
+      "zh-Hant": "預先設定網址列在偽裝網址模式下顯示的假網址或文字，看起來更像日常瀏覽。",
+      "en": "Choose the fake URL or text shown in the address bar in camouflage URL mode, so it looks like ordinary browsing."
     },
 
     "index.faq.h2": { "zh-Hant": "常見問題", "en": "FAQ" },
     "index.faq.q1": { "zh-Hant": "上司經過時會被發現嗎？", "en": "Will I be caught if my boss walks by?" },
     "index.faq.a1": {
-      "zh-Hant": "閱讀內容顯示於偽裝網址列，畫面其餘部分可放置工作截圖。搭配 Panic Button，上司走近時只需一鍵，網址列的書本句子即改為預設或自訂的偽裝網址，背景維持工作截圖。",
-      "en": "Reading sits in the camouflaged address bar; the rest of the screen can show a work screenshot. With Panic Button, one key replaces the book sentence with a default or custom disguised URL. The background stays."
+      "zh-Hant": "閱讀內容顯示於偽裝網址列，畫面其餘部分可放置工作截圖。搭配偽裝網址鍵，上司走近時只需一鍵，網址列的書本句子即改為預設或自訂的偽裝網址，背景維持工作截圖。",
+      "en": "Reading sits in the camouflaged address bar; the rest of the screen can show a work screenshot. With the Fake URL Key, one press replaces the book sentence with a default or custom disguised URL. The background stays."
     },
     "index.faq.q2": { "zh-Hant": "閱讀器如何開啟？", "en": "How do I open the reader?" },
     "index.faq.a2": {
@@ -183,8 +175,8 @@
     },
     "index.faq.q4": { "zh-Hant": "Readbar 需要付款嗎？", "en": "Do I need to pay for Readbar?" },
     "index.faq.a4": {
-      "zh-Hant": "不需要。註冊帳號後即可使用全部功能，包括 EPUB、簡轉繁、20 張背景、獨立彈出視窗、Panic Button 與自訂快捷鍵。",
-      "en": "No. After you sign up, every feature is available — EPUB, Simplified-to-Traditional Chinese, 20 backgrounds, a standalone popup, Panic Button, and custom shortcuts."
+      "zh-Hant": "不需要。註冊帳號後即可使用全部功能，包括 EPUB、簡轉繁、20 張背景、獨立彈出視窗、偽裝網址鍵與自訂快捷鍵。",
+      "en": "No. After you sign up, every feature is available — EPUB, Simplified-to-Traditional Chinese, 20 backgrounds, a standalone popup, the Fake URL Key, and custom shortcuts."
     },
     "index.faq.q5": { "zh-Hant": "可以用手機開啟閱讀器嗎？", "en": "Can I open the reader on a phone?" },
     "index.faq.a5": {
@@ -200,8 +192,8 @@
     "login.kicker": { "zh-Hant": "Member Login", "en": "Member Login" },
     "login.h1": { "zh-Hant": "登入後即可開啟閱讀器", "en": "Log in to open the reader" },
     "login.lead": {
-      "zh-Hant": "訪客無法直接進入程式。登入後即可使用全部閱讀功能：TXT 與 EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗與 Panic Button。",
-      "en": "Guests cannot enter the app directly. After login you can use every reading feature: TXT and EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, a standalone popup, and Panic Button."
+      "zh-Hant": "訪客無法直接進入程式。登入後即可使用全部閱讀功能：TXT 與 EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗與偽裝網址鍵。",
+      "en": "Guests cannot enter the app directly. After login you can use every reading feature: TXT and EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, a standalone popup, and the Fake URL Key."
     },
     "login.point1": { "zh-Hant": "登入後進入會員中心，再啟動隱蔽閱讀器", "en": "Log in to the member centre, then launch the stealth reader" },
     "login.point2": { "zh-Hant": "全部功能均可使用，無需升級或付款", "en": "Every feature is included — no upgrade and no payment" },
@@ -279,7 +271,7 @@
     "guide.import": { "zh-Hant": "匯入 TXT 或 EPUB", "en": "Import TXT or EPUB" },
     "guide.progress": { "zh-Hant": "顯示進度，按一下即可跳轉句子", "en": "Shows progress; tap to jump to a sentence" },
     "guide.upload": { "zh-Hant": "上傳偽裝背景", "en": "Upload camouflage backgrounds" },
-    "guide.settings": { "zh-Hant": "自訂快捷鍵及 Panic 顯示文字", "en": "Custom shortcuts and Panic display text" },
+    "guide.settings": { "zh-Hant": "自訂快捷鍵及偽裝網址文字", "en": "Custom shortcuts and camouflage URL text" },
     "auth.planMember": { "zh-Hant": "會員（全部功能）", "en": "Member (all features)" },
     "auth.member": { "zh-Hant": "會員中心", "en": "Member centre" },
 
@@ -321,8 +313,8 @@
     "dash.featuresKicker": { "zh-Hant": "Included", "en": "Included" },
     "dash.featuresH2": { "zh-Hant": "全部功能均可使用", "en": "Every feature is available" },
     "dash.featuresLead": {
-      "zh-Hant": "EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗、Panic Button、本機進度、自訂快捷鍵及 Panic 顯示文字均已可以使用。如仍需要其他功能，可以提出請求。",
-      "en": "EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, standalone popup, Panic Button, local progress, custom shortcuts, and Panic display text are all available. If you still need something else, send a request."
+      "zh-Hant": "EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗、偽裝網址鍵、本機進度、自訂快捷鍵及偽裝網址文字均已可以使用。如仍需要其他功能，可以提出請求。",
+      "en": "EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, standalone popup, Fake URL Key, local progress, custom shortcuts, and camouflage URL text are all available. If you still need something else, send a request."
     },
     "dash.included": { "zh-Hant": "已包含", "en": "Included" },
 
@@ -330,10 +322,10 @@
     "dash.featConvert": { "zh-Hant": "簡體轉繁體", "en": "Simplified-to-Traditional Chinese" },
     "dash.featBg": { "zh-Hant": "偽裝背景上限 20 張", "en": "Up to 20 camouflage backgrounds" },
     "dash.featPopup": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup" },
-    "dash.featPanic": { "zh-Hant": "Panic Button 一鍵轉換", "en": "Panic Button one-key swap" },
+    "dash.featPanic": { "zh-Hant": "偽裝網址鍵", "en": "Fake URL Key" },
     "dash.featLocal": { "zh-Hant": "本機進度保存", "en": "Local reading progress" },
     "dash.featShortcuts": { "zh-Hant": "自訂快捷鍵", "en": "Custom shortcuts" },
-    "dash.featPanicText": { "zh-Hant": "自訂 Panic 顯示文字", "en": "Custom Panic display text" },
+    "dash.featPanicText": { "zh-Hant": "自訂偽裝網址文字", "en": "Custom camouflage URL text" },
     "dash.requestCta": { "zh-Hant": "提出功能請求", "en": "Request a feature" },
     "dash.requestHint": { "zh-Hant": "提交後會有專人透過你提供的電郵聯絡跟進。", "en": "After you submit, someone will follow up using the email you provide." },
 

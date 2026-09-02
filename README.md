@@ -8,7 +8,7 @@
 - `login.html` — 會員登入（Clerk 電郵／密碼）
 - `register.html` — 註冊（Clerk 建立帳號）
 - `dashboard.html` — 會員中心（啟動閱讀器、更改密碼）
-- `reader.html` — 閱讀器（TXT／EPUB、20 張背景、Panic Button 等；須用 Clerk 電郵／密碼登入）
+- `reader.html` — 閱讀器（TXT／EPUB、20 張背景、偽裝網址鍵等；須用 Clerk 電郵／密碼登入）
 - `guide.html` — 閱讀器使用說明
 - `dashboard-free-version.html`、`dashboard-pro-version.html` — 轉去 `dashboard.html`
 - `reader-free-version.html`、`reader-pro-version.html` — 轉去 `reader.html`
@@ -65,7 +65,7 @@ python3 -m http.server 8765
 | 匯入 TXT 或 EPUB | ★ 按鈕 |
 | 上一句 / 下一句 | Q / R 或 ← / →（可自訂） |
 | 簡轉繁 | ⇄ 按鈕（可自訂快捷鍵） |
-| Panic Button | 空白鍵（可自訂） |
+| 偽裝網址鍵 | 空白鍵（可自訂） |
 | 自訂快捷鍵 | B 按鈕右側三條橫線選單（設定會自動保存） |
 | 上傳背景 | B 按鈕（最多 20 張） |
 | 切換背景 | ↻ 按鈕 |
