@@ -13,7 +13,7 @@
     "nav.faq": { "zh-Hant": "常見問題", "en": "FAQ" },
     "nav.loginCta": { "zh-Hant": "登入", "en": "Log in" },
     "nav.login": { "zh-Hant": "登入", "en": "Log in" },
-    "nav.home": { "zh-Hant": "產品官網", "en": "Product site" },
+    "nav.home": { "zh-Hant": "首頁", "en": "Home" },
     "nav.register": { "zh-Hant": "註冊", "en": "Sign up" },
     "nav.logout": { "zh-Hant": "登出", "en": "Log out" },
     "nav.account": { "zh-Hant": "會員資料", "en": "Account" },
