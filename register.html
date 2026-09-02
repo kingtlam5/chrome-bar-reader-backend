@@ -47,7 +47,7 @@
     }
   </style>
   <link rel="stylesheet" href="css/style.css?v=10">
-  <script src="js/i18n.js?v=13"></script>
+  <script src="js/i18n.js?v=17"></script>
 </head>
 <body class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header class="bg-blue-700 text-white">
@@ -77,7 +77,7 @@
         <ul class="mt-8 space-y-3 text-sm text-slate-700">
           <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">1</span>
-            <span class="min-w-0 flex-1" data-i18n="register.point1">填寫姓名、電郵及密碼（最少 15 個字元）</span>
+            <span class="min-w-0 flex-1" data-i18n="register.point1">填寫姓名、電郵及密碼（最少 8 個字元）</span>
           </li>
           <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">2</span>
@@ -102,7 +102,7 @@
           </label>
           <label class="block text-sm font-medium text-slate-700">
             <span data-i18n="common.password">密碼</span>
-            <input id="registerPassword" name="password" type="password" required minlength="15" autocomplete="new-password" data-i18n-placeholder="register.passwordPlaceholder" placeholder="最少 15 個字元" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
+            <input id="registerPassword" name="password" type="password" required minlength="8" autocomplete="new-password" data-i18n-placeholder="register.passwordPlaceholder" placeholder="最少 8 個字元" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
           </label>
 
           <div id="clerk-captcha" class="clerk-captcha"></div>
@@ -166,7 +166,7 @@
     </section>
   </div>
 
-  <script src="js/clerk-client.js?v=6"></script>
+  <script src="js/clerk-client.js?v=7"></script>
   <script src="js/auth.js?v=6"></script>
   <script src="js/register.js?v=6"></script>
 </body>

@@ -172,7 +172,7 @@
     return profile;
   }
 
-  const MIN_PASSWORD_LENGTH = 15;
+  const MIN_PASSWORD_LENGTH = 8;
   const REVERIFY_AFTER_MINUTES = 10;
 
   function clerkErrorCodes(err) {
