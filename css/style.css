@@ -148,6 +148,12 @@ body.theme-light {
   min-width: 0;
 }
 
+.hero-badge {
+  justify-self: start;
+  width: max-content;
+  max-width: 100%;
+}
+
 .hero-mock {
   margin-top: 1.25rem;
 }
@@ -156,22 +162,22 @@ body.theme-light {
   margin-top: 1.25rem;
 }
 
-.hero-points {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 1.25rem;
-}
-
-.hero-points-row {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 1.5rem;
-  row-gap: 0.5rem;
-}
-
 .hero-ctas {
   margin-top: 2rem;
+}
+
+.hero-points {
+  display: flex;
+  flex-wrap: nowrap;
+  column-gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 479px) {
+  .hero-points {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -181,18 +187,18 @@ body.theme-light {
       "badge mock"
       "title mock"
       "lead mock"
-      "points mock"
-      "ctas mock";
+      "ctas mock"
+      "points mock";
     column-gap: 3rem;
     row-gap: 0;
     align-items: center;
   }
 
-  .hero-badge { grid-area: badge; min-width: 0; }
+  .hero-badge { grid-area: badge; }
   .hero-title { grid-area: title; min-width: 0; }
   .hero-lead { grid-area: lead; min-width: 0; }
-  .hero-points { grid-area: points; min-width: 0; }
   .hero-ctas { grid-area: ctas; min-width: 0; }
+  .hero-points { grid-area: points; min-width: 0; }
 
   .hero-mock {
     grid-area: mock;
