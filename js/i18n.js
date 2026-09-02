@@ -61,8 +61,8 @@
       "en": "Enjoy your own reading time at the office"
     },
     "index.hero.lead": {
-      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。想於辦公室享受一段閱讀時光，卻總擔心一抬頭就被看見？<br>Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。",
-      "en": "A fake web reader designed for office workers. Want a moment of reading at the office, but worry that someone will see the moment you look up?<br>Readbar hides the book in the look of everyday work, so you can finish a few pages of your own in the office, calmly and at ease."
+      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。",
+      "en": "A fake web reader designed for office workers. Readbar hides the book in the look of everyday work, so you can finish a few pages of your own in the office, calmly and at ease."
     },
     "index.hero.ctaLogin": { "zh-Hant": "登入會員中心", "en": "Log in to the member centre" },
     "index.hero.ctaRegister": { "zh-Hant": "立即註冊", "en": "Sign up" },
@@ -117,43 +117,43 @@
     },
     "index.features.f1h": { "zh-Hant": "EPUB 檔案支援", "en": "EPUB file support" },
     "index.features.f1p": {
-      "zh-Hant": "可匯入 EPUB 電子書，亦支援 TXT。適合在辦公室以句子為單位閱讀。",
-      "en": "Import EPUB e-books, or TXT files. Read sentence by sentence at the office."
+      "zh-Hant": "可匯入 EPUB 電子書，亦支援 TXT。句子會逐句出現在偽裝網址列，讓你在工位上慢慢讀，不必打開顯眼的電子書介面。",
+      "en": "Import EPUB e-books, or TXT files. Sentences appear one by one in the fake address bar, so you can read at your desk without opening an obvious e-book screen."
     },
     "index.features.f2h": { "zh-Hant": "簡體轉繁體", "en": "Simplified-to-Traditional Chinese" },
     "index.features.f2p": {
-      "zh-Hant": "一鍵將簡體中文轉為繁體，無需另外尋找轉換工具。",
-      "en": "Convert Simplified Chinese to Traditional Chinese with one tap. No extra converter needed."
+      "zh-Hant": "書本若是簡體，可一鍵轉為繁體。轉換在此瀏覽器完成，讀起來更順，也少一次切換視窗的風險。",
+      "en": "If the book is Simplified Chinese, convert it to Traditional with one tap. It happens in this browser, so reading feels smoother and you switch windows less often."
     },
     "index.features.f3h": { "zh-Hant": "偽裝背景上限 20 張", "en": "Up to 20 fake backgrounds" },
     "index.features.f3p": {
-      "zh-Hant": "上傳 PNG、JPG 或 WEBP 工作截圖，讓畫面下方呈現日常工作內容，最多 20 張並可隨時切換。",
-      "en": "Upload PNG, JPG, or WEBP work screenshots so the area below looks like everyday work. Up to 20 images. Switch anytime."
+      "zh-Hant": "上傳工作截圖作為畫面背景，最多 20 張。遠看像在處理公事，切換時仍維持同一套工作畫面。",
+      "en": "Upload work screenshots as the page background, up to 20. From a distance it looks like office work. Switching keeps the same work screen."
     },
     "index.features.f4h": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup" },
     "index.features.f4p": {
-      "zh-Hant": "由會員中心以獨立彈出視窗開啟閱讀器，減少分頁列干擾，無須安裝。",
-      "en": "Launch the reader from the member centre as a standalone popup, with fewer tab bars and no install."
+      "zh-Hant": "由會員中心以獨立視窗開啟，減少分頁列。看起來更像一份正在進行的工作，而不是另開一個閱讀分頁。",
+      "en": "Open a standalone window from the member centre, with fewer tab bars. A glance looks more like work in progress than a reading tab."
     },
     "index.features.f5h": { "zh-Hant": "偽裝網址鍵", "en": "Fake URL Key" },
     "index.features.f5p": {
-      "zh-Hant": "上司走近時，一鍵將網址列的書本句子換成偽裝文字，背景維持工作截圖。",
-      "en": "When someone walks over, one key replaces the book sentence in the address bar with fake text. The work-screenshot background stays."
+      "zh-Hant": "有人走近時，一鍵把網址列的書本句子換成預設或自訂的偽裝網址。背景維持工作截圖，閱讀可隨時藏起來。",
+      "en": "When someone walks over, one key replaces the book sentence in the address bar with your default or custom fake URL. The work-screenshot background stays, so reading can hide at any moment."
     },
     "index.features.f6h": { "zh-Hant": "本機進度保存", "en": "Local reading progress" },
     "index.features.f6p": {
-      "zh-Hant": "閱讀進度保存在此瀏覽器。書本內容不會上傳到我們的伺服器。",
-      "en": "Reading progress stays in this browser. Book content is not uploaded to our servers."
+      "zh-Hant": "進度保存在此瀏覽器，下次打開可接續來讀。書本內容不會上傳到我們的伺服器。",
+      "en": "Progress stays in this browser, so you can pick up next time. Book content is not uploaded to our servers."
     },
     "index.features.f7h": { "zh-Hant": "自訂快捷鍵", "en": "Custom shortcuts" },
     "index.features.f7p": {
-      "zh-Hant": "可自行設定上一句、下一句、偽裝網址鍵等按鍵，設定會保存在此瀏覽器。",
-      "en": "Set your own keys for previous/next sentence, the Fake URL Key, and more. Settings stay in this browser."
+      "zh-Hant": "可自行設定上一句、下一句、偽裝網址鍵等按鍵。手不離鍵盤，也不必在畫面上尋找按鈕。",
+      "en": "Set your own keys for previous sentence, next sentence, and the Fake URL Key. Hands stay on the keyboard — no hunting for on-screen buttons."
     },
     "index.features.f8h": { "zh-Hant": "自訂偽裝網址文字", "en": "Custom fake URL text" },
     "index.features.f8p": {
-      "zh-Hant": "預先設定網址列在偽裝網址模式下顯示的假網址或文字，看起來更像日常瀏覽。",
-      "en": "Choose the fake URL or text shown in the address bar in fake URL mode, so it looks like ordinary browsing."
+      "zh-Hant": "預先寫好偽裝網址模式下要顯示的假網址或文字，讓畫面更像你日常會開啟的頁面。",
+      "en": "Write the fake URL or text for fake URL mode in advance, so the bar looks like a page you would open in ordinary work."
     },
 
     "index.faq.h2": { "zh-Hant": "常見問題", "en": "FAQ" },
