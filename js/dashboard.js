@@ -208,7 +208,7 @@
     const failTitle = passwordFail?.querySelector("[data-pw-fail-title]");
     const failBody = passwordFail?.querySelector("[data-pw-fail-body]");
     const passwordUi = bindModal(passwordModal, "data-close-change-password");
-    const minLength = window.ReadbarClerk?.MIN_PASSWORD_LENGTH || 15;
+    const minLength = window.ReadbarClerk?.MIN_PASSWORD_LENGTH || 8;
     let passwordBusy = false;
 
     function showPasswordPanel(panel) {

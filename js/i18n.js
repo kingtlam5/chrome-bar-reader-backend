@@ -61,8 +61,8 @@
       "en": "Enjoy your own reading time at the office"
     },
     "index.hero.lead": {
-      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。",
-      "en": "A fake web reader designed for office workers. Readbar hides the book in the look of everyday work, so you can finish a few pages of your own in the office, calmly and at ease."
+      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。<br>Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。",
+      "en": "A fake web reader designed for office workers.<br>Readbar hides the book in the look of everyday work, so you can finish a few pages of your own in the office, calmly and at ease."
     },
     "index.hero.ctaLogin": { "zh-Hant": "登入會員中心", "en": "Log in to the member centre" },
     "index.hero.ctaRegister": { "zh-Hant": "立即註冊", "en": "Sign up" },
@@ -217,7 +217,7 @@
       "zh-Hant": "請填寫姓名、電郵及密碼。註冊後即可使用全部閱讀功能，無需選擇方案或付款。",
       "en": "Enter your name, email, and password. After sign-up you can use every reading feature — no plan to choose and no payment."
     },
-    "register.point1": { "zh-Hant": "填寫姓名、電郵及密碼（最少 15 個字元）", "en": "Enter your name, email, and password (at least 15 characters)" },
+    "register.point1": { "zh-Hant": "填寫姓名、電郵及密碼（最少 8 個字元）", "en": "Enter your name, email, and password (at least 8 characters)" },
     "register.point2": { "zh-Hant": "驗證電郵後進入會員中心，即可啟動閱讀器", "en": "After email verification you enter the member centre and can launch the reader" },
     "register.h2": { "zh-Hant": "建立帳號", "en": "Create an account" },
     "register.formLead": { "zh-Hant": "請填寫姓名、電郵及密碼。完成驗證後即可開始閱讀。", "en": "Enter your name, email, and password. After verification you can start reading." },
@@ -232,7 +232,7 @@
     "register.captchaHint": { "zh-Hant": "如出現驗證框，請先完成驗證再繼續。", "en": "If a verification box appears, complete it to continue." },
     "register.captchaTimeout": { "zh-Hant": "驗證等候過久。請完成驗證框後再試一次。", "en": "Verification took too long. Complete the checkbox and try again." },
     "register.namePlaceholder": { "zh-Hant": "陳大文", "en": "Alex Chan" },
-    "register.passwordPlaceholder": { "zh-Hant": "最少 15 個字元", "en": "At least 15 characters" },
+    "register.passwordPlaceholder": { "zh-Hant": "最少 8 個字元", "en": "At least 8 characters" },
     "register.hasAccount": { "zh-Hant": "已有帳號？", "en": "Already have an account?" },
     "register.loginLink": { "zh-Hant": "登入", "en": "Log in" },
     "register.modalBrand": { "zh-Hant": "註冊", "en": "Sign up" },
@@ -340,16 +340,16 @@
 
     "dash.pwBrand": { "zh-Hant": "更改密碼", "en": "Change password" },
     "dash.pwTitle": { "zh-Hant": "更新登入密碼", "en": "Update login password" },
-    "dash.pwLead": { "zh-Hant": "請輸入目前密碼及新密碼。新密碼最少 15 個字元，儲存後會即時寫入你的 Clerk 帳號。", "en": "Enter your current password and a new one. The new password must be at least 15 characters. It is saved to your Clerk account immediately." },
+    "dash.pwLead": { "zh-Hant": "請輸入目前密碼及新密碼。新密碼最少 8 個字元，儲存後會即時寫入你的 Clerk 帳號。", "en": "Enter your current password and a new one. The new password must be at least 8 characters. It is saved to your Clerk account immediately." },
     "dash.pwCurrent": { "zh-Hant": "目前密碼", "en": "Current password" },
     "dash.pwNew": { "zh-Hant": "新密碼", "en": "New password" },
     "dash.pwConfirm": { "zh-Hant": "確認新密碼", "en": "Confirm new password" },
     "dash.pwSave": { "zh-Hant": "儲存新密碼", "en": "Save new password" },
     "dash.pwMismatch": { "zh-Hant": "兩次輸入的新密碼不一致。", "en": "The new passwords do not match." },
-    "dash.pwTooShort": { "zh-Hant": "新密碼最少要有 15 個字元。", "en": "The new password must be at least 15 characters." },
+    "dash.pwTooShort": { "zh-Hant": "新密碼最少要有 8 個字元。", "en": "The new password must be at least 8 characters." },
     "dash.pwWrongCurrent": { "zh-Hant": "目前密碼不正確。", "en": "The current password is incorrect." },
     "dash.pwPwned": { "zh-Hant": "這個新密碼不夠安全，請換一組。", "en": "Please choose a different, more secure password." },
-    "dash.pwTooWeak": { "zh-Hant": "新密碼未符合規則（最少 15 個字元）。", "en": "The new password does not meet the password rules (at least 15 characters)." },
+    "dash.pwTooWeak": { "zh-Hant": "新密碼未符合規則（最少 8 個字元）。", "en": "The new password does not meet the password rules (at least 8 characters)." },
     "dash.pwNeedReverify": { "zh-Hant": "登入已超過一段時間，請登出後重新登入，再更改密碼。", "en": "This sign-in is too old to change the password. Log out, sign in again, then retry." },
     "dash.pwNeedSignInTitle": { "zh-Hant": "需要正式登入", "en": "Sign in required" },
     "dash.pwNeedSignInBody": { "zh-Hant": "預覽會員中心或未登入 Clerk 時無法更改密碼。請用電郵／密碼登入後再試。", "en": "Password changes need a Clerk session. Sign in with your email and password, then try again. Preview dashboards cannot change a password." },

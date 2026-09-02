@@ -825,7 +825,7 @@
       </div>
     </section>
   </div>
-  <script src="js/clerk-client.js?v=6"></script>
+  <script src="js/clerk-client.js?v=7"></script>
   <script src="js/auth.js?v=6"></script>
   <script src="js/reader-auth.js?v=6"></script>
   <main class="memo" id="memo" aria-label="隱蔽文字閱讀器" aria-hidden="true" inert>
@@ -54765,6 +54765,16 @@
         return keysEqual(event.key, state.shortcuts[action]);
       }
 
+      function isTypingTarget(el) {
+        if (!el || el === document.body || el === document.documentElement) return false;
+        if (el.isContentEditable) return true;
+        const tag = el.tagName;
+        if (tag === "TEXTAREA" || tag === "SELECT") return true;
+        if (tag !== "INPUT") return false;
+        const type = String(el.type || "text").toLowerCase();
+        return type !== "button" && type !== "submit" && type !== "checkbox" && type !== "radio" && type !== "file" && type !== "reset" && type !== "hidden";
+      }
+
       function keyIsCustomBound(key) {
         return Object.values(state.shortcuts).some((value) => value && keysEqual(value, key));
       }
@@ -55234,7 +55244,11 @@
       chromeJumpInput.addEventListener("blur", closeChromeJumpInput);
 
       document.addEventListener("keydown", (event) => {
-        if (document.activeElement === chromeJumpInput || document.activeElement === panicTextInput) {
+        if (document.documentElement.classList.contains("pro-reader-locked")) {
+          return;
+        }
+
+        if (isTypingTarget(document.activeElement) || isTypingTarget(event.target)) {
           if (document.activeElement === panicTextInput && event.key === "Escape") {
             event.preventDefault();
             closeShortcutModal();
