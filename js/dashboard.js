@@ -298,14 +298,10 @@
     const form = document.getElementById("requestFeatureForm");
     const formWrap = document.getElementById("requestFormWrap");
     const success = document.getElementById("requestSuccess");
-    const emailInput = document.getElementById("requestEmail");
     if (!modal || !openBtn || !form) return;
 
     function openModal() {
-      const auth = window.StealthAuth?.get();
-      if (emailInput && auth?.email && !emailInput.value) {
-        emailInput.value = auth.email;
-      }
+      form.reset();
       formWrap?.classList.remove("hidden");
       success?.classList.add("hidden");
       modal.classList.remove("hidden");
