@@ -68,8 +68,7 @@
     "index.hero.ctaRegister": { "zh-Hant": "立即註冊", "en": "Sign up" },
     "index.hero.pointFree": { "zh-Hant": "🎁 完全免費", "en": "🎁 Completely free" },
     "index.hero.point1": { "zh-Hant": "🌐 免安裝，瀏覽器即用", "en": "🌐 No install — use it in the browser" },
-    "index.hero.point2": { "zh-Hant": "🕵️ 獨立彈出視窗，減少分頁列", "en": "🕵️ Standalone popup, fewer tab bars" },
-    "index.hero.point3": { "zh-Hant": "⚡ 偽裝網址鍵", "en": "⚡ Fake URL Key" },
+    "index.hero.point2": { "zh-Hant": "🕵️ 完美融入瀏覽器 增加隱蔽性", "en": "🕵️ Blends into the browser for more stealth" },
     "index.mock.url": {
       "zh-Hant": "面對絕對的困境，唯一的辦法就是讓自己變得絕對強大。",
       "en": "In absolute hardship, the only way out is to become absolutely strong."

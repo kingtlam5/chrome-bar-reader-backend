@@ -139,6 +139,68 @@ body.theme-light {
     #ffffff;
 }
 
+.hero-layout {
+  display: grid;
+  width: 100%;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 0;
+}
+
+.hero-mock {
+  margin-top: 1.25rem;
+}
+
+.hero-lead {
+  margin-top: 1.25rem;
+}
+
+.hero-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.hero-points-row {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.5rem;
+  row-gap: 0.5rem;
+}
+
+.hero-ctas {
+  margin-top: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-layout {
+    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-areas:
+      "badge mock"
+      "title mock"
+      "lead mock"
+      "points mock"
+      "ctas mock";
+    column-gap: 3rem;
+    row-gap: 0;
+    align-items: center;
+  }
+
+  .hero-badge { grid-area: badge; min-width: 0; }
+  .hero-title { grid-area: title; min-width: 0; }
+  .hero-lead { grid-area: lead; min-width: 0; }
+  .hero-points { grid-area: points; min-width: 0; }
+  .hero-ctas { grid-area: ctas; min-width: 0; }
+
+  .hero-mock {
+    grid-area: mock;
+    margin-top: 0;
+    align-self: center;
+  }
+}
+
 .chrome-mock {
   width: 100%;
   max-width: 100%;

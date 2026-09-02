@@ -52,8 +52,8 @@
       color-scheme: light;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css?v=13">
-  <script src="js/i18n.js?v=10"></script>
+  <link rel="stylesheet" href="css/style.css?v=14">
+  <script src="js/i18n.js?v=11"></script>
   <script>
     window.scrollToSection = function (id, event) {
       if (event) event.preventDefault();
@@ -217,35 +217,16 @@
 
   <main>
     <section class="hero-wash relative overflow-x-hidden px-5 pb-12 pt-24 md:pb-20 md:pt-36">
-      <div class="mx-auto grid max-w-content items-center gap-10 md:gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-        <div class="min-w-0">
-          <p class="mb-4 inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-            <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-600"></span>
-            <span data-i18n="index.badge">辦公室隱蔽閱讀器 · 免安裝</span>
-          </p>
-          <h1 class="text-2xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-5xl lg:text-[3.4rem]" data-i18n-html="index.hero.h1">
-            在辦公室<wbr>安心享受<wbr>你專屬的<wbr>閱讀時光
-          </h1>
-          <p class="mt-5 max-w-xl text-base leading-7 text-slate-600 md:text-lg" data-i18n-html="index.hero.lead">
-            專為上班族設計的偽裝式網頁閱讀器。想於辦公室享受一段閱讀時光，卻總擔心一抬頭就被看見？<br>Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。
-          </p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="login.html" class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="index.hero.ctaLogin">
-              登入會員中心
-            </a>
-            <a href="register.html" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700" data-i18n="index.hero.ctaRegister">
-              立即註冊
-            </a>
-          </div>
-          <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-600">
-            <span data-i18n="index.hero.pointFree">🎁 完全免費</span>
-            <span data-i18n="index.hero.point1">🌐 免安裝，瀏覽器即用</span>
-            <span data-i18n="index.hero.point2">🕵️ 獨立彈出視窗，減少分頁列</span>
-            <span data-i18n="index.hero.point3">⚡ 偽裝網址鍵</span>
-          </div>
-        </div>
+      <div class="hero-layout">
+        <p class="hero-badge mb-4 inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-600"></span>
+          <span data-i18n="index.badge">辦公室隱蔽閱讀器 · 免安裝</span>
+        </p>
+        <h1 class="hero-title text-2xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-5xl lg:text-[3.4rem]" data-i18n-html="index.hero.h1">
+          在辦公室<wbr>安心享受<wbr>你專屬的<wbr>閱讀時光
+        </h1>
 
-        <div class="chrome-mock min-w-0 overflow-hidden rounded-2xl bg-[#dee1e6]">
+        <div class="hero-mock chrome-mock min-w-0 overflow-hidden rounded-2xl bg-[#dee1e6]">
           <div class="flex w-full min-w-0 items-center gap-2 bg-[#dee1e6] px-3 pt-2 text-[11px] text-slate-600">
             <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
             <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
@@ -267,6 +248,27 @@
               <p class="mt-1 text-slate-300" data-i18n="index.mock.body">網址列的書本句子會改為預設或自訂文字，背景維持工作截圖。</p>
             </div>
           </div>
+        </div>
+
+        <p class="hero-lead max-w-xl text-base leading-7 text-slate-600 md:text-lg" data-i18n-html="index.hero.lead">
+          專為上班族設計的偽裝式網頁閱讀器。想於辦公室享受一段閱讀時光，卻總擔心一抬頭就被看見？<br>Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。
+        </p>
+        <div class="hero-points text-sm text-slate-600">
+          <div class="hero-points-row">
+            <span data-i18n="index.hero.pointFree">🎁 完全免費</span>
+            <span data-i18n="index.hero.point1">🌐 免安裝，瀏覽器即用</span>
+          </div>
+          <div class="hero-points-row">
+            <span data-i18n="index.hero.point2">🕵️ 完美融入瀏覽器 增加隱蔽性</span>
+          </div>
+        </div>
+        <div class="hero-ctas flex flex-col gap-3 sm:flex-row">
+          <a href="login.html" class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="index.hero.ctaLogin">
+            登入會員中心
+          </a>
+          <a href="register.html" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700" data-i18n="index.hero.ctaRegister">
+            立即註冊
+          </a>
         </div>
       </div>
     </section>
