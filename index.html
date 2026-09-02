@@ -52,8 +52,8 @@
       color-scheme: light;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css?v=12">
-  <script src="js/i18n.js?v=9"></script>
+  <link rel="stylesheet" href="css/style.css?v=13">
+  <script src="js/i18n.js?v=10"></script>
   <script>
     window.scrollToSection = function (id, event) {
       if (event) event.preventDefault();
@@ -226,8 +226,8 @@
           <h1 class="text-2xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-5xl lg:text-[3.4rem]" data-i18n-html="index.hero.h1">
             在辦公室<wbr>安心享受<wbr>你專屬的<wbr>閱讀時光
           </h1>
-          <p class="mt-5 max-w-xl text-base leading-7 text-slate-600 md:text-lg" data-i18n="index.hero.lead">
-            專為上班族設計的偽裝式網頁閱讀器。工位上最想偷一段閱讀時光，卻總擔心一抬頭就被看見。Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。
+          <p class="mt-5 max-w-xl text-base leading-7 text-slate-600 md:text-lg" data-i18n-html="index.hero.lead">
+            專為上班族設計的偽裝式網頁閱讀器。想於辦公室享受一段閱讀時光，卻總擔心一抬頭就被看見？<br>Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。
           </p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <a href="login.html" class="glow-btn inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-500" data-i18n="index.hero.ctaLogin">
@@ -280,32 +280,26 @@
         </div>
         <div class="mt-10 grid gap-6 md:grid-cols-2">
           <article class="compare-bad card-surface min-w-0 rounded-2xl border border-red-200 p-4 sm:p-6">
-            <div class="compare-window ebook-mock" aria-hidden="true">
-              <div class="ebook-mock-bar">
-                <span class="ebook-mock-dot"></span>
-                <span class="ebook-mock-dot"></span>
-                <span class="ebook-mock-dot"></span>
-                <span class="ebook-mock-title">The Silent Shore — Chapter 14</span>
+            <div class="compare-head">
+              <div class="compare-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="13.5" cy="13" r="3.1"/>
+                  <path d="M8 36.5v-9.2c0-3.1 2.4-5.6 5.5-5.6h2"/>
+                  <path d="M13.5 21.8v6"/>
+                  <path d="M13.5 25h8.5"/>
+                  <path d="M17.5 28.2c2.4-1.9 4.6-1.9 7 0v7.2c-2.4-1.5-4.6-1.5-7 0z"/>
+                  <path d="M24.5 28.2c2.4-1.9 4.6-1.9 7 0v7.2c-2.4-1.5-4.6-1.5-7 0z"/>
+                  <path d="M6 36.5h24"/>
+                  <circle cx="37.5" cy="11.5" r="3"/>
+                  <path d="M31.8 36.5v-13c0-3 2.4-5.3 5.7-5.3 3.3 0 5.7 2.3 5.7 5.3v13"/>
+                  <path d="M34.2 16.8c-2.2 2.2-5 4.4-8.2 6.2"/>
+                </svg>
               </div>
-              <div class="ebook-mock-body">
-                <aside class="ebook-mock-nav">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </aside>
-                <div class="ebook-mock-page">
-                  <p class="ebook-mock-chapter">E-book</p>
-                  <p class="ebook-mock-line"></p>
-                  <p class="ebook-mock-line"></p>
-                  <p class="ebook-mock-line short"></p>
-                  <p class="ebook-mock-line"></p>
-                  <p class="ebook-mock-progress">Page 184 / 362</p>
-                </div>
+              <div class="compare-copy">
+                <p class="text-sm font-semibold text-red-700" data-i18n="index.pain.badKicker">一般閱讀方式</p>
+                <h3 class="mt-1 text-xl font-semibold text-slate-900" data-i18n="index.pain.badH3">容易露出破綻</h3>
               </div>
             </div>
-            <p class="text-sm font-semibold text-red-700" data-i18n="index.pain.badKicker">一般閱讀方式</p>
-            <h3 class="mt-2 text-xl font-semibold text-slate-900" data-i18n="index.pain.badH3">容易露出破綻</h3>
             <ul class="mt-5 space-y-3 break-words text-sm text-slate-700">
               <li data-i18n="index.pain.bad1">電子書應用的圖示與排版，遠看即可辨識</li>
               <li data-i18n="index.pain.bad2">在瀏覽器再套一層閱讀介面，會出現雙重網址列</li>
@@ -314,60 +308,25 @@
             </ul>
           </article>
           <article class="compare-good card-surface min-w-0 rounded-2xl border border-blue-200 p-4 sm:p-6">
-            <div class="compare-window chrome-mock min-w-0 bg-[#dee1e6]" aria-hidden="true">
-              <div class="flex w-full min-w-0 items-center gap-2 bg-[#dee1e6] px-3 pt-2 text-[11px] text-slate-600">
-                <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
-                <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
-                <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
-                <span class="ml-2 min-w-0 truncate rounded-t-md bg-white px-3 py-1.5 text-slate-700">Sheets — Q3 Forecast</span>
+            <div class="compare-head">
+              <div class="compare-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="16.5" cy="12.5" r="3.1"/>
+                  <path d="M10 36.5v-9.5c0-3.3 2.6-6 6-6h3"/>
+                  <path d="M16.5 21v7"/>
+                  <rect x="22.5" y="19.5" width="16" height="11.5" rx="1.8"/>
+                  <path d="M25 22.8h11 M25 25.8h8 M25 28.8h10"/>
+                  <path d="M21 31.5h19"/>
+                  <path d="M8.5 26.5h5v7h-5z"/>
+                  <path d="M13.5 28.2h1.8a1.6 1.6 0 0 1 0 3.2h-1.8"/>
+                  <path d="M7 36.5h34"/>
+                </svg>
               </div>
-              <div class="bg-white px-3 py-2">
-                <div class="flex w-full min-w-0 items-center gap-2 rounded-full bg-[#e8eaed] px-3 py-2 text-[13px] text-slate-800">
-                  <svg class="h-3.5 w-3.5 shrink-0 text-slate-500" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                  <span class="chrome-mock-url min-w-0 flex-1" data-i18n="index.mock.url">面對絕對的困境，唯一的辦法就是讓自己變得絕對強大。</span>
-                </div>
-              </div>
-              <div class="sheet-mock">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>A</th>
-                      <th>B</th>
-                      <th>C</th>
-                      <th>D</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Region</td>
-                      <td>Q1</td>
-                      <td>Q2</td>
-                      <td>Q3</td>
-                    </tr>
-                    <tr>
-                      <td>HK</td>
-                      <td>128</td>
-                      <td>142</td>
-                      <td>155</td>
-                    </tr>
-                    <tr>
-                      <td>TW</td>
-                      <td>96</td>
-                      <td>101</td>
-                      <td>118</td>
-                    </tr>
-                    <tr>
-                      <td>SG</td>
-                      <td>84</td>
-                      <td>90</td>
-                      <td>97</td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div class="compare-copy">
+                <p class="text-sm font-semibold text-blue-700" data-i18n="index.pain.goodKicker">Readbar</p>
+                <h3 class="mt-1 text-xl font-semibold text-slate-900" data-i18n="index.pain.goodH3">融入日常工作畫面</h3>
               </div>
             </div>
-            <p class="text-sm font-semibold text-blue-700" data-i18n="index.pain.goodKicker">Readbar</p>
-            <h3 class="mt-2 text-xl font-semibold text-slate-900" data-i18n="index.pain.goodH3">融入日常工作畫面</h3>
             <ul class="mt-5 space-y-3 break-words text-sm text-slate-700">
               <li><strong class="text-slate-900" data-i18n="index.pain.good1Label">免安裝</strong><span data-i18n="index.pain.good1">：純網頁即可使用，不留下桌面圖示</span></li>
               <li><strong class="text-slate-900" data-i18n="index.pain.good2Label">偽裝網址列</strong><span data-i18n="index.pain.good2">：句子顯示於 Chrome 工具列，下方可放工作截圖</span></li>
@@ -388,128 +347,84 @@
         </div>
         <div class="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h6.5A2.5 2.5 0 0 1 14 7v13.5H7A2 2 0 0 1 5 18.5v-14z"/><path d="M9 4.5V18"/><path d="M14 7h5a2 2 0 0 1 2 2v11.5H14"/></svg>
+            <div class="flex items-center gap-2.5">
+              <div class="feature-num">01</div>
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h6.5A2.5 2.5 0 0 1 14 7v13.5H7A2 2 0 0 1 5 18.5v-14z"/><path d="M9 4.5V18"/><path d="M14 7h5a2 2 0 0 1 2 2v11.5H14"/></svg>
+              </div>
             </div>
             <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f1h">EPUB 檔案支援</h3>
             <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f1p">可匯入 EPUB 電子書，亦支援 TXT。適合在辦公室以句子為單位閱讀。</p>
-            <svg class="feature-art mt-6 w-full min-w-0" viewBox="0 0 280 96" fill="none" aria-hidden="true">
-              <rect x="28" y="18" width="96" height="62" rx="10" fill="#EFF6FF" stroke="#BFDBFE"/>
-              <rect x="42" y="30" width="68" height="8" rx="4" fill="#2563EB"/>
-              <rect x="42" y="46" width="52" height="6" rx="3" fill="#93C5FD"/>
-              <rect x="42" y="58" width="60" height="6" rx="3" fill="#BFDBFE"/>
-              <rect x="148" y="18" width="104" height="62" rx="10" fill="#FFFFFF" stroke="#DBEAFE"/>
-              <rect x="162" y="32" width="76" height="6" rx="3" fill="#CBD5E1"/>
-              <rect x="162" y="46" width="58" height="6" rx="3" fill="#E2E8F0"/>
-              <rect x="162" y="60" width="42" height="8" rx="4" fill="#2563EB"/>
-            </svg>
           </article>
           <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h5"/><path d="M8.5 8c0 4-1 7-3.5 9"/><path d="M12 8c0 4 .8 7 3 9"/><path d="M14 15.5h6"/><path d="M17.5 12.5 21 16l-3.5 3.5"/></svg>
+            <div class="flex items-center gap-2.5">
+              <div class="feature-num">02</div>
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h5"/><path d="M8.5 8c0 4-1 7-3.5 9"/><path d="M12 8c0 4 .8 7 3 9"/><path d="M14 15.5h6"/><path d="M17.5 12.5 21 16l-3.5 3.5"/></svg>
+              </div>
             </div>
             <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f2h">簡體轉繁體</h3>
             <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f2p">一鍵將簡體中文轉為繁體，無需另外尋找轉換工具。</p>
-            <svg class="feature-art mt-6 w-full min-w-0" viewBox="0 0 280 96" fill="none" aria-hidden="true">
-              <rect x="28" y="22" width="88" height="52" rx="12" fill="#EFF6FF" stroke="#BFDBFE"/>
-              <rect x="48" y="40" width="48" height="16" rx="4" fill="#93C5FD"/>
-              <path d="M128 48h24" stroke="#2563EB" stroke-width="3" stroke-linecap="round"/>
-              <path d="M144 38l10 10-10 10" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              <rect x="164" y="22" width="88" height="52" rx="12" fill="#1E3A8A"/>
-              <rect x="184" y="40" width="48" height="16" rx="4" fill="#60A5FA"/>
-            </svg>
           </article>
           <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="m8 14 2.2-2.6 2.3 2.2L16.5 10"/><circle cx="8.5" cy="8.5" r="1"/></svg>
+            <div class="flex items-center gap-2.5">
+              <div class="feature-num">03</div>
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="m8 14 2.2-2.6 2.3 2.2L16.5 10"/><circle cx="8.5" cy="8.5" r="1"/></svg>
+              </div>
             </div>
             <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f3h">偽裝背景上限 20 張</h3>
             <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f3p">上傳 PNG、JPG 或 WEBP 工作截圖，讓畫面下方呈現日常工作內容，最多 20 張並可隨時切換。</p>
-            <svg class="feature-art mt-6 w-full min-w-0" viewBox="0 0 280 96" fill="none" aria-hidden="true">
-              <rect x="24" y="20" width="92" height="56" rx="12" fill="#1E3A8A"/>
-              <rect x="36" y="32" width="68" height="8" rx="4" fill="#93C5FD"/>
-              <rect x="36" y="46" width="48" height="6" rx="3" fill="#60A5FA"/>
-              <rect x="36" y="58" width="58" height="6" rx="3" fill="#3B82F6"/>
-              <rect x="164" y="20" width="92" height="56" rx="12" fill="#EFF6FF" stroke="#BFDBFE"/>
-              <rect x="176" y="34" width="68" height="6" rx="3" fill="#CBD5E1"/>
-              <rect x="176" y="46" width="52" height="6" rx="3" fill="#E2E8F0"/>
-              <rect x="176" y="58" width="40" height="10" rx="4" fill="#2563EB"/>
-              <path d="M128 48h24" stroke="#2563EB" stroke-width="3" stroke-linecap="round"/>
-              <path d="M144 38l10 10-10 10" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
           </article>
           <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="12" height="12" rx="2"/><rect x="9" y="3.5" width="11.5" height="11.5" rx="2"/><path d="M15 15.5v3.2a1.3 1.3 0 0 1-1.3 1.3H6"/></svg>
+            <div class="flex items-center gap-2.5">
+              <div class="feature-num">04</div>
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="12" height="12" rx="2"/><rect x="9" y="3.5" width="11.5" height="11.5" rx="2"/><path d="M15 15.5v3.2a1.3 1.3 0 0 1-1.3 1.3H6"/></svg>
+              </div>
             </div>
             <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f4h">獨立彈出視窗</h3>
             <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f4p">由會員中心以獨立彈出視窗開啟閱讀器，減少分頁列干擾，無須安裝。</p>
-            <svg class="feature-art mt-6 w-full min-w-0" viewBox="0 0 280 96" fill="none" aria-hidden="true">
-              <rect x="36" y="28" width="120" height="48" rx="10" fill="#EFF6FF" stroke="#BFDBFE"/>
-              <circle cx="50" cy="42" r="4" fill="#F87171"/>
-              <circle cx="64" cy="42" r="4" fill="#FBBF24"/>
-              <circle cx="78" cy="42" r="4" fill="#34D399"/>
-              <rect x="92" y="36" width="50" height="12" rx="6" fill="#DBEAFE"/>
-              <rect x="148" y="18" width="96" height="58" rx="12" fill="#FFFFFF" stroke="#2563EB"/>
-              <rect x="160" y="30" width="72" height="10" rx="5" fill="#DBEAFE"/>
-              <rect x="160" y="48" width="56" height="16" rx="6" fill="#2563EB"/>
-            </svg>
           </article>
           <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6.5" width="17" height="5.5" rx="2.75"/><path d="M8 9.25h8"/><path d="M8 16h3"/><path d="M14 16h5"/><path d="m16.5 13.5 3 2.5-3 2.5"/></svg>
+            <div class="flex items-center gap-2.5">
+              <div class="feature-num">05</div>
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6.5" width="17" height="5.5" rx="2.75"/><path d="M8 9.25h8"/><path d="M8 16h3"/><path d="M14 16h5"/><path d="m16.5 13.5 3 2.5-3 2.5"/></svg>
+              </div>
             </div>
             <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f5h">偽裝網址鍵</h3>
             <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f5p">上司走近時，一鍵將網址列的書本句子換成偽裝文字，背景維持工作截圖。</p>
-            <svg class="feature-art mt-6 w-full min-w-0" viewBox="0 0 280 96" fill="none" aria-hidden="true">
-              <rect x="24" y="22" width="108" height="52" rx="12" fill="#EFF6FF" stroke="#BFDBFE"/>
-              <rect x="36" y="38" width="84" height="20" rx="10" fill="#FFFFFF" stroke="#93C5FD"/>
-              <rect x="46" y="44" width="48" height="8" rx="4" fill="#2563EB"/>
-              <path d="M144 48h20" stroke="#2563EB" stroke-width="3" stroke-linecap="round"/>
-              <path d="M156 38l12 10-12 10" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              <rect x="176" y="22" width="80" height="52" rx="12" fill="#1E3A8A"/>
-              <rect x="188" y="38" width="56" height="20" rx="10" fill="#1D4ED8"/>
-              <rect x="196" y="44" width="40" height="8" rx="4" fill="#DBEAFE"/>
-            </svg>
           </article>
           <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4.5h8.5A2.5 2.5 0 0 1 17 7v13l-5.5-3-5.5 3V7A2.5 2.5 0 0 1 8.5 4.5H6z"/><path d="M8 9h6"/></svg>
+            <div class="flex items-center gap-2.5">
+              <div class="feature-num">06</div>
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4.5h8.5A2.5 2.5 0 0 1 17 7v13l-5.5-3-5.5 3V7A2.5 2.5 0 0 1 8.5 4.5H6z"/><path d="M8 9h6"/></svg>
+              </div>
             </div>
             <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f6h">本機進度保存</h3>
             <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f6p">閱讀進度保存在此瀏覽器。書本內容不會上傳到我們的伺服器。</p>
-            <svg class="feature-art mt-6 w-full min-w-0" viewBox="0 0 280 96" fill="none" aria-hidden="true">
-              <rect x="40" y="20" width="200" height="16" rx="8" fill="#EFF6FF" stroke="#BFDBFE"/>
-              <rect x="40" y="20" width="128" height="16" rx="8" fill="#2563EB"/>
-              <rect x="56" y="48" width="72" height="28" rx="8" fill="#DBEAFE"/>
-              <rect x="144" y="48" width="80" height="28" rx="8" fill="#1E3A8A"/>
-            </svg>
           </article>
           <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="17" height="12.5" rx="2"/><path d="M7 10h2.2"/><path d="M11 10h2.2"/><path d="M15 10h2"/><path d="M7 13.5h10"/></svg>
+            <div class="flex items-center gap-2.5">
+              <div class="feature-num">07</div>
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="17" height="12.5" rx="2"/><path d="M7 10h2.2"/><path d="M11 10h2.2"/><path d="M15 10h2"/><path d="M7 13.5h10"/></svg>
+              </div>
             </div>
             <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f7h">自訂快捷鍵</h3>
             <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f7p">可自行設定上一句、下一句、偽裝網址鍵等按鍵，設定會保存在此瀏覽器。</p>
-            <svg class="feature-art mt-6 w-full min-w-0" viewBox="0 0 280 96" fill="none" aria-hidden="true">
-              <rect x="44" y="24" width="44" height="28" rx="8" fill="#EFF6FF" stroke="#BFDBFE"/>
-              <rect x="100" y="24" width="80" height="28" rx="8" fill="#2563EB"/>
-              <rect x="192" y="24" width="44" height="28" rx="8" fill="#EFF6FF" stroke="#BFDBFE"/>
-              <rect x="72" y="60" width="136" height="16" rx="8" fill="#DBEAFE"/>
-            </svg>
           </article>
           <article class="card-surface flex min-w-0 flex-col rounded-2xl border border-slate-200 p-4 sm:p-6">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h16"/><path d="M4 12h10"/><path d="M4 16.5h7"/><path d="M16.5 13.5 20 17l-3.5 3.5"/><path d="M13 17h7"/></svg>
+            <div class="flex items-center gap-2.5">
+              <div class="feature-num">08</div>
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h16"/><path d="M4 12h10"/><path d="M4 16.5h7"/><path d="M16.5 13.5 20 17l-3.5 3.5"/><path d="M13 17h7"/></svg>
+              </div>
             </div>
             <h3 class="mt-5 text-lg font-semibold text-slate-900" data-i18n="index.features.f8h">自訂偽裝網址文字</h3>
             <p class="mt-2 break-words text-sm leading-6 text-slate-600" data-i18n="index.features.f8p">預先設定網址列在偽裝網址模式下顯示的假網址或文字，看起來更像日常瀏覽。</p>
-            <svg class="feature-art mt-6 w-full min-w-0" viewBox="0 0 280 96" fill="none" aria-hidden="true">
-              <rect x="28" y="26" width="224" height="44" rx="14" fill="#EFF6FF" stroke="#BFDBFE"/>
-              <rect x="42" y="36" width="196" height="24" rx="12" fill="#FFFFFF" stroke="#93C5FD"/>
-              <rect x="54" y="42" width="120" height="12" rx="6" fill="#CBD5E1"/>
-              <rect x="182" y="42" width="42" height="12" rx="6" fill="#2563EB"/>
-            </svg>
           </article>
         </div>
       </div>
