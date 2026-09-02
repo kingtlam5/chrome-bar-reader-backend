@@ -35,6 +35,14 @@ body {
   overflow-wrap: break-word;
 }
 
+.rb-mark {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+}
+
 html.lang-en body {
   line-break: auto;
 }

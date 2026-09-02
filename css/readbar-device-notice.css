@@ -135,11 +135,14 @@ html.lang-en .rb-device-notice-body p {
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   border-radius: 8px;
-  background: #1d4ed8;
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 700;
+}
+
+.rb-device-notice-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .rb-device-notice-card {
@@ -154,8 +157,7 @@ html.lang-en .rb-device-notice-body p {
 }
 
 .rb-device-notice-card-head .rb-device-notice-mark {
-  background: #ffffff;
-  color: #1d4ed8;
+  background: transparent;
 }
 
 .rb-device-notice-body {
