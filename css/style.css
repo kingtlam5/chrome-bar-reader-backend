@@ -246,6 +246,16 @@ body.theme-light {
   background-color: #f0f7ff;
 }
 
+.compare-shot {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 0.9rem;
+  margin-bottom: 1.1rem;
+  background: #e2e8f0;
+}
+
 .feature-art {
   display: block;
   width: 100%;

@@ -9,7 +9,6 @@
 
     "nav.pain": { "zh-Hant": "安心閱讀", "en": "Read at ease" },
     "nav.features": { "zh-Hant": "核心功能", "en": "Features" },
-    "nav.start": { "zh-Hant": "開始使用", "en": "Get started" },
     "nav.guide": { "zh-Hant": "使用說明", "en": "User guide" },
     "nav.faq": { "zh-Hant": "常見問題", "en": "FAQ" },
     "nav.loginCta": { "zh-Hant": "登入", "en": "Log in" },
@@ -67,6 +66,7 @@
     },
     "index.hero.ctaLogin": { "zh-Hant": "登入會員中心", "en": "Log in to the member centre" },
     "index.hero.ctaRegister": { "zh-Hant": "立即註冊", "en": "Sign up" },
+    "index.hero.pointFree": { "zh-Hant": "🎁 完全免費", "en": "🎁 Completely free" },
     "index.hero.point1": { "zh-Hant": "🌐 免安裝，瀏覽器即用", "en": "🌐 No install — use it in the browser" },
     "index.hero.point2": { "zh-Hant": "🕵️ 獨立彈出視窗，減少分頁列", "en": "🕵️ Standalone popup, fewer tab bars" },
     "index.hero.point3": { "zh-Hant": "⚡ Panic Button 一鍵換成偽裝網址", "en": "⚡ Panic Button swaps in a disguised URL" },
@@ -106,51 +106,64 @@
     "index.pain.good3": { "zh-Hant": "：以免安裝方式開啟獨立視窗，減少分頁列干擾", "en": ": opens a separate window without installing, with fewer tab bars" },
     "index.pain.good4Label": { "zh-Hant": "Panic Button", "en": "Panic Button" },
     "index.pain.good4": { "zh-Hant": "：一鍵將網址列改為自訂假文字", "en": ": one key turns the address bar into custom fake text" },
+    "index.pain.badAlt": {
+      "zh-Hant": "示意圖：辦公室電腦正顯示電子書介面，上司從後走近並看見螢幕。",
+      "en": "Illustration: an office monitor showing an e-book app while a manager walks up and sees the screen."
+    },
+    "index.pain.goodAlt": {
+      "zh-Hant": "示意圖：辦公室電腦看起來像在處理試算表，路過的人難以察覺正在閱讀。",
+      "en": "Illustration: an office monitor that looks like a spreadsheet, so a passer-by is unlikely to notice reading."
+    },
 
     "index.features.kicker": { "zh-Hant": "Features", "en": "Features" },
     "index.features.h2": {
-      "zh-Hant": "核心功能：<wbr>對應實際產品能力",
-      "en": "Core features, matched to the real product"
+      "zh-Hant": "核心功能：<wbr>全部均可使用",
+      "en": "Core features, all included"
     },
     "index.features.lead": {
-      "zh-Hant": "全部功能均可使用：TXT 與 EPUB、簡轉繁、二十張偽裝背景、獨立彈出視窗、Panic Button、本機進度與自訂快捷鍵。",
-      "en": "Every feature is available: TXT and EPUB, Simplified-to-Traditional Chinese, twenty camouflage backgrounds, a standalone popup, Panic Button, local progress, and custom shortcuts."
+      "zh-Hant": "註冊後即可使用全部八項功能，無需升級或付款。",
+      "en": "After you sign up, all eight features are available — no upgrade and no payment."
     },
-    "index.features.f1h": { "zh-Hant": "偽裝 Chrome 工具列", "en": "Camouflaged Chrome toolbar" },
+    "index.features.f1h": { "zh-Hant": "EPUB 檔案支援", "en": "EPUB file support" },
     "index.features.f1p": {
-      "zh-Hant": "閱讀句子顯示於網址列，並可顯示進度、跳轉句子。遠看如同日常瀏覽網頁，而非電子書介面。",
-      "en": "Reading sentences appear in the address bar, with progress and sentence jump. From a distance it looks like ordinary browsing, not an e-book."
+      "zh-Hant": "可匯入 EPUB 電子書，亦支援 TXT。適合在辦公室以句子為單位閱讀。",
+      "en": "Import EPUB e-books, or TXT files. Read sentence by sentence at the office."
     },
-    "index.features.f2h": { "zh-Hant": "工作截圖偽裝背景", "en": "Work-screenshot backgrounds" },
+    "index.features.f2h": { "zh-Hant": "簡體轉繁體", "en": "Simplified-to-Traditional Chinese" },
     "index.features.f2p": {
-      "zh-Hant": "上傳 PNG、JPG 或 WEBP 工作截圖，讓畫面下方呈現日常工作內容。最多 20 張，並可隨時切換。",
+      "zh-Hant": "一鍵將簡體中文轉為繁體，無需另外尋找轉換工具。",
+      "en": "Convert Simplified Chinese to Traditional Chinese with one tap. No extra converter needed."
+    },
+    "index.features.f3h": { "zh-Hant": "偽裝背景上限 20 張", "en": "Up to 20 camouflage backgrounds" },
+    "index.features.f3p": {
+      "zh-Hant": "上傳 PNG、JPG 或 WEBP 工作截圖，讓畫面下方呈現日常工作內容，最多 20 張並可隨時切換。",
       "en": "Upload PNG, JPG, or WEBP work screenshots so the area below looks like everyday work. Up to 20 images. Switch anytime."
     },
-    "index.features.f3h": { "zh-Hant": "辦公室防禦", "en": "Office defence" },
-    "index.features.f3p": {
-      "zh-Hant": "以獨立彈出視窗開啟閱讀器，無須安裝。Panic Button 可自訂快捷鍵與顯示文字。另支援 EPUB、簡體轉繁體、本機進度與自訂快捷鍵。",
-      "en": "Open the reader in a standalone popup — no install. Panic Button lets you customise the shortcut and display text. Also includes EPUB, Simplified-to-Traditional Chinese, local progress, and custom shortcuts."
+    "index.features.f4h": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup" },
+    "index.features.f4p": {
+      "zh-Hant": "由會員中心以獨立彈出視窗開啟閱讀器，減少分頁列干擾，無須安裝。",
+      "en": "Launch the reader from the member centre as a standalone popup, with fewer tab bars and no install."
     },
-
-    "index.start.kicker": { "zh-Hant": "Get started", "en": "Get started" },
-    "index.start.h2": { "zh-Hant": "全部功能均可使用", "en": "Every feature is included" },
-    "index.start.lead": {
-      "zh-Hant": "註冊帳號後即可啟動隱蔽閱讀器，無需選擇方案或付款。",
-      "en": "Create an account, then launch the stealth reader. No plan to choose and no payment."
+    "index.features.f5h": { "zh-Hant": "Panic Button 一鍵轉換", "en": "Panic Button one-key swap" },
+    "index.features.f5p": {
+      "zh-Hant": "上司走近時，一鍵將網址列的書本句子換成偽裝文字，背景維持工作截圖。",
+      "en": "When someone walks over, one key replaces the book sentence in the address bar with disguised text. The work-screenshot background stays."
     },
-    "index.start.includedKicker": { "zh-Hant": "Included", "en": "Included" },
-    "index.start.includedTitle": { "zh-Hant": "閱讀與偽裝", "en": "Reading and camouflage" },
-    "index.start.officeKicker": { "zh-Hant": "Office", "en": "Office" },
-    "index.start.officeTitle": { "zh-Hant": "辦公室防禦", "en": "Office defence" },
-    "index.start.item1": { "zh-Hant": "TXT 與 EPUB 檔案支援", "en": "TXT and EPUB support" },
-    "index.start.item2": { "zh-Hant": "簡體轉繁體中文", "en": "Simplified-to-Traditional Chinese" },
-    "index.start.item3": { "zh-Hant": "偽裝背景上限 20 張", "en": "Up to 20 camouflage backgrounds" },
-    "index.start.item4": { "zh-Hant": "本機閱讀進度保存", "en": "Local reading progress" },
-    "index.start.item5": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup window" },
-    "index.start.item6": { "zh-Hant": "Panic Button 一鍵轉換", "en": "Panic Button one-key swap" },
-    "index.start.item7": { "zh-Hant": "自訂快捷鍵", "en": "Custom shortcuts" },
-    "index.start.item8": { "zh-Hant": "自訂 Panic 顯示文字", "en": "Custom Panic display text" },
-    "index.start.cta": { "zh-Hant": "立即註冊", "en": "Sign up" },
+    "index.features.f6h": { "zh-Hant": "本機進度保存", "en": "Local reading progress" },
+    "index.features.f6p": {
+      "zh-Hant": "閱讀進度保存在此瀏覽器。書本內容不會上傳到我們的伺服器。",
+      "en": "Reading progress stays in this browser. Book content is not uploaded to our servers."
+    },
+    "index.features.f7h": { "zh-Hant": "自訂快捷鍵", "en": "Custom shortcuts" },
+    "index.features.f7p": {
+      "zh-Hant": "可自行設定上一句、下一句、Panic Button 等按鍵，設定會保存在此瀏覽器。",
+      "en": "Set your own keys for previous/next sentence, Panic Button, and more. Settings stay in this browser."
+    },
+    "index.features.f8h": { "zh-Hant": "自訂 Panic 顯示文字", "en": "Custom Panic display text" },
+    "index.features.f8p": {
+      "zh-Hant": "預先設定網址列在 Panic 模式下顯示的假網址或文字，看起來更像日常瀏覽。",
+      "en": "Choose the fake URL or text shown in the address bar during Panic mode, so it looks like ordinary browsing."
+    },
 
     "index.faq.h2": { "zh-Hant": "常見問題", "en": "FAQ" },
     "index.faq.q1": { "zh-Hant": "上司經過時會被發現嗎？", "en": "Will I be caught if my boss walks by?" },
@@ -474,6 +487,11 @@
     scope.querySelectorAll("[data-i18n-content]").forEach((el) => {
       const key = el.getAttribute("data-i18n-content");
       if (key) el.setAttribute("content", t(key));
+    });
+
+    scope.querySelectorAll("[data-i18n-alt]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-alt");
+      if (key) el.setAttribute("alt", t(key));
     });
 
     const titleEl = document.querySelector("title[data-i18n]");
