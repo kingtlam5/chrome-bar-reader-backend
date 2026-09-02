@@ -61,8 +61,8 @@
       "en": "Enjoy your own reading time at the office"
     },
     "index.hero.lead": {
-      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。想於辦公室享受一段閱讀時光，卻總擔心一抬頭就被看見？<br>Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。",
-      "en": "A fake web reader designed for office workers. Want a moment of reading at the office, but worry that someone will see the moment you look up?<br>Readbar hides the book in the look of everyday work, so you can finish a few pages of your own in the office, calmly and at ease."
+      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。",
+      "en": "A fake web reader designed for office workers. Readbar hides the book in the look of everyday work, so you can finish a few pages of your own in the office, calmly and at ease."
     },
     "index.hero.ctaLogin": { "zh-Hant": "登入會員中心", "en": "Log in to the member centre" },
     "index.hero.ctaRegister": { "zh-Hant": "立即註冊", "en": "Sign up" },
