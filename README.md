@@ -2,6 +2,8 @@
 
 辦公室隱蔽閱讀器：偽裝成 Chrome 工具列的 Web 閱讀器。註冊後即可使用全部功能，沒有 Free / Pro 方案。
 
+本 repo 為後端工作用 duplicate。靜態頁面視為 UI 合約。後端接駁計劃見 [`BACKEND_DEVELOPMENT_PLAN.md`](./BACKEND_DEVELOPMENT_PLAN.md)（待審閱；未確認前不接駁真實會員／付款）。平台選擇同按功能分工見該文件第 A～C 節。
+
 ## 專案結構
 
 - `index.html` — 產品官網 Landing Page
