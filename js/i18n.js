@@ -61,15 +61,14 @@
       "en": "Enjoy your own reading time at the office"
     },
     "index.hero.lead": {
-      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。工位上最想偷一段閱讀時光，卻總擔心一抬頭就被看見。Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。",
-      "en": "A camouflaged web reader designed for office workers. The hardest part of reading at your desk is not finding a spare minute — it is being seen. Readbar hides the book in the look of ordinary work, so you can finish a few pages of your own, quietly, in the office."
+      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。想於辦公室享受一段閱讀時光，卻總擔心一抬頭就被看見？<br>Readbar 讓書藏進日常工作的樣子裡，讓你在辦公室也能安心、自在地讀完屬於自己的那幾頁。",
+      "en": "A camouflaged web reader designed for office workers. Want a moment of reading at the office, but worry that someone will see the moment you look up?<br>Readbar hides the book in the look of everyday work, so you can finish a few pages of your own in the office, calmly and at ease."
     },
     "index.hero.ctaLogin": { "zh-Hant": "登入會員中心", "en": "Log in to the member centre" },
     "index.hero.ctaRegister": { "zh-Hant": "立即註冊", "en": "Sign up" },
     "index.hero.pointFree": { "zh-Hant": "🎁 完全免費", "en": "🎁 Completely free" },
     "index.hero.point1": { "zh-Hant": "🌐 免安裝，瀏覽器即用", "en": "🌐 No install — use it in the browser" },
-    "index.hero.point2": { "zh-Hant": "🕵️ 獨立彈出視窗，減少分頁列", "en": "🕵️ Standalone popup, fewer tab bars" },
-    "index.hero.point3": { "zh-Hant": "⚡ 偽裝網址鍵", "en": "⚡ Fake URL Key" },
+    "index.hero.point2": { "zh-Hant": "🕵️ 完美融入瀏覽器 增加隱蔽性", "en": "🕵️ Blends into the browser for more stealth" },
     "index.mock.url": {
       "zh-Hant": "面對絕對的困境，唯一的辦法就是讓自己變得絕對強大。",
       "en": "In absolute hardship, the only way out is to become absolutely strong."
