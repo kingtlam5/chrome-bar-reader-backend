@@ -17,6 +17,7 @@
     "nav.register": { "zh-Hant": "註冊", "en": "Sign up" },
     "nav.logout": { "zh-Hant": "登出", "en": "Log out" },
     "nav.account": { "zh-Hant": "會員資料", "en": "Account" },
+    "nav.tip": { "zh-Hant": "打賞", "en": "Tip" },
     "nav.menu": { "zh-Hant": "開啟選單", "en": "Open menu" },
     "footer.backHome": { "zh-Hant": "← 返回產品官網", "en": "← Back to product site" },
     "common.close": { "zh-Hant": "關閉", "en": "Close" },
@@ -174,8 +175,8 @@
     },
     "index.faq.q4": { "zh-Hant": "Readbar 需要付款嗎？", "en": "Do I need to pay for Readbar?" },
     "index.faq.a4": {
-      "zh-Hant": "不需要。註冊帳號後即可使用全部功能，包括 EPUB、簡轉繁、20 張背景、獨立彈出視窗、偽裝網址鍵與自訂快捷鍵。",
-      "en": "No. After you sign up, every feature is available — EPUB, Simplified-to-Traditional Chinese, 20 backgrounds, a standalone popup, the Fake URL Key, and custom shortcuts."
+      "zh-Hant": "不需要。註冊帳號後即可使用全部功能，包括 EPUB、簡轉繁、20 張背景、獨立彈出視窗、偽裝網址鍵與自訂快捷鍵。若想支持 Readbar，可自願打賞，不會解鎖額外功能。",
+      "en": "No. After you sign up, every feature is available — EPUB, Simplified-to-Traditional Chinese, 20 backgrounds, a standalone popup, the Fake URL Key, and custom shortcuts. If you want to support Readbar, you can leave a tip. Tipping does not unlock extra features."
     },
     "index.faq.q5": { "zh-Hant": "可以用手機開啟閱讀器嗎？", "en": "Can I open the reader on a phone?" },
     "index.faq.a5": {
@@ -337,6 +338,20 @@
     "dash.requestOkKicker": { "zh-Hant": "已收到", "en": "Received" },
     "dash.requestOkTitle": { "zh-Hant": "我們會有專人與你聯絡", "en": "Someone will contact you" },
     "dash.requestOkBody": { "zh-Hant": "多謝你的功能請求。團隊會以你提供的電郵跟進，了解你需要的功能及使用場景。", "en": "Thanks for the request. The team will follow up by email to understand the feature and how you would use it." },
+
+    "tip.kicker": { "zh-Hant": "自願打賞", "en": "Optional tip" },
+    "tip.h2": { "zh-Hant": "產品免費，若覺得好用可以打賞", "en": "The product is free. Tip if you find it useful" },
+    "tip.lead": { "zh-Hant": "打賞不會解鎖額外功能。可選擇 HK$20、HK$50 或 HK$100。", "en": "Tipping does not unlock extra features. Choose HK$20, HK$50, or HK$100." },
+    "tip.cta": { "zh-Hant": "打賞", "en": "Leave a tip" },
+    "tip.brand": { "zh-Hant": "打賞", "en": "Tip" },
+    "tip.title": { "zh-Hant": "選擇金額", "en": "Choose an amount" },
+    "tip.body": { "zh-Hant": "接著會前往 Stripe 完成付款。打賞為一次過、自願支持，不會改變你可使用的功能。", "en": "You will continue to Stripe to pay. This is a one-off, optional tip and does not change the features you can use." },
+    "tip.hkd20": { "zh-Hant": "HK$20", "en": "HK$20" },
+    "tip.hkd50": { "zh-Hant": "HK$50", "en": "HK$50" },
+    "tip.hkd100": { "zh-Hant": "HK$100", "en": "HK$100" },
+    "tip.okKicker": { "zh-Hant": "謝謝", "en": "Thank you" },
+    "tip.okTitle": { "zh-Hant": "已收到你的打賞", "en": "Your tip was received" },
+    "tip.okBody": { "zh-Hant": "感謝支持。Readbar 仍然完全免費，打賞不會解鎖額外功能。", "en": "Thanks for the support. Readbar stays completely free, and tipping does not unlock extra features." },
 
     "dash.pwBrand": { "zh-Hant": "更改密碼", "en": "Change password" },
     "dash.pwTitle": { "zh-Hant": "更新登入密碼", "en": "Update login password" },
