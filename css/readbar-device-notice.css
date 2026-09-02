@@ -128,21 +128,11 @@ html.lang-en .rb-device-notice-body p {
   overflow-wrap: break-word;
 }
 
-.rb-device-notice-mark {
-  display: flex;
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-.rb-device-notice-mark img {
+.rb-lockup {
   display: block;
-  width: 100%;
-  height: 100%;
+  height: 32px;
+  width: auto;
+  flex-shrink: 0;
 }
 
 .rb-device-notice-card {
@@ -154,10 +144,6 @@ html.lang-en .rb-device-notice-body p {
   border-radius: 24px;
   background: #ffffff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
-}
-
-.rb-device-notice-card-head .rb-device-notice-mark {
-  background: transparent;
 }
 
 .rb-device-notice-body {
