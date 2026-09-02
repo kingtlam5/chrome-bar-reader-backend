@@ -3,8 +3,7 @@
 
   if (document.documentElement.classList.contains("rb-device-blocked")) return;
 
-  const requiredPlan = document.body?.dataset.readerPlan === "pro" ? "pro" : "free";
-  const lockClass = requiredPlan === "pro" ? "pro-reader-locked" : "reader-login-locked";
+  const lockClass = "pro-reader-locked";
   const gate = document.querySelector("[data-reader-login-gate]");
   const form = gate?.querySelector("form");
   const emailInput = form?.querySelector('input[name="email"], input[type="email"]');
@@ -16,7 +15,6 @@
   const verifyInput = gate?.querySelector("[data-reader-login-code]");
   const verifyBtn = gate?.querySelector("[data-reader-login-verify-btn]");
   const resendBtn = gate?.querySelector("[data-reader-login-resend]");
-  const altEl = gate?.querySelector("[data-reader-login-alt]");
   const html = document.documentElement;
   let locked = true;
   let busy = false;
@@ -47,17 +45,6 @@
     if (show) verifyInput?.focus();
   }
 
-  function readerUrl(fileName) {
-    try {
-      const url = new URL(fileName, window.location.href);
-      const popup = new URLSearchParams(window.location.search).get("popup");
-      if (popup) url.searchParams.set("popup", popup);
-      return url.href;
-    } catch (error) {
-      return fileName;
-    }
-  }
-
   function unlockReader() {
     locked = false;
     html.classList.remove(lockClass);
@@ -83,22 +70,8 @@
 
   async function admitUser(user) {
     const nextUser = (await window.ReadbarClerk.ensureMembershipMetadata()) || user;
-    const profile = window.ReadbarClerk.applySession(nextUser);
-    const plan = profile.plan === "pro" ? "pro" : "free";
-
-    if (requiredPlan === "pro" && plan !== "pro") {
-      showError(t("reader.loginNeedPro", "Free members cannot open the Pro reader."));
-      if (altEl) altEl.hidden = false;
-      return false;
-    }
-
-    if (requiredPlan === "free" && plan === "pro") {
-      window.location.replace(readerUrl("reader-pro-version.html"));
-      return true;
-    }
-
+    window.ReadbarClerk.applySession(nextUser);
     showError("");
-    if (altEl) altEl.hidden = true;
     unlockReader();
     return true;
   }
@@ -131,7 +104,6 @@
     event.preventDefault();
     if (busy) return;
     showError("");
-    if (altEl) altEl.hidden = true;
     if (!form.reportValidity()) return;
 
     setBusy(true);

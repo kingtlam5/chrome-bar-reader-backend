@@ -12,7 +12,7 @@
       const raw = sessionStorage.getItem(AUTH_KEY);
       if (!raw) return null;
       const parsed = JSON.parse(raw);
-      if (!parsed || !parsed.email || !parsed.plan) return null;
+      if (!parsed || !parsed.email) return null;
       return parsed;
     } catch (error) {
       return null;
@@ -39,10 +39,7 @@
       el.textContent = usernameOf(auth);
     });
     document.querySelectorAll("[data-member-plan-label]").forEach((el) => {
-      el.textContent = planLabelOf(auth);
-    });
-    document.querySelectorAll("[data-next-payment]").forEach((el) => {
-      el.textContent = nextPaymentLabelOf(auth);
+      el.textContent = t("auth.planMember");
     });
   }
 
@@ -51,29 +48,7 @@
     const email = member.email || "";
     const at = email.indexOf("@");
     if (at > 0) return email.slice(0, at);
-    return email || "testing";
-  }
-
-  function planLabelOf(member) {
-    if (member.plan === "pro") return t("auth.planPro");
-    return t("auth.planFree");
-  }
-
-  function nextPaymentLabelOf(member) {
-    if (member.plan !== "pro") return t("auth.nextPaymentNA");
-    const source = member.nextPaymentAt ? new Date(member.nextPaymentAt) : addOneMonth(new Date());
-    if (Number.isNaN(source.getTime())) return t("auth.nextPaymentNA");
-    const lang = window.ReadbarI18n?.getLang() || "zh-Hant";
-    if (lang === "en") {
-      return source.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
-    }
-    return `${source.getFullYear()}年${source.getMonth() + 1}月${source.getDate()}日`;
-  }
-
-  function addOneMonth(date) {
-    const next = new Date(date.getTime());
-    next.setMonth(next.getMonth() + 1);
-    return next;
+    return email || "member";
   }
 
   async function syncClerkSession() {
@@ -93,8 +68,9 @@
   }
 
   async function gateProtectedPage() {
-    const required = document.body?.dataset.requirePlan;
-    if (!required) {
+    const requiresAuth = document.body?.hasAttribute("data-require-auth")
+      || Boolean(document.body?.dataset.requirePlan);
+    if (!requiresAuth) {
       fillMemberLabels();
       return;
     }
@@ -103,10 +79,6 @@
     const auth = getAuth();
     if (!auth) {
       window.location.replace("login.html");
-      return;
-    }
-    if (auth.plan !== required) {
-      window.location.replace(auth.plan === "pro" ? "dashboard-pro-version.html" : "dashboard-free-version.html");
       return;
     }
     fillMemberLabels();

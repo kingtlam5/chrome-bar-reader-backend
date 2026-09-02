@@ -9,19 +9,17 @@
 
     "nav.pain": { "zh-Hant": "安心閱讀", "en": "Read at ease" },
     "nav.features": { "zh-Hant": "核心功能", "en": "Features" },
-    "nav.pricing": { "zh-Hant": "價格方案", "en": "Pricing" },
+    "nav.start": { "zh-Hant": "開始使用", "en": "Get started" },
     "nav.guide": { "zh-Hant": "使用說明", "en": "User guide" },
     "nav.faq": { "zh-Hant": "常見問題", "en": "FAQ" },
-    "nav.loginCta": { "zh-Hant": "免費試用／登入", "en": "Try free / Log in" },
+    "nav.loginCta": { "zh-Hant": "登入", "en": "Log in" },
     "nav.login": { "zh-Hant": "登入", "en": "Log in" },
     "nav.home": { "zh-Hant": "產品官網", "en": "Product site" },
     "nav.register": { "zh-Hant": "註冊", "en": "Sign up" },
     "nav.logout": { "zh-Hant": "登出", "en": "Log out" },
     "nav.account": { "zh-Hant": "會員資料", "en": "Account" },
     "nav.menu": { "zh-Hant": "開啟選單", "en": "Open menu" },
-    "nav.backRegister": { "zh-Hant": "返回註冊", "en": "Back to sign up" },
     "footer.backHome": { "zh-Hant": "← 返回產品官網", "en": "← Back to product site" },
-    "footer.pricing": { "zh-Hant": "價格", "en": "Pricing" },
     "common.close": { "zh-Hant": "關閉", "en": "Close" },
     "common.gotIt": { "zh-Hant": "知道了", "en": "Got it" },
     "common.done": { "zh-Hant": "完成", "en": "Done" },
@@ -29,7 +27,6 @@
     "common.password": { "zh-Hant": "密碼", "en": "Password" },
     "common.email": { "zh-Hant": "電郵", "en": "Email" },
     "common.name": { "zh-Hant": "姓名", "en": "Name" },
-    "common.plan": { "zh-Hant": "方案", "en": "Plan" },
     "common.yes": { "zh-Hant": "有", "en": "Yes" },
     "common.no": { "zh-Hant": "無", "en": "No" },
 
@@ -43,30 +40,20 @@
       "zh-Hant": "登入 Readbar 會員中心。訪客須先登入，方可開啟閱讀器。",
       "en": "Log in to the Readbar member centre. Guests must sign in before opening the reader."
     },
-    "meta.register.title": { "zh-Hant": "免費註冊｜Readbar", "en": "Free sign-up | Readbar" },
+    "meta.register.title": { "zh-Hant": "註冊｜Readbar", "en": "Sign up | Readbar" },
     "meta.register.description": {
-      "zh-Hant": "註冊 Readbar 免費或 Pro 會員。填寫姓名、電郵、密碼並選擇方案。",
-      "en": "Create a free or Pro Readbar account. Enter your name, email, and password, then choose a plan."
-    },
-    "meta.payment.title": { "zh-Hant": "付款｜Readbar", "en": "Payment | Readbar" },
-    "meta.payment.description": {
-      "zh-Hant": "Readbar Pro 付款閘道示範頁。尚未接駁真實付款服務。",
-      "en": "Readbar Pro payment-gateway preview. Live payment is not connected yet."
+      "zh-Hant": "註冊 Readbar 會員。填寫姓名、電郵及密碼即可使用全部閱讀功能。",
+      "en": "Create a Readbar account. Enter your name, email, and password to use every reading feature."
     },
     "meta.guide.title": { "zh-Hant": "使用說明｜Readbar", "en": "User guide | Readbar" },
     "meta.guide.description": {
-      "zh-Hant": "Readbar 免費版與 Pro 版閱讀器使用說明。匯入書本、切換偽裝背景、Panic Button 與自訂快捷鍵。",
-      "en": "How to use the free and Pro Readbar readers: import a book, switch camouflage backgrounds, Panic Button, and custom shortcuts."
+      "zh-Hant": "Readbar 閱讀器使用說明。匯入書本、切換偽裝背景、Panic Button 與自訂快捷鍵。",
+      "en": "How to use the Readbar reader: import a book, switch camouflage backgrounds, Panic Button, and custom shortcuts."
     },
-    "meta.dashFree.title": { "zh-Hant": "免費會員中心｜Readbar", "en": "Free member centre | Readbar" },
-    "meta.dashFree.description": {
-      "zh-Hant": "免費會員可進行基本 TXT 閱讀。升級 Pro 即可解鎖偽裝主題、Panic Button 與雲端同步。",
-      "en": "Free members can read TXT files. Upgrade to Pro to unlock camouflage tools, Panic Button, and cloud sync."
-    },
-    "meta.dashPro.title": { "zh-Hant": "付費會員中心｜Readbar", "en": "Pro member centre | Readbar" },
-    "meta.dashPro.description": {
-      "zh-Hant": "Pro 會員專用：啟動隱蔽閱讀器、查看閱讀進度，並管理偽裝設定。",
-      "en": "For Pro members: launch the stealth reader, check reading progress, and manage camouflage settings."
+    "meta.dash.title": { "zh-Hant": "會員中心｜Readbar", "en": "Member centre | Readbar" },
+    "meta.dash.description": {
+      "zh-Hant": "啟動隱蔽閱讀器、查看閱讀進度，並管理偽裝設定。",
+      "en": "Launch the stealth reader, check reading progress, and manage camouflage settings."
     },
 
     "index.badge": { "zh-Hant": "辦公室隱蔽閱讀器 · 免安裝", "en": "Stealth office reader · No install" },
@@ -75,13 +62,13 @@
       "en": "Enjoy your own reading time at the office"
     },
     "index.hero.lead": {
-      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。句子顯示於 Chrome 網址列，畫面可呈現工作截圖；Pro 可以獨立彈出視窗開啟。Panic Button 一鍵將書本句子換成預設或自訂的偽裝網址，背景維持工作截圖。閱讀器僅供電腦瀏覽器使用。",
-      "en": "A camouflaged web reader for office workers. Sentences appear in the Chrome address bar, and the page can show a work screenshot. Pro can open in a standalone popup. Panic Button replaces the book sentence with a default or custom disguised URL; the background stays. The reader is for computer browsers only."
+      "zh-Hant": "專為上班族設計的偽裝式網頁閱讀器。句子顯示於 Chrome 網址列，畫面可呈現工作截圖；可以獨立彈出視窗開啟。Panic Button 一鍵將書本句子換成預設或自訂的偽裝網址，背景維持工作截圖。閱讀器僅供電腦瀏覽器使用。",
+      "en": "A camouflaged web reader for office workers. Sentences appear in the Chrome address bar, and the page can show a work screenshot. Open it in a standalone popup. Panic Button replaces the book sentence with a default or custom disguised URL; the background stays. The reader is for computer browsers only."
     },
-    "index.hero.ctaLogin": { "zh-Hant": "免費試用／登入", "en": "Try free / Log in" },
-    "index.hero.ctaPricing": { "zh-Hant": "查看價格方案", "en": "See pricing" },
+    "index.hero.ctaLogin": { "zh-Hant": "登入會員中心", "en": "Log in to the member centre" },
+    "index.hero.ctaRegister": { "zh-Hant": "立即註冊", "en": "Sign up" },
     "index.hero.point1": { "zh-Hant": "🌐 免安裝，瀏覽器即用", "en": "🌐 No install — use it in the browser" },
-    "index.hero.point2": { "zh-Hant": "🕵️ Pro 獨立彈出視窗，減少分頁列", "en": "🕵️ Pro standalone popup, fewer tab bars" },
+    "index.hero.point2": { "zh-Hant": "🕵️ 獨立彈出視窗，減少分頁列", "en": "🕵️ Standalone popup, fewer tab bars" },
     "index.hero.point3": { "zh-Hant": "⚡ Panic Button 一鍵換成偽裝網址", "en": "⚡ Panic Button swaps in a disguised URL" },
     "index.mock.url": {
       "zh-Hant": "面對絕對的困境，唯一的辦法就是讓自己變得絕對強大。",
@@ -100,8 +87,8 @@
       "en": "Read at ease: looks like work, actually reading"
     },
     "index.pain.lead": {
-      "zh-Hant": "一般電子書應用、瀏覽器分頁或額外套層，都容易露出閱讀痕跡。Readbar 以偽裝網址列、工作截圖背景，以及 Pro 的獨立彈出視窗與 Panic Button，讓閱讀融入日常操作。",
-      "en": "E-book apps, browser tabs, or extra overlays are easy to spot. Readbar uses a camouflaged address bar, a work-screenshot background, and — on Pro — a standalone popup and Panic Button, so reading blends into everyday work."
+      "zh-Hant": "一般電子書應用、瀏覽器分頁或額外套層，都容易露出閱讀痕跡。Readbar 以偽裝網址列、工作截圖背景、獨立彈出視窗與 Panic Button，讓閱讀融入日常操作。",
+      "en": "E-book apps, browser tabs, or extra overlays are easy to spot. Readbar uses a camouflaged address bar, a work-screenshot background, a standalone popup, and Panic Button, so reading blends into everyday work."
     },
     "index.pain.badKicker": { "zh-Hant": "一般閱讀方式", "en": "Typical reading" },
     "index.pain.badH3": { "zh-Hant": "容易露出破綻", "en": "Easy to get caught" },
@@ -115,10 +102,10 @@
     "index.pain.good1": { "zh-Hant": "：純網頁即可使用，不留下桌面圖示", "en": ": a web page only — no desktop icon left behind" },
     "index.pain.good2Label": { "zh-Hant": "偽裝網址列", "en": "Camouflaged address bar" },
     "index.pain.good2": { "zh-Hant": "：句子顯示於 Chrome 工具列，下方可放工作截圖", "en": ": sentences sit in the Chrome toolbar; a work screenshot can sit below" },
-    "index.pain.good3Label": { "zh-Hant": "Pro 獨立彈出視窗", "en": "Pro standalone popup" },
+    "index.pain.good3Label": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup" },
     "index.pain.good3": { "zh-Hant": "：以免安裝方式開啟獨立視窗，減少分頁列干擾", "en": ": opens a separate window without installing, with fewer tab bars" },
     "index.pain.good4Label": { "zh-Hant": "Panic Button", "en": "Panic Button" },
-    "index.pain.good4": { "zh-Hant": "：一鍵將網址列改為自訂假文字（Pro）", "en": ": one key turns the address bar into custom fake text (Pro)" },
+    "index.pain.good4": { "zh-Hant": "：一鍵將網址列改為自訂假文字", "en": ": one key turns the address bar into custom fake text" },
 
     "index.features.kicker": { "zh-Hant": "Features", "en": "Features" },
     "index.features.h2": {
@@ -126,8 +113,8 @@
       "en": "Core features, matched to the real product"
     },
     "index.features.lead": {
-      "zh-Hant": "免費版可開始 TXT 閱讀與兩張偽裝背景；Pro 解鎖 EPUB、簡轉繁、二十張背景、獨立彈出視窗、Panic Button、雲端進度與自訂快捷鍵。",
-      "en": "Free starts you with TXT reading and two camouflage backgrounds. Pro unlocks EPUB, Simplified-to-Traditional Chinese, twenty backgrounds, a standalone popup, Panic Button, cloud progress, and custom shortcuts."
+      "zh-Hant": "全部功能均可使用：TXT 與 EPUB、簡轉繁、二十張偽裝背景、獨立彈出視窗、Panic Button、本機進度與自訂快捷鍵。",
+      "en": "Every feature is available: TXT and EPUB, Simplified-to-Traditional Chinese, twenty camouflage backgrounds, a standalone popup, Panic Button, local progress, and custom shortcuts."
     },
     "index.features.f1h": { "zh-Hant": "偽裝 Chrome 工具列", "en": "Camouflaged Chrome toolbar" },
     "index.features.f1p": {
@@ -136,63 +123,55 @@
     },
     "index.features.f2h": { "zh-Hant": "工作截圖偽裝背景", "en": "Work-screenshot backgrounds" },
     "index.features.f2p": {
-      "zh-Hant": "上傳 PNG、JPG 或 WEBP 工作截圖，讓畫面下方呈現日常工作內容。免費版最多 2 張，Pro 最多 20 張，並可隨時切換。",
-      "en": "Upload PNG, JPG, or WEBP work screenshots so the area below looks like everyday work. Free allows 2; Pro allows 20. Switch anytime."
+      "zh-Hant": "上傳 PNG、JPG 或 WEBP 工作截圖，讓畫面下方呈現日常工作內容。最多 20 張，並可隨時切換。",
+      "en": "Upload PNG, JPG, or WEBP work screenshots so the area below looks like everyday work. Up to 20 images. Switch anytime."
     },
-    "index.features.f3h": { "zh-Hant": "Pro 辦公室防禦", "en": "Pro office defence" },
+    "index.features.f3h": { "zh-Hant": "辦公室防禦", "en": "Office defence" },
     "index.features.f3p": {
-      "zh-Hant": "以獨立彈出視窗開啟閱讀器，無須安裝。Panic Button 可自訂快捷鍵與顯示文字。另支援 EPUB、簡體轉繁體、雲端進度與自訂快捷鍵。",
-      "en": "Open the reader in a standalone popup — no install. Panic Button lets you customise the shortcut and display text. Also includes EPUB, Simplified-to-Traditional Chinese, cloud progress, and custom shortcuts."
+      "zh-Hant": "以獨立彈出視窗開啟閱讀器，無須安裝。Panic Button 可自訂快捷鍵與顯示文字。另支援 EPUB、簡體轉繁體、本機進度與自訂快捷鍵。",
+      "en": "Open the reader in a standalone popup — no install. Panic Button lets you customise the shortcut and display text. Also includes EPUB, Simplified-to-Traditional Chinese, local progress, and custom shortcuts."
     },
 
-    "index.pricing.kicker": { "zh-Hant": "Pricing", "en": "Pricing" },
-    "index.pricing.h2": { "zh-Hant": "定價簡單，可先免費使用", "en": "Simple pricing. Start free." },
-    "index.pricing.lead": {
-      "zh-Hant": "Free 即可開始基本 TXT 閱讀。如需 EPUB、簡轉繁、獨立彈出視窗與 Panic Button，可以 $2.99／月升級 Pro。",
-      "en": "Free covers basic TXT reading. For EPUB, Simplified-to-Traditional Chinese, a standalone popup, and Panic Button, upgrade to Pro at $2.99 / month."
+    "index.start.kicker": { "zh-Hant": "Get started", "en": "Get started" },
+    "index.start.h2": { "zh-Hant": "全部功能均可使用", "en": "Every feature is included" },
+    "index.start.lead": {
+      "zh-Hant": "註冊帳號後即可啟動隱蔽閱讀器，無需選擇方案或付款。",
+      "en": "Create an account, then launch the stealth reader. No plan to choose and no payment."
     },
-    "index.pricing.freeBlurb": { "zh-Hant": "永久免費，適合先體驗基本功能", "en": "Free forever — try the basics first" },
-    "index.pricing.free1": { "zh-Hant": "基本閱讀體驗", "en": "Basic reading" },
-    "index.pricing.free2": { "zh-Hant": "TXT 檔案支援", "en": "TXT file support" },
-    "index.pricing.free3": { "zh-Hant": "偽裝背景上限 2 個", "en": "Up to 2 camouflage backgrounds" },
-    "index.pricing.free4": { "zh-Hant": "本機閱讀進度保存", "en": "Local reading progress" },
-    "index.pricing.freeCta": { "zh-Hant": "免費開始", "en": "Start free" },
-    "index.pricing.popular": { "zh-Hant": "最受歡迎", "en": "Most popular" },
-    "index.pricing.perMonth": { "zh-Hant": "/ 月", "en": "/ month" },
-    "index.pricing.proBlurb": {
-      "zh-Hant": "包含所有免費功能，再解鎖 EPUB、簡轉繁、獨立彈出視窗與 Panic Button。",
-      "en": "Everything in Free, plus EPUB, Simplified-to-Traditional Chinese, a standalone popup, and Panic Button."
-    },
-    "index.pricing.pro1": { "zh-Hant": "所有免費版功能", "en": "Everything in Free" },
-    "index.pricing.pro2": { "zh-Hant": "EPUB 檔案支援", "en": "EPUB file support" },
-    "index.pricing.pro3": { "zh-Hant": "簡體轉繁體中文", "en": "Simplified-to-Traditional Chinese" },
-    "index.pricing.pro4": { "zh-Hant": "偽裝背景上限 20 個", "en": "Up to 20 camouflage backgrounds" },
-    "index.pricing.pro5": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup window" },
-    "index.pricing.pro6": { "zh-Hant": "Panic Button 一鍵轉換", "en": "Panic Button one-key swap" },
-    "index.pricing.pro7": { "zh-Hant": "雲端進度同步", "en": "Cloud progress sync" },
-    "index.pricing.pro8": { "zh-Hant": "自訂快捷鍵", "en": "Custom shortcuts" },
-    "index.pricing.proCta": { "zh-Hant": "升級 Pro", "en": "Upgrade to Pro" },
+    "index.start.includedKicker": { "zh-Hant": "Included", "en": "Included" },
+    "index.start.includedTitle": { "zh-Hant": "閱讀與偽裝", "en": "Reading and camouflage" },
+    "index.start.officeKicker": { "zh-Hant": "Office", "en": "Office" },
+    "index.start.officeTitle": { "zh-Hant": "辦公室防禦", "en": "Office defence" },
+    "index.start.item1": { "zh-Hant": "TXT 與 EPUB 檔案支援", "en": "TXT and EPUB support" },
+    "index.start.item2": { "zh-Hant": "簡體轉繁體中文", "en": "Simplified-to-Traditional Chinese" },
+    "index.start.item3": { "zh-Hant": "偽裝背景上限 20 張", "en": "Up to 20 camouflage backgrounds" },
+    "index.start.item4": { "zh-Hant": "本機閱讀進度保存", "en": "Local reading progress" },
+    "index.start.item5": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup window" },
+    "index.start.item6": { "zh-Hant": "Panic Button 一鍵轉換", "en": "Panic Button one-key swap" },
+    "index.start.item7": { "zh-Hant": "自訂快捷鍵", "en": "Custom shortcuts" },
+    "index.start.item8": { "zh-Hant": "自訂 Panic 顯示文字", "en": "Custom Panic display text" },
+    "index.start.cta": { "zh-Hant": "立即註冊", "en": "Sign up" },
 
     "index.faq.h2": { "zh-Hant": "常見問題", "en": "FAQ" },
     "index.faq.q1": { "zh-Hant": "上司經過時會被發現嗎？", "en": "Will I be caught if my boss walks by?" },
     "index.faq.a1": {
-      "zh-Hant": "閱讀內容顯示於偽裝網址列，畫面其餘部分可放置工作截圖。搭配 Pro 的 Panic Button，上司走近時只需一鍵，網址列的書本句子即改為預設或自訂的偽裝網址，背景維持工作截圖。",
-      "en": "Reading sits in the camouflaged address bar; the rest of the screen can show a work screenshot. With Pro Panic Button, one key replaces the book sentence with a default or custom disguised URL. The background stays."
+      "zh-Hant": "閱讀內容顯示於偽裝網址列，畫面其餘部分可放置工作截圖。搭配 Panic Button，上司走近時只需一鍵，網址列的書本句子即改為預設或自訂的偽裝網址，背景維持工作截圖。",
+      "en": "Reading sits in the camouflaged address bar; the rest of the screen can show a work screenshot. With Panic Button, one key replaces the book sentence with a default or custom disguised URL. The background stays."
     },
-    "index.faq.q2": { "zh-Hant": "Pro 視窗與免費版有何不同？", "en": "How is the Pro window different from Free?" },
+    "index.faq.q2": { "zh-Hant": "閱讀器如何開啟？", "en": "How do I open the reader?" },
     "index.faq.a2": {
-      "zh-Hant": "兩者都免安裝。免費版以一般瀏覽器分頁開啟。Pro 以獨立彈出視窗開啟，減少分頁列。閱讀內容顯示於我們繪製的偽裝工具列，畫面可放置工作截圖。",
-      "en": "Neither version needs installing. Free opens as a normal browser tab. Pro opens as a standalone popup with fewer tab bars. Reading sits in our drawn camouflage toolbar; the page can show a work screenshot."
+      "zh-Hant": "免安裝。由會員中心以獨立彈出視窗開啟閱讀器，減少分頁列。閱讀內容顯示於我們繪製的偽裝工具列，畫面可放置工作截圖。",
+      "en": "No install. Launch a standalone popup from the member centre, with fewer tab bars. Reading sits in our drawn camouflage toolbar; the page can show a work screenshot."
     },
     "index.faq.q3": { "zh-Hant": "需要安裝 Extension 或下載 App 嗎？", "en": "Do I need an extension or app?" },
     "index.faq.a3": {
       "zh-Hant": "不需要。Readbar 為純網頁應用，使用公司電腦的瀏覽器即可，避免安裝紀錄及額外權限審查。",
       "en": "No. Readbar is a web app. Use the browser on a work computer — no install history and no extra permission review."
     },
-    "index.faq.q4": { "zh-Hant": "Free 與 Pro 有何分別？", "en": "What is the difference between Free and Pro?" },
+    "index.faq.q4": { "zh-Hant": "Readbar 需要付款嗎？", "en": "Do I need to pay for Readbar?" },
     "index.faq.a4": {
-      "zh-Hant": "Free 支援基本閱讀、TXT、2 張偽裝背景與本機進度。Pro（$2.99／月）另加 EPUB、簡轉繁、20 張背景、獨立彈出視窗、Panic Button、雲端同步與自訂快捷鍵。",
-      "en": "Free covers basic reading, TXT, 2 camouflage backgrounds, and local progress. Pro ($2.99 / month) adds EPUB, Simplified-to-Traditional Chinese, 20 backgrounds, a standalone popup, Panic Button, cloud sync, and custom shortcuts."
+      "zh-Hant": "不需要。註冊帳號後即可使用全部功能，包括 EPUB、簡轉繁、20 張背景、獨立彈出視窗、Panic Button 與自訂快捷鍵。",
+      "en": "No. After you sign up, every feature is available — EPUB, Simplified-to-Traditional Chinese, 20 backgrounds, a standalone popup, Panic Button, and custom shortcuts."
     },
     "index.faq.q5": { "zh-Hant": "可以用手機開啟閱讀器嗎？", "en": "Can I open the reader on a phone?" },
     "index.faq.a5": {
@@ -201,18 +180,18 @@
     },
     "index.faq.q6": { "zh-Hant": "書本內容會上傳到伺服器嗎？", "en": "Is book content uploaded to a server?" },
     "index.faq.a6": {
-      "zh-Hant": "Free 進度僅保存在你的瀏覽器。Pro 雲端同步只傳送閱讀進度與檔名，不會把整本書以明文儲存到我們的伺服器。",
-      "en": "Free progress stays in your browser. Pro cloud sync sends only reading progress and the file name — not the full book in plaintext to our servers."
+      "zh-Hant": "書本內容不會上傳到我們的伺服器。閱讀進度保存在你的瀏覽器。",
+      "en": "Book content is not uploaded to our servers. Reading progress stays in your browser."
     },
 
     "login.kicker": { "zh-Hant": "Member Login", "en": "Member Login" },
     "login.h1": { "zh-Hant": "登入後即可開啟閱讀器", "en": "Log in to open the reader" },
     "login.lead": {
-      "zh-Hant": "訪客無法直接進入程式。登入後將以免費會員開始：TXT 閱讀、2 張偽裝背景、本機進度。如需 EPUB、簡轉繁、獨立彈出視窗、Panic Button 及雲端同步，可再升級 Pro。",
-      "en": "Guests cannot enter the app directly. After login you start as a free member: TXT reading, 2 camouflage backgrounds, and local progress. Upgrade to Pro for EPUB, Simplified-to-Traditional Chinese, a standalone popup, Panic Button, and cloud sync."
+      "zh-Hant": "訪客無法直接進入程式。登入後即可使用全部閱讀功能：TXT 與 EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗與 Panic Button。",
+      "en": "Guests cannot enter the app directly. After login you can use every reading feature: TXT and EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, a standalone popup, and Panic Button."
     },
-    "login.point1": { "zh-Hant": "免費會員：基本閱讀、TXT、2 張背景、本機進度", "en": "Free: basic reading, TXT, 2 backgrounds, local progress" },
-    "login.point2": { "zh-Hant": "Pro 會員：$2.99／月，解鎖 EPUB、簡轉繁、獨立彈出視窗與 Panic Button", "en": "Pro: $2.99 / month — EPUB, Simplified-to-Traditional, standalone popup, and Panic Button" },
+    "login.point1": { "zh-Hant": "登入後進入會員中心，再啟動隱蔽閱讀器", "en": "Log in to the member centre, then launch the stealth reader" },
+    "login.point2": { "zh-Hant": "全部功能均可使用，無需升級或付款", "en": "Every feature is included — no upgrade and no payment" },
     "login.h2": { "zh-Hant": "登入會員中心", "en": "Log in to the member centre" },
     "login.formLead": { "zh-Hant": "請使用已註冊的電郵及密碼登入。", "en": "Use the email and password you registered with." },
     "login.submit": { "zh-Hant": "登入", "en": "Log in" },
@@ -224,21 +203,21 @@
     "login.codeRequired": { "zh-Hant": "請輸入驗證碼。", "en": "Enter the verification code." },
     "login.needMoreSteps": { "zh-Hant": "此登入還需要其他驗證步驟，暫時未能在此頁完成。", "en": "This sign-in needs another verification step that is not available here." },
     "login.noAccount": { "zh-Hant": "還沒有帳號？", "en": "No account yet?" },
-    "login.registerLink": { "zh-Hant": "免費註冊", "en": "Sign up free" },
-    "login.preview": { "zh-Hant": "預覽 Dashboard", "en": "Preview dashboard" },
-    "login.previewFree": { "zh-Hant": "免費版本", "en": "Free version" },
-    "login.previewPro": { "zh-Hant": "Pro版本", "en": "Pro version" },
+    "login.registerLink": { "zh-Hant": "註冊", "en": "Sign up" },
+    "login.preview": { "zh-Hant": "預覽會員中心", "en": "Preview the member centre" },
+    "login.previewDash": { "zh-Hant": "預覽會員中心", "en": "Preview member centre" },
 
     "register.kicker": { "zh-Hant": "Create Account", "en": "Create Account" },
     "register.h1": { "zh-Hant": "註冊後即可開始閱讀", "en": "Sign up, then start reading" },
     "register.lead": {
-      "zh-Hant": "請填寫姓名、電郵及密碼，再選擇免費或 Pro 方案。免費註冊會建立會員帳號；Pro 會先建立帳號，再前往付款頁。",
-      "en": "Enter your name, email, and password, then choose Free or Pro. Free sign-up creates a member account. Pro creates an account first, then continues to payment."
+      "zh-Hant": "請填寫姓名、電郵及密碼。註冊後即可使用全部閱讀功能，無需選擇方案或付款。",
+      "en": "Enter your name, email, and password. After sign-up you can use every reading feature — no plan to choose and no payment."
     },
-    "register.point1": { "zh-Hant": "免費方案：按「免費註冊」建立帳號，驗證電郵後進入免費會員中心", "en": "Free plan: tap “Sign up free” to create an account. After email verification you enter the free member centre." },
-    "register.point2": { "zh-Hant": "Pro 方案：$2.99／月，按「前往付款」前往付款閘道參考頁", "en": "Pro plan: $2.99 / month. Tap “Continue to payment” for the payment-gateway preview." },
+    "register.point1": { "zh-Hant": "填寫姓名、電郵及密碼（最少 15 個字元）", "en": "Enter your name, email, and password (at least 15 characters)" },
+    "register.point2": { "zh-Hant": "驗證電郵後進入會員中心，即可啟動閱讀器", "en": "After email verification you enter the member centre and can launch the reader" },
     "register.h2": { "zh-Hant": "建立帳號", "en": "Create an account" },
-    "register.formLead": { "zh-Hant": "請填寫姓名、電郵及密碼。免費註冊會建立會員帳號；Pro 付款閘道稍後接駁。", "en": "Enter your name, email, and password. Free sign-up creates a member account. The Pro payment gateway is still a preview." },
+    "register.formLead": { "zh-Hant": "請填寫姓名、電郵及密碼。完成驗證後即可開始閱讀。", "en": "Enter your name, email, and password. After verification you can start reading." },
+    "register.submitCta": { "zh-Hant": "註冊", "en": "Sign up" },
     "register.code": { "zh-Hant": "驗證碼", "en": "Verification code" },
     "register.codePlaceholder": { "zh-Hant": "6 位數字", "en": "6-digit code" },
     "register.verifyLead": { "zh-Hant": "請輸入寄到你電郵的驗證碼，以完成註冊。", "en": "Enter the verification code sent to your email to finish signing up." },
@@ -250,12 +229,6 @@
     "register.captchaTimeout": { "zh-Hant": "驗證等候過久。請完成驗證框後再試一次。", "en": "Verification took too long. Complete the checkbox and try again." },
     "register.namePlaceholder": { "zh-Hant": "陳大文", "en": "Alex Chan" },
     "register.passwordPlaceholder": { "zh-Hant": "最少 15 個字元", "en": "At least 15 characters" },
-    "register.choosePlan": { "zh-Hant": "選擇方案", "en": "Choose a plan" },
-    "register.freeDetail": { "zh-Hant": "TXT、2 張背景、本機進度", "en": "TXT, 2 backgrounds, local progress" },
-    "register.proPerMonth": { "zh-Hant": "／月", "en": "/ mo" },
-    "register.proDetail": { "zh-Hant": "EPUB、簡轉繁、Panic Button", "en": "EPUB, CJK convert, Panic Button" },
-    "register.freeCta": { "zh-Hant": "免費註冊", "en": "Sign up free" },
-    "register.payCta": { "zh-Hant": "前往付款", "en": "Continue to payment" },
     "register.hasAccount": { "zh-Hant": "已有帳號？", "en": "Already have an account?" },
     "register.loginLink": { "zh-Hant": "登入", "en": "Log in" },
     "register.modalBrand": { "zh-Hant": "註冊", "en": "Sign up" },
@@ -268,75 +241,42 @@
     "clerk.unavailable": { "zh-Hant": "暫時未能連接會員系統，請稍後再試。", "en": "The member system could not load. Please try again later." },
     "clerk.errorGeneric": { "zh-Hant": "未能完成驗證，請稍後再試。", "en": "Could not complete authentication. Please try again later." },
 
-    "payment.kicker": { "zh-Hant": "Payment Gateway", "en": "Payment Gateway" },
-    "payment.h1": { "zh-Hant": "確認 Pro 訂閱", "en": "Confirm Pro subscription" },
-    "payment.lead": {
-      "zh-Hant": "此頁僅為付款閘道參考頁。接駁 Stripe 或其他閘道之後，此按鈕將引導你前往真實結帳。",
-      "en": "This page is a payment-gateway preview. After Stripe or another gateway is connected, this button will take you to real checkout."
-    },
-    "payment.summary": { "zh-Hant": "訂單摘要", "en": "Order summary" },
-    "payment.monthly": { "zh-Hant": "每月", "en": "Monthly" },
-    "payment.confirm": { "zh-Hant": "確認付款", "en": "Confirm payment" },
-    "payment.note": { "zh-Hant": "付款閘道尚未接駁，此按鈕暫時只作介面參考。", "en": "The payment gateway is not connected yet. This button is an interface preview only." },
-    "payment.noteClicked": { "zh-Hant": "付款閘道尚未接駁。接駁後，此按鈕會開啟真實結帳頁。", "en": "The payment gateway is not connected yet. After it is, this button will open real checkout." },
-    "payment.backRegister": { "zh-Hant": "← 返回註冊", "en": "← Back to sign up" },
-
     "guide.kicker": { "zh-Hant": "User Guide", "en": "User Guide" },
     "guide.h1": { "zh-Hant": "如何使用 Readbar", "en": "How to use Readbar" },
     "guide.lead": {
-      "zh-Hant": "兩個版本均為偽裝成 Chrome 工具列的閱讀器：句子顯示於網址列，下方可放置工作截圖。請使用下方按鈕切換免費版與 Pro 版說明。",
-      "en": "Both versions are readers camouflaged as a Chrome toolbar: sentences appear in the address bar, and a work screenshot can sit below. Use the buttons below to switch between Free and Pro instructions."
+      "zh-Hant": "Readbar 是偽裝成 Chrome 工具列的閱讀器：句子顯示於網址列，下方可放置工作截圖。由會員中心以獨立彈出視窗啟動。",
+      "en": "Readbar is a reader camouflaged as a Chrome toolbar: sentences appear in the address bar, and a work screenshot can sit below. Launch it as a standalone popup from the member centre."
     },
-    "guide.tabAria": { "zh-Hant": "選擇閱讀器版本", "en": "Choose reader version" },
-    "guide.tabFree": { "zh-Hant": "免費版", "en": "Free" },
-    "guide.tabPro": { "zh-Hant": "Pro 版", "en": "Pro" },
     "guide.before": { "zh-Hant": "開始之前", "en": "Before you start" },
-    "guide.freeH2": { "zh-Hant": "由免費會員中心啟動", "en": "Launch from the free member centre" },
-    "guide.free1": { "zh-Hant": "登入後將進入免費會員中心。", "en": "After login you enter the free member centre." },
-    "guide.free2": { "zh-Hant": "按「啟動免費閱讀器」，會以一般瀏覽器分頁開啟。頁面內會先出現登入畫面，請輸入 Clerk 電郵及密碼。", "en": "Tap “Launch free reader” to open a normal browser tab. A login screen appears first; enter your Clerk email and password." },
-    "guide.free3": { "zh-Hant": "免費版以一般瀏覽器分頁開啟，適合先熟悉操作。", "en": "Free opens as a normal browser tab — a good way to learn the controls first." },
+    "guide.launchH2": { "zh-Hant": "由會員中心啟動", "en": "Launch from the member centre" },
+    "guide.launch1": { "zh-Hant": "登入後進入會員中心。", "en": "After login you enter the member centre." },
+    "guide.launch2": {
+      "zh-Hant": "按「啟動隱蔽閱讀器」，會以獨立彈出視窗開啟。視窗內請用 Clerk 電郵及密碼登入。",
+      "en": "Tap “Launch stealth reader” to open a standalone popup. Sign in with your Clerk email and password."
+    },
+    "guide.launch3": { "zh-Hant": "如彈出視窗被攔截，請允許此網站的彈出視窗後再試。", "en": "If the popup is blocked, allow pop-ups for this site and try again." },
     "guide.toolbarH2": { "zh-Hant": "工具列按鈕", "en": "Toolbar buttons" },
     "guide.colButton": { "zh-Hant": "按鈕", "en": "Button" },
     "guide.colUse": { "zh-Hant": "用途", "en": "Use" },
     "guide.srPrevNext": { "zh-Hant": "上一句／下一句", "en": "Previous / next sentence" },
     "guide.srBg": { "zh-Hant": "切換偽裝背景", "en": "Switch camouflage background" },
-    "guide.freePrevNext": { "zh-Hant": "上一句 / 下一句（鍵盤僅可使用 ← / →）", "en": "Previous / next sentence (keyboard: ← / → only)" },
-    "guide.freeBg": { "zh-Hant": "切換已上傳的偽裝背景", "en": "Switch uploaded camouflage backgrounds" },
-    "guide.freeImport": { "zh-Hant": "匯入 TXT 書本", "en": "Import a TXT book" },
+    "guide.prevNext": { "zh-Hant": "上一句 / 下一句", "en": "Previous / next sentence" },
+    "guide.bg": { "zh-Hant": "切換偽裝背景（最多 20 張）", "en": "Switch camouflage backgrounds (up to 20)" },
+    "guide.convert": { "zh-Hant": "簡體轉繁體", "en": "Simplified-to-Traditional Chinese" },
+    "guide.import": { "zh-Hant": "匯入 TXT 或 EPUB", "en": "Import TXT or EPUB" },
     "guide.progress": { "zh-Hant": "顯示進度，按一下即可跳轉句子", "en": "Shows progress; tap to jump to a sentence" },
-    "guide.freeUpload": { "zh-Hant": "上傳偽裝背景（免費版最多 2 張）", "en": "Upload camouflage backgrounds (Free: up to 2)" },
-    "guide.proH2": { "zh-Hant": "由付費會員中心啟動", "en": "Launch from the Pro member centre" },
-    "guide.pro1": { "zh-Hant": "使用 Pro 帳號登入付費會員中心。", "en": "Log in to the Pro member centre with a Pro account." },
-    "guide.pro2": { "zh-Hant": "按「啟動隱蔽閱讀器」，會以獨立彈出視窗開啟。視窗內請用 Clerk 電郵及密碼登入。免費會員無法進入 Pro 閱讀器。", "en": "Tap “Launch stealth reader” to open a standalone popup. Sign in with your Clerk email and password. Free members cannot open the Pro reader." },
-    "guide.pro3": { "zh-Hant": "如彈出視窗被攔截，請允許此網站的彈出視窗後再試。", "en": "If the popup is blocked, allow pop-ups for this site and try again." },
-    "guide.proPrevNext": { "zh-Hant": "上一句 / 下一句", "en": "Previous / next sentence" },
-    "guide.proBg": { "zh-Hant": "切換偽裝背景（最多 20 張）", "en": "Switch camouflage backgrounds (up to 20)" },
-    "guide.proConvert": { "zh-Hant": "簡體轉繁體", "en": "Simplified-to-Traditional Chinese" },
-    "guide.proImport": { "zh-Hant": "匯入 TXT 或 EPUB", "en": "Import TXT or EPUB" },
-    "guide.proUpload": { "zh-Hant": "上傳偽裝背景", "en": "Upload camouflage backgrounds" },
-    "guide.proSettings": { "zh-Hant": "自訂快捷鍵及 Panic 顯示文字", "en": "Custom shortcuts and Panic display text" },
-
-    "auth.planFree": { "zh-Hant": "免費計劃", "en": "Free plan" },
-    "auth.planPro": { "zh-Hant": "Pro 計劃（每月 $2.99，自動續訂）", "en": "Pro plan ($2.99 / month, auto-renew)" },
-    "auth.nextPaymentNA": { "zh-Hant": "不適用", "en": "Not applicable" },
-    "auth.memberFree": { "zh-Hant": "免費會員", "en": "Free member" },
-    "auth.memberPro": { "zh-Hant": "付費會員中心", "en": "Pro member centre" },
+    "guide.upload": { "zh-Hant": "上傳偽裝背景", "en": "Upload camouflage backgrounds" },
+    "guide.settings": { "zh-Hant": "自訂快捷鍵及 Panic 顯示文字", "en": "Custom shortcuts and Panic display text" },
+    "auth.planMember": { "zh-Hant": "會員（全部功能）", "en": "Member (all features)" },
+    "auth.member": { "zh-Hant": "會員中心", "en": "Member centre" },
 
     "dash.accountKicker": { "zh-Hant": "Member Account", "en": "Member Account" },
     "dash.accountH2": { "zh-Hant": "會員資料", "en": "Account" },
-    "dash.accountLeadFree": { "zh-Hant": "可在此查看用戶名稱、訂閱狀態，以及更改密碼或計劃。", "en": "View your username and subscription, and change your password or plan." },
-    "dash.accountLeadPro": { "zh-Hant": "可在此查看用戶名稱、訂閱狀態，以及更改密碼或管理訂閱。", "en": "View your username and subscription, and change your password or manage billing." },
+    "dash.accountLead": { "zh-Hant": "可在此查看用戶名稱，以及更改密碼。", "en": "View your username and change your password." },
     "dash.username": { "zh-Hant": "用戶名稱", "en": "Username" },
-    "dash.status": { "zh-Hant": "訂閱狀態", "en": "Subscription" },
-    "dash.nextPay": { "zh-Hant": "下次自動扣款", "en": "Next auto-charge" },
+    "dash.status": { "zh-Hant": "帳號類型", "en": "Account" },
     "dash.changePassword": { "zh-Hant": "更改密碼", "en": "Change password" },
-    "dash.upgradePro": { "zh-Hant": "升級至 Pro", "en": "Upgrade to Pro" },
-    "dash.manageSub": { "zh-Hant": "管理訂閱", "en": "Manage subscription" },
 
-    "dash.freeBadge": { "zh-Hant": "免費會員 · TXT", "en": "Free member · TXT" },
-    "dash.freeH1": { "zh-Hant": "啟動免費閱讀器", "en": "Launch the free reader" },
-    "dash.freeLead": { "zh-Hant": "以一般視窗開啟閱讀器，可匯入 TXT、上傳最多 2 張偽裝背景，進度會保存在本機。", "en": "Opens in a normal window. Import TXT, upload up to 2 camouflage backgrounds, and keep progress on this device." },
-    "dash.launchFree": { "zh-Hant": "啟動免費閱讀器", "en": "Launch free reader" },
     "dash.guide": { "zh-Hant": "使用說明", "en": "User guide" },
     "dash.progressH2": { "zh-Hant": "書本進度", "en": "Book progress" },
     "dash.progressLead": { "zh-Hant": "以下進度僅保存在你的瀏覽器，不會同步到其他裝置。", "en": "This progress stays in your browser and does not sync to other devices." },
@@ -348,29 +288,6 @@
     "dash.todayTime": { "zh-Hant": "今天 {time}", "en": "Today {time}" },
     "dash.unnamed": { "zh-Hant": "未命名文件", "en": "Untitled file" },
     "dash.popupBlocked": { "zh-Hant": "無法開啟彈出視窗。請允許此網站的彈出視窗後再試。", "en": "Could not open the popup. Allow pop-ups for this site and try again." },
-
-    "dash.upgradeKicker": { "zh-Hant": "Pro 會員升級", "en": "Upgrade to Pro" },
-    "dash.upgradeH2": { "zh-Hant": "若要在辦公室真正隱蔽閱讀，請升級 Pro", "en": "For real stealth reading at the office, upgrade to Pro" },
-    "dash.upgradeLead": { "zh-Hant": "$2.99／月即可解鎖 EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗、Panic Button、雲端同步與自訂快捷鍵。", "en": "$2.99 / month unlocks EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, a standalone popup, Panic Button, cloud sync, and custom shortcuts." },
-    "dash.upgradeCta": { "zh-Hant": "升級至 Pro · $2.99／月", "en": "Upgrade to Pro · $2.99 / month" },
-    "dash.compareH2": { "zh-Hant": "Pro 會員與免費會員的分別", "en": "Pro vs Free" },
-    "dash.compareLead": { "zh-Hant": "同一套閱讀介面，Pro 解鎖辦公室隱蔽所需的全部功能。", "en": "The same reading interface. Pro unlocks everything needed for office stealth." },
-    "dash.colFeature": { "zh-Hant": "功能", "en": "Feature" },
-    "dash.colFree": { "zh-Hant": "免費會員", "en": "Free" },
-    "dash.colPro": { "zh-Hant": "Pro 會員", "en": "Pro" },
-    "dash.rowBasic": { "zh-Hant": "基本閱讀體驗", "en": "Basic reading" },
-    "dash.rowTxt": { "zh-Hant": "TXT 檔案支援", "en": "TXT file support" },
-    "dash.rowBg": { "zh-Hant": "偽裝背景上限", "en": "Camouflage background limit" },
-    "dash.rowBgFree": { "zh-Hant": "2 張", "en": "2" },
-    "dash.rowBgPro": { "zh-Hant": "20 張", "en": "20" },
-    "dash.rowProgress": { "zh-Hant": "閱讀進度保存", "en": "Reading progress" },
-    "dash.rowProgressFree": { "zh-Hant": "本機", "en": "This device" },
-    "dash.rowProgressPro": { "zh-Hant": "本機 + 雲端同步", "en": "This device + cloud sync" },
-    "dash.rowEpub": { "zh-Hant": "EPUB 檔案支援", "en": "EPUB file support" },
-    "dash.rowConvert": { "zh-Hant": "簡體轉繁體", "en": "Simplified-to-Traditional Chinese" },
-    "dash.rowPopup": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup" },
-    "dash.rowPanic": { "zh-Hant": "Panic Button 一鍵轉換", "en": "Panic Button one-key swap" },
-    "dash.rowShortcuts": { "zh-Hant": "自訂快捷鍵", "en": "Custom shortcuts" },
 
     "dash.proBadge": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup" },
     "dash.proH1": { "zh-Hant": "準備進入隱蔽閱讀模式", "en": "Ready for stealth reading" },
@@ -384,21 +301,24 @@
     "dash.shortcut1": { "zh-Hant": "在桌面空白處按滑鼠右鍵。", "en": "Right-click an empty area on the desktop." },
     "dash.shortcut2": { "zh-Hant": "選擇「新增」→「捷徑」。", "en": "Choose New → Shortcut." },
     "dash.shortcut3": { "zh-Hant": "在「輸入物件的位置」欄位貼上以下內容：", "en": "Paste the following into the location field:" },
-    "dash.shortcut4": { "zh-Hant": "按「下一步」，為捷徑命名，例如 Readbar Pro。", "en": "Click Next and name the shortcut, for example Readbar Pro." },
+    "dash.shortcut4": { "zh-Hant": "按「下一步」，為捷徑命名，例如 Readbar。", "en": "Click Next and name the shortcut, for example Readbar." },
     "dash.shortcut5": { "zh-Hant": "按「完成」。", "en": "Click Finish." },
     "dash.shortcut6": { "zh-Hant": "其後以該捷徑啟動。Chrome 會以應用程式視窗開啟，原生網址列不會顯示。閱讀器內的登入畫面請輸入 Clerk 電郵及密碼。", "en": "Launch with that shortcut. Chrome opens as an app window without the real address bar. The in-reader login requires your Clerk email and password." },
     "dash.shortcutNote": { "zh-Hant": "若 Chrome 安裝於其他資料夾，請把路徑改為你電腦上的 chrome.exe 位置。", "en": "If Chrome is installed in another folder, change the path to chrome.exe on your computer." },
+    "dash.featuresKicker": { "zh-Hant": "Included", "en": "Included" },
+    "dash.featuresH2": { "zh-Hant": "全部功能均可使用", "en": "Every feature is available" },
+    "dash.featuresLead": {
+      "zh-Hant": "EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗、Panic Button、本機進度、自訂快捷鍵及 Panic 顯示文字均已可以使用。如仍需要其他功能，可以提出請求。",
+      "en": "EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, standalone popup, Panic Button, local progress, custom shortcuts, and Panic display text are all available. If you still need something else, send a request."
+    },
+    "dash.included": { "zh-Hant": "已包含", "en": "Included" },
 
-    "dash.proSettingsKicker": { "zh-Hant": "Pro 專屬設定", "en": "Pro settings" },
-    "dash.proSettingsH2": { "zh-Hant": "你已解鎖全部 Pro 功能", "en": "All Pro features are unlocked" },
-    "dash.proSettingsLead": { "zh-Hant": "EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗、Panic Button、雲端同步、自訂快捷鍵及 Panic 顯示文字均已可以使用。如仍需要其他功能，可以提出請求，我們會有專人聯絡你跟進。", "en": "EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, standalone popup, Panic Button, cloud sync, custom shortcuts, and Panic display text are all available. If you still need something else, send a request and someone will follow up." },
-    "dash.unlocked": { "zh-Hant": "已全部解鎖", "en": "Fully unlocked" },
     "dash.featEpub": { "zh-Hant": "EPUB 檔案支援", "en": "EPUB file support" },
     "dash.featConvert": { "zh-Hant": "簡體轉繁體", "en": "Simplified-to-Traditional Chinese" },
     "dash.featBg": { "zh-Hant": "偽裝背景上限 20 張", "en": "Up to 20 camouflage backgrounds" },
     "dash.featPopup": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup" },
     "dash.featPanic": { "zh-Hant": "Panic Button 一鍵轉換", "en": "Panic Button one-key swap" },
-    "dash.featCloud": { "zh-Hant": "雲端進度同步", "en": "Cloud progress sync" },
+    "dash.featLocal": { "zh-Hant": "本機進度保存", "en": "Local reading progress" },
     "dash.featShortcuts": { "zh-Hant": "自訂快捷鍵", "en": "Custom shortcuts" },
     "dash.featPanicText": { "zh-Hant": "自訂 Panic 顯示文字", "en": "Custom Panic display text" },
     "dash.requestCta": { "zh-Hant": "提出功能請求", "en": "Request a feature" },
@@ -437,11 +357,6 @@
     "dash.pwFailBody": { "zh-Hant": "暫時未能更改密碼。請確認已登入會員帳號後再試。", "en": "The password could not be changed. Sign in to your member account and try again." },
     "dash.pwRetry": { "zh-Hant": "返回表格", "en": "Back to form" },
 
-    "dash.payBrand": { "zh-Hant": "付款閘道", "en": "Payment gateway" },
-    "dash.payKicker": { "zh-Hant": "尚未接駁", "en": "Not connected" },
-    "dash.payTitle": { "zh-Hant": "尚未連接付款閘道", "en": "Payment gateway not connected" },
-    "dash.payBody": { "zh-Hant": "付款閘道尚未接駁。接駁之後，此按鈕會前往外部付款頁，供你升級或管理訂閱。", "en": "The payment gateway is not connected yet. After it is, this button will open the external payment page to upgrade or manage your subscription." },
-
     "reader.noticeKicker": { "zh-Hant": "Office desktop", "en": "Office desktop" },
     "reader.noticeH1": { "zh-Hant": "請改用電腦<wbr>開啟閱讀器", "en": "Open the reader on a computer" },
     "reader.noticeP1": {
@@ -451,15 +366,11 @@
     "reader.noticeP2": { "zh-Hant": "請改以電腦登入會員中心後再啟動。", "en": "Log in to the member centre on a computer, then launch." },
     "reader.noticeHome": { "zh-Hant": "返回產品官網", "en": "Back to product site" },
     "reader.noticeLogin": { "zh-Hant": "前往登入", "en": "Go to login" },
-    "reader.loginFreeKicker": { "zh-Hant": "Free Login", "en": "Free Login" },
-    "reader.loginProKicker": { "zh-Hant": "Pro Login", "en": "Pro Login" },
+    "reader.loginKicker": { "zh-Hant": "Login", "en": "Login" },
     "reader.loginH1": { "zh-Hant": "登入後即可使用閱讀器", "en": "Log in to use the reader" },
-    "reader.loginLead": { "zh-Hant": "請輸入 Clerk 會員電郵及密碼。免費會員可開啟此閱讀器；Pro 會員會轉去 Pro 閱讀器。", "en": "Enter your Clerk email and password. Free members can open this reader; Pro members are sent to the Pro reader." },
-    "reader.loginLeadPro": { "zh-Hant": "請輸入 Clerk 會員電郵及密碼。只有已是 Pro 的帳號可以使用此閱讀器。", "en": "Enter your Clerk email and password. Only Pro accounts can open this reader." },
+    "reader.loginLead": { "zh-Hant": "請輸入 Clerk 會員電郵及密碼。", "en": "Enter your Clerk email and password." },
     "reader.loginSubmit": { "zh-Hant": "登入", "en": "Log in" },
     "reader.loginError": { "zh-Hant": "電郵或密碼不正確。", "en": "Incorrect email or password." },
-    "reader.loginNeedPro": { "zh-Hant": "免費會員無法使用 Pro 閱讀器。請改用免費閱讀器，或請管理員把 Public metadata 的 plan 設為 pro。", "en": "Free members cannot open the Pro reader. Use the free reader, or ask an admin to set Public metadata plan to pro." },
-    "reader.loginGoFree": { "zh-Hant": "前往免費閱讀器", "en": "Go to the free reader" }
   };
 
   let currentLang = null;
