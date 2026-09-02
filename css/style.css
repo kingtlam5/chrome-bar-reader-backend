@@ -641,6 +641,38 @@ code {
   color: #ffffff;
 }
 
+.tip-amounts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 480px) {
+  .tip-amounts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.tip-amount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.tip-amount:hover {
+  border-color: #2563eb;
+  background: #dbeafe;
+}
+
 .sr-site-modal-close {
   width: 36px;
   height: 36px;
