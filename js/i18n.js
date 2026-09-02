@@ -46,8 +46,8 @@
     },
     "meta.guide.title": { "zh-Hant": "使用說明｜Readbar", "en": "User guide | Readbar" },
     "meta.guide.description": {
-      "zh-Hant": "Readbar 閱讀器使用說明。匯入書本、切換偽裝背景、轉換偽裝網址鍵與自訂快捷鍵。",
-      "en": "How to use the Readbar reader: import a book, switch camouflage backgrounds, use the camouflage URL key, and set custom shortcuts."
+      "zh-Hant": "Readbar 閱讀器使用說明。匯入書本、切換偽裝背景、偽裝網址鍵與自訂快捷鍵。",
+      "en": "How to use the Readbar reader: import a book, switch camouflage backgrounds, use the Fake URL Key, and set custom shortcuts."
     },
     "meta.dash.title": { "zh-Hant": "會員中心｜Readbar", "en": "Member centre | Readbar" },
     "meta.dash.description": {
@@ -69,7 +69,7 @@
     "index.hero.pointFree": { "zh-Hant": "🎁 完全免費", "en": "🎁 Completely free" },
     "index.hero.point1": { "zh-Hant": "🌐 免安裝，瀏覽器即用", "en": "🌐 No install — use it in the browser" },
     "index.hero.point2": { "zh-Hant": "🕵️ 獨立彈出視窗，減少分頁列", "en": "🕵️ Standalone popup, fewer tab bars" },
-    "index.hero.point3": { "zh-Hant": "⚡ 轉換偽裝網址鍵", "en": "⚡ Camouflage URL key" },
+    "index.hero.point3": { "zh-Hant": "⚡ 偽裝網址鍵", "en": "⚡ Fake URL Key" },
     "index.mock.url": {
       "zh-Hant": "面對絕對的困境，唯一的辦法就是讓自己變得絕對強大。",
       "en": "In absolute hardship, the only way out is to become absolutely strong."
@@ -104,7 +104,7 @@
     "index.pain.good2": { "zh-Hant": "：句子顯示於 Chrome 工具列，下方可放工作截圖", "en": ": sentences sit in the Chrome toolbar; a work screenshot can sit below" },
     "index.pain.good3Label": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup" },
     "index.pain.good3": { "zh-Hant": "：以免安裝方式開啟獨立視窗，減少分頁列干擾", "en": ": opens a separate window without installing, with fewer tab bars" },
-    "index.pain.good4Label": { "zh-Hant": "轉換偽裝網址鍵", "en": "Camouflage URL key" },
+    "index.pain.good4Label": { "zh-Hant": "偽裝網址鍵", "en": "Fake URL Key" },
     "index.pain.good4": { "zh-Hant": "：一鍵將網址列改為自訂假文字", "en": ": one key turns the address bar into custom fake text" },
 
     "index.features.kicker": { "zh-Hant": "Features", "en": "Features" },
@@ -136,7 +136,7 @@
       "zh-Hant": "由會員中心以獨立彈出視窗開啟閱讀器，減少分頁列干擾，無須安裝。",
       "en": "Launch the reader from the member centre as a standalone popup, with fewer tab bars and no install."
     },
-    "index.features.f5h": { "zh-Hant": "轉換偽裝網址鍵", "en": "Camouflage URL key" },
+    "index.features.f5h": { "zh-Hant": "偽裝網址鍵", "en": "Fake URL Key" },
     "index.features.f5p": {
       "zh-Hant": "上司走近時，一鍵將網址列的書本句子換成偽裝文字，背景維持工作截圖。",
       "en": "When someone walks over, one key replaces the book sentence in the address bar with disguised text. The work-screenshot background stays."
@@ -148,8 +148,8 @@
     },
     "index.features.f7h": { "zh-Hant": "自訂快捷鍵", "en": "Custom shortcuts" },
     "index.features.f7p": {
-      "zh-Hant": "可自行設定上一句、下一句、轉換偽裝網址鍵等按鍵，設定會保存在此瀏覽器。",
-      "en": "Set your own keys for previous/next sentence, the camouflage URL key, and more. Settings stay in this browser."
+      "zh-Hant": "可自行設定上一句、下一句、偽裝網址鍵等按鍵，設定會保存在此瀏覽器。",
+      "en": "Set your own keys for previous/next sentence, the Fake URL Key, and more. Settings stay in this browser."
     },
     "index.features.f8h": { "zh-Hant": "自訂偽裝網址文字", "en": "Custom camouflage URL text" },
     "index.features.f8p": {
@@ -160,8 +160,8 @@
     "index.faq.h2": { "zh-Hant": "常見問題", "en": "FAQ" },
     "index.faq.q1": { "zh-Hant": "上司經過時會被發現嗎？", "en": "Will I be caught if my boss walks by?" },
     "index.faq.a1": {
-      "zh-Hant": "閱讀內容顯示於偽裝網址列，畫面其餘部分可放置工作截圖。搭配轉換偽裝網址鍵，上司走近時只需一鍵，網址列的書本句子即改為預設或自訂的偽裝網址，背景維持工作截圖。",
-      "en": "Reading sits in the camouflaged address bar; the rest of the screen can show a work screenshot. With the camouflage URL key, one press replaces the book sentence with a default or custom disguised URL. The background stays."
+      "zh-Hant": "閱讀內容顯示於偽裝網址列，畫面其餘部分可放置工作截圖。搭配偽裝網址鍵，上司走近時只需一鍵，網址列的書本句子即改為預設或自訂的偽裝網址，背景維持工作截圖。",
+      "en": "Reading sits in the camouflaged address bar; the rest of the screen can show a work screenshot. With the Fake URL Key, one press replaces the book sentence with a default or custom disguised URL. The background stays."
     },
     "index.faq.q2": { "zh-Hant": "閱讀器如何開啟？", "en": "How do I open the reader?" },
     "index.faq.a2": {
@@ -175,8 +175,8 @@
     },
     "index.faq.q4": { "zh-Hant": "Readbar 需要付款嗎？", "en": "Do I need to pay for Readbar?" },
     "index.faq.a4": {
-      "zh-Hant": "不需要。註冊帳號後即可使用全部功能，包括 EPUB、簡轉繁、20 張背景、獨立彈出視窗、轉換偽裝網址鍵與自訂快捷鍵。",
-      "en": "No. After you sign up, every feature is available — EPUB, Simplified-to-Traditional Chinese, 20 backgrounds, a standalone popup, the camouflage URL key, and custom shortcuts."
+      "zh-Hant": "不需要。註冊帳號後即可使用全部功能，包括 EPUB、簡轉繁、20 張背景、獨立彈出視窗、偽裝網址鍵與自訂快捷鍵。",
+      "en": "No. After you sign up, every feature is available — EPUB, Simplified-to-Traditional Chinese, 20 backgrounds, a standalone popup, the Fake URL Key, and custom shortcuts."
     },
     "index.faq.q5": { "zh-Hant": "可以用手機開啟閱讀器嗎？", "en": "Can I open the reader on a phone?" },
     "index.faq.a5": {
@@ -192,8 +192,8 @@
     "login.kicker": { "zh-Hant": "Member Login", "en": "Member Login" },
     "login.h1": { "zh-Hant": "登入後即可開啟閱讀器", "en": "Log in to open the reader" },
     "login.lead": {
-      "zh-Hant": "訪客無法直接進入程式。登入後即可使用全部閱讀功能：TXT 與 EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗與轉換偽裝網址鍵。",
-      "en": "Guests cannot enter the app directly. After login you can use every reading feature: TXT and EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, a standalone popup, and the camouflage URL key."
+      "zh-Hant": "訪客無法直接進入程式。登入後即可使用全部閱讀功能：TXT 與 EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗與偽裝網址鍵。",
+      "en": "Guests cannot enter the app directly. After login you can use every reading feature: TXT and EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, a standalone popup, and the Fake URL Key."
     },
     "login.point1": { "zh-Hant": "登入後進入會員中心，再啟動隱蔽閱讀器", "en": "Log in to the member centre, then launch the stealth reader" },
     "login.point2": { "zh-Hant": "全部功能均可使用，無需升級或付款", "en": "Every feature is included — no upgrade and no payment" },
@@ -313,8 +313,8 @@
     "dash.featuresKicker": { "zh-Hant": "Included", "en": "Included" },
     "dash.featuresH2": { "zh-Hant": "全部功能均可使用", "en": "Every feature is available" },
     "dash.featuresLead": {
-      "zh-Hant": "EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗、轉換偽裝網址鍵、本機進度、自訂快捷鍵及偽裝網址文字均已可以使用。如仍需要其他功能，可以提出請求。",
-      "en": "EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, standalone popup, camouflage URL key, local progress, custom shortcuts, and camouflage URL text are all available. If you still need something else, send a request."
+      "zh-Hant": "EPUB、簡轉繁、20 張偽裝背景、獨立彈出視窗、偽裝網址鍵、本機進度、自訂快捷鍵及偽裝網址文字均已可以使用。如仍需要其他功能，可以提出請求。",
+      "en": "EPUB, Simplified-to-Traditional Chinese, 20 camouflage backgrounds, standalone popup, Fake URL Key, local progress, custom shortcuts, and camouflage URL text are all available. If you still need something else, send a request."
     },
     "dash.included": { "zh-Hant": "已包含", "en": "Included" },
 
@@ -322,7 +322,7 @@
     "dash.featConvert": { "zh-Hant": "簡體轉繁體", "en": "Simplified-to-Traditional Chinese" },
     "dash.featBg": { "zh-Hant": "偽裝背景上限 20 張", "en": "Up to 20 camouflage backgrounds" },
     "dash.featPopup": { "zh-Hant": "獨立彈出視窗", "en": "Standalone popup" },
-    "dash.featPanic": { "zh-Hant": "轉換偽裝網址鍵", "en": "Camouflage URL key" },
+    "dash.featPanic": { "zh-Hant": "偽裝網址鍵", "en": "Fake URL Key" },
     "dash.featLocal": { "zh-Hant": "本機進度保存", "en": "Local reading progress" },
     "dash.featShortcuts": { "zh-Hant": "自訂快捷鍵", "en": "Custom shortcuts" },
     "dash.featPanicText": { "zh-Hant": "自訂偽裝網址文字", "en": "Custom camouflage URL text" },
