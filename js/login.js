@@ -11,8 +11,7 @@
   const verifyInput = document.getElementById("loginVerifyCode");
   const verifyBtn = document.getElementById("loginVerifyBtn");
   const resendBtn = document.getElementById("loginResendBtn");
-  const previewFree = document.getElementById("previewFreeLink");
-  const previewPro = document.getElementById("previewProLink");
+  const previewLink = document.getElementById("previewDashboardLink");
 
   let busy = false;
 
@@ -30,19 +29,12 @@
     return at > 0 ? email.slice(0, at) : email;
   }
 
-  function memberProfile(plan) {
+  function memberProfile() {
     const email = emailFromForm();
-    const profile = {
+    return {
       email,
-      username: usernameFromEmail(email),
-      plan
+      username: usernameFromEmail(email)
     };
-    if (plan === "pro") {
-      const next = new Date();
-      next.setMonth(next.getMonth() + 1);
-      profile.nextPaymentAt = next.toISOString();
-    }
-    return profile;
   }
 
   function showError(message) {
@@ -69,12 +61,8 @@
 
   async function enterApp(user) {
     const nextUser = (await window.ReadbarClerk.ensureMembershipMetadata()) || user;
-    const profile = window.ReadbarClerk.applySession(nextUser);
-    if (profile.plan === "pro") {
-      window.location.href = "reader-pro-version.html";
-      return;
-    }
-    window.location.href = window.ReadbarClerk.dashboardFor(profile.plan);
+    window.ReadbarClerk.applySession(nextUser);
+    window.location.href = window.ReadbarClerk.dashboardFor();
   }
 
   async function finishSignIn(signIn) {
@@ -166,12 +154,8 @@
     }
   });
 
-  previewFree?.addEventListener("click", () => {
-    window.StealthAuth?.set(memberProfile("free"));
-  });
-
-  previewPro?.addEventListener("click", () => {
-    window.StealthAuth?.set(memberProfile("pro"));
+  previewLink?.addEventListener("click", () => {
+    window.StealthAuth?.set(memberProfile());
   });
 
   (async () => {

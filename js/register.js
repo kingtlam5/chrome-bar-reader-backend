@@ -1,15 +1,11 @@
 (() => {
   "use strict";
 
-  const PENDING_KEY = "stealthReader.pendingSignup";
   const form = document.getElementById("registerForm");
   const nameInput = document.getElementById("registerName");
   const emailInput = document.getElementById("registerEmail");
   const passwordInput = document.getElementById("registerPassword");
-  const freeWrap = document.getElementById("registerFreeWrap");
-  const payWrap = document.getElementById("registerPayWrap");
-  const payBtn = document.getElementById("registerPayBtn");
-  const freeBtn = document.getElementById("registerFreeBtn");
+  const submitBtn = document.getElementById("registerSubmitBtn");
   const failModal = document.getElementById("registerFailModal");
   const failBody = document.getElementById("registerFailBody");
   const errorEl = document.getElementById("registerError");
@@ -18,32 +14,11 @@
   const verifyInput = document.getElementById("registerVerifyCode");
   const verifyBtn = document.getElementById("registerVerifyBtn");
   const resendBtn = document.getElementById("registerResendBtn");
-  const planInputs = Array.from(document.querySelectorAll('input[name="plan"]'));
 
   let busy = false;
-  let pendingPlan = "free";
 
   function t(key, fallback) {
     return window.ReadbarI18n?.t(key) || fallback || key;
-  }
-
-  function selectedPlan() {
-    return planInputs.find((input) => input.checked)?.value === "pro" ? "pro" : "free";
-  }
-
-  function updateCta() {
-    const isPro = selectedPlan() === "pro";
-    freeWrap?.classList.toggle("hidden", isPro);
-    payWrap?.classList.toggle("hidden", !isPro);
-  }
-
-  function collectProfile(plan) {
-    return {
-      name: (nameInput?.value || "").trim(),
-      email: (emailInput?.value || "").trim(),
-      plan: plan || selectedPlan(),
-      createdAt: Date.now()
-    };
   }
 
   function showError(message) {
@@ -65,8 +40,7 @@
 
   function setBusy(nextBusy, button) {
     busy = nextBusy;
-    if (freeBtn) freeBtn.disabled = nextBusy;
-    if (payBtn) payBtn.disabled = nextBusy;
+    if (submitBtn) submitBtn.disabled = nextBusy;
     if (verifyBtn) verifyBtn.disabled = nextBusy;
     if (resendBtn) resendBtn.disabled = nextBusy;
     if (button) button.disabled = nextBusy;
@@ -78,17 +52,7 @@
     if (show) verifyInput?.focus();
   }
 
-  function preselectPlanFromQuery() {
-    const params = new URLSearchParams(window.location.search);
-    const plan = (params.get("plan") || "").toLowerCase();
-    if (plan !== "pro") return;
-    const proInput = planInputs.find((input) => input.value === "pro");
-    if (proInput) {
-      proInput.checked = true;
-    }
-  }
-
-  async function createSignUp(plan) {
+  async function createSignUp() {
     const clerk = await window.ReadbarClerk.ready();
     const name = (nameInput?.value || "").trim();
     const emailAddress = (emailInput?.value || "").trim();
@@ -97,7 +61,7 @@
     const payload = {
       emailAddress,
       password,
-      unsafeMetadata: window.ReadbarClerk.membershipMeta(plan, { name })
+      unsafeMetadata: window.ReadbarClerk.membershipMeta(null, { name })
     };
     if (firstName) payload.firstName = firstName;
     if (lastName) payload.lastName = lastName;
@@ -118,7 +82,7 @@
           clerk.client.signUp.create({
             emailAddress,
             password,
-            unsafeMetadata: window.ReadbarClerk.membershipMeta(plan, { name })
+            unsafeMetadata: window.ReadbarClerk.membershipMeta(null, { name })
           }),
           timeoutMs,
           timeoutMessage
@@ -135,32 +99,25 @@
     });
   }
 
-  async function finishSignedIn(user, plan) {
-    const nextUser = (await window.ReadbarClerk.persistMembership(plan)) || user;
-    const profile = window.ReadbarClerk.applySession(nextUser);
-    if (plan === "pro") {
-      const pending = collectProfile("pro");
-      localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
-      window.location.href = "payment.html";
-      return;
-    }
-    window.location.href = window.ReadbarClerk.dashboardFor(profile.plan);
+  async function finishSignedIn(user) {
+    const nextUser = (await window.ReadbarClerk.persistMembership()) || user;
+    window.ReadbarClerk.applySession(nextUser);
+    window.location.href = window.ReadbarClerk.dashboardFor();
   }
 
-  async function completeIfReady(signUp, plan) {
+  async function completeIfReady(signUp) {
     if (signUp.status === "complete") {
       const user = await window.ReadbarClerk.activateSession(signUp.createdSessionId);
-      await finishSignedIn(user, plan);
+      await finishSignedIn(user);
       return true;
     }
     return false;
   }
 
-  async function startSignUp(plan) {
-    pendingPlan = plan;
+  async function startSignUp() {
     showError("");
-    const signUp = await createSignUp(plan);
-    if (await completeIfReady(signUp, plan)) return;
+    const signUp = await createSignUp();
+    if (await completeIfReady(signUp)) return;
 
     const needsEmail =
       signUp.unverifiedFields?.includes("email_address") ||
@@ -175,41 +132,20 @@
     throw new Error(t("register.needMoreSteps", "Sign-up needs another step that is not available here."));
   }
 
-  planInputs.forEach((input) => {
-    input.addEventListener("change", updateCta);
-  });
-
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (busy) return;
-    if (selectedPlan() !== "free") return;
     if (!form.reportValidity()) return;
 
-    setBusy(true, freeBtn);
+    setBusy(true, submitBtn);
     try {
-      await startSignUp("free");
+      await startSignUp();
     } catch (error) {
       const message = window.ReadbarClerk?.errorMessage(error) || t("register.failBody");
       showError(message);
       openFailModal(message);
     } finally {
-      setBusy(false, freeBtn);
-    }
-  });
-
-  payBtn?.addEventListener("click", async () => {
-    if (busy) return;
-    if (!form?.reportValidity()) return;
-
-    setBusy(true, payBtn);
-    try {
-      await startSignUp("pro");
-    } catch (error) {
-      const message = window.ReadbarClerk?.errorMessage(error) || t("register.failBody");
-      showError(message);
-      openFailModal(message);
-    } finally {
-      setBusy(false, payBtn);
+      setBusy(false, submitBtn);
     }
   });
 
@@ -226,7 +162,7 @@
     try {
       const clerk = await window.ReadbarClerk.ready();
       const signUp = await clerk.client.signUp.attemptEmailAddressVerification({ code });
-      if (!(await completeIfReady(signUp, pendingPlan))) {
+      if (!(await completeIfReady(signUp))) {
         throw new Error(t("register.needMoreSteps", "Sign-up needs another step that is not available here."));
       }
     } catch (error) {
@@ -261,16 +197,13 @@
     }
   });
 
-  preselectPlanFromQuery();
-  updateCta();
-
   (async () => {
     try {
       const clerk = await window.ReadbarClerk.ready();
       if (clerk?.user) {
         const user = (await window.ReadbarClerk.ensureMembershipMetadata()) || clerk.user;
-        const profile = window.ReadbarClerk.applySession(user);
-        window.location.replace(window.ReadbarClerk.dashboardFor(profile.plan));
+        window.ReadbarClerk.applySession(user);
+        window.location.replace(window.ReadbarClerk.dashboardFor());
       }
     } catch (error) {
       showError(window.ReadbarClerk?.errorMessage(error) || t("clerk.unavailable"));

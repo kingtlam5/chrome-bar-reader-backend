@@ -8,7 +8,6 @@
   const progressEl = document.getElementById("currentProgress");
   const progressBarEl = document.getElementById("progressBar");
   const lastReadEl = document.getElementById("lastReadAt");
-  const lockedControls = document.querySelectorAll("[data-locked]");
   const panicKeyInput = document.getElementById("panicKeyInput");
 
   function t(key, vars) {
@@ -60,24 +59,12 @@
   }
 
   function launchReader() {
-    const mode = launchBtn?.dataset.launchMode || "pro";
-
     if (isMobileReaderDevice()) {
-      const fileName = mode === "basic" ? "reader-free-version.html" : "reader-pro-version.html";
-      window.location.assign(readerUrl(fileName));
+      window.location.assign(readerUrl("reader.html"));
       return;
     }
 
-    if (mode === "basic") {
-      const url = readerUrl("reader-free-version.html");
-      const win = window.open(url, "_blank");
-      if (!win) {
-        window.location.assign(url);
-      }
-      return;
-    }
-
-    const url = readerUrl("reader-pro-version.html?popup=1");
+    const url = readerUrl("reader.html?popup=1");
     const popup = openProReaderWindow(url);
     if (!popup) {
       alert(t("dash.popupBlocked"));
@@ -171,13 +158,6 @@
 
   launchBtn?.addEventListener("click", launchReader);
 
-  lockedControls.forEach((control) => {
-    control.addEventListener("click", (event) => {
-      event.preventDefault();
-      window.location.href = "index.html#pricing";
-    });
-  });
-
   panicKeyInput?.addEventListener("keydown", (event) => {
     event.preventDefault();
     const settings = loadSettings();
@@ -227,9 +207,7 @@
     const passwordSubmit = passwordForm?.querySelector('button[type="submit"]');
     const failTitle = passwordFail?.querySelector("[data-pw-fail-title]");
     const failBody = passwordFail?.querySelector("[data-pw-fail-body]");
-    const paymentModal = document.getElementById("paymentGatewayModal");
     const passwordUi = bindModal(passwordModal, "data-close-change-password");
-    const paymentUi = bindModal(paymentModal, "data-close-payment-gateway");
     const minLength = window.ReadbarClerk?.MIN_PASSWORD_LENGTH || 15;
     let passwordBusy = false;
 
@@ -262,10 +240,6 @@
         resetPasswordModal();
         passwordUi.open();
       });
-    });
-
-    document.querySelectorAll("[data-open-payment-gateway]").forEach((button) => {
-      button.addEventListener("click", () => paymentUi.open());
     });
 
     passwordModal?.addEventListener("click", (event) => {

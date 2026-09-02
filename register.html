@@ -16,8 +16,8 @@
       } catch (e) {}
     })();
   </script>
-  <title data-i18n="meta.register.title">免費註冊｜Readbar</title>
-  <meta name="description" data-i18n-content="meta.register.description" content="註冊 Readbar 免費或 Pro 會員。填寫姓名、電郵、密碼並選擇方案。">
+  <title data-i18n="meta.register.title">註冊｜Readbar</title>
+  <meta name="description" data-i18n-content="meta.register.description" content="註冊 Readbar 會員。填寫姓名、電郵及密碼即可使用全部閱讀功能。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -46,8 +46,8 @@
       color-scheme: light;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css?v=9">
-  <script src="js/i18n.js?v=2"></script>
+  <link rel="stylesheet" href="css/style.css?v=10">
+  <script src="js/i18n.js?v=6"></script>
 </head>
 <body class="theme-light min-h-screen bg-white font-sans text-slate-900 antialiased">
   <header class="bg-blue-700 text-white">
@@ -72,23 +72,23 @@
         <p class="text-sm font-medium text-blue-700" data-i18n="register.kicker">Create Account</p>
         <h1 class="mt-2 max-w-full text-xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl" data-i18n="register.h1">註冊後即可開始閱讀</h1>
         <p class="mt-4 max-w-full text-sm leading-7 text-slate-600 md:max-w-lg md:text-base" data-i18n="register.lead">
-          請填寫姓名、電郵及密碼，再選擇免費或 Pro 方案。免費註冊會建立會員帳號；Pro 會先建立帳號，再前往付款頁。
+          請填寫姓名、電郵及密碼。註冊後即可使用全部閱讀功能，無需選擇方案或付款。
         </p>
         <ul class="mt-8 space-y-3 text-sm text-slate-700">
           <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">1</span>
-            <span class="min-w-0 flex-1" data-i18n="register.point1">免費方案：按「免費註冊」建立帳號，驗證電郵後進入免費會員中心</span>
+            <span class="min-w-0 flex-1" data-i18n="register.point1">填寫姓名、電郵及密碼（最少 15 個字元）</span>
           </li>
           <li class="flex min-w-0 items-start gap-3">
             <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-700">2</span>
-            <span class="min-w-0 flex-1" data-i18n="register.point2">Pro 方案：$2.99／月，按「前往付款」前往付款閘道參考頁</span>
+            <span class="min-w-0 flex-1" data-i18n="register.point2">驗證電郵後進入會員中心，即可啟動閱讀器</span>
           </li>
         </ul>
       </section>
 
       <section class="card-surface min-w-0 w-full rounded-3xl border border-slate-200 p-5 sm:p-8 md:p-10">
         <h2 class="text-xl font-bold tracking-tight text-slate-900" data-i18n="register.h2">建立帳號</h2>
-        <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="register.formLead">請填寫姓名、電郵及密碼。免費註冊會建立會員帳號；Pro 付款閘道稍後接駁。</p>
+        <p class="mt-2 text-sm leading-6 text-slate-600" data-i18n="register.formLead">請填寫姓名、電郵及密碼。完成驗證後即可開始閱讀。</p>
 
         <form id="registerForm" class="mt-8 space-y-4">
           <div id="registerFields" class="space-y-4">
@@ -105,35 +105,12 @@
             <input id="registerPassword" name="password" type="password" required minlength="15" autocomplete="new-password" data-i18n-placeholder="register.passwordPlaceholder" placeholder="最少 15 個字元" class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none focus:border-blue-400">
           </label>
 
-          <fieldset class="pt-2">
-            <legend class="text-sm font-medium text-slate-700" data-i18n="register.choosePlan">選擇方案</legend>
-            <div class="mt-3 grid gap-3 sm:grid-cols-2" role="radiogroup" data-i18n-aria="register.choosePlan" aria-label="選擇方案">
-              <label class="plan-choice">
-                <input type="radio" name="plan" value="free" checked>
-                <span class="block text-xs font-medium text-slate-500">Free</span>
-                <span class="mt-1 block text-lg font-bold text-slate-900">$0</span>
-                <span class="mt-1 block text-xs leading-5 text-slate-600" data-i18n="register.freeDetail">TXT、2 張背景、本機進度</span>
-              </label>
-              <label class="plan-choice">
-                <input type="radio" name="plan" value="pro">
-                <span class="block text-xs font-medium text-slate-500">Pro</span>
-                <span class="mt-1 block text-lg font-bold text-slate-900">$2.99<span class="text-sm font-medium text-slate-500" data-i18n="register.proPerMonth">／月</span></span>
-                <span class="mt-1 block text-xs leading-5 text-slate-600" data-i18n="register.proDetail">EPUB、簡轉繁、Panic Button</span>
-              </label>
-            </div>
-          </fieldset>
-
           <div id="clerk-captcha" class="clerk-captcha"></div>
           <p class="text-xs leading-5 text-slate-500" data-i18n="register.captchaHint">如出現驗證框，請先完成驗證再繼續。</p>
 
-          <div id="registerFreeWrap" class="mt-2">
-            <button id="registerFreeBtn" type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500 disabled:opacity-60" data-i18n="register.freeCta">
-              免費註冊
-            </button>
-          </div>
-          <div id="registerPayWrap" class="mt-2 hidden">
-            <button id="registerPayBtn" type="button" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500 disabled:opacity-60" data-i18n="register.payCta">
-              前往付款
+          <div class="mt-2">
+            <button id="registerSubmitBtn" type="submit" class="glow-btn inline-flex w-full items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-500 disabled:opacity-60" data-i18n="register.submitCta">
+              註冊
             </button>
           </div>
           </div>
@@ -189,8 +166,8 @@
     </section>
   </div>
 
-  <script src="js/clerk-client.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/register.js"></script>
+  <script src="js/clerk-client.js?v=6"></script>
+  <script src="js/auth.js?v=6"></script>
+  <script src="js/register.js?v=6"></script>
 </body>
 </html>
