@@ -108,12 +108,12 @@
 
     "index.features.kicker": { "zh-Hant": "Features", "en": "Features" },
     "index.features.h2": {
-      "zh-Hant": "核心功能：<wbr>全部均可使用",
-      "en": "Core features, all included"
+      "zh-Hant": "核心功能：<wbr>打造沉浸式<wbr>辦公室閱讀體驗",
+      "en": "Core features: an immersive office reading experience"
     },
     "index.features.lead": {
-      "zh-Hant": "註冊後即可使用全部八項功能，無需升級或付款。",
-      "en": "After you sign up, all eight features are available — no upgrade and no payment."
+      "zh-Hant": "八項功能互相配合，讓閱讀藏進日常工作畫面，在辦公室也能專注、自在地讀下去。",
+      "en": "Eight features work together so reading hides in the look of everyday work. You can keep reading at the office with focus and ease."
     },
     "index.features.f1h": { "zh-Hant": "EPUB 檔案支援", "en": "EPUB file support" },
     "index.features.f1p": {
